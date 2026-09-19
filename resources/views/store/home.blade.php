@@ -2,23 +2,23 @@
 
 @section('content')
 
-<!-- 1. TABSTICK HERO SECTION (ORIGINAL & HIGH IMPACT) -->
+<!-- 1. TAPSTICK PLAYFUL POP HERO SECTION -->
 <section class="tabstick-hero-section">
     <div class="container hero-container">
         <div class="hero-text-col">
             <div class="hero-badge">
-                <span class="badge-spark">⚡</span> TABSTICK ORIGINAL • 2026 DROP
+                <span class="badge-spark">⚡</span> TAPSTICK ORIGINAL • 2026 POP DROP
             </div>
             <h1 class="hero-main-heading">
                 PEEL. STICK.<br>
-                <span class="hero-accent-text">STAND OUT.</span>
+                <span class="hero-accent-red">STAND</span> <span class="hero-accent-blue">OUT.</span>
             </h1>
             <p class="hero-subtext">
-                India's creative die-cut sticker studio. 100% waterproof, scratch-resistant vinyl crafted with long-lasting UV inks that won't fade or leave sticky residue.
+                India's creative die-cut sticker studio. 100% waterproof, scratchproof vinyl with rich UV inks that won't fade in the sun or leave sticky goo on your gear.
             </p>
             <div class="hero-cta-group">
-                <a href="#shop" class="btn-hero-primary">Shop Bestsellers →</a>
-                <a href="#new-collection" class="btn-hero-secondary">Explore Drops</a>
+                <a href="#shop" class="btn-pop-primary">Shop Bestsellers 🛍️</a>
+                <a href="#club" class="btn-pop-secondary">Tapstick Club ✦</a>
             </div>
             <div class="hero-perks-row">
                 <div class="hero-perk-item">
@@ -37,39 +37,54 @@
             <div class="hero-stage-card">
                 <div class="floating-sticker sticker-pos-1">
                     <img src="{{ asset('images/limited-edition.jpg') }}" alt="Limited Edition Sticker">
-                    <span class="sticker-chip">🔥 HOT</span>
+                    <span class="sticker-chip chip-red">🔥 HOT</span>
                 </div>
                 <div class="floating-sticker sticker-pos-2">
                     <img src="{{ asset('images/wasted.jpg') }}" alt="Wasted Sticker">
-                    <span class="sticker-chip">⭐ POPULAR</span>
+                    <span class="sticker-chip chip-yellow">⭐ POPULAR</span>
                 </div>
                 <div class="floating-sticker sticker-pos-3">
                     <img src="{{ asset('images/ah-shit.jpg') }}" alt="Ah Shit Here We Go Again">
-                    <span class="sticker-chip">👑 MEME</span>
+                    <span class="sticker-chip chip-blue">👑 MEME</span>
                 </div>
                 <div class="floating-sticker sticker-pos-4">
                     <img src="{{ asset('images/fizzy-zero.jpg') }}" alt="Fizzy Zero Sticker">
-                    <span class="sticker-chip">⚡ NEW</span>
+                    <span class="sticker-chip chip-green">⚡ FRESH</span>
                 </div>
                 <div class="hero-center-badge">
-                    <span>TABSTICK</span>
-                    <small>DIE-CUT VINYL</small>
+                    <span>TAPSTICK</span>
+                    <small>DIE-CUT VINYL • ORIGINAL</small>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 2. HIGH ENERGY TICKER MARQUEE -->
+<!-- 2. ANIMATED PRODUCT-QUALITY TICKER (HIGH ENERGY MARQUEE) -->
 <div class="marquee-bar">
     <div class="marquee-content">
-        ⚡ TABSTICK STUDIO &nbsp;•&nbsp; 100% WATERPROOF VINYL &nbsp;•&nbsp; SCRATCHPROOF &nbsp;•&nbsp; UV RESISTANT &nbsp;•&nbsp; RESIDUE FREE &nbsp;•&nbsp; FREE SHIPPING OVER ₹499 &nbsp;•&nbsp; ⚡ TABSTICK STUDIO &nbsp;•&nbsp; 100% WATERPROOF VINYL &nbsp;•&nbsp; SCRATCHPROOF &nbsp;•&nbsp; UV RESISTANT &nbsp;•&nbsp; RESIDUE FREE &nbsp;•&nbsp; FREE SHIPPING OVER ₹499 &nbsp;•&nbsp;
+        <span class="marquee-chip chip-yellow">⭐ 100% WATERPROOF VINYL</span>
+        <span class="marquee-chip chip-blue">⚡ SCRATCHPROOF MATTE FINISH</span>
+        <span class="marquee-chip chip-red">🎨 ULTRA-VIBRANT UV INKS</span>
+        <span class="marquee-chip chip-green">🚫 ZERO STICKY RESIDUE</span>
+        <span class="marquee-chip chip-yellow">🚚 48H PAN-INDIA DISPATCH</span>
+        <span class="marquee-chip chip-purple">📦 10 LAKH+ STICKERS SHIPPED</span>
+        <span class="marquee-chip chip-blue">🇮🇳 PROUDLY CRAFTED IN INDIA</span>
+        <span class="marquee-chip chip-red">✨ DIE-CUT PRECISION EDGES</span>
+        <!-- Duplicate for seamless continuous loop -->
+        <span class="marquee-chip chip-yellow">⭐ 100% WATERPROOF VINYL</span>
+        <span class="marquee-chip chip-blue">⚡ SCRATCHPROOF MATTE FINISH</span>
+        <span class="marquee-chip chip-red">🎨 ULTRA-VIBRANT UV INKS</span>
+        <span class="marquee-chip chip-green">🚫 ZERO STICKY RESIDUE</span>
+        <span class="marquee-chip chip-yellow">🚚 48H PAN-INDIA DISPATCH</span>
+        <span class="marquee-chip chip-purple">📦 10 LAKH+ STICKERS SHIPPED</span>
+        <span class="marquee-chip chip-blue">🇮🇳 PROUDLY CRAFTED IN INDIA</span>
+        <span class="marquee-chip chip-red">✨ DIE-CUT PRECISION EDGES</span>
     </div>
 </div>
 
-<!-- 3. BRAND NEW DROPS / NEW COLLECTION -->
+<!-- 3. BRAND NEW DROPS / NEW COLLECTION BANNER -->
 <div id="new-collection">
-    <div class="striped-divider"></div>
     <section class="new-collection-section">
         <div class="container">
             <div class="banner-responsive-wrap">
@@ -86,7 +101,8 @@
     <div class="container">
         <div class="section-title-wrap">
             <h2 class="section-watermark">CURATED DROPS</h2>
-            <h3 class="section-main-title">TABSTICK BEST SELLERS</h3>
+            <h3 class="section-main-title">TAPSTICK BEST SELLERS</h3>
+            <p class="section-subtitle">Ultra-durable vinyl stickers built for laptops, bottles, bikes &amp; phone cases.</p>
             
             <div class="filter-tabs">
                 <button class="tab-pill active" onclick="filterTab(this, 'all')">ALL STICKERS</button>
@@ -104,7 +120,7 @@
                 @endphp
                 <article class="product-card" data-category="{{ $product->category?->slug ?? 'stickers' }}">
                     @if($savings > 0)
-                        <div class="card-save-badge">Save Rs. {{ number_format($savings, 2) }}</div>
+                        <div class="card-save-badge">Save Rs. {{ number_format($savings, 0) }}</div>
                     @endif
 
                     <a href="{{ route('products.show', $product) }}" class="card-image-wrap">
@@ -114,22 +130,25 @@
                             <span style="font-size:4.5rem;">{{ $product->emoji ?: '✨' }}</span>
                         @endif
                         
-                        <div class="quick-view-btn" title="Quick view">
-                            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        <div class="quick-view-btn" title="View details">
+                            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                             </svg>
                         </div>
                     </a>
 
+                    <div class="card-meta-top">
+                        <span class="category-chip">{{ $product->category?->name ?? 'Sticker' }}</span>
+                        <div class="card-ratings">
+                            <span class="stars-gold">★★★★★</span>
+                            <span class="review-count">(778)</span>
+                        </div>
+                    </div>
+
                     <h4 class="product-card-title">
                         <a href="{{ route('products.show', $product) }}">{{ $product->name }}</a>
                     </h4>
-
-                    <div class="card-ratings">
-                        <span class="stars-gold">★★★★★</span>
-                        <span class="review-count">(778)</span>
-                    </div>
 
                     <div class="card-pricing-row">
                         @if($savings > 0)
@@ -142,8 +161,8 @@
                     <form action="{{ route('cart.add', $product) }}" method="POST" style="margin-top:auto;">
                         @csrf
                         <button type="submit" class="btn-add-to-cart">
-                            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                             </svg>
                             Add to cart
                         </button>
@@ -157,24 +176,98 @@
         </div>
 
         <div class="section-footer-cta">
-            <a href="#shop" class="btn-view-all">View all</a>
+            <a href="#shop" class="btn-view-all">Explore All 5000+ Stickers →</a>
         </div>
     </div>
 </section>
 
-<!-- 5. WHY TABSTICK SECTION -->
-<section id="why" class="why-section">
+<!-- 5. NEW “TAPSTICK CLUB” STORY & COMMUNITY SECTION -->
+<section id="club" class="club-section">
     <div class="container">
-        <div class="why-brand-header">
-            <span class="why-eyebrow">WHY TABSTICK</span>
-            <h2 class="why-heading">Built To Last. Designed To Stand Out.</h2>
-            <p class="why-subheading">
-                High quality vinyl stickers with sharp prints from long-lasting durable inks. Each sticker is proudly designed &amp; crafted in India.
+        <div class="club-header">
+            <span class="club-pill-tag">✦ THE COMMUNITY ✦</span>
+            <h2 class="club-title">JOIN THE TAPSTICK CLUB</h2>
+            <p class="club-subtitle">
+                More than just stickers — it's a movement of creators, gamers, coders, and riders making ordinary tech and gear colorful.
             </p>
         </div>
 
-        <div class="banner-responsive-wrap" style="border: 1px solid #27272a; margin-top: 24px;">
-            <img src="{{ asset('images/why-banner.webp') }}" alt="Why TabStick - Built to last, designed to stand out">
+        <div class="club-perks-grid">
+            <div class="club-perk-card perk-cream">
+                <div class="club-perk-icon">🎁</div>
+                <h4>Secret Drops First</h4>
+                <p>Club members get 24-hour early access to limited weekly meme, anime, and art drops before they sell out.</p>
+            </div>
+            <div class="club-perk-card perk-blue">
+                <div class="club-perk-icon">🛡️</div>
+                <h4>Stick-For-Life Guarantee</h4>
+                <p>100% waterproof, weather-sealed &amp; UV-cured. If it ever peels, fades, or bubbles, we replace it free.</p>
+            </div>
+            <div class="club-perk-card perk-yellow">
+                <div class="club-perk-icon">⚡</div>
+                <h4>Mystery Perks &amp; 10% Off</h4>
+                <p>Unlock an instant 10% discount on your first order plus secret surprise stickers in every package over ₹499.</p>
+            </div>
+        </div>
+
+        <!-- Founder Story Spotlight (#author) -->
+        <div id="author" class="founder-spotlight-card">
+            <div class="founder-grid">
+                <div class="founder-image-col">
+                    <div class="polaroid-frame">
+                        <div class="tape-sticker"></div>
+                        <img src="{{ asset('images/author.jpg') }}" alt="Mayank Malhotra, Founder of Tapstick" class="founder-photo">
+                        <div class="polaroid-caption">
+                            <strong>Mayank Malhotra</strong>
+                            <span>Founder &amp; Chief Curator</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="founder-content-col">
+                    <span class="founder-eyebrow">THE TAPSTICK STORY</span>
+                    <h3 class="founder-heading">Turning Passion Into <span class="pop-accent-red">Everyday Art</span>.</h3>
+                    <p class="founder-bio">
+                        Hey! Welcome to <strong>Tapstick</strong>. We started Tapstick with a single frustration: mass-market stickers were paper-thin, faded within weeks, and left a sticky, disgusting residue on expensive MacBooks and bikes.
+                    </p>
+                    <p class="founder-bio">
+                        We built Tapstick with heavy-duty automotive-grade vinyl, rich UV-cured inks, and precision die-cuts. Today, we're proud to have delivered over 10 Lakh+ stickers to creators, gamers, coders, and dreamers across India.
+                    </p>
+                    <div class="founder-stats-bar">
+                        <div class="f-stat-item">
+                            <strong class="f-stat-num">10L+</strong>
+                            <span class="f-stat-label">Stickers Shipped</span>
+                        </div>
+                        <div class="f-stat-item">
+                            <strong class="f-stat-num">5000+</strong>
+                            <span class="f-stat-label">Original Designs</span>
+                        </div>
+                        <div class="f-stat-item">
+                            <strong class="f-stat-num">4.8★</strong>
+                            <span class="f-stat-label">Community Rating</span>
+                        </div>
+                    </div>
+                    <div class="founder-cta-wrap">
+                        <a href="#shop" class="btn-pop-primary">Shop Founder's Favorites →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 6. WHY TAPSTICK QUALITY GUARANTEES -->
+<section id="why" class="why-section">
+    <div class="container">
+        <div class="why-brand-header">
+            <span class="why-eyebrow">QUALITY THAT STICKS</span>
+            <h2 class="why-heading">Built To Last. Designed To Stand Out.</h2>
+            <p class="why-subheading">
+                Every sticker is crafted from automotive-grade waterproof vinyl, sealed with UV protection, and tested on outdoor bikes, helmets &amp; daily carry laptops.
+            </p>
+        </div>
+
+        <div class="banner-responsive-wrap why-banner-wrap">
+            <img src="{{ asset('images/why-banner.webp') }}" alt="Why Tapstick - Built to last, designed to stand out">
         </div>
 
         <div class="features-grid">
@@ -182,73 +275,28 @@
                 <div class="feature-icon-box">🚚</div>
                 <div class="feature-text">
                     <strong>SHIPPED IN 48 HRS</strong>
-                    <span>Pan India delivery</span>
+                    <span>Fast pan-India dispatch</span>
                 </div>
             </div>
             <div class="feature-item">
                 <div class="feature-icon-box">🎖️</div>
                 <div class="feature-text">
-                    <strong>TOP GRADE MATERIAL</strong>
-                    <span>Uv &amp; waterproof</span>
+                    <strong>100% VINYL QUALITY</strong>
+                    <span>Waterproof &amp; scratchproof</span>
                 </div>
             </div>
             <div class="feature-item">
                 <div class="feature-icon-box">📦</div>
                 <div class="feature-text">
                     <strong>5000+ DESIGNS</strong>
-                    <span>Always dropping new</span>
+                    <span>Memes, anime &amp; pop drops</span>
                 </div>
             </div>
             <div class="feature-item">
                 <div class="feature-icon-box">🇮🇳</div>
                 <div class="feature-text">
                     <strong>PROUDLY INDIAN</strong>
-                    <span>Designed &amp; made in india</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- 6. ABOUT TABSTICK FOUNDER -->
-<section id="author" class="author-section">
-    <div class="container">
-        <div class="author-grid">
-            <div class="author-image-col">
-                <div class="author-card-wrap">
-                    <img src="{{ asset('images/author.jpg') }}" alt="TabStick Founder &amp; Creator" class="author-portrait">
-                    <div class="author-floating-badge">
-                        <span>FOUNDER &amp; CREATOR ✦</span>
-                    </div>
-                </div>
-            </div>
-            <div class="author-content-col">
-                <span class="author-eyebrow">THE TABSTICK STORY</span>
-                <h2 class="author-heading">Turning Passion Into <span class="text-highlight">Everyday Art</span>.</h2>
-                <p class="author-bio">
-                    Hey! Welcome to <strong>TabStick</strong>. We started TabStick with a single vision: your gear should speak your personality. What began as a personal passion for creative design, street pop art, and custom decals has grown into a community of over 10 lakh creators, riders, gamers, and dreamers across India.
-                </p>
-                <p class="author-bio">
-                    Every TabStick design is printed on commercial-grade waterproof vinyl, sealed with a UV matte protective layer, and guaranteed to leave zero sticky residue when removed.
-                </p>
-                
-                <div class="author-stats-row">
-                    <div class="stat-box">
-                        <strong class="stat-num">10L+</strong>
-                        <span class="stat-desc">Stickers Delivered</span>
-                    </div>
-                    <div class="stat-box">
-                        <strong class="stat-num">5000+</strong>
-                        <span class="stat-desc">Custom Designs</span>
-                    </div>
-                    <div class="stat-box">
-                        <strong class="stat-num">4.8★</strong>
-                        <span class="stat-desc">Customer Rating</span>
-                    </div>
-                </div>
-
-                <div style="margin-top: 32px;">
-                    <a href="#shop" class="btn-author-cta">Shop Founder's Picks →</a>
+                    <span>Crafted with love in India</span>
                 </div>
             </div>
         </div>

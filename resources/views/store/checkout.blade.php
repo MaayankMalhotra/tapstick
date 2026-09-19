@@ -1,94 +1,97 @@
 @extends('layouts.app')
 
-@section('title', 'Checkout | TABSTICK')
+@section('title', 'Checkout | TAPSTICK')
 
 @section('content')
-<div class="container" style="padding-top: 40px;">
-    <h1 style="font-family:var(--font-heading);font-size:2.4rem;font-weight:900;text-transform:uppercase;margin-bottom:24px;">Checkout</h1>
+<div class="container" style="padding: 40px 0 60px;">
+    <h1 style="font-family:var(--font-heading);font-size:2.4rem;font-weight:900;text-transform:uppercase;margin-bottom:24px;color:var(--color-ink);">Checkout</h1>
     
     <div class="checkout-layout">
-        <form class="cart-card" action="{{ route('checkout.store') }}" method="POST">
+        <form class="cart-card" action="{{ route('checkout.store') }}" method="POST" style="background:#FFFFFF;border:var(--border-pop);border-radius:var(--radius-card);box-shadow:var(--shadow-pop);padding:32px;">
             @csrf
-            <h3 style="font-family:var(--font-heading);font-size:1.3rem;font-weight:800;margin-bottom:20px;">Shipping Details</h3>
+            <h3 style="font-family:var(--font-heading);font-size:1.35rem;font-weight:900;text-transform:uppercase;margin-bottom:20px;color:var(--color-ink);">Shipping Details</h3>
             
             <div class="form-grid-2">
                 <div class="form-group">
-                    <label>FULL NAME</label>
-                    <input class="form-control" name="customer_name" value="{{ old('customer_name') }}" placeholder="John Doe" required>
+                    <label style="font-size:0.78rem;font-weight:900;text-transform:uppercase;margin-bottom:6px;display:block;">FULL NAME</label>
+                    <input class="form-control" name="customer_name" value="{{ old('customer_name') }}" placeholder="Mayank Malhotra" required style="border:2px solid var(--color-ink);border-radius:10px;padding:12px 14px;font-weight:600;">
                 </div>
                 <div class="form-group">
-                    <label>EMAIL ADDRESS</label>
-                    <input class="form-control" type="email" name="email" value="{{ old('email') }}" placeholder="john@example.com" required>
+                    <label style="font-size:0.78rem;font-weight:900;text-transform:uppercase;margin-bottom:6px;display:block;">EMAIL ADDRESS</label>
+                    <input class="form-control" type="email" name="email" value="{{ old('email') }}" placeholder="mayank@example.com" required style="border:2px solid var(--color-ink);border-radius:10px;padding:12px 14px;font-weight:600;">
                 </div>
             </div>
 
             <div class="form-grid-2">
                 <div class="form-group">
-                    <label>PHONE NUMBER (10 DIGITS)</label>
-                    <input class="form-control" name="phone" value="{{ old('phone') }}" placeholder="9876543210" required>
+                    <label style="font-size:0.78rem;font-weight:900;text-transform:uppercase;margin-bottom:6px;display:block;">PHONE NUMBER (10 DIGITS)</label>
+                    <input class="form-control" name="phone" value="{{ old('phone') }}" placeholder="9876543210" required style="border:2px solid var(--color-ink);border-radius:10px;padding:12px 14px;font-weight:600;">
                 </div>
                 <div class="form-group">
-                    <label>POSTAL PINCODE</label>
-                    <input class="form-control" name="postal_code" value="{{ old('postal_code') }}" placeholder="110001" required>
+                    <label style="font-size:0.78rem;font-weight:900;text-transform:uppercase;margin-bottom:6px;display:block;">POSTAL PINCODE</label>
+                    <input class="form-control" name="postal_code" value="{{ old('postal_code') }}" placeholder="110001" required style="border:2px solid var(--color-ink);border-radius:10px;padding:12px 14px;font-weight:600;">
                 </div>
             </div>
 
             <div class="form-group">
-                <label>STREET ADDRESS</label>
-                <textarea class="form-control" name="address" rows="3" placeholder="House no, street, landmark" required>{{ old('address') }}</textarea>
+                <label style="font-size:0.78rem;font-weight:900;text-transform:uppercase;margin-bottom:6px;display:block;">STREET ADDRESS</label>
+                <textarea class="form-control" name="address" rows="3" placeholder="House no, street, landmark" required style="border:2px solid var(--color-ink);border-radius:10px;padding:12px 14px;font-weight:600;">{{ old('address') }}</textarea>
             </div>
 
             <div class="form-grid-2">
                 <div class="form-group">
-                    <label>CITY</label>
-                    <input class="form-control" name="city" value="{{ old('city') }}" placeholder="City" required>
+                    <label style="font-size:0.78rem;font-weight:900;text-transform:uppercase;margin-bottom:6px;display:block;">CITY</label>
+                    <input class="form-control" name="city" value="{{ old('city') }}" placeholder="New Delhi" required style="border:2px solid var(--color-ink);border-radius:10px;padding:12px 14px;font-weight:600;">
                 </div>
                 <div class="form-group">
-                    <label>STATE</label>
-                    <input class="form-control" name="state" value="{{ old('state') }}" placeholder="State" required>
+                    <label style="font-size:0.78rem;font-weight:900;text-transform:uppercase;margin-bottom:6px;display:block;">STATE</label>
+                    <input class="form-control" name="state" value="{{ old('state') }}" placeholder="Delhi" required style="border:2px solid var(--color-ink);border-radius:10px;padding:12px 14px;font-weight:600;">
                 </div>
             </div>
 
-            <h3 style="font-family:var(--font-heading);font-size:1.3rem;font-weight:800;margin:28px 0 16px;">Payment Method</h3>
+            <h3 style="font-family:var(--font-heading);font-size:1.35rem;font-weight:900;text-transform:uppercase;margin:28px 0 16px;color:var(--color-ink);">Payment Method</h3>
 
-            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:14px;margin-bottom:12px;">
-                <label style="display:flex;align-items:center;gap:10px;font-weight:700;cursor:pointer;">
-                    <input type="radio" name="payment_method" value="cod" {{ old('payment_method', 'cod') === 'cod' ? 'checked' : '' }}>
+            <div style="background:var(--color-bg-page);border:2px solid var(--color-ink);border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:var(--shadow-pop-sm);">
+                <label style="display:flex;align-items:center;gap:12px;font-weight:800;cursor:pointer;font-size:0.95rem;">
+                    <input type="radio" name="payment_method" value="cod" {{ old('payment_method', 'cod') === 'cod' ? 'checked' : '' }} style="accent-color:var(--color-pop-red);transform:scale(1.2);">
                     <span>💵 Cash on Delivery (COD)</span>
                 </label>
             </div>
 
-            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:14px;margin-bottom:24px;">
-                <label style="display:flex;align-items:center;gap:10px;font-weight:700;cursor:pointer;">
-                    <input type="radio" name="payment_method" value="razorpay" {{ old('payment_method') === 'razorpay' ? 'checked' : '' }}>
-                    <span>⚡ Razorpay (UPI, Google Pay, PhonePe, Cards, NetBanking)</span>
+            <div style="background:var(--color-bg-page);border:2px solid var(--color-ink);border-radius:14px;padding:16px;margin-bottom:28px;box-shadow:var(--shadow-pop-sm);">
+                <label style="display:flex;align-items:center;gap:12px;font-weight:800;cursor:pointer;font-size:0.95rem;">
+                    <input type="radio" name="payment_method" value="razorpay" {{ old('payment_method') === 'razorpay' ? 'checked' : '' }} style="accent-color:var(--color-pop-blue);transform:scale(1.2);">
+                    <span>⚡ Razorpay (Instant UPI, QR, Google Pay, Cards, NetBanking)</span>
                 </label>
             </div>
 
-            <button class="btn-primary" type="submit" style="font-size:1rem;height:52px;">
+            <button class="btn-pop-primary" type="submit" style="font-size:1.1rem;height:54px;width:100%;justify-content:center;">
                 Place Order · Rs. {{ number_format($total, 2) }}
             </button>
         </form>
 
-        <aside class="cart-summary">
-            <h3>Order Items</h3>
+        <aside class="cart-summary" style="background:#FFFFFF;border:var(--border-pop);border-radius:var(--radius-card);box-shadow:var(--shadow-pop);padding:28px;">
+            <h3 style="font-family:var(--font-heading);font-size:1.3rem;font-weight:900;text-transform:uppercase;margin-bottom:20px;color:var(--color-ink);">Order Items</h3>
             @foreach($items as $item)
-                <div style="display:flex;justify-content:space-between;margin-bottom:10px;font-size:0.9rem;">
+                <div style="display:flex;justify-content:space-between;margin-bottom:10px;font-size:0.9rem;font-weight:600;color:var(--color-ink);">
                     <span>{{ $item['product']->name }} × {{ $item['quantity'] }}</span>
                     <b>Rs. {{ number_format($item['line_total'], 2) }}</b>
                 </div>
             @endforeach
-            <div class="summary-line" style="margin-top:16px;border-top:1px solid #e2e8f0;padding-top:12px;">
+            <div class="summary-line" style="margin-top:16px;border-top:1.5px solid var(--color-border-subtle);padding-top:14px;display:flex;justify-content:space-between;font-size:0.95rem;font-weight:600;color:var(--color-ink-muted);">
                 <span>Subtotal</span>
-                <b>Rs. {{ number_format($subtotal, 2) }}</b>
+                <b style="color:var(--color-ink);">Rs. {{ number_format($subtotal, 2) }}</b>
             </div>
-            <div class="summary-line">
+            <div class="summary-line" style="display:flex;justify-content:space-between;margin-bottom:12px;font-size:0.95rem;font-weight:600;color:var(--color-ink-muted);">
                 <span>Shipping</span>
-                <b style="color:{{ $shipping === 0 ? '#16a34a' : 'inherit' }}">{{ $shipping ? 'Rs. '.number_format($shipping, 2) : 'FREE' }}</b>
+                <b style="color:{{ $shipping === 0 ? '#16a34a' : 'inherit' }}">{{ $shipping ? 'Rs. '.number_format($shipping, 2) : 'FREE ⚡' }}</b>
             </div>
-            <div class="summary-line total">
+            <div class="summary-line total" style="display:flex;justify-content:space-between;border-top:2px solid var(--color-ink);padding-top:16px;margin-top:16px;font-size:1.3rem;font-weight:900;color:var(--color-ink);">
                 <span>Total Payable</span>
-                <b style="color:#dc2626;">Rs. {{ number_format($total, 2) }}</b>
+                <b style="color:var(--color-pop-red);">Rs. {{ number_format($total, 2) }}</b>
+            </div>
+            <div style="margin-top:20px;text-align:center;font-size:0.78rem;font-weight:700;color:var(--color-ink-muted);">
+                🚚 48-Hour Pan-India Express Dispatch
             </div>
         </aside>
     </div>
