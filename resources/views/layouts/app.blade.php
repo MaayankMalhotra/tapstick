@@ -40,7 +40,7 @@
                 <a href="{{ route('home') }}#shop" class="nav-item">Clothing ▾</a>
                 <a href="{{ route('home') }}#shop" class="nav-item highlight">Mystery Box</a>
                 <a href="{{ route('home') }}#why" class="nav-item">Custom Stickers</a>
-                <a href="{{ route('home') }}#why" class="nav-item">Our Story</a>
+                <a href="{{ route('home') }}#author" class="nav-item">Our Story</a>
                 <a href="{{ route('home') }}#reviews" class="nav-item">Reviews</a>
             </nav>
 

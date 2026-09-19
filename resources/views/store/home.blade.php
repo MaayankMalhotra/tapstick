@@ -150,6 +150,51 @@
     </div>
 </section>
 
+<!-- 6. ABOUT THE FOUNDER SECTION -->
+<section id="author" class="author-section">
+    <div class="container">
+        <div class="author-grid">
+            <div class="author-image-col">
+                <div class="author-card-wrap">
+                    <img src="{{ asset('images/author.jpg') }}" alt="Founder &amp; Creator" class="author-portrait">
+                    <div class="author-floating-badge">
+                        <span>FOUNDER &amp; CREATOR ✦</span>
+                    </div>
+                </div>
+            </div>
+            <div class="author-content-col">
+                <span class="author-eyebrow">ABOUT THE FOUNDER</span>
+                <h2 class="author-heading">Turning Passion Into <span class="text-highlight">Everyday Art</span>.</h2>
+                <p class="author-bio">
+                    Hey! Welcome to STICK IT UP. We believe your gear should speak your mind. What began as a love for stickers, pop culture, and bold design has grown into a community of over 10 lakh creators, riders, gamers, and dreamers across India.
+                </p>
+                <p class="author-bio">
+                    Every design is carefully curated, printed on premium waterproof vinyl, and built to survive the sun, rain, and everyday grind. No peeling, no fading, and zero sticky residue.
+                </p>
+                
+                <div class="author-stats-row">
+                    <div class="stat-box">
+                        <strong class="stat-num">10L+</strong>
+                        <span class="stat-desc">Stickers Delivered</span>
+                    </div>
+                    <div class="stat-box">
+                        <strong class="stat-num">5000+</strong>
+                        <span class="stat-desc">Custom Designs</span>
+                    </div>
+                    <div class="stat-box">
+                        <strong class="stat-num">4.7★</strong>
+                        <span class="stat-desc">Customer Rating</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 32px;">
+                    <a href="#shop" class="btn-author-cta">Shop Founder's Picks →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 @endsection
 
 @push('scripts')
