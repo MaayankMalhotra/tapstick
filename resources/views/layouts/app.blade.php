@@ -165,7 +165,7 @@
                 <div class="footer-col">
                     <h4>Get 10% Off First Drop</h4>
                     <p style="color:#475569;font-size:0.88rem;">Subscribe to the Tapstick Club for weekly secret drops &amp; members-only perks.</p>
-                    <form class="newsletter-form" onsubmit="event.preventDefault();alert('Welcome to the Tapstick Club! Check your inbox soon for your secret 10% drop code.');">
+                    <form class="newsletter-form" onsubmit="event.preventDefault(); const inp = this.querySelector('input'); if(inp && inp.value){ const mInp = document.getElementById('lead_email'); if(mInp){ mInp.value = inp.value; } } document.getElementById('floating-lead-trigger')?.click();">
                         <input type="email" placeholder="Enter your email" class="newsletter-input" required>
                         <button type="submit" class="newsletter-btn">Join Club</button>
                     </form>
@@ -208,6 +208,9 @@
             updateTimer();
         })();
     </script>
+    <!-- LANDING PAGE LEAD / GOOGLE AUTH POPUP MODAL -->
+    @include('partials.lead-modal')
+
     @stack('scripts')
 </body>
 </html>

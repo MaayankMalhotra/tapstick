@@ -14,18 +14,18 @@
             <div class="form-grid-2">
                 <div class="form-group">
                     <label style="font-size:0.78rem;font-weight:900;text-transform:uppercase;margin-bottom:6px;display:block;">FULL NAME</label>
-                    <input class="form-control" name="customer_name" value="{{ old('customer_name') }}" placeholder="Mayank Malhotra" required style="border:2px solid var(--color-ink);border-radius:10px;padding:12px 14px;font-weight:600;">
+                    <input class="form-control" name="customer_name" value="{{ old('customer_name', session('customer_name')) }}" placeholder="Mayank Malhotra" required style="border:2px solid var(--color-ink);border-radius:10px;padding:12px 14px;font-weight:600;">
                 </div>
                 <div class="form-group">
                     <label style="font-size:0.78rem;font-weight:900;text-transform:uppercase;margin-bottom:6px;display:block;">EMAIL ADDRESS</label>
-                    <input class="form-control" type="email" name="email" value="{{ old('email') }}" placeholder="mayank@example.com" required style="border:2px solid var(--color-ink);border-radius:10px;padding:12px 14px;font-weight:600;">
+                    <input class="form-control" type="email" name="email" value="{{ old('email', session('customer_email')) }}" placeholder="mayank@example.com" required style="border:2px solid var(--color-ink);border-radius:10px;padding:12px 14px;font-weight:600;">
                 </div>
             </div>
 
             <div class="form-grid-2">
                 <div class="form-group">
                     <label style="font-size:0.78rem;font-weight:900;text-transform:uppercase;margin-bottom:6px;display:block;">PHONE NUMBER (10 DIGITS)</label>
-                    <input class="form-control" name="phone" value="{{ old('phone') }}" placeholder="9876543210" required style="border:2px solid var(--color-ink);border-radius:10px;padding:12px 14px;font-weight:600;">
+                    <input class="form-control" name="phone" value="{{ old('phone', session('customer_phone')) }}" placeholder="9876543210" required style="border:2px solid var(--color-ink);border-radius:10px;padding:12px 14px;font-weight:600;">
                 </div>
                 <div class="form-group">
                     <label style="font-size:0.78rem;font-weight:900;text-transform:uppercase;margin-bottom:6px;display:block;">POSTAL PINCODE</label>

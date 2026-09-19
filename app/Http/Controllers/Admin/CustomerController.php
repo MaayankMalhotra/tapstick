@@ -36,8 +36,18 @@ class CustomerController extends Controller
             });
         }
 
-        $customers = $query->orderByDesc('last_order_at')->paginate(20)->withQueryString();
+        $customers = $query->orderByDesc('last_order_at')->paginate(20, ['*'], 'customers_page')->withQueryString();
 
-        return view('admin.customers.index', compact('customers', 'q'));
+        $leadsQuery = \App\Models\CustomerLead::query();
+        if ($q) {
+            $leadsQuery->where(function ($builder) use ($q) {
+                $builder->where('name', 'like', '%'.$q.'%')
+                    ->orWhere('email', 'like', '%'.$q.'%')
+                    ->orWhere('phone', 'like', '%'.$q.'%');
+            });
+        }
+        $leads = $leadsQuery->orderByDesc('created_at')->paginate(20, ['*'], 'leads_page')->withQueryString();
+
+        return view('admin.customers.index', compact('customers', 'leads', 'q'));
     }
 }

@@ -90,4 +90,70 @@
         {{ $customers->links() }}
     </div>
 </div>
+
+<div class="heading" style="margin-top:40px;">
+    <div>
+        <div class="kicker">LEAD CAPTURE DIRECTORY</div>
+        <h2>Landing Page Leads &amp; Google Sign-ups</h2>
+        <p>Customers who registered their mobile number &amp; Google email through the landing page form.</p>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Lead Name</th>
+                    <th>Google Email</th>
+                    <th>Mobile Number</th>
+                    <th>Method</th>
+                    <th>Discount Code</th>
+                    <th>IP Address</th>
+                    <th>Registered At</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($leads as $lead)
+                    <tr>
+                        <td>
+                            <strong style="font-size:15px; color:#0f172a;">{{ $lead->name ?: 'Guest Club Member' }}</strong>
+                        </td>
+                        <td>
+                            <a href="mailto:{{ $lead->email }}" style="font-weight:600; color:#2563eb;">{{ $lead->email }}</a>
+                        </td>
+                        <td>
+                            <span style="font-family:monospace; font-size:14px; font-weight:700;">{{ $lead->phone ?: '—' }}</span>
+                        </td>
+                        <td>
+                            <span class="badge" style="background:{{ $lead->auth_provider === 'google' ? '#fee2e2; color:#dc2626' : '#fef9c3; color:#854d0e' }}; font-weight:800; font-size:12px;">
+                                {{ $lead->auth_provider === 'google' ? 'Google Auth' : 'Mobile + Gmail' }}
+                            </span>
+                        </td>
+                        <td>
+                            <span style="font-family:monospace; font-weight:800; color:#16a34a;">{{ $lead->discount_code }}</span>
+                        </td>
+                        <td>
+                            <small style="color:#64748b;">{{ $lead->ip_address ?: '—' }}</small>
+                        </td>
+                        <td>
+                            <span>{{ $lead->created_at->format('d M Y') }}</span>
+                            <small>{{ $lead->created_at->format('h:i A') }}</small>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="7" class="empty">
+                            No landing page leads registered yet. Sign-ups through the landing page form will appear here.
+                        </td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
+    <div class="pagination">
+        {{ $leads->links() }}
+    </div>
+</div>
 @endsection
