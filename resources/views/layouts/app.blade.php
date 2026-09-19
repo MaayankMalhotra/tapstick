@@ -76,11 +76,6 @@
             </nav>
 
             <div class="header-actions">
-                <!-- Sound Effect Audio Toggle -->
-                <button type="button" class="sound-toggle-pill" id="sound-toggle-btn" title="Toggle tactile sticker sound effects">
-                    🔊 SFX: ON
-                </button>
-
                 <a href="{{ route('home') }}#shop" class="action-icon-btn" aria-label="Search Catalog" title="Search Stickers">
                     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
