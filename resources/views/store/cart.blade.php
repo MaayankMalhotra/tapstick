@@ -1,19 +1,84 @@
 @extends('layouts.app')
-@section('title', 'Your cart | Tab Stick')
+
+@section('title', 'Your Cart | STICK IT UP')
+
 @section('content')
-<section class="shell section"><h1 class="page-title">Your cart</h1>
+<div class="container" style="padding-top: 40px;">
+    <h1 style="font-family:var(--font-heading);font-size:2.4rem;font-weight:900;text-transform:uppercase;margin-bottom:24px;">Your Cart</h1>
+
     @if($items->isEmpty())
-        <div class="empty"><h3>Your cart is empty</h3><p>Find a sticker that feels like you.</p><a class="pill orange" href="{{ route('home') }}#shop">Start shopping</a></div>
+        <div style="background:#f8fafc;border:2px dashed #cbd5e1;border-radius:16px;padding:60px 20px;text-align:center;">
+            <div style="font-size:3rem;margin-bottom:12px;">🛒</div>
+            <h3 style="font-family:var(--font-heading);font-size:1.5rem;font-weight:800;margin-bottom:8px;">Your cart is empty</h3>
+            <p style="color:#64748b;margin-bottom:24px;">Find stickers that speak your vibe!</p>
+            <a href="{{ route('home') }}#shop" class="btn-primary" style="display:inline-block;width:auto;padding:12px 32px;">Explore Stickers</a>
+        </div>
     @else
-        <div class="cart-layout"><div class="cart-list">
-            @foreach($items as $item)
-                <div class="cart-item"><div class="mini-art">{{ $item['product']->emoji ?: '✨' }}</div><div class="grow"><h3>{{ $item['product']->name }}</h3><span>₹{{ number_format($item['product']->price, 0) }} each</span></div>
-                    <form action="{{ route('cart.update', $item['product']) }}" method="POST">@csrf @method('PATCH')<input class="qty" type="number" name="quantity" min="1" max="{{ min(20, $item['product']->stock) }}" value="{{ $item['quantity'] }}"><button class="link-button">Update</button></form>
-                    <b>₹{{ number_format($item['line_total'], 0) }}</b>
-                    <form action="{{ route('cart.remove', $item['product']) }}" method="POST">@csrf @method('DELETE')<button class="remove" aria-label="Remove item">×</button></form>
+        <div class="cart-layout">
+            <div class="cart-card">
+                @foreach($items as $item)
+                    @php
+                        $p = $item['product'];
+                        $imgSrc = $p->image ? (str_starts_with($p->image, 'http') ? $p->image : (str_starts_with($p->image, 'images/') ? asset($p->image) : asset('storage/'.$p->image))) : null;
+                    @endphp
+                    <div class="cart-item-row">
+                        <div class="cart-thumb">
+                            @if($imgSrc)
+                                <img src="{{ $imgSrc }}" alt="{{ $p->name }}">
+                            @else
+                                <span style="font-size:2rem;">{{ $p->emoji ?: '✨' }}</span>
+                            @endif
+                        </div>
+
+                        <div class="cart-item-details">
+                            <h3><a href="{{ route('products.show', $p) }}">{{ $p->name }}</a></h3>
+                            <div class="cart-item-price">Rs. {{ number_format($p->price, 2) }} each</div>
+                        </div>
+
+                        <form action="{{ route('cart.update', $p) }}" method="POST" class="cart-qty-form">
+                            @csrf
+                            @method('PATCH')
+                            <input class="cart-qty-input" type="number" name="quantity" min="1" max="{{ min(20, $p->stock) }}" value="{{ $item['quantity'] }}">
+                            <button type="submit" style="background:#f1f5f9;border:1px solid #cbd5e1;padding:6px 10px;border-radius:6px;font-size:0.75rem;font-weight:700;cursor:pointer;">Update</button>
+                        </form>
+
+                        <div style="font-size:1.1rem;font-weight:900;color:#0f172a;min-width:90px;text-align:right;">
+                            Rs. {{ number_format($item['line_total'], 2) }}
+                        </div>
+
+                        <form action="{{ route('cart.remove', $p) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="cart-remove-btn" title="Remove item">&times;</button>
+                        </form>
+                    </div>
+                @endforeach
+            </div>
+
+            <aside class="cart-summary">
+                <h3>Order Summary</h3>
+                <div class="summary-line">
+                    <span>Subtotal</span>
+                    <b>Rs. {{ number_format($subtotal, 2) }}</b>
                 </div>
-            @endforeach
-        </div><aside class="summary"><h3>Order summary</h3><div><span>Subtotal</span><b>₹{{ number_format($subtotal, 0) }}</b></div><div><span>Shipping</span><b>{{ $shipping ? '₹'.number_format($shipping, 0) : 'FREE' }}</b></div><div class="total"><span>Total</span><b>₹{{ number_format($total, 0) }}</b></div><a class="pill orange full center" href="{{ route('checkout.create') }}">Continue to checkout</a></aside></div>
+                <div class="summary-line">
+                    <span>Shipping</span>
+                    <b style="color:{{ $shipping === 0 ? '#16a34a' : 'inherit' }}">{{ $shipping ? 'Rs. '.number_format($shipping, 2) : 'FREE' }}</b>
+                </div>
+                <div class="summary-line total">
+                    <span>Total</span>
+                    <b style="color:#dc2626;">Rs. {{ number_format($total, 2) }}</b>
+                </div>
+
+                <a href="{{ route('checkout.create') }}" class="btn-primary">
+                    Proceed to Checkout
+                </a>
+
+                <div style="margin-top:16px;text-align:center;font-size:0.78rem;color:#64748b;">
+                    🔒 Safe &amp; Secure 256-Bit SSL Checkout
+                </div>
+            </aside>
+        </div>
     @endif
-</section>
+</div>
 @endsection
