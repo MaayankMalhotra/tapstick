@@ -27,7 +27,7 @@
                 <div class="peel-stamp-title">TAP<span>STICK</span></div>
             </div>
             <div class="peel-loading-chip">
-                <span>✦ UNBOXING STICKER UNIVERSE ✦</span>
+                <span id="peel-loader-text">✦ UNBOXING STICKER UNIVERSE ✦</span>
             </div>
             <div class="peel-loading-progress">
                 <div class="peel-progress-bar"></div>
@@ -35,6 +35,16 @@
         </div>
         <div class="peel-corner-curl"></div>
     </div>
+    <script>
+        // Fail-safe: ensure loader peels away cleanly on every page even if external JS is delayed
+        setTimeout(function() {
+            var loader = document.getElementById('sticker-peel-loader');
+            if (loader && !loader.classList.contains('peeling') && !loader.classList.contains('done')) {
+                loader.classList.add('peeling');
+                setTimeout(function() { loader.classList.add('done'); }, 550);
+            }
+        }, 1800);
+    </script>
 
     <!-- 1. TOP ANNOUNCEMENT BAR WITH LIVE COUNTDOWN -->
     <div class="announcement-bar">

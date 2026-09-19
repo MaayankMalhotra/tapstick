@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <form action="{{ route('cart.add', $product) }}" method="POST" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
+        <form action="{{ route('cart.add', $product) }}" method="POST" class="pop-add-cart-form" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
             @csrf
             <div>
                 <label style="font-size:0.78rem;font-weight:900;display:block;margin-bottom:6px;text-transform:uppercase;">QUANTITY</label>

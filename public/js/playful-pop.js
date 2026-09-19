@@ -86,32 +86,144 @@
     window.addEventListener('keydown', initAudio, { once: true });
 
     // ==========================================================================
-    // 2. CINEMATIC FULL-SCREEN STICKER PEEL PAGE ENTRANCE
+    // 2. STICKER UNIVERSE PAGE TRANSITIONS & ENTRANCE LOADER (EVERY PAGE CHANGE)
     // ==========================================================================
     const peelLoader = document.getElementById('sticker-peel-loader');
-    if (peelLoader) {
-        // If user already saw it in this session, hide quickly
-        const seenPeel = sessionStorage.getItem('tapstick_peel_seen');
-        if (seenPeel || prefersReducedMotion) {
-            peelLoader.style.display = 'none';
-        } else {
-            document.body.style.overflow = 'hidden';
-            setTimeout(() => {
-                peelLoader.classList.add('peeling');
-                playPopSound();
-                createConfetti(window.innerWidth / 2, window.innerHeight / 2, 45);
+    const peelTextSpan = document.getElementById('peel-loader-text') || (peelLoader ? peelLoader.querySelector('.peel-loading-chip span') : null);
 
-                setTimeout(() => {
-                    peelLoader.classList.add('done');
-                    document.body.style.overflow = '';
-                    sessionStorage.setItem('tapstick_peel_seen', 'true');
-                    setTimeout(() => {
-                        peelLoader.remove();
-                    }, 800);
-                }, 900);
-            }, 1000);
+    function runEntrancePeel() {
+        if (!peelLoader) return;
+        if (prefersReducedMotion) {
+            peelLoader.style.display = 'none';
+            return;
+        }
+
+        peelLoader.classList.remove('page-transition-exit');
+        peelLoader.classList.remove('peeling');
+        peelLoader.classList.remove('done');
+        peelLoader.style.display = 'flex';
+
+        // Fast, punchy entrance peel-reveal on EVERY page load
+        setTimeout(() => {
+            peelLoader.classList.add('peeling');
+            playPopSound();
+            createConfetti(window.innerWidth / 2, window.innerHeight / 2, 36);
+
+            setTimeout(() => {
+                peelLoader.classList.add('done');
+                document.body.style.overflow = '';
+            }, 550);
+        }, 220);
+    }
+
+    if (peelLoader) {
+        runEntrancePeel();
+    }
+
+    // Handle BFCache (browser Back/Forward navigation)
+    window.addEventListener('pageshow', function (e) {
+        if (peelLoader) {
+            runEntrancePeel();
+        }
+    });
+
+    // Page exit transition trigger helper
+    function triggerPageExit(targetUrl, customMessage) {
+        if (!peelLoader || prefersReducedMotion) {
+            if (targetUrl) window.location.href = targetUrl;
+            return;
+        }
+
+        if (peelTextSpan && customMessage) {
+            peelTextSpan.textContent = customMessage;
+        }
+
+        peelLoader.classList.remove('done');
+        peelLoader.classList.remove('peeling');
+        peelLoader.classList.add('page-transition-exit');
+        playPeelSound();
+
+        if (targetUrl) {
+            const safetyTimeout = setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 900);
+
+            setTimeout(() => {
+                clearTimeout(safetyTimeout);
+                window.location.href = targetUrl;
+            }, 260);
         }
     }
+
+    // Intercept internal navigation link clicks for animated page transitions
+    document.addEventListener('click', function (e) {
+        const link = e.target.closest('a');
+        if (!link) return;
+
+        // Skip if modifier keys held (Cmd+Click, Ctrl+Click for new tab)
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+        const rawHref = link.getAttribute('href');
+        if (!rawHref) return;
+
+        // Skip in-page hash anchors (#shop, #why) on the same current page
+        if (rawHref.startsWith('#')) return;
+
+        // Skip external protocols
+        if (rawHref.startsWith('mailto:') || rawHref.startsWith('tel:') || rawHref.startsWith('javascript:')) return;
+
+        // Skip new tab or file downloads
+        if (link.target === '_blank' || link.hasAttribute('download')) return;
+
+        try {
+            const currentUrl = new URL(window.location.href);
+            const nextUrl = new URL(link.href, window.location.origin);
+
+            // Only animate same origin
+            if (nextUrl.origin !== currentUrl.origin) return;
+
+            // If navigating to the same path & search with a hash (e.g. /#shop while on /)
+            if (nextUrl.pathname === currentUrl.pathname && nextUrl.search === currentUrl.search) {
+                return;
+            }
+
+            // Context-sensitive sticker universe loading text
+            let message = '✦ UNBOXING NEXT DROP ✦';
+            if (nextUrl.pathname.includes('/cart')) {
+                message = '✦ ROLLING TO YOUR CART ✦';
+            } else if (nextUrl.pathname.includes('/checkout')) {
+                message = '✦ SECURING YOUR PACK ✦';
+            } else if (nextUrl.pathname.includes('/products/')) {
+                message = '✦ INSPECTING VINYL DECAL ✦';
+            } else if (nextUrl.pathname === '/') {
+                message = '✦ BACK TO TAPSTICK HQ ✦';
+            }
+
+            e.preventDefault();
+            triggerPageExit(nextUrl.href, message);
+        } catch (err) {
+            // Let default browser navigation occur
+        }
+    });
+
+    // Handle form submissions that trigger page change (checkout, cart updates)
+    document.addEventListener('submit', function (e) {
+        const form = e.target;
+        if (!form || form.id === 'lead-capture-form' || form.target === '_blank') return;
+        if (form.classList.contains('pop-add-cart-form')) return; // handled with flying sticker
+
+        if (peelLoader && !prefersReducedMotion && !form.dataset.submitting) {
+            form.dataset.submitting = 'true';
+            let message = '✦ PACKING YOUR DROP ✦';
+            if (form.action && form.action.includes('checkout')) {
+                message = '✦ PROCESSING YOUR ORDER ✦';
+            } else if (form.action && form.action.includes('cart')) {
+                message = '✦ UPDATING STICKER BAG ✦';
+            }
+
+            triggerPageExit(null, message);
+        }
+    });
 
     // ==========================================================================
     // 3. CANVAS CONFETTI & SPARKLE ENGINE
@@ -215,17 +327,22 @@
     });
 
     // ==========================================================================
-    // 4. FLYING STICKER TO CART ANIMATION
+    // 4. FLYING STICKER TO CART ANIMATION WITH PAGE TRANSITION
     // ==========================================================================
     document.addEventListener('submit', function (e) {
         const form = e.target.closest('.pop-add-cart-form');
         if (!form) return;
 
-        const card = form.closest('.product-pop-card');
-        const img = card ? card.querySelector('.pop-card-sticker-img') : null;
+        if (form.dataset.submitting === 'true') return;
+
+        const card = form.closest('.product-pop-card') || document;
+        const img = card ? card.querySelector('.pop-card-sticker-img, .product-hero-image img, img') : null;
         const cartPill = document.querySelector('.header-cart-pill');
 
         if (img && cartPill && !prefersReducedMotion) {
+            e.preventDefault();
+            form.dataset.submitting = 'true';
+
             const imgRect = img.getBoundingClientRect();
             const cartRect = cartPill.getBoundingClientRect();
 
@@ -241,7 +358,7 @@
             flyingSticker.style.borderRadius = '16px';
             flyingSticker.style.border = '3px solid #18181B';
             flyingSticker.style.boxShadow = '6px 6px 0 #18181B';
-            flyingSticker.style.transition = 'all 0.65s cubic-bezier(0.16, 1, 0.3, 1)';
+            flyingSticker.style.transition = 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
             document.body.appendChild(flyingSticker);
 
             playPeelSound();
@@ -257,11 +374,15 @@
                 flyingSticker.remove();
                 playPopSound();
                 cartPill.classList.add('cart-bounce-pop');
-                createConfetti(cartRect.left + cartRect.width / 2, cartRect.top + cartRect.height / 2, 18);
+                createConfetti(cartRect.left + cartRect.width / 2, cartRect.top + cartRect.height / 2, 20);
+
                 setTimeout(() => {
-                    cartPill.classList.remove('cart-bounce-pop');
-                }, 500);
-            }, 650);
+                    triggerPageExit(null, '✦ ADDING TO YOUR CART ✦');
+                    setTimeout(() => {
+                        form.submit();
+                    }, 220);
+                }, 150);
+            }, 500);
         }
     });
 
