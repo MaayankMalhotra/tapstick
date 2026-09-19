@@ -3,8 +3,8 @@
 @section('title', 'Your Cart | TAPSTICK')
 
 @section('content')
-<div class="container" style="padding: 40px 0 60px;">
-    <h1 style="font-family:var(--font-heading);font-size:2.4rem;font-weight:900;text-transform:uppercase;margin-bottom:24px;color:var(--color-ink);">Your Cart</h1>
+<div class="container cart-page-container">
+    <h1 class="cart-page-title">Your Cart</h1>
 
     @if($items->isEmpty())
         <div style="background:#FFFFFF;border:var(--border-pop);border-radius:var(--radius-card);box-shadow:var(--shadow-pop);padding:60px 20px;text-align:center;">
