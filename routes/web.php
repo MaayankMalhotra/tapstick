@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Middleware\RequireAdmin;
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -14,6 +16,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(RequireAdmin::class)->group(function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/', [InventoryController::class, 'dashboard'])->name('dashboard');
+        Route::resource('orders', OrderController::class)->only(['index', 'show', 'update']);
+        Route::get('/customers', [CustomerController::class, 'index'])->name('customers.index');
         Route::resource('products', InventoryController::class)->except(['show', 'destroy']);
         Route::post('/products/{product}/stock', [InventoryController::class, 'adjust'])->name('products.stock');
         Route::get('/stock-history', [InventoryController::class, 'history'])->name('history');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\StockMovement;
 use Illuminate\Http\Request;
@@ -23,6 +24,10 @@ class InventoryController extends Controller
             'lowStockCount' => Product::whereColumn('stock', '<=', 'low_stock_threshold')->count(),
             'lowStock' => Product::whereColumn('stock', '<=', 'low_stock_threshold')->orderBy('stock')->limit(12)->get(),
             'movements' => StockMovement::with(['product', 'user'])->latest('id')->limit(10)->get(),
+            'totalOrders' => Order::count(),
+            'totalRevenue' => (float) Order::where(fn ($q) => $q->where('payment_status', 'paid')->orWhere('payment_method', 'cod'))->sum('total'),
+            'recentOrders' => Order::with('items')->latest('id')->limit(6)->get(),
+            'totalCustomers' => Order::distinct('email')->count('email'),
         ]);
     }
 
