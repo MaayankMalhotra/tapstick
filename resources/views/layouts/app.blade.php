@@ -46,21 +46,6 @@
         }, 1800);
     </script>
 
-    <!-- 1. TOP ANNOUNCEMENT BAR WITH LIVE COUNTDOWN -->
-    <div class="announcement-bar">
-        <div class="announcement-content">
-            <span class="announcement-tag">🔥 DROP SALE</span>
-            <span class="announcement-text-hide-mobile">Limited Release Ends In:</span>
-            <div class="timer-wrap">
-                <span class="timer-box" id="timer-days">01</span> <span class="timer-label">D</span>
-                <span class="timer-box" id="timer-hours">09</span> <span class="timer-label">H</span>
-                <span class="timer-box" id="timer-mins">39</span> <span class="timer-label">M</span>
-                <span class="timer-box" id="timer-secs">37</span> <span class="timer-label">S</span>
-            </div>
-            <span class="announcement-perk">• FREE SHIPPING OVER ₹499 • 100% WATERPROOF</span>
-        </div>
-    </div>
-
     <!-- 2. TAPSTICK PLAYFUL POP HEADER -->
     <header class="site-header">
         <div class="container header-inner">
@@ -347,32 +332,6 @@
         </div>
     </footer>
 
-    <!-- LIVE COUNTDOWN TIMER JAVASCRIPT -->
-    <script>
-        (function() {
-            let totalSeconds = (1 * 86400) + (9 * 3600) + (39 * 60) + 37;
-            function updateTimer() {
-                if (totalSeconds <= 0) totalSeconds = 86400 * 2;
-                const d = Math.floor(totalSeconds / 86400);
-                const h = Math.floor((totalSeconds % 86400) / 3600);
-                const m = Math.floor((totalSeconds % 3600) / 60);
-                const s = totalSeconds % 60;
-                
-                const elD = document.getElementById('timer-days');
-                const elH = document.getElementById('timer-hours');
-                const elM = document.getElementById('timer-mins');
-                const elS = document.getElementById('timer-secs');
-
-                if (elD) elD.textContent = String(d).padStart(2, '0');
-                if (elH) elH.textContent = String(h).padStart(2, '0');
-                if (elM) elM.textContent = String(m).padStart(2, '0');
-                if (elS) elS.textContent = String(s).padStart(2, '0');
-                totalSeconds--;
-            }
-            setInterval(updateTimer, 1000);
-            updateTimer();
-        })();
-    </script>
     <!-- PLAYFUL POP INTERACTION SCRIPT -->
     <script src="{{ asset('js/playful-pop.js') }}" defer></script>
     <!-- LANDING PAGE LEAD POPUP MODAL -->
