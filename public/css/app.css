@@ -3388,3 +3388,772 @@ button {
   }
 }
 
+/* ==========================================================================
+   TAPSTICK INTERACTIVE ANIMATED STICKER UNIVERSE STYLES
+   ========================================================================== */
+
+/* 1. CINEMATIC FULL-SCREEN STICKER PEEL PAGE ENTRANCE */
+.sticker-peel-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: var(--color-pop-yellow, #FFE600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  will-change: clip-path, transform;
+}
+
+.sticker-peel-overlay.peeling {
+  animation: sticker-peel-fullscreen 0.9s cubic-bezier(0.7, 0, 0.25, 1) forwards;
+}
+
+.sticker-peel-overlay.done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@keyframes sticker-peel-fullscreen {
+  0% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform: translate(0, 0) rotate(0deg);
+  }
+  30% {
+    clip-path: polygon(0 0, 80% 0, 100% 100%, 0 100%);
+    transform: translate(10px, -20px) rotate(1deg);
+  }
+  100% {
+    clip-path: polygon(0 0, 0 0, 100% 100%, 0 100%);
+    transform: translate(-120%, -120%) rotate(-25deg);
+    opacity: 0;
+  }
+}
+
+.peel-loader-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.peel-logo-stamp {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #FFFFFF;
+  border: 3.5px solid #18181B;
+  box-shadow: 8px 8px 0 #18181B;
+  padding: 16px 28px;
+  border-radius: 24px;
+  transform: rotate(-2deg);
+  animation: peel-stamp-bounce 1.2s infinite ease-in-out alternate;
+}
+
+@keyframes peel-stamp-bounce {
+  0% { transform: rotate(-2deg) translateY(0); }
+  100% { transform: rotate(1deg) translateY(-8px); }
+}
+
+.peel-stamp-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.peel-stamp-title {
+  font-family: var(--font-heading, 'Bricolage Grotesque', sans-serif);
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #18181B;
+  letter-spacing: -0.5px;
+}
+
+.peel-stamp-title span {
+  color: #FF334B;
+}
+
+.peel-loading-chip {
+  background: #18181B;
+  color: #FFE600;
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-family: var(--font-heading, 'Bricolage Grotesque', sans-serif);
+  font-weight: 900;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  box-shadow: 4px 4px 0 rgba(24, 24, 27, 0.2);
+}
+
+.peel-loading-progress {
+  width: 200px;
+  height: 8px;
+  background: rgba(24, 24, 27, 0.15);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 2px solid #18181B;
+}
+
+.peel-progress-bar {
+  width: 100%;
+  height: 100%;
+  background: #FF334B;
+  animation: peel-bar-fill 0.9s ease-out forwards;
+}
+
+@keyframes peel-bar-fill {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+.peel-corner-curl {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 90px;
+  height: 90px;
+  background: linear-gradient(135deg, transparent 50%, rgba(24, 24, 27, 0.1) 50%, #FAF7F0 60%);
+  filter: drop-shadow(-4px 4px 8px rgba(0,0,0,0.25));
+  border-bottom-left-radius: 12px;
+}
+
+/* 2. SOUND TOGGLE BUTTON IN NAVBAR */
+.sound-toggle-pill {
+  background: #FAF7F0;
+  color: #18181B;
+  border: 2px solid #18181B;
+  box-shadow: 2.5px 2.5px 0 #18181B;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-family: var(--font-heading, 'Bricolage Grotesque', sans-serif);
+  font-weight: 800;
+  font-size: 0.78rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.sound-toggle-pill:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 #18181B;
+  background: #FFFFFF;
+}
+
+.sound-toggle-pill:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 #18181B;
+}
+
+.sound-toggle-pill.muted {
+  background: #E2E8F0;
+  color: #64748B;
+  border-color: #94A3B8;
+  box-shadow: 1.5px 1.5px 0 #94A3B8;
+}
+
+/* 3. MOBILE MENU BURGER & STICKER MENU DRAWER */
+.mobile-menu-burger-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: #FFE600;
+  border: 2.5px solid #18181B;
+  box-shadow: 3px 3px 0 #18181B;
+  border-radius: 12px;
+  cursor: pointer;
+  color: #18181B;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mobile-menu-burger-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 #18181B;
+}
+
+.mobile-menu-burger-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 #18181B;
+}
+
+@media (max-width: 900px) {
+  .mobile-menu-burger-btn {
+    display: flex;
+  }
+}
+
+.mobile-sticker-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  background: rgba(24, 24, 27, 0.65);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mobile-sticker-drawer.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.mobile-sticker-drawer > * {
+  box-sizing: border-box;
+}
+
+.mobile-sticker-drawer {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  background: #FAF7F0;
+  border-bottom: 2.5px dashed #CBD5E1;
+}
+
+.btn-close-mobile-drawer {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #FF334B;
+  color: #FFFFFF;
+  border: 2.5px solid #18181B;
+  box-shadow: 3px 3px 0 #18181B;
+  font-size: 1.6rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 900;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-close-mobile-drawer:hover {
+  transform: scale(1.1) rotate(90deg);
+}
+
+.mobile-drawer-links {
+  background: #FAF7F0;
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-drawer-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border: 2.5px solid #18181B;
+  border-radius: 18px;
+  text-decoration: none;
+  color: #18181B;
+  box-shadow: 4px 4px 0 #18181B;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+}
+
+.mobile-drawer-card:hover, .mobile-drawer-card:active {
+  transform: translate(-2px, -2px) scale(1.02);
+  box-shadow: 6px 6px 0 #18181B;
+}
+
+.mobile-drawer-card.card-yellow { background: #FEF9C3; }
+.mobile-drawer-card.card-blue   { background: #DBEAFE; }
+.mobile-drawer-card.card-pink   { background: #FCE7F3; }
+.mobile-drawer-card.card-green  { background: #DCFCE7; }
+.mobile-drawer-card.card-purple { background: #F3E8FF; }
+.mobile-drawer-card.card-red    { background: #FEE2E2; }
+
+.mobile-drawer-card strong {
+  display: block;
+  font-family: var(--font-heading, 'Bricolage Grotesque', sans-serif);
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.mobile-drawer-card small {
+  display: block;
+  font-size: 0.78rem;
+  color: #475569;
+  font-weight: 600;
+}
+
+.drawer-card-emoji {
+  font-size: 1.5rem;
+}
+
+.drawer-arrow {
+  margin-left: auto;
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+
+.mobile-drawer-footer {
+  background: #FAF7F0;
+  padding: 16px 24px 24px;
+  border-top: 2.5px dashed #CBD5E1;
+}
+
+/* 4. HERO WORD-BY-WORD STAGGERED SPRING ANIMATION */
+.pop-word-span {
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.25s;
+  cursor: default;
+}
+
+.pop-word-span.word-make {
+  animation: word-float-bounce 3.6s infinite ease-in-out;
+}
+
+.pop-word-span.word-it {
+  animation: word-float-bounce 3.6s infinite ease-in-out 0.25s;
+}
+
+.headline-pop-word.word-yours {
+  animation: word-float-bounce 3.6s infinite ease-in-out 0.5s;
+}
+
+@keyframes word-float-bounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-5px) rotate(-1deg); }
+  50% { transform: translateY(0) rotate(0deg); }
+  75% { transform: translateY(-3px) rotate(1deg); }
+}
+
+.pop-word-span:hover, .headline-pop-word:hover {
+  transform: scale(1.08) rotate(-2deg);
+  color: #FF334B;
+}
+
+/* 5. TACTILE PEEL CORNER ON PRODUCT CARDS & STICKERS */
+.pop-card-peel-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  z-index: 9;
+  overflow: hidden;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.pop-card-peel-corner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 32px 32px 0;
+  border-color: transparent #FAF7F0 transparent transparent;
+  filter: drop-shadow(-2px 2px 2px rgba(24, 24, 27, 0.15));
+  transition: border-width 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.pop-card-peel-corner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 32px 32px;
+  border-color: transparent transparent #E2E8F0 transparent;
+  border-bottom-left-radius: 4px;
+  box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.12);
+  transition: border-width 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.pop-card-image-stage:hover .pop-card-peel-corner::before,
+.pop-card-image-stage:hover .pop-card-peel-corner::after,
+.die-cut-sticker-wrap:hover .pop-card-peel-corner::before,
+.die-cut-sticker-wrap:hover .pop-card-peel-corner::after {
+  border-width: 0 46px 46px 0;
+}
+
+.pop-card-image-stage:hover .pop-card-peel-corner::after,
+.die-cut-sticker-wrap:hover .pop-card-peel-corner::after {
+  border-width: 0 0 46px 46px;
+}
+
+/* 6. STOCK URGENCY PULSING PILL */
+.pop-stock-pill.pulse {
+  animation: stock-heartbeat 1.8s infinite ease-in-out;
+}
+
+@keyframes stock-heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.06); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.06); }
+  70% { transform: scale(1); }
+}
+
+/* 7. FLYING STICKER TO CART ANIMATION & CART BOUNCE POP */
+.flying-sticker-clone {
+  position: fixed;
+  z-index: 99999;
+  pointer-events: none;
+  object-fit: contain;
+  background: #FFFFFF;
+  will-change: transform, opacity;
+}
+
+.cart-bounce-pop {
+  animation: cart-squash-bounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+@keyframes cart-squash-bounce {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.3) rotate(-8deg); background: #FFE600; }
+  50% { transform: scale(0.92) rotate(4deg); }
+  75% { transform: scale(1.1) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* 8. CUSTOMER PHRASES FLOATING MARQUEE */
+.phrases-marquee-strip {
+  background: #FF334B;
+  color: #FFFFFF;
+  border-top: 3px solid #18181B;
+  border-bottom: 3px solid #18181B;
+  padding: 14px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  user-select: none;
+  position: relative;
+  transform: rotate(-0.8deg);
+  margin: 36px 0;
+  box-shadow: 0 6px 18px rgba(255, 51, 75, 0.25);
+  cursor: default;
+}
+
+.phrases-marquee-track {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: phrases-scroll-track 22s linear infinite;
+  will-change: transform;
+}
+
+.phrases-marquee-strip:hover .phrases-marquee-track {
+  animation-play-state: paused;
+}
+
+.phrase-item {
+  font-family: var(--font-heading, 'Bricolage Grotesque', sans-serif);
+  font-size: 1.2rem;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 0 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.phrase-star {
+  color: #FFE600;
+  font-size: 1.4rem;
+}
+
+@keyframes phrases-scroll-track {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* 9. INTERACTIVE DRAGGABLE STICKER WALL PLAYGROUND */
+.interactive-sticker-wall-wrap {
+  margin: 48px 0 24px;
+  background: #FFFFFF;
+  border: 3px solid #18181B;
+  border-radius: 24px;
+  box-shadow: 8px 8px 0 #18181B;
+  overflow: hidden;
+  position: relative;
+}
+
+.wall-header-pill {
+  background: #FFE600;
+  border-bottom: 3px solid #18181B;
+  padding: 12px 24px;
+  font-family: var(--font-heading, 'Bricolage Grotesque', sans-serif);
+  font-weight: 900;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #18181B;
+  text-transform: uppercase;
+}
+
+.wall-spark {
+  font-size: 1.1rem;
+}
+
+.sticker-wall-stage {
+  min-height: 320px;
+  padding: 40px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  background-color: #FAF7F0;
+  background-image: radial-gradient(#CBD5E1 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  position: relative;
+  touch-action: none;
+  user-select: none;
+}
+
+.draggable-sticker {
+  width: 130px;
+  height: 130px;
+  background: #FFFFFF;
+  border: 3px solid #18181B;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #18181B;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+  will-change: transform;
+}
+
+.draggable-sticker img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.draggable-sticker .sticker-pin {
+  position: absolute;
+  top: -12px;
+  right: -8px;
+  font-size: 1.4rem;
+  pointer-events: none;
+  filter: drop-shadow(1px 2px 1px rgba(0,0,0,0.25));
+}
+
+.draggable-sticker:hover {
+  transform: scale(1.08) rotate(3deg);
+  box-shadow: 8px 8px 0 #18181B;
+  z-index: 10;
+}
+
+.draggable-sticker.dragging {
+  cursor: grabbing;
+  box-shadow: 14px 14px 0 #18181B;
+  z-index: 99;
+}
+
+.wall-stk-1 { transform: rotate(-8deg); }
+.wall-stk-2 { transform: rotate(12deg); }
+.wall-stk-3 { transform: rotate(-14deg); }
+.wall-stk-4 { transform: rotate(6deg); }
+.wall-stk-5 { transform: rotate(-4deg); }
+.wall-stk-6 { transform: rotate(10deg); }
+
+/* 10. CONTINUOUS AUTO-SCROLLING LIFESTYLE GALLERY TRACK */
+.lifestyle-autoscroll-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 36px 0 20px;
+  mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+}
+
+.lifestyle-autoscroll-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: autoscroll-lifestyle 38s linear infinite;
+  will-change: transform;
+}
+
+.lifestyle-autoscroll-container:hover .lifestyle-autoscroll-track {
+  animation-play-state: paused;
+}
+
+.gallery-tile {
+  width: 270px;
+  flex-shrink: 0;
+  border: 3px solid #18181B;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #18181B;
+  overflow: hidden;
+  background: #FAF7F0;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+}
+
+.gallery-tile:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 8px 8px 0 #18181B;
+}
+
+.gallery-tile-inner {
+  width: 100%;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-tile-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gallery-tile:hover img {
+  transform: scale(1.08);
+}
+
+.gallery-tile-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(24, 24, 27, 0.88);
+  backdrop-filter: blur(4px);
+  color: #FFFFFF;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.gallery-insta-handle {
+  font-family: var(--font-heading, 'Bricolage Grotesque', sans-serif);
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: #FFE600;
+}
+
+.gallery-gear-label {
+  font-size: 0.75rem;
+  color: #CBD5E1;
+  font-weight: 600;
+}
+
+@keyframes autoscroll-lifestyle {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* 11. FOOTER GUARANTEE SEAL & FLOATING STICKERS */
+.footer-hero-statement {
+  position: relative;
+  text-align: center;
+  margin-bottom: 44px;
+  padding: 24px 0;
+}
+
+.footer-floating-stickers-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.footer-float-stk {
+  position: absolute;
+  font-size: 2.2rem;
+  animation: float-stk-bounce 4s infinite ease-in-out alternate;
+}
+
+.fstk-1 { top: 10%; left: 12%; animation-delay: 0s; }
+.fstk-2 { top: 18%; right: 14%; animation-delay: 1s; }
+.fstk-3 { bottom: 12%; left: 18%; animation-delay: 2s; }
+.fstk-4 { bottom: 15%; right: 16%; animation-delay: 1.5s; }
+
+@keyframes float-stk-bounce {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-14px) rotate(12deg); }
+}
+
+.footer-seal-stamp {
+  display: inline-block;
+  margin-top: 24px;
+  cursor: pointer;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(4px 4px 0 #18181B);
+  animation: seal-stamp-wiggle 6s infinite ease-in-out;
+}
+
+.footer-seal-stamp:hover {
+  transform: rotate(180deg) scale(1.15);
+}
+
+@keyframes seal-stamp-wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
+
+/* 12. ACCESSIBILITY: PREFERS-REDUCED-MOTION */
+@media (prefers-reduced-motion: reduce) {
+  .sticker-peel-overlay,
+  #sticker-peel-loader {
+    display: none !important;
+  }
+  .phrases-marquee-track,
+  .lifestyle-autoscroll-track,
+  .ticker-pop-track,
+  .footer-marquee-track {
+    animation: none !important;
+  }
+  .pop-word-span.word-make,
+  .pop-word-span.word-it,
+  .headline-pop-word.word-yours,
+  .pop-stock-pill.pulse,
+  .footer-float-stk,
+  .footer-seal-stamp,
+  .floating-gift,
+  .sunburst-badge-rotator {
+    animation: none !important;
+  }
+  .product-pop-card,
+  .draggable-sticker,
+  .gallery-tile {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+

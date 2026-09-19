@@ -1,6 +1,7 @@
 /**
- * Tapstick Playful Pop Interaction Engine
- * Lightweight, performant Vanilla JavaScript
+ * Tapstick Interactive Animated Sticker Universe Engine
+ * Pure Vanilla JavaScript • High Performance GPU Motion
+ * Web Audio API Tactile Sound • Canvas Confetti • Parallax Physics
  * Respects prefers-reduced-motion
  */
 
@@ -9,16 +10,124 @@
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // 1. LIGHTWEIGHT CANVAS CONFETTI BURST
-    const canvas = document.createElement('canvas');
-    canvas.id = 'confetti-canvas';
-    canvas.style.position = 'fixed';
-    canvas.style.inset = '0';
-    canvas.style.width = '100vw';
-    canvas.style.height = '100vh';
-    canvas.style.pointerEvents = 'none';
-    canvas.style.zIndex = '99999';
-    document.body.appendChild(canvas);
+    // ==========================================================================
+    // 1. WEB AUDIO API: SYNTHETIC PEEL & POP SOUNDS (NO AUTOPLAY, ZERO ASSET OVERHEAD)
+    // ==========================================================================
+    let audioCtx = null;
+    let soundEnabled = true;
+    let userHasInteracted = false;
+
+    function initAudio() {
+        if (!audioCtx && (window.AudioContext || window.webkitAudioContext)) {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            audioCtx = new AudioContext();
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+        userHasInteracted = true;
+    }
+
+    // Play tactile vinyl peel sound
+    function playPeelSound() {
+        if (!soundEnabled || !userHasInteracted || !audioCtx || prefersReducedMotion) return;
+        try {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            const filter = audioCtx.createBiquadFilter();
+
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(420, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(140, audioCtx.currentTime + 0.08);
+
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(2400, audioCtx.currentTime);
+
+            gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.08);
+        } catch (e) {
+            // Audio fail silent
+        }
+    }
+
+    // Play sticker pop / slap sound
+    function playPopSound() {
+        if (!soundEnabled || !userHasInteracted || !audioCtx || prefersReducedMotion) return;
+        try {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(180, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(680, audioCtx.currentTime + 0.06);
+
+            gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.07);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.07);
+        } catch (e) {
+            // Audio fail silent
+        }
+    }
+
+    // Activate audio on first user click or tap anywhere
+    window.addEventListener('pointerdown', initAudio, { once: true });
+    window.addEventListener('keydown', initAudio, { once: true });
+
+    // ==========================================================================
+    // 2. CINEMATIC FULL-SCREEN STICKER PEEL PAGE ENTRANCE
+    // ==========================================================================
+    const peelLoader = document.getElementById('sticker-peel-loader');
+    if (peelLoader) {
+        // If user already saw it in this session, hide quickly
+        const seenPeel = sessionStorage.getItem('tapstick_peel_seen');
+        if (seenPeel || prefersReducedMotion) {
+            peelLoader.style.display = 'none';
+        } else {
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                peelLoader.classList.add('peeling');
+                playPopSound();
+                createConfetti(window.innerWidth / 2, window.innerHeight / 2, 45);
+
+                setTimeout(() => {
+                    peelLoader.classList.add('done');
+                    document.body.style.overflow = '';
+                    sessionStorage.setItem('tapstick_peel_seen', 'true');
+                    setTimeout(() => {
+                        peelLoader.remove();
+                    }, 800);
+                }, 900);
+            }, 1000);
+        }
+    }
+
+    // ==========================================================================
+    // 3. CANVAS CONFETTI & SPARKLE ENGINE
+    // ==========================================================================
+    let canvas = document.getElementById('confetti-canvas');
+    if (!canvas) {
+        canvas = document.createElement('canvas');
+        canvas.id = 'confetti-canvas';
+        canvas.style.position = 'fixed';
+        canvas.style.inset = '0';
+        canvas.style.width = '100vw';
+        canvas.style.height = '100vh';
+        canvas.style.pointerEvents = 'none';
+        canvas.style.zIndex = '99999';
+        document.body.appendChild(canvas);
+    }
 
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -31,7 +140,7 @@
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    const confettiColors = ['#FFE600', '#FF334B', '#2563EB', '#FF80BF', '#10B981', '#18181B'];
+    const confettiColors = ['#FFE600', '#FF334B', '#2563EB', '#FF80BF', '#10B981', '#18181B', '#FFFFFF'];
 
     function createConfetti(x, y, count = 36) {
         if (prefersReducedMotion) return;
@@ -42,14 +151,14 @@
                 x: x,
                 y: y,
                 vx: Math.cos(angle) * speed,
-                vy: Math.sin(angle) * speed - 3,
-                size: 6 + Math.random() * 8,
+                vy: Math.sin(angle) * speed - 3.5,
+                size: 7 + Math.random() * 8,
                 color: confettiColors[Math.floor(Math.random() * confettiColors.length)],
                 rotation: Math.random() * 360,
-                rotationSpeed: (Math.random() - 0.5) * 12,
+                rotationSpeed: (Math.random() - 0.5) * 14,
                 alpha: 1,
-                decay: 0.015 + Math.random() * 0.02,
-                shape: Math.random() > 0.5 ? 'rect' : 'circle'
+                decay: 0.014 + Math.random() * 0.018,
+                shape: Math.random() > 0.4 ? 'rect' : 'star'
             });
         }
         if (!animationFrame) {
@@ -64,7 +173,7 @@
         for (let p of particles) {
             p.x += p.vx;
             p.y += p.vy;
-            p.vy += 0.25; // gravity
+            p.vy += 0.28; // gravity
             p.rotation += p.rotationSpeed;
             p.alpha -= p.decay;
 
@@ -77,6 +186,7 @@
             if (p.shape === 'rect') {
                 ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
             } else {
+                // Little star sparkle
                 ctx.beginPath();
                 ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
                 ctx.fill();
@@ -92,39 +202,74 @@
         }
     }
 
-    // Trigger confetti on any element with data-confetti or .trigger-confetti or .btn-pop-primary
+    // Trigger confetti on any interactive CTA
     document.addEventListener('click', function (e) {
-        const target = e.target.closest('[data-confetti], .trigger-confetti, .btn-pop-primary, .btn-add-pop-cart');
+        const target = e.target.closest('[data-confetti], .trigger-confetti, .btn-pop-primary');
         if (target) {
             const rect = target.getBoundingClientRect();
             const x = rect.left + rect.width / 2;
             const y = rect.top + rect.height / 2;
-            createConfetti(x, y, 40);
+            createConfetti(x, y, 42);
+            playPopSound();
         }
     });
 
-    // 2. MAGNETIC BUTTON HOVER EFFECT
-    if (!prefersReducedMotion && window.innerWidth > 768) {
-        const magneticElements = document.querySelectorAll('.btn-magnetic, .btn-pop-primary, .btn-pop-secondary, .floating-lead-trigger');
-        magneticElements.forEach(el => {
-            el.addEventListener('mousemove', function (e) {
-                const rect = el.getBoundingClientRect();
-                const x = e.clientX - (rect.left + rect.width / 2);
-                const y = e.clientY - (rect.top + rect.height / 2);
-                el.style.transform = `translate(${x * 0.22}px, ${y * 0.22}px)`;
-            });
-            el.addEventListener('mouseleave', function () {
-                el.style.transform = 'translate(0px, 0px)';
-                el.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
-                setTimeout(() => {
-                    el.style.transition = '';
-                }, 400);
-            });
-        });
-    }
+    // ==========================================================================
+    // 4. FLYING STICKER TO CART ANIMATION
+    // ==========================================================================
+    document.addEventListener('submit', function (e) {
+        const form = e.target.closest('.pop-add-cart-form');
+        if (!form) return;
 
-    // 3. CURSOR-FOLLOWING HERO DEPTH / PARALLAX
-    if (!prefersReducedMotion && window.innerWidth > 900) {
+        const card = form.closest('.product-pop-card');
+        const img = card ? card.querySelector('.pop-card-sticker-img') : null;
+        const cartPill = document.querySelector('.header-cart-pill');
+
+        if (img && cartPill && !prefersReducedMotion) {
+            const imgRect = img.getBoundingClientRect();
+            const cartRect = cartPill.getBoundingClientRect();
+
+            const flyingSticker = img.cloneNode(true);
+            flyingSticker.className = 'flying-sticker-clone';
+            flyingSticker.style.position = 'fixed';
+            flyingSticker.style.left = `${imgRect.left}px`;
+            flyingSticker.style.top = `${imgRect.top}px`;
+            flyingSticker.style.width = `${imgRect.width}px`;
+            flyingSticker.style.height = `${imgRect.height}px`;
+            flyingSticker.style.zIndex = '99999';
+            flyingSticker.style.pointerEvents = 'none';
+            flyingSticker.style.borderRadius = '16px';
+            flyingSticker.style.border = '3px solid #18181B';
+            flyingSticker.style.boxShadow = '6px 6px 0 #18181B';
+            flyingSticker.style.transition = 'all 0.65s cubic-bezier(0.16, 1, 0.3, 1)';
+            document.body.appendChild(flyingSticker);
+
+            playPeelSound();
+
+            requestAnimationFrame(() => {
+                const targetX = cartRect.left + cartRect.width / 2 - imgRect.width / 4;
+                const targetY = cartRect.top + cartRect.height / 2 - imgRect.height / 4;
+                flyingSticker.style.transform = `translate(${targetX - imgRect.left}px, ${targetY - imgRect.top}px) scale(0.25) rotate(720deg)`;
+                flyingSticker.style.opacity = '0.3';
+            });
+
+            setTimeout(() => {
+                flyingSticker.remove();
+                playPopSound();
+                cartPill.classList.add('cart-bounce-pop');
+                createConfetti(cartRect.left + cartRect.width / 2, cartRect.top + cartRect.height / 2, 18);
+                setTimeout(() => {
+                    cartPill.classList.remove('cart-bounce-pop');
+                }, 500);
+            }, 650);
+        }
+    });
+
+    // ==========================================================================
+    // 5. CURSOR-BASED 3D TILT & HERO PARALLAX
+    // ==========================================================================
+    if (!prefersReducedMotion && window.innerWidth > 768) {
+        // Hero 3D depth
         const heroSection = document.querySelector('.hero-pop-section');
         const parallaxLayers = document.querySelectorAll('[data-parallax-depth]');
 
@@ -146,18 +291,63 @@
                 parallaxLayers.forEach(layer => {
                     const depth = parseFloat(layer.getAttribute('data-parallax-depth') || 1);
                     const rotate = parseFloat(layer.getAttribute('data-base-rotate') || 0);
-                    const moveX = currentX * depth * 24;
-                    const moveY = currentY * depth * 24;
-                    layer.style.transform = `translate3d(${moveX}px, ${moveY}px, 0) rotate(${rotate + currentX * 2}deg)`;
+                    const moveX = currentX * depth * 28;
+                    const moveY = currentY * depth * 28;
+                    layer.style.transform = `translate3d(${moveX}px, ${moveY}px, 0) rotate(${rotate + currentX * 3}deg)`;
                 });
 
                 requestAnimationFrame(renderParallax);
             }
             renderParallax();
         }
+
+        // Product Cards 3D Tilt
+        const tiltCards = document.querySelectorAll('.product-pop-card');
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', function (e) {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const cx = rect.width / 2;
+                const cy = rect.height / 2;
+                const rotX = ((y - cy) / cy) * -7;
+                const rotY = ((x - cx) / cx) * 7;
+                card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-8px)`;
+            });
+
+            card.addEventListener('mouseleave', function () {
+                card.style.transform = '';
+            });
+
+            card.addEventListener('mouseenter', playPeelSound);
+        });
     }
 
-    // 4. ANIMATED STICKER MASCOT EYE TRACKING
+    // ==========================================================================
+    // 6. MAGNETIC BUTTONS
+    // ==========================================================================
+    if (!prefersReducedMotion && window.innerWidth > 768) {
+        const magneticElements = document.querySelectorAll('.btn-magnetic, .btn-pop-primary, .btn-pop-secondary, .floating-lead-trigger');
+        magneticElements.forEach(el => {
+            el.addEventListener('mousemove', function (e) {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - (rect.left + rect.width / 2);
+                const y = e.clientY - (rect.top + rect.height / 2);
+                el.style.transform = `translate(${x * 0.22}px, ${y * 0.22}px)`;
+            });
+            el.addEventListener('mouseleave', function () {
+                el.style.transform = 'translate(0px, 0px)';
+                el.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                setTimeout(() => {
+                    el.style.transition = '';
+                }, 400);
+            });
+        });
+    }
+
+    // ==========================================================================
+    // 7. STICKER MASCOT EYE TRACKING
+    // ==========================================================================
     const mascotEyes = document.querySelectorAll('.mascot-pupil');
     if (mascotEyes.length > 0 && !prefersReducedMotion) {
         window.addEventListener('mousemove', function (e) {
@@ -174,7 +364,20 @@
         });
     }
 
-    // 5. SCROLL-TRIGGERED ENTRANCE REVEAL (INTERSECTION OBSERVER)
+    // ==========================================================================
+    // 8. SCROLL REVEALS & ACTIVE NAVBAR SHRINK
+    // ==========================================================================
+    const siteHeader = document.querySelector('.site-header');
+    window.addEventListener('scroll', function () {
+        if (siteHeader) {
+            if (window.scrollY > 40) {
+                siteHeader.classList.add('is-scrolled');
+            } else {
+                siteHeader.classList.remove('is-scrolled');
+            }
+        }
+    }, { passive: true });
+
     if ('IntersectionObserver' in window) {
         const revealElements = document.querySelectorAll('.reveal-on-scroll');
         const observer = new IntersectionObserver((entries, obs) => {
@@ -185,36 +388,113 @@
                 }
             });
         }, {
-            threshold: 0.12,
+            threshold: 0.1,
             rootMargin: '0px 0px -40px 0px'
         });
 
         revealElements.forEach(el => observer.observe(el));
     }
 
-    // 6. CARD 3D TILT EFFECT
-    if (!prefersReducedMotion && window.innerWidth > 768) {
-        const tiltCards = document.querySelectorAll('.product-pop-card');
-        tiltCards.forEach(card => {
-            card.addEventListener('mousemove', function (e) {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const cx = rect.width / 2;
-                const cy = rect.height / 2;
-                const rotX = ((y - cy) / cy) * -6;
-                const rotY = ((x - cx) / cx) * 6;
-                card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-8px)`;
-            });
+    // ==========================================================================
+    // 9. SOUND TOGGLE BUTTON IN NAVBAR
+    // ==========================================================================
+    const soundToggleBtn = document.getElementById('sound-toggle-btn');
+    if (soundToggleBtn) {
+        soundToggleBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            soundEnabled = !soundEnabled;
+            soundToggleBtn.textContent = soundEnabled ? '🔊 SFX: ON' : '🔇 SFX: OFF';
+            soundToggleBtn.classList.toggle('muted', !soundEnabled);
+            if (soundEnabled) {
+                initAudio();
+                playPopSound();
+            }
+        });
+    }
 
-            card.addEventListener('mouseleave', function () {
-                card.style.transform = '';
+    // ==========================================================================
+    // 10. INTERACTIVE DRAGGABLE STICKER WALL (CLUB SECTION)
+    // ==========================================================================
+    const dragStickers = document.querySelectorAll('.draggable-sticker');
+    dragStickers.forEach(sticker => {
+        let isDragging = false;
+        let startX, startY, initLeft, initTop;
+
+        sticker.addEventListener('pointerdown', function (e) {
+            if (prefersReducedMotion) return;
+            isDragging = true;
+            sticker.setPointerCapture(e.pointerId);
+            sticker.classList.add('dragging');
+            playPeelSound();
+
+            startX = e.clientX;
+            startY = e.clientY;
+
+            const rect = sticker.getBoundingClientRect();
+            initLeft = rect.left;
+            initTop = rect.top;
+        });
+
+        sticker.addEventListener('pointermove', function (e) {
+            if (!isDragging) return;
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+            sticker.style.transform = `translate(${dx}px, ${dy}px) scale(1.1) rotate(6deg)`;
+        });
+
+        const endDrag = function (e) {
+            if (!isDragging) return;
+            isDragging = false;
+            sticker.classList.remove('dragging');
+            sticker.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            sticker.style.transform = '';
+            playPopSound();
+            setTimeout(() => {
+                sticker.style.transition = '';
+            }, 400);
+        };
+
+        sticker.addEventListener('pointerup', endDrag);
+        sticker.addEventListener('pointercancel', endDrag);
+    });
+
+    // ==========================================================================
+    // 11. MOBILE FULL-SCREEN ANIMATED MENU
+    // ==========================================================================
+    const mobileMenuOpenBtn = document.getElementById('btn-open-mobile-menu');
+    const mobileMenuCloseBtn = document.getElementById('btn-close-mobile-menu');
+    const mobileMenuDrawer = document.getElementById('mobile-sticker-drawer');
+
+    if (mobileMenuOpenBtn && mobileMenuDrawer) {
+        mobileMenuOpenBtn.addEventListener('click', function () {
+            mobileMenuDrawer.classList.add('is-active');
+            document.body.style.overflow = 'hidden';
+            playPeelSound();
+        });
+    }
+
+    if (mobileMenuCloseBtn && mobileMenuDrawer) {
+        mobileMenuCloseBtn.addEventListener('click', function () {
+            mobileMenuDrawer.classList.remove('is-active');
+            document.body.style.overflow = '';
+            playPopSound();
+        });
+    }
+
+    // Close mobile drawer when clicking any link inside it
+    if (mobileMenuDrawer) {
+        mobileMenuDrawer.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function () {
+                mobileMenuDrawer.classList.remove('is-active');
+                document.body.style.overflow = '';
             });
         });
     }
 
-    // Expose utility globally
+    // Expose utilities globally
     window.TapstickPop = {
-        burst: createConfetti
+        burst: createConfetti,
+        playPop: playPopSound,
+        playPeel: playPeelSound
     };
 })();

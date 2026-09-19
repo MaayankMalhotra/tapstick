@@ -13,6 +13,29 @@
 </head>
 <body>
 
+    <!-- 0. CINEMATIC FULL-SCREEN STICKER PEEL PAGE ENTRANCE -->
+    <div id="sticker-peel-loader" class="sticker-peel-overlay" aria-hidden="true">
+        <div class="peel-loader-center">
+            <div class="peel-logo-stamp">
+                <div class="peel-stamp-badge">
+                    <svg width="40" height="40" viewBox="0 0 32 32" fill="none">
+                        <rect x="2" y="2" width="28" height="28" rx="8" fill="#FFE600" stroke="#18181B" stroke-width="2.5"/>
+                        <path d="M7 10H25M7 16H21M7 22H15" stroke="#18181B" stroke-width="3.5" stroke-linecap="round"/>
+                        <circle cx="23" cy="21" r="3.5" fill="#FF334B" stroke="#18181B" stroke-width="1.5"/>
+                    </svg>
+                </div>
+                <div class="peel-stamp-title">TAP<span>STICK</span></div>
+            </div>
+            <div class="peel-loading-chip">
+                <span>✦ UNBOXING STICKER UNIVERSE ✦</span>
+            </div>
+            <div class="peel-loading-progress">
+                <div class="peel-progress-bar"></div>
+            </div>
+        </div>
+        <div class="peel-corner-curl"></div>
+    </div>
+
     <!-- 1. TOP ANNOUNCEMENT BAR WITH LIVE COUNTDOWN -->
     <div class="announcement-bar">
         <div class="announcement-content">
@@ -58,6 +81,11 @@
             </nav>
 
             <div class="header-actions">
+                <!-- Sound Effect Audio Toggle -->
+                <button type="button" class="sound-toggle-pill" id="sound-toggle-btn" title="Toggle tactile sticker sound effects">
+                    🔊 SFX: ON
+                </button>
+
                 <div class="customer-support-pill">
                     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -89,6 +117,13 @@
                     </div>
                     <span class="cart-pill-text">Cart: <strong class="cart-subtotal-text">Rs. {{ number_format($headerCartSubtotal ?? 0, 2) }}</strong></span>
                 </a>
+
+                <!-- Mobile Menu Button -->
+                <button type="button" class="mobile-menu-burger-btn" id="btn-open-mobile-menu" aria-label="Open Mobile Menu">
+                    <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
             </div>
         </div>
 
@@ -104,6 +139,78 @@
             </div>
         </div>
     </header>
+
+    <!-- MOBILE FULL-SCREEN STICKER MENU DRAWER -->
+    <div id="mobile-sticker-drawer" class="mobile-sticker-drawer" aria-hidden="true">
+        <div class="mobile-drawer-header">
+            <div class="brand-link">
+                <div class="brand-logo-badge">
+                    <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+                        <rect x="2" y="2" width="28" height="28" rx="8" fill="#FFE600" stroke="#18181B" stroke-width="2"/>
+                        <path d="M7 10H25M7 16H21M7 22H15" stroke="#18181B" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="23" cy="21" r="3.5" fill="#FF334B" stroke="#18181B" stroke-width="1.5"/>
+                    </svg>
+                </div>
+                <span class="brand-main">TAP<span class="brand-accent">STICK</span></span>
+            </div>
+            <button type="button" class="btn-close-mobile-drawer" id="btn-close-mobile-menu" aria-label="Close menu">&times;</button>
+        </div>
+        <div class="mobile-drawer-links">
+            <a href="{{ route('home') }}#shop" class="mobile-drawer-card card-yellow">
+                <span class="drawer-card-emoji">🛍️</span>
+                <div>
+                    <strong>Shop The Drop</strong>
+                    <small>Explore 5000+ waterproof stickers</small>
+                </div>
+                <span class="drawer-arrow">➔</span>
+            </a>
+            <a href="{{ route('home') }}#why" class="mobile-drawer-card card-blue">
+                <span class="drawer-card-emoji">🛡️</span>
+                <div>
+                    <strong>Why We Stick</strong>
+                    <small>100% waterproof automotive vinyl</small>
+                </div>
+                <span class="drawer-arrow">➔</span>
+            </a>
+            <a href="{{ route('home') }}#club" class="mobile-drawer-card card-pink">
+                <span class="drawer-card-emoji">🎁</span>
+                <div>
+                    <strong>The Tapstick Club</strong>
+                    <small>Secret weekly drops &amp; 10% coupon</small>
+                </div>
+                <span class="drawer-arrow">➔</span>
+            </a>
+            <a href="{{ route('home') }}#reviews" class="mobile-drawer-card card-green">
+                <span class="drawer-card-emoji">⭐</span>
+                <div>
+                    <strong>Reviews</strong>
+                    <small>What 25,000+ sticker heads say</small>
+                </div>
+                <span class="drawer-arrow">➔</span>
+            </a>
+            <a href="{{ route('home') }}#gallery" class="mobile-drawer-card card-purple">
+                <span class="drawer-card-emoji">📸</span>
+                <div>
+                    <strong>Seen In The Wild</strong>
+                    <small>Streetwear on laptops &amp; bikes</small>
+                </div>
+                <span class="drawer-arrow">➔</span>
+            </a>
+            <a href="{{ route('home') }}#author" class="mobile-drawer-card card-red">
+                <span class="drawer-card-emoji">✍️</span>
+                <div>
+                    <strong>Founder Story</strong>
+                    <small>Mayank Malhotra's mission</small>
+                </div>
+                <span class="drawer-arrow">➔</span>
+            </a>
+        </div>
+        <div class="mobile-drawer-footer">
+            <button type="button" class="btn-pop-primary" style="width: 100%;" onclick="document.getElementById('floating-lead-trigger')?.click();">
+                <span>Claim 10% Off 🎁</span>
+            </button>
+        </div>
+    </div>
 
     @if(session('success'))
         <div class="container"><div class="alert success">{{ session('success') }}</div></div>
@@ -130,8 +237,25 @@
 
         <div class="container footer-inner-wrap">
             <div class="footer-hero-statement">
-                <h2 class="footer-big-brand-title">MAKE IT YOURS.</h2>
+                <div class="footer-floating-stickers-wrap" aria-hidden="true">
+                    <span class="footer-float-stk fstk-1">⭐</span>
+                    <span class="footer-float-stk fstk-2">🔥</span>
+                    <span class="footer-float-stk fstk-3">⚡</span>
+                    <span class="footer-float-stk fstk-4">💧</span>
+                </div>
+                <h2 class="footer-big-brand-title footer-bouncy-title">STICK AROUND.</h2>
                 <p class="footer-big-brand-sub">Premium vinyl stickers crafted for creators, coders, riders, and dreamers who refuse to blend in.</p>
+
+                <!-- Final Guarantee Sticker Seal -->
+                <div class="footer-seal-stamp" title="100% Authentic Vinyl Seal">
+                    <svg width="86" height="86" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="46" fill="#FFE600" stroke="#18181B" stroke-width="3" stroke-dasharray="5 3"/>
+                        <circle cx="50" cy="50" r="36" fill="#FF334B" stroke="#18181B" stroke-width="2"/>
+                        <text x="50" y="44" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="900" fill="#FFFFFF">100%</text>
+                        <text x="50" y="56" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="900" fill="#FFE600">GENUINE</text>
+                        <text x="50" y="67" text-anchor="middle" font-family="sans-serif" font-size="7" font-weight="900" fill="#FFFFFF">VINYL SEAL ✦</text>
+                    </svg>
+                </div>
             </div>
 
             <div class="footer-grid">

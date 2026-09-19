@@ -37,8 +37,12 @@
                 <span class="eyebrow-badge">NEW</span>
             </div>
 
+            <!-- Independent Word Spans for Staggered Spring Animation -->
             <h1 class="hero-pop-headline reveal-on-scroll">
-                <span class="headline-line-1">MAKE IT</span>
+                <span class="headline-line-1">
+                    <span class="pop-word-span word-make">MAKE</span>
+                    <span class="pop-word-span word-it">IT</span>
+                </span>
                 <span class="headline-line-2">
                     <span class="headline-pop-word word-yours">
                         YOURS.
@@ -97,7 +101,7 @@
                         </g>
                         <circle cx="80" cy="80" r="54" fill="#18181B" />
                         <!-- Rotating Circular Text -->
-                        <text font-family="Bricolage Grotesque, sans-serif" font-size="11" font-weight="900" fill="#FFFFFF" letter-spacing="2.5">
+                        <text font-family="sans-serif" font-size="11" font-weight="900" fill="#FFFFFF" letter-spacing="2.5">
                             <textPath href="#sunburstPath" startOffset="0%">
                                 ✦ STICK WITH IT ✦ TAPSTICK ✦ POP ✦
                             </textPath>
@@ -131,6 +135,7 @@
                     <div class="die-cut-sticker-wrap">
                         <img src="{{ asset('images/wasted.jpg') }}" alt="Wasted Sticker">
                         <span class="sticker-tag-badge badge-yellow">⭐ BESTSELLER</span>
+                        <div class="pop-card-peel-corner"></div>
                     </div>
                 </div>
 
@@ -138,6 +143,7 @@
                     <div class="die-cut-sticker-wrap">
                         <img src="{{ asset('images/ah-shit.jpg') }}" alt="Ah Shit Here We Go Again">
                         <span class="sticker-tag-badge badge-blue">👑 MEME DROP</span>
+                        <div class="pop-card-peel-corner"></div>
                     </div>
                 </div>
 
@@ -145,6 +151,7 @@
                     <div class="die-cut-sticker-wrap">
                         <img src="{{ asset('images/limited-edition.jpg') }}" alt="Limited Edition Sticker">
                         <span class="sticker-tag-badge badge-red">🔥 DROP 04</span>
+                        <div class="pop-card-peel-corner"></div>
                     </div>
                 </div>
 
@@ -152,6 +159,7 @@
                     <div class="die-cut-sticker-wrap">
                         <img src="{{ asset('images/fizzy-zero.jpg') }}" alt="Fizzy Zero Sticker">
                         <span class="sticker-tag-badge badge-green">⚡ POP ART</span>
+                        <div class="pop-card-peel-corner"></div>
                     </div>
                 </div>
             </div>
@@ -234,19 +242,21 @@
                     <div class="pop-card-top-bar">
                         <span class="pop-category-tag">{{ $product->category?->name ?? 'Sticker Pack' }}</span>
                         @if($stockLeft <= 8)
-                            <span class="pop-stock-pill urgent">🔥 Only {{ $stockLeft }} Left</span>
+                            <span class="pop-stock-pill urgent pulse">🔥 Almost gone! Only {{ $stockLeft }}</span>
                         @else
                             <span class="pop-stock-pill in-stock">✓ In Stock</span>
                         @endif
                     </div>
 
-                    <!-- Die-Cut Image Stage -->
+                    <!-- Die-Cut Image Stage with Tactile Peel Corner -->
                     <a href="{{ route('products.show', $product) }}" class="pop-card-image-stage">
                         @if($savings > 0)
                             <div class="pop-savings-corner-badge">
                                 <span>SAVE ₹{{ number_format($savings, 0) }}</span>
                             </div>
                         @endif
+
+                        <div class="pop-card-peel-corner" title="Peel me!"></div>
 
                         <div class="pop-sticker-preview-wrapper">
                             @if($imgSrc)
@@ -284,7 +294,7 @@
                             <span class="pop-price-note">Incl. all taxes</span>
                         </div>
 
-                        <!-- Add to Cart Form with Magnetic Hover & Confetti -->
+                        <!-- Add to Cart Form with Magnetic Hover & Flying Sticker Animation -->
                         <form action="{{ route('cart.add', $product) }}" method="POST" class="pop-add-cart-form">
                             @csrf
                             <button type="submit" class="btn-add-pop-cart trigger-confetti" data-confetti="true">
@@ -312,6 +322,27 @@
         </div>
     </div>
 </section>
+
+<!-- ==========================================================================
+     CUSTOMER PHRASES FLOATING MARQUEE
+     ========================================================================== -->
+<div class="phrases-marquee-strip">
+    <div class="phrases-marquee-track">
+        <span class="phrase-item"><span class="phrase-star">★</span> “LOOKS AMAZING”</span>
+        <span class="phrase-item"><span class="phrase-star">★</span> “STICKS PERFECTLY”</span>
+        <span class="phrase-item"><span class="phrase-star">★</span> “BEST LAPTOP UPGRADE”</span>
+        <span class="phrase-item"><span class="phrase-star">★</span> “SO SATISFYING TO PEEL”</span>
+        <span class="phrase-item"><span class="phrase-star">★</span> “100% WATERPROOF MONSOON PROOF”</span>
+        <span class="phrase-item"><span class="phrase-star">★</span> “COLORS POP LIKE CRAZY”</span>
+        <!-- Duplicated for continuous infinite marquee -->
+        <span class="phrase-item"><span class="phrase-star">★</span> “LOOKS AMAZING”</span>
+        <span class="phrase-item"><span class="phrase-star">★</span> “STICKS PERFECTLY”</span>
+        <span class="phrase-item"><span class="phrase-star">★</span> “BEST LAPTOP UPGRADE”</span>
+        <span class="phrase-item"><span class="phrase-star">★</span> “SO SATISFYING TO PEEL”</span>
+        <span class="phrase-item"><span class="phrase-star">★</span> “100% WATERPROOF MONSOON PROOF”</span>
+        <span class="phrase-item"><span class="phrase-star">★</span> “COLORS POP LIKE CRAZY”</span>
+    </div>
+</div>
 
 <!-- ==========================================================================
      4. SECTION: “WHY YOU’LL LOVE THEM” (WEATHERPROOF, CLEAN CUTS, BOLD COLOUR)
@@ -459,6 +490,41 @@
             </div>
         </div>
 
+        <!-- Interactive Sticker Playground Wall -->
+        <div class="interactive-sticker-wall-wrap reveal-on-scroll">
+            <div class="wall-header-pill">
+                <span class="wall-spark">🎮</span>
+                <span>INTERACTIVE STICKER WALL • DRAG &amp; PLAY AROUND!</span>
+                <span class="wall-spark">✦</span>
+            </div>
+            <div class="sticker-wall-stage" id="sticker-wall">
+                <div class="draggable-sticker wall-stk-1" data-base-rotate="-8" title="Drag me!">
+                    <img src="{{ asset('images/wasted.jpg') }}" alt="Wasted Sticker">
+                    <span class="sticker-pin">📌</span>
+                </div>
+                <div class="draggable-sticker wall-stk-2" data-base-rotate="12" title="Drag me!">
+                    <img src="{{ asset('images/ah-shit.jpg') }}" alt="Ah Shit Sticker">
+                    <span class="sticker-pin">📌</span>
+                </div>
+                <div class="draggable-sticker wall-stk-3" data-base-rotate="-14" title="Drag me!">
+                    <img src="{{ asset('images/limited-edition.jpg') }}" alt="Limited Drop">
+                    <span class="sticker-pin">📌</span>
+                </div>
+                <div class="draggable-sticker wall-stk-4" data-base-rotate="6" title="Drag me!">
+                    <img src="{{ asset('images/fizzy-zero.jpg') }}" alt="Fizzy Pop">
+                    <span class="sticker-pin">📌</span>
+                </div>
+                <div class="draggable-sticker wall-stk-5" data-base-rotate="-4" title="Drag me!">
+                    <img src="{{ asset('images/keep-distance.jpg') }}" alt="Keep Distance">
+                    <span class="sticker-pin">📌</span>
+                </div>
+                <div class="draggable-sticker wall-stk-6" data-base-rotate="10" title="Drag me!">
+                    <img src="{{ asset('images/uchiha.jpg') }}" alt="Uchiha Clan">
+                    <span class="sticker-pin">📌</span>
+                </div>
+            </div>
+        </div>
+
         <!-- 3 Club Benefits Cards -->
         <div class="club-benefits-grid">
             <div class="benefit-card benefit-yellow reveal-on-scroll">
@@ -548,7 +614,7 @@
 </section>
 
 <!-- ==========================================================================
-     7. INSTAGRAM-STYLE LIFESTYLE GALLERY: “SEEN IN THE WILD”
+     7. INSTAGRAM-STYLE LIFESTYLE GALLERY: “SEEN IN THE WILD” (AUTO-SCROLLING)
      ========================================================================== -->
 <section id="gallery" class="gallery-pop-section">
     <div class="container">
@@ -558,13 +624,16 @@
             </div>
             <h2 class="section-pop-title">SEEN IN THE WILD</h2>
             <p class="section-pop-subtitle">
-                Tag <strong>@tapstick.in</strong> on Instagram to be featured on our official drop wall.
+                Tag <strong>@tapstick.in</strong> on Instagram to be featured on our official drop wall. Hover to pause.
             </p>
         </div>
+    </div>
 
-        <div class="lifestyle-gallery-grid">
+    <!-- Continuous Auto-Scrolling Track with Hover Pause -->
+    <div class="lifestyle-autoscroll-container">
+        <div class="lifestyle-autoscroll-track">
             <!-- Tile 1 -->
-            <div class="gallery-tile tile-1 reveal-on-scroll">
+            <div class="gallery-tile">
                 <div class="gallery-tile-inner">
                     <img src="{{ asset('images/hero-banner.webp') }}" alt="Stickers on Laptop" loading="lazy">
                     <div class="gallery-tile-overlay">
@@ -575,7 +644,7 @@
             </div>
 
             <!-- Tile 2 -->
-            <div class="gallery-tile tile-2 reveal-on-scroll">
+            <div class="gallery-tile">
                 <div class="gallery-tile-inner">
                     <img src="{{ asset('images/wasted.jpg') }}" alt="Wasted Sticker on Flask" loading="lazy">
                     <div class="gallery-tile-overlay">
@@ -586,7 +655,7 @@
             </div>
 
             <!-- Tile 3 -->
-            <div class="gallery-tile tile-3 reveal-on-scroll">
+            <div class="gallery-tile">
                 <div class="gallery-tile-inner">
                     <img src="{{ asset('images/limited-edition.jpg') }}" alt="Limited Edition on Bike" loading="lazy">
                     <div class="gallery-tile-overlay">
@@ -597,7 +666,7 @@
             </div>
 
             <!-- Tile 4 -->
-            <div class="gallery-tile tile-4 reveal-on-scroll">
+            <div class="gallery-tile">
                 <div class="gallery-tile-inner">
                     <img src="{{ asset('images/ah-shit.jpg') }}" alt="Ah Shit on Skateboard" loading="lazy">
                     <div class="gallery-tile-overlay">
@@ -608,7 +677,7 @@
             </div>
 
             <!-- Tile 5 -->
-            <div class="gallery-tile tile-5 reveal-on-scroll">
+            <div class="gallery-tile">
                 <div class="gallery-tile-inner">
                     <img src="{{ asset('images/fizzy-zero.jpg') }}" alt="Fizzy Pop on iPad" loading="lazy">
                     <div class="gallery-tile-overlay">
@@ -619,7 +688,63 @@
             </div>
 
             <!-- Tile 6 -->
-            <div class="gallery-tile tile-6 reveal-on-scroll">
+            <div class="gallery-tile">
+                <div class="gallery-tile-inner">
+                    <img src="{{ asset('images/mystery-box.jpg') }}" alt="Mystery Box Unboxing" loading="lazy">
+                    <div class="gallery-tile-overlay">
+                        <span class="gallery-insta-handle">@tapstick.in</span>
+                        <span class="gallery-gear-label">Mystery Unboxing • Collector</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DUPLICATED FOR SEAMLESS INFINITE LOOP -->
+            <div class="gallery-tile">
+                <div class="gallery-tile-inner">
+                    <img src="{{ asset('images/hero-banner.webp') }}" alt="Stickers on Laptop" loading="lazy">
+                    <div class="gallery-tile-overlay">
+                        <span class="gallery-insta-handle">@tapstick.in</span>
+                        <span class="gallery-gear-label">MacBook Air • Pop Drops</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-tile">
+                <div class="gallery-tile-inner">
+                    <img src="{{ asset('images/wasted.jpg') }}" alt="Wasted Sticker on Flask" loading="lazy">
+                    <div class="gallery-tile-overlay">
+                        <span class="gallery-insta-handle">@tapstick.in</span>
+                        <span class="gallery-gear-label">Hydro Flask • Meme Pack</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-tile">
+                <div class="gallery-tile-inner">
+                    <img src="{{ asset('images/limited-edition.jpg') }}" alt="Limited Edition on Bike" loading="lazy">
+                    <div class="gallery-tile-overlay">
+                        <span class="gallery-insta-handle">@tapstick.in</span>
+                        <span class="gallery-gear-label">Moto Helmet • Drop 04</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-tile">
+                <div class="gallery-tile-inner">
+                    <img src="{{ asset('images/ah-shit.jpg') }}" alt="Ah Shit on Skateboard" loading="lazy">
+                    <div class="gallery-tile-overlay">
+                        <span class="gallery-insta-handle">@tapstick.in</span>
+                        <span class="gallery-gear-label">Skate Deck • Street Drop</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-tile">
+                <div class="gallery-tile-inner">
+                    <img src="{{ asset('images/fizzy-zero.jpg') }}" alt="Fizzy Pop on iPad" loading="lazy">
+                    <div class="gallery-tile-overlay">
+                        <span class="gallery-insta-handle">@tapstick.in</span>
+                        <span class="gallery-gear-label">iPad Pro • Pop Art</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-tile">
                 <div class="gallery-tile-inner">
                     <img src="{{ asset('images/mystery-box.jpg') }}" alt="Mystery Box Unboxing" loading="lazy">
                     <div class="gallery-tile-overlay">
