@@ -21,6 +21,6 @@
 <div class="identity">Signed in as<br><strong>{{ auth()->user()->name }}</strong></div></nav>@endif
 <main class="content">
 @if(session('success'))<div class="notice good" role="status">{{ session('success') }}</div>@endif
-@if($errors->any())<div class="notice bad" role="alert"><strong>Please check:</strong><ul>@foreach($errors->all() as $message)<li>{{ $message }}</li>@endforeach</ul></div>@endif
+@if(isset($errors) && $errors->any())<div class="notice bad" role="alert"><strong>Please check:</strong><ul>@foreach($errors->all() as $message)<li>{{ $message }}</li>@endforeach</ul></div>@endif
 @yield('content')
 </main></div></body></html>
