@@ -50,9 +50,10 @@
 
             <nav class="main-nav">
                 <a href="{{ route('home') }}#shop" class="nav-item">Stickers &amp; Decals</a>
-                <a href="{{ route('home') }}#shop" class="nav-item highlight">Mystery Packs</a>
-                <a href="{{ route('home') }}#club" class="nav-item club-pill">Tapstick Club ✦</a>
-                <a href="{{ route('home') }}#why" class="nav-item">Why Tapstick</a>
+                <a href="{{ route('home') }}#why" class="nav-item">Why We Stick</a>
+                <a href="{{ route('home') }}#club" class="nav-item club-pill">The Club ✦</a>
+                <a href="{{ route('home') }}#reviews" class="nav-item">Reviews</a>
+                <a href="{{ route('home') }}#gallery" class="nav-item">Gallery</a>
                 <a href="{{ route('home') }}#author" class="nav-item">Our Story</a>
             </nav>
 
@@ -62,7 +63,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                     <div>
-                        <span style="font-size:0.68rem;display:block;color:#64748b;font-weight:700;">Help / WhatsApp</span>
+                        <span style="font-size:0.68rem;display:block;color:#64748b;font-weight:700;">WhatsApp Support</span>
                         <a href="mailto:hello@tapstick.in" style="color:#0f172a;font-weight:700;">hello@tapstick.in</a>
                     </div>
                 </div>
@@ -94,12 +95,12 @@
         <!-- Mobile Horizontal Navigation Bar -->
         <div class="mobile-nav-scroller">
             <div class="mobile-nav-inner">
-                <a href="{{ route('home') }}#shop" class="mobile-nav-chip active">All Stickers</a>
-                <a href="{{ route('home') }}#shop" class="mobile-nav-chip">Memes</a>
-                <a href="{{ route('home') }}#shop" class="mobile-nav-chip">Mystery Packs</a>
-                <a href="{{ route('home') }}#club" class="mobile-nav-chip highlight">Tapstick Club ✦</a>
+                <a href="{{ route('home') }}#shop" class="mobile-nav-chip active">All Drops</a>
                 <a href="{{ route('home') }}#why" class="mobile-nav-chip">Why Us</a>
-                <a href="{{ route('home') }}#author" class="mobile-nav-chip">Story</a>
+                <a href="{{ route('home') }}#club" class="mobile-nav-chip highlight">Tapstick Club ✦</a>
+                <a href="{{ route('home') }}#reviews" class="mobile-nav-chip">Reviews</a>
+                <a href="{{ route('home') }}#gallery" class="mobile-nav-chip">Gallery</a>
+                <a href="{{ route('home') }}#author" class="mobile-nav-chip">Our Story</a>
             </div>
         </div>
     </header>
@@ -118,9 +119,21 @@
         @yield('content')
     </main>
 
-    <!-- 8. PLAYFUL POP FOOTER -->
+    <!-- 8. PLAYFUL POP BOLD FOOTER -->
     <footer class="site-footer">
-        <div class="container">
+        <div class="footer-marquee-strip">
+            <div class="footer-marquee-track">
+                <span>✦ PEEL. STICK. STAND OUT. ✦ 100% WATERPROOF VINYL ✦ EASY PEEL BACKING ✦ UV SUNPROOF ✦ 5000+ DESIGNS ✦</span>
+                <span>✦ PEEL. STICK. STAND OUT. ✦ 100% WATERPROOF VINYL ✦ EASY PEEL BACKING ✦ UV SUNPROOF ✦ 5000+ DESIGNS ✦</span>
+            </div>
+        </div>
+
+        <div class="container footer-inner-wrap">
+            <div class="footer-hero-statement">
+                <h2 class="footer-big-brand-title">MAKE IT YOURS.</h2>
+                <p class="footer-big-brand-sub">Premium vinyl stickers crafted for creators, coders, riders, and dreamers who refuse to blend in.</p>
+            </div>
+
             <div class="footer-grid">
                 <div class="footer-col">
                     <div class="brand-wrap" style="margin-bottom:16px;">
@@ -134,14 +147,21 @@
                         <span class="brand-main" style="color:#0f172a;">TAP<span class="brand-accent">STICK</span></span>
                     </div>
                     <p style="color:#475569;font-size:0.92rem;line-height:1.6;max-width:320px;">
-                        India's creative sticker studio. 5000+ waterproof die-cut vinyl stickers built for laptops, bottles, bikes, and everyday carry.
+                        India's freshest sticker drop studio. Heavy-duty waterproof vinyl built for laptops, bottles, bikes, and phone cases.
                     </p>
-                    <div class="footer-badges-row">
-                        <span class="badge-pill badge-yellow">★ 4.8/5 Verified</span>
-                        <span class="badge-pill badge-blue">10 Lakh+ Delivered</span>
-                        <span class="badge-pill badge-red">100% Vinyl</span>
+                    <div class="footer-social-links">
+                        <a href="https://instagram.com" target="_blank" rel="noopener" class="social-chip" aria-label="Instagram">
+                            <span>📸 @tapstick.in</span>
+                        </a>
+                        <a href="https://wa.me/919876543210" target="_blank" rel="noopener" class="social-chip" aria-label="WhatsApp">
+                            <span>💬 WhatsApp Club</span>
+                        </a>
+                        <a href="mailto:hello@tapstick.in" class="social-chip" aria-label="Email">
+                            <span>✉️ hello@tapstick.in</span>
+                        </a>
                     </div>
                 </div>
+
                 <div class="footer-col">
                     <h4>Collections</h4>
                     <ul>
@@ -152,30 +172,51 @@
                         <li><a href="{{ route('home') }}#shop">Curated Mystery Boxes</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-col">
                     <h4>Customer Care</h4>
                     <ul>
                         <li><a href="mailto:hello@tapstick.in">hello@tapstick.in</a></li>
                         <li><a href="{{ route('home') }}#why">48-Hour Dispatch Guarantee</a></li>
                         <li><a href="{{ route('home') }}#why">100% Waterproof Guarantee</a></li>
-                        <li><a href="{{ route('cart.index') }}">Review Cart</a></li>
+                        <li><a href="{{ route('cart.index') }}">Review Your Cart</a></li>
                         <li><a href="{{ route('admin.dashboard') }}">Staff Admin Portal</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-col">
-                    <h4>Get 10% Off First Drop</h4>
-                    <p style="color:#475569;font-size:0.88rem;">Subscribe to the Tapstick Club for weekly secret drops &amp; members-only perks.</p>
-                    <form class="newsletter-form" onsubmit="event.preventDefault(); const inp = this.querySelector('input'); if(inp && inp.value){ const mInp = document.getElementById('lead_email'); if(mInp){ mInp.value = inp.value; } } document.getElementById('floating-lead-trigger')?.click();">
-                        <input type="email" placeholder="Enter your email" class="newsletter-input" required>
-                        <button type="submit" class="newsletter-btn">Join Club</button>
-                    </form>
+                    <h4>The Tapstick Promise</h4>
+                    <div class="footer-perks-list">
+                        <div class="footer-perk-item">
+                            <span class="f-perk-icon">💧</span>
+                            <div>
+                                <strong>100% Waterproof</strong>
+                                <small>Rain, snow &amp; dishwasher proof</small>
+                            </div>
+                        </div>
+                        <div class="footer-perk-item">
+                            <span class="f-perk-icon">✨</span>
+                            <div>
+                                <strong>Zero Residue</strong>
+                                <small>Clean peel whenever you change</small>
+                            </div>
+                        </div>
+                        <div class="footer-perk-item">
+                            <span class="f-perk-icon">🚚</span>
+                            <div>
+                                <strong>Pan-India Express</strong>
+                                <small>Dispatched within 48 hours</small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             <div class="footer-bottom">
-                <p>© {{ date('Y') }} TAPSTICK. All rights reserved. Designed &amp; Crafted with ❤️ in India.</p>
+                <p>© {{ date('Y') }} TAPSTICK STUDIO. Designed &amp; Crafted with ❤️ in India. All stickers 100% waterproof automotive-grade vinyl.</p>
                 <div class="footer-payment-pills">
                     <span class="payment-pill">⚡ UPI / QR</span>
-                    <span class="payment-pill">💳 Cards</span>
+                    <span class="payment-pill">💳 Cards &amp; NetBanking</span>
                     <span class="payment-pill">💵 Cash on Delivery</span>
                 </div>
             </div>
@@ -208,7 +249,9 @@
             updateTimer();
         })();
     </script>
-    <!-- LANDING PAGE LEAD / GOOGLE AUTH POPUP MODAL -->
+    <!-- PLAYFUL POP INTERACTION SCRIPT -->
+    <script src="{{ asset('js/playful-pop.js') }}" defer></script>
+    <!-- LANDING PAGE LEAD POPUP MODAL -->
     @include('partials.lead-modal')
 
     @stack('scripts')
