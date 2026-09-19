@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $product->name . ' | STICK IT UP')
+@section('title', $product->name . ' | TABSTICK')
 
 @section('content')
 <div class="container product-detail-layout">

@@ -2,21 +2,72 @@
 
 @section('content')
 
-<!-- 1. HERO SECTION (IMAGE 1: STEP INTO STICKER UNIVERSE) -->
-<section class="hero-banner-section">
-    <a href="#shop">
-        <img src="{{ asset('images/hero-banner.webp') }}" alt="Step Into Sticker Universe" class="hero-banner-img">
-    </a>
+<!-- 1. TABSTICK HERO SECTION (ORIGINAL & HIGH IMPACT) -->
+<section class="tabstick-hero-section">
+    <div class="container hero-container">
+        <div class="hero-text-col">
+            <div class="hero-badge">
+                <span class="badge-spark">⚡</span> TABSTICK ORIGINAL • 2026 DROP
+            </div>
+            <h1 class="hero-main-heading">
+                PEEL. STICK.<br>
+                <span class="hero-accent-text">STAND OUT.</span>
+            </h1>
+            <p class="hero-subtext">
+                India's creative die-cut sticker studio. 100% waterproof, scratch-resistant vinyl crafted with long-lasting UV inks that won't fade or leave sticky residue.
+            </p>
+            <div class="hero-cta-group">
+                <a href="#shop" class="btn-hero-primary">Shop Bestsellers →</a>
+                <a href="#new-collection" class="btn-hero-secondary">Explore Drops</a>
+            </div>
+            <div class="hero-perks-row">
+                <div class="hero-perk-item">
+                    <span class="perk-icon">🚚</span> 48h Pan-India Dispatch
+                </div>
+                <div class="hero-perk-item">
+                    <span class="perk-icon">💧</span> 100% Waterproof Vinyl
+                </div>
+                <div class="hero-perk-item">
+                    <span class="perk-icon">🇮🇳</span> Crafted in India
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-visual-col">
+            <div class="hero-stage-card">
+                <div class="floating-sticker sticker-pos-1">
+                    <img src="{{ asset('images/limited-edition.jpg') }}" alt="Limited Edition Sticker">
+                    <span class="sticker-chip">🔥 HOT</span>
+                </div>
+                <div class="floating-sticker sticker-pos-2">
+                    <img src="{{ asset('images/wasted.jpg') }}" alt="Wasted Sticker">
+                    <span class="sticker-chip">⭐ POPULAR</span>
+                </div>
+                <div class="floating-sticker sticker-pos-3">
+                    <img src="{{ asset('images/ah-shit.jpg') }}" alt="Ah Shit Here We Go Again">
+                    <span class="sticker-chip">👑 MEME</span>
+                </div>
+                <div class="floating-sticker sticker-pos-4">
+                    <img src="{{ asset('images/fizzy-zero.jpg') }}" alt="Fizzy Zero Sticker">
+                    <span class="sticker-chip">⚡ NEW</span>
+                </div>
+                <div class="hero-center-badge">
+                    <span>TABSTICK</span>
+                    <small>DIE-CUT VINYL</small>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <!-- 2. HIGH ENERGY TICKER MARQUEE -->
 <div class="marquee-bar">
     <div class="marquee-content">
-        ⚡ EXPLORE 5000+ DESIGNS &nbsp;•&nbsp; 100% WATERPROOF &nbsp;•&nbsp; SCRATCHPROOF &nbsp;•&nbsp; UV RESISTANT &nbsp;•&nbsp; RESIDUE FREE &nbsp;•&nbsp; FREE SHIPPING ON PREPAID &nbsp;•&nbsp; ⚡ EXPLORE 5000+ DESIGNS &nbsp;•&nbsp; 100% WATERPROOF &nbsp;•&nbsp; SCRATCHPROOF &nbsp;•&nbsp; UV RESISTANT &nbsp;•&nbsp; RESIDUE FREE &nbsp;•&nbsp; FREE SHIPPING ON PREPAID &nbsp;•&nbsp;
+        ⚡ TABSTICK STUDIO &nbsp;•&nbsp; 100% WATERPROOF VINYL &nbsp;•&nbsp; SCRATCHPROOF &nbsp;•&nbsp; UV RESISTANT &nbsp;•&nbsp; RESIDUE FREE &nbsp;•&nbsp; FREE SHIPPING OVER ₹499 &nbsp;•&nbsp; ⚡ TABSTICK STUDIO &nbsp;•&nbsp; 100% WATERPROOF VINYL &nbsp;•&nbsp; SCRATCHPROOF &nbsp;•&nbsp; UV RESISTANT &nbsp;•&nbsp; RESIDUE FREE &nbsp;•&nbsp; FREE SHIPPING OVER ₹499 &nbsp;•&nbsp;
     </div>
 </div>
 
-<!-- 3. BRAND NEW DESIGNS / NEW COLLECTION (IMAGE 2) -->
+<!-- 3. BRAND NEW DROPS / NEW COLLECTION -->
 <div id="new-collection">
     <div class="striped-divider"></div>
     <section class="new-collection-section">
@@ -30,16 +81,17 @@
     </section>
 </div>
 
-<!-- 4. BEST SELLERS PRODUCT GRID (IMAGE 3) -->
+<!-- 4. BEST SELLERS PRODUCT GRID -->
 <section id="shop" class="products-section">
     <div class="container">
         <div class="section-title-wrap">
-            <h2 class="section-watermark">Most Loved</h2>
-            <h3 class="section-main-title">BEST SELLERS</h3>
+            <h2 class="section-watermark">CURATED DROPS</h2>
+            <h3 class="section-main-title">TABSTICK BEST SELLERS</h3>
             
             <div class="filter-tabs">
-                <button class="tab-pill active" onclick="filterTab(this, 'all')">STICKERS</button>
-                <button class="tab-pill" onclick="filterTab(this, 'clothing')">CLOTHING</button>
+                <button class="tab-pill active" onclick="filterTab(this, 'all')">ALL STICKERS</button>
+                <button class="tab-pill" onclick="filterTab(this, 'stickers')">MEMES &amp; POP</button>
+                <button class="tab-pill" onclick="filterTab(this, 'mystery-box')">MYSTERY PACKS</button>
             </div>
         </div>
 
@@ -110,11 +162,19 @@
     </div>
 </section>
 
-<!-- 5. WHY STICKITUP SECTION (IMAGE 4: BUILT TO LAST) -->
+<!-- 5. WHY TABSTICK SECTION -->
 <section id="why" class="why-section">
     <div class="container">
-        <div class="banner-responsive-wrap" style="border: 1px solid #27272a;">
-            <img src="{{ asset('images/why-banner.webp') }}" alt="Why Stickitup - Built to last, designed to stand out">
+        <div class="why-brand-header">
+            <span class="why-eyebrow">WHY TABSTICK</span>
+            <h2 class="why-heading">Built To Last. Designed To Stand Out.</h2>
+            <p class="why-subheading">
+                High quality vinyl stickers with sharp prints from long-lasting durable inks. Each sticker is proudly designed &amp; crafted in India.
+            </p>
+        </div>
+
+        <div class="banner-responsive-wrap" style="border: 1px solid #27272a; margin-top: 24px;">
+            <img src="{{ asset('images/why-banner.webp') }}" alt="Why TabStick - Built to last, designed to stand out">
         </div>
 
         <div class="features-grid">
@@ -150,26 +210,26 @@
     </div>
 </section>
 
-<!-- 6. ABOUT THE FOUNDER SECTION -->
+<!-- 6. ABOUT TABSTICK FOUNDER -->
 <section id="author" class="author-section">
     <div class="container">
         <div class="author-grid">
             <div class="author-image-col">
                 <div class="author-card-wrap">
-                    <img src="{{ asset('images/author.jpg') }}" alt="Founder &amp; Creator" class="author-portrait">
+                    <img src="{{ asset('images/author.jpg') }}" alt="TabStick Founder &amp; Creator" class="author-portrait">
                     <div class="author-floating-badge">
                         <span>FOUNDER &amp; CREATOR ✦</span>
                     </div>
                 </div>
             </div>
             <div class="author-content-col">
-                <span class="author-eyebrow">ABOUT THE FOUNDER</span>
+                <span class="author-eyebrow">THE TABSTICK STORY</span>
                 <h2 class="author-heading">Turning Passion Into <span class="text-highlight">Everyday Art</span>.</h2>
                 <p class="author-bio">
-                    Hey! Welcome to STICK IT UP. We believe your gear should speak your mind. What began as a love for stickers, pop culture, and bold design has grown into a community of over 10 lakh creators, riders, gamers, and dreamers across India.
+                    Hey! Welcome to <strong>TabStick</strong>. We started TabStick with a single vision: your gear should speak your personality. What began as a personal passion for creative design, street pop art, and custom decals has grown into a community of over 10 lakh creators, riders, gamers, and dreamers across India.
                 </p>
                 <p class="author-bio">
-                    Every design is carefully curated, printed on premium waterproof vinyl, and built to survive the sun, rain, and everyday grind. No peeling, no fading, and zero sticky residue.
+                    Every TabStick design is printed on commercial-grade waterproof vinyl, sealed with a UV matte protective layer, and guaranteed to leave zero sticky residue when removed.
                 </p>
                 
                 <div class="author-stats-row">
@@ -182,7 +242,7 @@
                         <span class="stat-desc">Custom Designs</span>
                     </div>
                     <div class="stat-box">
-                        <strong class="stat-num">4.7★</strong>
+                        <strong class="stat-num">4.8★</strong>
                         <span class="stat-desc">Customer Rating</span>
                     </div>
                 </div>

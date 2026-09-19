@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Checkout | STICK IT UP')
+@section('title', 'Checkout | TABSTICK')
 
 @section('content')
 <div class="container" style="padding-top: 40px;">
