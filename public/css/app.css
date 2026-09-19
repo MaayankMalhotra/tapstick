@@ -66,6 +66,9 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 body {
@@ -76,6 +79,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  position: relative;
 }
 
 /* Typography Defaults */
@@ -4224,7 +4230,499 @@ button {
   75% { transform: rotate(8deg); }
 }
 
-/* 12. ACCESSIBILITY: PREFERS-REDUCED-MOTION */
+/* ==========================================================================
+   12. MOBILE-FIRST NATIVE APP RESPONSIVENESS & STICKY BOTTOM APP BAR
+   ========================================================================== */
+
+/* Mobile Bottom Sticky Bar */
+.mobile-bottom-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 3px solid var(--color-ink, #18181B);
+  box-shadow: 0 -4px 20px rgba(24, 24, 27, 0.12);
+  z-index: 998;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 4px;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.bottom-bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 100%;
+  min-height: 48px;
+  background: none;
+  border: none;
+  padding: 6px 2px;
+  color: var(--color-ink, #18181B);
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.15s ease, color 0.15s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bottom-bar-item:active {
+  transform: scale(0.92);
+}
+
+.bottom-bar-icon {
+  font-size: 1.25rem;
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.bottom-bar-item:hover .bottom-bar-icon,
+.bottom-bar-item:active .bottom-bar-icon {
+  transform: translateY(-2px) scale(1.1);
+}
+
+.bottom-bar-label {
+  font-family: var(--font-heading, 'Bricolage Grotesque', sans-serif);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin-top: 2px;
+  color: #475569;
+  transition: color 0.15s ease;
+}
+
+.bottom-bar-item.active .bottom-bar-label {
+  color: var(--color-ink, #18181B);
+  font-weight: 900;
+}
+
+.bottom-bar-item.active .bottom-bar-icon {
+  transform: translateY(-2px);
+}
+
+.bottom-bar-badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: var(--color-pop-red, #FF334B);
+  color: #FFFFFF;
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.62rem;
+  font-weight: 900;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  border: 1.5px solid var(--color-ink, #18181B);
+  box-shadow: 1px 1px 0 var(--color-ink, #18181B);
+}
+
+/* VIP Pulsing Center Button in Bottom Bar */
+.bottom-bar-item.vip-pulse-item {
+  position: relative;
+}
+
+.bottom-bar-icon-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-bar-ping {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: var(--color-pop-yellow, #FFE600);
+  opacity: 0.75;
+  z-index: -1;
+  animation: ping-pulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping-pulse {
+  75%, 100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.bottom-bar-item .highlight-label {
+  background: var(--color-pop-yellow, #FFE600);
+  color: var(--color-ink, #18181B) !important;
+  padding: 1px 6px;
+  border-radius: 6px;
+  border: 1px solid var(--color-ink, #18181B);
+  font-size: 0.62rem;
+  font-weight: 900;
+}
+
+/* TABLET & MOBILE (< 768px) */
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw;
+    width: 100%;
+    position: relative;
+  }
+
+  body {
+    padding-bottom: calc(66px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .mobile-bottom-bar {
+    display: flex;
+  }
+
+  .floating-lead-trigger {
+    display: none !important;
+  }
+
+  /* Prevent iOS Safari auto-zoom on input focus */
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="search"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Header compact */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 990;
+  }
+  .header-inner {
+    padding: 10px 14px;
+  }
+  .header-actions {
+    gap: 8px;
+  }
+  .mobile-nav-scroller {
+    padding: 6px 12px;
+  }
+  .mobile-nav-chip {
+    padding: 5px 12px;
+    font-size: 0.76rem;
+  }
+
+  /* Marquee safety */
+  .ticker-pop-strip,
+  .phrases-marquee-strip,
+  .lifestyle-autoscroll-container {
+    overflow: hidden !important;
+    max-width: 100vw;
+    width: 100%;
+  }
+
+  /* Interactive Wall */
+  .interactive-sticker-wall-wrap {
+    overflow: hidden !important;
+    max-width: 100%;
+  }
+  .sticker-wall-stage {
+    height: 250px !important;
+    overflow: hidden !important;
+  }
+}
+
+/* SMARTPHONE & NARROW VIEWPORTS (< 480px) */
+@media (max-width: 480px) {
+  .container {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  /* Header elements */
+  .sound-toggle-pill {
+    display: none !important;
+  }
+  .header-actions .action-icon-btn {
+    display: none !important;
+  }
+  .brand-sub {
+    display: none;
+  }
+  .brand-main {
+    font-size: 1.15rem;
+  }
+  .brand-logo-badge svg {
+    width: 24px;
+    height: 24px;
+  }
+  .header-cart-pill {
+    padding: 0 8px;
+    height: 36px;
+  }
+  .mobile-menu-burger-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Hero Section */
+  .hero-pop-section {
+    padding: 20px 0 36px !important;
+    min-height: auto;
+  }
+  .hero-pop-container {
+    gap: 28px;
+  }
+  .hero-pop-headline {
+    font-size: clamp(2.1rem, 11vw, 2.7rem) !important;
+    line-height: 1.06;
+  }
+  .hero-pop-eyebrow-pill {
+    font-size: 0.68rem;
+    padding: 4px 10px;
+    white-space: normal;
+    text-align: center;
+  }
+  .hero-pop-subtext {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    padding: 0 4px;
+  }
+  .hero-pop-cta-row {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+  .hero-pop-cta-row .btn-pop-primary,
+  .hero-pop-cta-row .btn-pop-secondary {
+    width: 100%;
+    justify-content: center;
+    padding: 13px 20px;
+    font-size: 0.95rem;
+  }
+  .hero-pop-perks-bar {
+    flex-direction: column;
+    width: 100%;
+    gap: 6px;
+  }
+  .hero-perk-chip {
+    font-size: 0.76rem;
+    justify-content: center;
+  }
+  .hero-floating-doodle {
+    display: none !important;
+  }
+
+  /* Stage & Stickers */
+  .hero-pop-visual-col {
+    min-height: 280px;
+  }
+  .hero-sticker-stage {
+    max-width: 265px !important;
+    height: 265px !important;
+    margin: 0 auto;
+  }
+  .stage-base-card {
+    width: 200px;
+    height: 200px;
+  }
+  .interactive-sticker-layer img {
+    width: 66px !important;
+    height: 66px !important;
+  }
+  .sticker-pop-1 { top: -12px !important; left: -8px !important; }
+  .sticker-pop-2 { top: -12px !important; right: -8px !important; }
+  .sticker-pop-3 { bottom: -12px !important; left: -8px !important; }
+  .sticker-pop-4 { bottom: -12px !important; right: -8px !important; }
+
+  .sunburst-badge-rotator {
+    width: 76px !important;
+    height: 76px !important;
+  }
+  .hero-sunburst-badge-wrap {
+    top: -10px !important;
+    right: -6px !important;
+  }
+
+  /* 2-Column Collectible Products Grid */
+  .products-pop-section {
+    padding: 40px 0 50px;
+  }
+  .section-pop-title {
+    font-size: clamp(1.6rem, 7vw, 2.1rem) !important;
+  }
+  .section-pop-subtitle {
+    font-size: 0.88rem !important;
+  }
+  .pop-filter-tabs {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+  .pop-filter-pill {
+    padding: 7px 12px;
+    font-size: 0.72rem;
+  }
+  .products-pop-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+  .product-pop-card {
+    padding: 8px !important;
+    border-radius: 16px !important;
+    border-width: 2px !important;
+    box-shadow: 3px 3px 0 var(--color-ink) !important;
+  }
+  .pop-card-top-bar {
+    margin-bottom: 6px;
+    gap: 2px;
+  }
+  .pop-category-tag {
+    font-size: 0.6rem !important;
+    padding: 2px 5px !important;
+  }
+  .pop-stock-pill {
+    font-size: 0.58rem !important;
+    padding: 2px 5px !important;
+  }
+  .pop-card-image-stage {
+    height: 120px !important;
+    border-radius: 12px !important;
+  }
+  .pop-card-sticker-img {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  .pop-card-body {
+    padding: 6px 2px 2px !important;
+  }
+  .pop-stars {
+    font-size: 0.72rem !important;
+  }
+  .pop-rating-num {
+    font-size: 0.7rem !important;
+  }
+  .pop-review-total {
+    display: none;
+  }
+  .pop-product-name {
+    font-size: 0.8rem !important;
+    min-height: 2.3em;
+    margin: 3px 0 5px !important;
+    line-height: 1.2;
+  }
+  .pop-price-block {
+    margin-bottom: 8px !important;
+  }
+  .pop-original-price {
+    font-size: 0.7rem !important;
+  }
+  .pop-current-price {
+    font-size: 1.02rem !important;
+  }
+  .pop-price-note {
+    font-size: 0.62rem !important;
+  }
+  .btn-add-pop-cart {
+    font-size: 0.72rem !important;
+    padding: 9px 4px !important;
+    border-radius: var(--radius-pill) !important;
+    gap: 4px !important;
+  }
+  .btn-add-pop-cart svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Why Cards */
+  .why-pop-section {
+    padding: 40px 0 50px;
+  }
+  .why-pop-card {
+    padding: 20px 16px !important;
+  }
+
+  /* Founder Spotlight Card */
+  .founder-spotlight-box {
+    padding: 20px 14px !important;
+  }
+  .founder-photo-col {
+    max-width: 210px !important;
+  }
+  .founder-quote-title {
+    font-size: 1.15rem !important;
+  }
+  .founder-metrics-strip {
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 6px !important;
+  }
+  .metric-card {
+    padding: 8px 4px !important;
+  }
+  .metric-number {
+    font-size: 1.15rem !important;
+  }
+  .metric-label {
+    font-size: 0.65rem !important;
+  }
+  .founder-actions-row {
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+  .founder-actions-row a,
+  .founder-actions-row button {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Gallery Tiles */
+  .gallery-tile {
+    width: 190px !important;
+  }
+  .gallery-tile-inner {
+    height: 170px !important;
+  }
+
+  /* Reviews */
+  .review-pop-card {
+    padding: 18px 14px !important;
+  }
+  .review-quote-text {
+    font-size: 0.85rem !important;
+  }
+
+  /* Newsletter Card */
+  .newsletter-pop-card {
+    padding: 22px 14px !important;
+  }
+  .newsletter-headline {
+    font-size: 1.7rem !important;
+  }
+  .mascot-character-wrap svg {
+    width: 140px;
+    height: 140px;
+  }
+
+  /* Footer */
+  .footer-bottom {
+    padding-bottom: 20px;
+  }
+}
+
+/* 13. ACCESSIBILITY: PREFERS-REDUCED-MOTION */
 @media (prefers-reduced-motion: reduce) {
   .sticker-peel-overlay,
   #sticker-peel-loader {

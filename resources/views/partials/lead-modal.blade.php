@@ -106,6 +106,17 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.overflow = '';
     }
 
+    window.openLeadModal = openModal;
+    window.closeLeadModal = closeModal;
+
+    const bottomBarVip = document.getElementById('bottom-bar-vip-btn');
+    if (bottomBarVip) {
+        bottomBarVip.addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal();
+        });
+    }
+
     // Auto-open on landing page after 1.8 seconds if user hasn't already dismissed or joined in this session
     const hasJoined = localStorage.getItem('tapstick_vip_joined') === 'true';
     const hasDismissedSession = sessionStorage.getItem('tapstick_lead_dismissed') === 'true';

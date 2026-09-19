@@ -332,6 +332,36 @@
         </div>
     </footer>
 
+    <!-- MOBILE STICKY BOTTOM APP BAR (NATIVE APP EXPERIENCE) -->
+    <nav class="mobile-bottom-bar" aria-label="Mobile Navigation">
+        <a href="{{ route('home') }}#shop" class="bottom-bar-item {{ request()->routeIs('home') ? 'active' : '' }}">
+            <span class="bottom-bar-icon">🏠</span>
+            <span class="bottom-bar-label">Drops</span>
+        </a>
+        <button type="button" class="bottom-bar-item" id="bottom-bar-search-btn" aria-label="Search">
+            <span class="bottom-bar-icon">🔍</span>
+            <span class="bottom-bar-label">Search</span>
+        </button>
+        <button type="button" class="bottom-bar-item vip-pulse-item" id="bottom-bar-vip-btn" aria-label="10% Off VIP Club">
+            <span class="bottom-bar-icon-wrap">
+                <span class="bottom-bar-icon">🎁</span>
+                <span class="bottom-bar-ping"></span>
+            </span>
+            <span class="bottom-bar-label highlight-label">10% OFF</span>
+        </button>
+        <a href="{{ route('cart.index') }}" class="bottom-bar-item cart-item {{ request()->routeIs('cart.*') ? 'active' : '' }}">
+            <span class="bottom-bar-icon">
+                🛍️
+                <span class="bottom-bar-badge cart-badge-count">{{ $headerCartCount ?? 0 }}</span>
+            </span>
+            <span class="bottom-bar-label">Cart</span>
+        </a>
+        <button type="button" class="bottom-bar-item" id="bottom-bar-menu-btn" aria-label="Menu">
+            <span class="bottom-bar-icon">☰</span>
+            <span class="bottom-bar-label">Menu</span>
+        </button>
+    </nav>
+
     <!-- PLAYFUL POP INTERACTION SCRIPT -->
     <script src="{{ asset('js/playful-pop.js') }}" defer></script>
     <!-- LANDING PAGE LEAD POPUP MODAL -->
