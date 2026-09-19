@@ -71,7 +71,11 @@
                 </div>
 
                 <a href="{{ route('checkout.create') }}" class="btn-primary">
-                    Proceed to Checkout
+                    Proceed to Checkout →
+                </a>
+
+                <a href="{{ route('home') }}#shop" style="display:block; text-align:center; margin-top:14px; font-size:0.88rem; font-weight:800; color:#475569; text-decoration:none;">
+                    ← Add More Stickers
                 </a>
 
                 <div style="margin-top:16px;text-align:center;font-size:0.78rem;color:#64748b;">

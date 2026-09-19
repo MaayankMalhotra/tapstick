@@ -29,12 +29,20 @@ class StoreController extends Controller
     public function addToCart(Request $request, Product $product): RedirectResponse
     {
         abort_unless($product->is_active && $product->stock > 0, 404);
-        $validated = $request->validate(['quantity' => 'nullable|integer|min:1|max:20']);
+        $validated = $request->validate([
+            'quantity' => 'nullable|integer|min:1|max:20',
+            'redirect' => 'nullable|string|in:cart,checkout,back',
+        ]);
         $quantity = (int) ($validated['quantity'] ?? 1);
         $cart = $request->session()->get('cart', []);
         $cart[$product->id] = min(($cart[$product->id] ?? 0) + $quantity, $product->stock, 20);
         $request->session()->put('cart', $cart);
-        return back()->with('success', $product->name.' added to your cart.');
+
+        if ($request->input('redirect') === 'checkout') {
+            return redirect()->route('checkout.create');
+        }
+
+        return redirect()->route('cart.index')->with('success', $product->name.' added to your cart!');
     }
 
     public function updateCart(Request $request, Product $product): RedirectResponse
