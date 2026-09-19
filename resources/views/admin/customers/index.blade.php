@@ -94,8 +94,8 @@
 <div class="heading" style="margin-top:40px;">
     <div>
         <div class="kicker">LEAD CAPTURE DIRECTORY</div>
-        <h2>Landing Page Leads &amp; Google Sign-ups</h2>
-        <p>Customers who registered their mobile number &amp; Google email through the landing page form.</p>
+        <h2>Landing Page Leads &amp; Club Sign-ups</h2>
+        <p>Customers who registered their name, mobile number &amp; email through the landing page form.</p>
     </div>
 </div>
 
@@ -105,9 +105,9 @@
             <thead>
                 <tr>
                     <th>Lead Name</th>
-                    <th>Google Email</th>
+                    <th>Email Address</th>
                     <th>Mobile Number</th>
-                    <th>Method</th>
+                    <th>Source</th>
                     <th>Discount Code</th>
                     <th>IP Address</th>
                     <th>Registered At</th>
@@ -126,8 +126,8 @@
                             <span style="font-family:monospace; font-size:14px; font-weight:700;">{{ $lead->phone ?: '—' }}</span>
                         </td>
                         <td>
-                            <span class="badge" style="background:{{ $lead->auth_provider === 'google' ? '#fee2e2; color:#dc2626' : '#fef9c3; color:#854d0e' }}; font-weight:800; font-size:12px;">
-                                {{ $lead->auth_provider === 'google' ? 'Google Auth' : 'Mobile + Gmail' }}
+                            <span class="badge" style="background:#e0f2fe; color:#0369a1; font-weight:800; font-size:12px;">
+                                {{ $lead->auth_provider === 'google' ? 'Google' : 'Web Form' }}
                             </span>
                         </td>
                         <td>

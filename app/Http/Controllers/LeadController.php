@@ -21,7 +21,7 @@ class LeadController extends Controller
         $email = strtolower(trim($validated['email']));
         $phone = !empty($validated['phone']) ? preg_replace('/[^0-9+]/', '', trim($validated['phone'])) : null;
         $name = !empty($validated['name']) ? trim($validated['name']) : null;
-        $provider = !empty($validated['auth_provider']) ? trim($validated['auth_provider']) : 'mobile_email';
+        $provider = !empty($validated['auth_provider']) ? trim($validated['auth_provider']) : 'web_form';
 
         $lead = CustomerLead::updateOrCreate(
             ['email' => $email],

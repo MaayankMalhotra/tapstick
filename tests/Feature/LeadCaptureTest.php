@@ -21,18 +21,21 @@ class LeadCaptureTest extends TestCase
         $response = $this->get('/');
         $response->assertOk();
         $response->assertSee('Get 10% Off Your First Drop');
-        $response->assertSee('Continue with Google');
+        $response->assertSee('Your Name');
+        $response->assertSee('Mobile Number');
+        $response->assertSee('Email Address');
+        $response->assertDontSee('Continue with Google');
         $response->assertSee('lead-modal');
         $response->assertSee('floating-lead-trigger');
     }
 
-    public function test_guest_can_submit_mobile_and_gmail_lead(): void
+    public function test_guest_can_submit_lead_form(): void
     {
         $response = $this->postJson('/club/join', [
             'name' => 'Aarav Patel',
-            'email' => 'aarav.patel@gmail.com',
             'phone' => '9876543210',
-            'auth_provider' => 'mobile_email',
+            'email' => 'aarav.patel@gmail.com',
+            'auth_provider' => 'web_form',
         ]);
 
         $response->assertOk();
@@ -43,7 +46,7 @@ class LeadCaptureTest extends TestCase
                 'name' => 'Aarav Patel',
                 'email' => 'aarav.patel@gmail.com',
                 'phone' => '9876543210',
-                'provider' => 'mobile_email',
+                'provider' => 'web_form',
             ],
         ]);
 
@@ -51,35 +54,14 @@ class LeadCaptureTest extends TestCase
             'name' => 'Aarav Patel',
             'email' => 'aarav.patel@gmail.com',
             'phone' => '9876543210',
-            'auth_provider' => 'mobile_email',
+            'auth_provider' => 'web_form',
             'discount_code' => 'TAPSTICK10',
         ]);
 
-        // Verify session data was set
+        // Verify session data was set for checkout autofill
         $this->assertEquals('Aarav Patel', session('customer_name'));
         $this->assertEquals('aarav.patel@gmail.com', session('customer_email'));
         $this->assertEquals('9876543210', session('customer_phone'));
-    }
-
-    public function test_guest_can_submit_google_lead(): void
-    {
-        $response = $this->postJson('/club/join', [
-            'name' => 'Google Collector',
-            'email' => 'collector@gmail.com',
-            'auth_provider' => 'google',
-        ]);
-
-        $response->assertOk();
-        $response->assertJson([
-            'success' => true,
-            'discount_code' => 'TAPSTICK10',
-        ]);
-
-        $this->assertDatabaseHas('customer_leads', [
-            'email' => 'collector@gmail.com',
-            'auth_provider' => 'google',
-            'discount_code' => 'TAPSTICK10',
-        ]);
     }
 
     public function test_admin_can_view_captured_leads_in_customer_directory(): void
@@ -88,7 +70,7 @@ class LeadCaptureTest extends TestCase
             'name' => 'Kavya Sharma',
             'email' => 'kavya@gmail.com',
             'phone' => '9811122233',
-            'auth_provider' => 'mobile_email',
+            'auth_provider' => 'web_form',
             'discount_code' => 'TAPSTICK10',
         ]);
 
@@ -96,7 +78,7 @@ class LeadCaptureTest extends TestCase
 
         $response = $this->actingAs($admin)->get('/admin/customers');
         $response->assertOk();
-        $response->assertSee('Landing Page Leads &amp; Google Sign-ups', false);
+        $response->assertSee('Landing Page Leads &amp; Club Sign-ups', false);
         $response->assertSee('Kavya Sharma');
         $response->assertSee('kavya@gmail.com');
         $response->assertSee('9811122233');
