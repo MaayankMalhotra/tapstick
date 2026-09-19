@@ -9,6 +9,7 @@
   /* Core Playful Pop Color System */
   --color-bg-cream: #FAF7F0;
   --color-bg-cream-soft: #F5F0E6;
+  --color-bg-cream-light: #FFFFFF;
   --color-bg-card: #FFFFFF;
   --color-ink: #18181B;
   --color-ink-muted: #52525B;
@@ -16,6 +17,7 @@
 
   /* Vibrant Accent Palette */
   --color-pop-yellow: #FFE600;
+  --color-accent-yellow: #FFE600;
   --color-pop-red: #FF334B;
   --color-pop-blue: #2563EB;
   --color-pop-pink: #FF80BF;
@@ -2496,25 +2498,37 @@ button {
 }
 
 .btn-primary {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   padding: 14px 20px;
-  background: #000000;
-  color: var(--color-accent-yellow);
-  border: 2px solid #000000;
-  border-radius: 8px;
-  font-weight: 800;
+  background: var(--color-pop-yellow, #FFE600);
+  color: var(--color-ink, #18181B);
+  border: 2.5px solid var(--color-ink, #18181B);
+  box-shadow: 4px 4px 0 var(--color-ink, #18181B);
+  border-radius: var(--radius-pill, 9999px);
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 1.05rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   cursor: pointer;
   text-align: center;
-  transition: all 0.2s ease;
-  margin-top: 16px;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  margin-top: 14px;
 }
 
 .btn-primary:hover {
-  background: var(--color-accent-yellow);
-  color: #000000;
+  background: #FFFFFF;
+  color: var(--color-ink, #18181B);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--color-ink, #18181B);
+}
+
+.btn-primary:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--color-ink, #18181B);
 }
 
 /* Product Detail Page */
@@ -3189,10 +3203,10 @@ button {
 }
 
 .lead-modal-card {
-  background: var(--color-bg-cream-light);
-  border: 3px solid var(--color-ink);
+  background: #FFFFFF !important;
+  border: 3.5px solid var(--color-ink);
   border-radius: 26px;
-  box-shadow: 8px 8px 0px var(--color-ink);
+  box-shadow: 10px 10px 0px var(--color-ink);
   max-width: 460px;
   width: 100%;
   padding: 34px 28px;
@@ -3261,10 +3275,11 @@ button {
 }
 
 .lead-modal-subtitle {
-  color: var(--color-ink-muted);
+  color: #475569;
   font-size: 0.95rem;
   line-height: 1.5;
   margin-bottom: 22px;
+  font-weight: 500;
 }
 
 .btn-google-auth {
@@ -3319,7 +3334,7 @@ button {
 
 .lead-input-group label {
   display: block;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 900;
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -3331,7 +3346,7 @@ button {
 .lead-input-group input[type="text"] {
   width: 100%;
   padding: 12px 14px;
-  background: #FFFFFF;
+  background: #FAF7F0;
   border: 2px solid var(--color-ink);
   border-radius: 12px;
   font-size: 0.95rem;
@@ -3344,6 +3359,7 @@ button {
 
 .lead-input-group input:focus {
   border-color: var(--color-pop-blue);
+  background: #FFFFFF;
 }
 
 .phone-input-wrap {
@@ -3351,7 +3367,7 @@ button {
   align-items: center;
   border: 2px solid var(--color-ink);
   border-radius: 12px;
-  background: #FFFFFF;
+  background: #FAF7F0;
   box-shadow: 2px 2px 0 var(--color-ink);
   overflow: hidden;
 }
@@ -3369,6 +3385,7 @@ button {
 .phone-input-wrap input {
   flex: 1;
   border: none;
+  background: transparent;
   padding: 12px 14px;
   font-size: 0.95rem;
   font-weight: 700;
@@ -3379,16 +3396,42 @@ button {
 
 .lead-btn-submit {
   width: 100%;
-  padding: 14px;
+  padding: 14px 20px;
   font-size: 1.05rem;
-  margin-top: 8px;
+  font-weight: 900;
+  font-family: var(--font-heading);
+  margin-top: 10px;
   border-radius: var(--radius-pill);
+  background: var(--color-pop-yellow, #FFE600) !important;
+  color: var(--color-ink, #18181B) !important;
+  border: 2.5px solid var(--color-ink, #18181B) !important;
+  box-shadow: 4px 4px 0 var(--color-ink, #18181B) !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.lead-btn-submit:hover {
+  transform: translate(-2px, -2px) scale(1.02);
+  box-shadow: 6px 6px 0 var(--color-ink, #18181B) !important;
+  background: #FFFFFF !important;
+  color: var(--color-ink, #18181B) !important;
+}
+
+.lead-btn-submit:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--color-ink, #18181B) !important;
 }
 
 .lead-modal-footer-tip {
   text-align: center;
   font-size: 0.78rem;
-  color: var(--color-ink-muted);
+  color: #64748B;
   font-weight: 700;
   margin-top: 14px;
 }
