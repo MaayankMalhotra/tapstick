@@ -12,6 +12,13 @@
         <span class="badge warn" style="float:right;padding:2px 7px;font-size:11px;">{{ $pendingCount }}</span>
     @endif
 </a>
+<a class="{{ request()->routeIs('admin.leads.*') ? 'selected' : '' }}" href="{{ route('admin.leads.index') }}">
+    VIP Club Leads
+    @php $leadsCount = \App\Models\CustomerLead::count(); @endphp
+    @if($leadsCount > 0)
+        <span class="badge" style="float:right;padding:2px 7px;font-size:11px;background:#38bdf8;color:#0f172a;font-weight:800;">{{ $leadsCount }}</span>
+    @endif
+</a>
 <a class="{{ request()->routeIs('admin.customers.*') ? 'selected' : '' }}" href="{{ route('admin.customers.index') }}">Customers</a>
 <p style="margin-top:20px;">STORE MANAGEMENT</p>
 <a class="{{ request()->routeIs('admin.dashboard') ? 'selected' : '' }}" href="{{ route('admin.dashboard') }}">Overview</a>

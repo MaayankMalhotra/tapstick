@@ -20,6 +20,14 @@ class LeadController extends Controller
 
         $email = strtolower(trim($validated['email']));
         $phone = !empty($validated['phone']) ? preg_replace('/[^0-9+]/', '', trim($validated['phone'])) : null;
+        if ($phone) {
+            $digits = preg_replace('/[^0-9]/', '', $phone);
+            if (strlen($digits) === 10) {
+                $phone = '+91 ' . $digits;
+            } elseif (strlen($digits) === 12 && str_starts_with($digits, '91')) {
+                $phone = '+91 ' . substr($digits, 2);
+            }
+        }
         $name = !empty($validated['name']) ? trim($validated['name']) : null;
         $provider = !empty($validated['auth_provider']) ? trim($validated['auth_provider']) : 'web_form';
 

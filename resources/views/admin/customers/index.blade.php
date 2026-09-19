@@ -9,6 +9,11 @@
         <h1>Customers</h1>
         <p>View all customers who have placed orders on TabStick.</p>
     </div>
+    <div style="display:flex; gap:10px;">
+        <a href="{{ route('admin.leads.index') }}" class="button" style="background:#0284c7; display:inline-flex; align-items:center; gap:6px;">
+            <span>🎁 View VIP Club Leads ({{ $leadsCount }}) →</span>
+        </a>
+    </div>
 </div>
 
 <div class="panel">

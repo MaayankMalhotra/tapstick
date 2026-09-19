@@ -13,11 +13,16 @@
     </div>
 </div>
 
-<div class="stats">
+<div class="stats" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
     <article style="border-left: 4px solid #df7239;">
         <span>Total Orders</span>
         <strong>{{ $totalOrders }}</strong>
         <small style="color:#df7239; font-weight:700;"><a href="{{ route('admin.orders.index') }}">View all orders →</a></small>
+    </article>
+    <article style="border-left: 4px solid #38bdf8;">
+        <span>VIP Club Leads</span>
+        <strong>{{ $totalLeads }}</strong>
+        <small style="color:#0284c7; font-weight:700;"><a href="{{ route('admin.leads.index') }}">View all {{ $totalLeads }} leads →</a></small>
     </article>
     <article style="border-left: 4px solid #225a43;">
         <span>Active Customers</span>
@@ -104,6 +109,80 @@
                 @empty
                     <tr>
                         <td colspan="8" class="empty">No orders placed yet.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Recent VIP Club Leads Section -->
+<div class="panel">
+    <div class="heading">
+        <div>
+            <h2>Recent VIP Club Leads (10% OFF Sign-ups)</h2>
+            <p style="margin:4px 0 0 0; font-size:13px; color:#64748b;">Visitors who joined the club via the landing page pop-up form.</p>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center;">
+            <a href="{{ route('admin.leads.export') }}" class="ghost" style="padding:6px 12px; font-size:12px;">📥 Export CSV</a>
+            <a href="{{ route('admin.leads.index') }}" style="font-weight:700;">View all {{ $totalLeads }} leads →</a>
+        </div>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Lead Name</th>
+                    <th>Email Address</th>
+                    <th>Mobile &amp; WhatsApp</th>
+                    <th>Source</th>
+                    <th>Coupon</th>
+                    <th>Joined</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($recentLeads as $lead)
+                    @php
+                        $cleanPhone = preg_replace('/[^0-9]/', '', $lead->phone ?? '');
+                        $waNumber = strlen($cleanPhone) === 10 ? '91' . $cleanPhone : $cleanPhone;
+                        $waMsg = "Hi " . ($lead->name ?: 'there') . "! Thanks for joining Tapstick Club. Your 10% coupon code is TAPSTICK10.";
+                    @endphp
+                    <tr>
+                        <td>
+                            <strong style="color:#0f172a; font-size:14px;">{{ $lead->name ?: 'Guest Club Member' }}</strong>
+                        </td>
+                        <td>
+                            <a href="mailto:{{ $lead->email }}" style="font-weight:600; color:#2563eb;">{{ $lead->email }}</a>
+                        </td>
+                        <td>
+                            @if($cleanPhone)
+                                <div style="display:flex; align-items:center; gap:6px;">
+                                    <span style="font-family:monospace; font-size:13px; font-weight:700;">{{ $lead->phone }}</span>
+                                    <a href="https://wa.me/{{ $waNumber }}?text={{ urlencode($waMsg) }}" target="_blank" rel="noopener noreferrer" 
+                                       style="background:#25D366; color:#ffffff; font-size:10px; font-weight:800; padding:2px 6px; border-radius:4px; text-decoration:none;">
+                                        WhatsApp
+                                    </a>
+                                </div>
+                            @else
+                                <span style="color:#94a3b8;">—</span>
+                            @endif
+                        </td>
+                        <td>
+                            <span class="badge" style="background:#e0f2fe; color:#0369a1; font-weight:700; font-size:11px;">
+                                {{ $lead->auth_provider === 'google' ? 'Google' : 'Web Form' }}
+                            </span>
+                        </td>
+                        <td>
+                            <span style="font-family:monospace; font-weight:800; color:#16a34a; font-size:12px;">{{ $lead->discount_code ?: 'TAPSTICK10' }}</span>
+                        </td>
+                        <td>
+                            <span>{{ $lead->created_at->format('d M, h:i A') }}</span>
+                            <small style="color:#64748b;">{{ $lead->created_at->diffForHumans() }}</small>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="6" class="empty">No leads captured yet. Landing page pop-up sign-ups will show here.</td>
                     </tr>
                 @endforelse
             </tbody>

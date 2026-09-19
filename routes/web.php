@@ -17,6 +17,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/', [InventoryController::class, 'dashboard'])->name('dashboard');
         Route::resource('orders', OrderController::class)->only(['index', 'show', 'update']);
+        Route::get('/leads', [CustomerController::class, 'leads'])->name('leads.index');
+        Route::get('/leads/export', [CustomerController::class, 'exportLeads'])->name('leads.export');
+        Route::delete('/leads/{lead}', [CustomerController::class, 'destroyLead'])->name('leads.destroy');
         Route::get('/customers', [CustomerController::class, 'index'])->name('customers.index');
         Route::resource('products', InventoryController::class)->except(['show', 'destroy']);
         Route::post('/products/{product}/stock', [InventoryController::class, 'adjust'])->name('products.stock');

@@ -45,7 +45,7 @@ class LeadCaptureTest extends TestCase
             'customer' => [
                 'name' => 'Aarav Patel',
                 'email' => 'aarav.patel@gmail.com',
-                'phone' => '9876543210',
+                'phone' => '+91 9876543210',
                 'provider' => 'web_form',
             ],
         ]);
@@ -53,7 +53,7 @@ class LeadCaptureTest extends TestCase
         $this->assertDatabaseHas('customer_leads', [
             'name' => 'Aarav Patel',
             'email' => 'aarav.patel@gmail.com',
-            'phone' => '9876543210',
+            'phone' => '+91 9876543210',
             'auth_provider' => 'web_form',
             'discount_code' => 'TAPSTICK10',
         ]);
@@ -61,7 +61,7 @@ class LeadCaptureTest extends TestCase
         // Verify session data was set for checkout autofill
         $this->assertEquals('Aarav Patel', session('customer_name'));
         $this->assertEquals('aarav.patel@gmail.com', session('customer_email'));
-        $this->assertEquals('9876543210', session('customer_phone'));
+        $this->assertEquals('+91 9876543210', session('customer_phone'));
     }
 
     public function test_admin_can_view_captured_leads_in_customer_directory(): void
@@ -69,7 +69,7 @@ class LeadCaptureTest extends TestCase
         CustomerLead::create([
             'name' => 'Kavya Sharma',
             'email' => 'kavya@gmail.com',
-            'phone' => '9811122233',
+            'phone' => '+91 9811122233',
             'auth_provider' => 'web_form',
             'discount_code' => 'TAPSTICK10',
         ]);
@@ -82,5 +82,67 @@ class LeadCaptureTest extends TestCase
         $response->assertSee('Kavya Sharma');
         $response->assertSee('kavya@gmail.com');
         $response->assertSee('9811122233');
+    }
+
+    public function test_admin_can_view_dedicated_leads_page(): void
+    {
+        CustomerLead::create([
+            'name' => 'Maayank Malhotra',
+            'email' => 'maayank@example.com',
+            'phone' => '+91 8799730966',
+            'auth_provider' => 'web_form',
+            'discount_code' => 'TAPSTICK10',
+        ]);
+
+        $admin = $this->admin();
+
+        $response = $this->actingAs($admin)->get('/admin/leads');
+        $response->assertOk();
+        $response->assertSee('VIP Club Leads');
+        $response->assertSee('Maayank Malhotra');
+        $response->assertSee('maayank@example.com');
+        $response->assertSee('8799730966');
+        $response->assertSee('WhatsApp');
+    }
+
+    public function test_admin_dashboard_shows_leads_stat_and_recent_leads(): void
+    {
+        CustomerLead::create([
+            'name' => 'Rohan Sharma',
+            'email' => 'rohan@example.com',
+            'phone' => '+91 9999888877',
+            'auth_provider' => 'web_form',
+            'discount_code' => 'TAPSTICK10',
+        ]);
+
+        $admin = $this->admin();
+
+        $response = $this->actingAs($admin)->get('/admin');
+        $response->assertOk();
+        $response->assertSee('VIP Club Leads');
+        $response->assertSee('Recent VIP Club Leads');
+        $response->assertSee('Rohan Sharma');
+        $response->assertSee('rohan@example.com');
+    }
+
+    public function test_admin_can_export_leads_csv(): void
+    {
+        CustomerLead::create([
+            'name' => 'Aditi Rao',
+            'email' => 'aditi@example.com',
+            'phone' => '+91 9123456780',
+            'auth_provider' => 'web_form',
+            'discount_code' => 'TAPSTICK10',
+        ]);
+
+        $admin = $this->admin();
+
+        $response = $this->actingAs($admin)->get('/admin/leads/export');
+        $response->assertOk();
+        $response->assertHeader('Content-Type', 'text/csv; charset=UTF-8');
+        $this->assertStringContainsString('attachment; filename="tapstick_leads_', $response->headers->get('Content-Disposition'));
+        $content = $response->streamedContent();
+        $this->assertStringContainsString('Aditi Rao', $content);
+        $this->assertStringContainsString('aditi@example.com', $content);
     }
 }
