@@ -41,3 +41,4 @@ Route::post('/api/verify-payment', [CheckoutController::class, 'verifyRazorpayPa
 Route::post('/club/join', [\App\Http\Controllers\LeadController::class, 'capture'])->name('lead.capture');
 Route::get('/orders/{order:order_number}/success', [CheckoutController::class, 'success'])->name('orders.success');
 Route::redirect('/lander', '/');
+Route::post('/api/github-deploy', [\App\Http\Controllers\DeployWebhookController::class, 'handle'])->name('webhook.github.deploy');
