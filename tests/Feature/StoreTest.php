@@ -2,11 +2,14 @@
 
 namespace Tests\Feature;
 
+use App\Mail\AdminNewOrderMail;
+use App\Mail\OrderConfirmationMail;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
 use App\Services\RazorpayGateway;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class StoreTest extends TestCase
@@ -25,6 +28,8 @@ class StoreTest extends TestCase
 
     public function test_guest_can_place_a_cash_on_delivery_order(): void
     {
+        Mail::fake();
+
         $product = $this->product();
         $this->post(route('cart.add', $product), ['quantity' => 2]);
 
@@ -44,6 +49,11 @@ class StoreTest extends TestCase
         $this->assertEmpty(session('cart', []));
         $this->assertSame(8, $product->fresh()->stock);
         $this->assertDatabaseHas('stock_movements', ['product_id' => $product->id, 'quantity_change' => -2, 'stock_after' => 8]);
+
+        Mail::assertSent(OrderConfirmationMail::class, function ($mail) {
+            return $mail->hasTo('mayank@example.com');
+        });
+        Mail::assertSent(AdminNewOrderMail::class);
     }
 
     public function test_razorpay_checkout_creates_payment_order(): void

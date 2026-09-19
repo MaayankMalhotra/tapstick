@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AdminNewOrderMail;
+use App\Mail\OrderConfirmationMail;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\StockMovement;
@@ -10,6 +12,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Razorpay\Api\Errors\Error as RazorpayError;
@@ -64,6 +68,7 @@ class CheckoutController extends Controller
 
         if ($order->payment_method === 'cod') {
             $request->session()->forget('cart');
+            $this->sendOrderEmails($order);
             return redirect()->route('orders.success', $order);
         }
         return view('store.payment', compact('order'));
@@ -152,6 +157,7 @@ class CheckoutController extends Controller
             'payment_status' => 'paid',
         ]);
         $request->session()->forget('cart');
+        $this->sendOrderEmails($order);
 
         return response()->json(['success' => true, 'redirect_url' => route('orders.success', $order)]);
     }
@@ -181,5 +187,28 @@ class CheckoutController extends Controller
             }
             $order->delete();
         });
+    }
+
+    protected function sendOrderEmails(Order $order): void
+    {
+        try {
+            $order->loadMissing('items.product');
+
+            // 1. Send confirmation email to customer
+            if (filter_var($order->email, FILTER_VALIDATE_EMAIL)) {
+                Mail::to($order->email)->send(new OrderConfirmationMail($order));
+            }
+
+            // 2. Send new order alert to store owner / admin
+            $adminEmail = config('mail.from.address', 'maayankmalhotra095@gmail.com');
+            if (filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
+                Mail::to($adminEmail)->send(new AdminNewOrderMail($order));
+            }
+        } catch (\Throwable $e) {
+            report($e);
+            Log::error('Order email sending failed: ' . $e->getMessage(), [
+                'order' => $order->order_number,
+            ]);
+        }
     }
 }
