@@ -1,0 +1,8 @@
+@extends('admin.layout')
+@section('title', 'Overview')
+@section('content')
+<div class="heading"><div><div class="kicker">YOUR STORE, AT A GLANCE</div><h1>Inventory overview</h1><p>Keep your next best seller ready to ship.</p></div><a class="button" href="{{ route('admin.products.create') }}">+ Add product</a></div>
+<div class="stats"><article><span>Total products</span><strong>{{ $totalProducts }}</strong></article><article><span>Visible products</span><strong>{{ $activeProducts }}</strong></article><article><span>Units in stock</span><strong>{{ number_format($units) }}</strong></article><article class="alert-stat"><span>At or below stock alert</span><strong>{{ $lowStockCount }}</strong></article></div>
+<div class="panel"><div class="heading"><h2>Needs attention</h2><a href="{{ route('admin.products.index', ['status' => 'low']) }}">View all low stock →</a></div><div class="table-wrap"><table><thead><tr><th>Product</th><th>SKU</th><th>Available</th><th>Alert at</th><th></th></tr></thead><tbody>@forelse($lowStock as $product)<tr><td>{{ $product->name }}</td><td>{{ $product->sku ?: '—' }}</td><td><span class="badge warn">{{ $product->stock }}</span></td><td>{{ $product->low_stock_threshold }}</td><td><a href="{{ route('admin.products.edit', $product) }}">Manage</a></td></tr>@empty<tr><td colspan="5" class="empty">All products are above their stock alert levels.</td></tr>@endforelse</tbody></table></div></div>
+<div class="panel"><div class="heading"><h2>Recent stock changes</h2><a href="{{ route('admin.history') }}">Full history →</a></div>@include('admin.movements')</div>
+@endsection

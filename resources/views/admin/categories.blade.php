@@ -1,0 +1,7 @@
+@extends('admin.layout')
+@section('title', 'Categories')
+@section('content')
+<div class="heading"><div><div class="kicker">ORGANIZE YOUR CATALOG</div><h1>Categories</h1></div></div>
+<form class="panel filters" action="{{ route('admin.categories.store') }}" method="POST">@csrf<label class="grow">New category name<input name="name" value="{{ old('name') }}" required maxlength="100"></label><label class="grow">URL slug<input name="slug" value="{{ old('slug') }}" required placeholder="laptop-stickers" pattern="[a-z0-9]+(-[a-z0-9]+)*" maxlength="150"></label><button class="button">Add category</button></form>
+@forelse($categories as $category)<div class="panel category-row"><form class="filters grow" method="POST" action="{{ route('admin.categories.update', $category) }}">@csrf @method('PUT')<label class="grow">Name<input name="name" value="{{ $category->name }}" required maxlength="100"></label><label class="grow">Slug<input name="slug" value="{{ $category->slug }}" required maxlength="150" pattern="[a-z0-9]+(-[a-z0-9]+)*"></label><button class="ghost">Save</button></form><span class="muted">{{ $category->products_count }} products</span>@if($category->products_count === 0)<form method="POST" action="{{ route('admin.categories.destroy', $category) }}" onsubmit="return confirm('Delete this empty category?')">@csrf @method('DELETE')<button class="danger">Delete</button></form>@endif</div>@empty<div class="panel empty">Add your first category above.</div>@endforelse
+@endsection

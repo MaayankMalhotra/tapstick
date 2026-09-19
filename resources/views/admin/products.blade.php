@@ -1,0 +1,10 @@
+@extends('admin.layout')
+@section('title', 'Products & stock')
+@section('content')
+<div class="heading"><div class="kicker">CATALOG & INVENTORY<h1>Products & stock</h1></div><a class="button" href="{{ route('admin.products.create') }}">+ Add product</a></div>
+<form class="filters panel" method="GET"><label class="grow">Search<input name="q" value="{{ request('q') }}" placeholder="Product name or SKU"></label><label>Filter<select name="status"><option value="">All products</option>@foreach(['active'=>'Visible','hidden'=>'Hidden','low'=>'Low stock','out'=>'Out of stock'] as $value=>$label)<option value="{{ $value }}" @selected(request('status') === $value)>{{ $label }}</option>@endforeach</select></label><button class="button">Apply</button><a href="{{ route('admin.products.index') }}">Reset</a></form>
+<div class="panel"><div class="table-wrap"><table><thead><tr><th>Product</th><th>SKU / Category</th><th>Price</th><th>Stock</th><th>Visibility</th><th></th></tr></thead><tbody>
+@forelse($products as $product)<tr><td><div class="product-cell">@if($product->image)<img src="{{ asset('storage/'.$product->image) }}" alt="">@else<span class="thumb">{{ $product->emoji ?: '✦' }}</span>@endif<strong>{{ $product->name }}</strong></div></td><td>{{ $product->sku ?: '—' }}<small>{{ $product->category?->name ?: 'Uncategorized' }}</small></td><td>₹{{ number_format($product->price, 2) }}</td><td><span class="badge {{ $product->stock <= $product->low_stock_threshold ? 'warn' : '' }}">{{ $product->stock }}</span></td><td>{{ $product->is_active ? 'Visible' : 'Hidden' }}</td><td><a href="{{ route('admin.products.edit', $product) }}">Manage →</a></td></tr>
+@empty<tr><td colspan="6" class="empty">No products match. Add a product or change the filters.</td></tr>@endforelse
+</tbody></table></div><div class="pagination">@if($products->previousPageUrl())<a href="{{ $products->previousPageUrl() }}">← Previous</a>@endif<span>Page {{ $products->currentPage() }} of {{ $products->lastPage() }}</span>@if($products->nextPageUrl())<a href="{{ $products->nextPageUrl() }}">Next →</a>@endif</div></div>
+@endsection
