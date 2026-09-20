@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -11,8 +13,62 @@ class StoreController extends Controller
 {
     public function home(): View
     {
-        $products = Product::with('category:id,name,slug')->where('is_active', true)->where('stock', '>', 0)->latest()->get();
-        return view('store.home', compact('products'));
+        $categories = Category::whereHas('products', function ($q) {
+            $q->where('is_active', true)->where('stock', '>', 0);
+        })->withCount(['products' => function ($q) {
+            $q->where('is_active', true)->where('stock', '>', 0);
+        }])->orderBy('name')->get();
+
+        $totalProductsCount = Product::where('is_active', true)->where('stock', '>', 0)->count();
+
+        $products = Product::with('category:id,name,slug')
+            ->where('is_active', true)
+            ->where('stock', '>', 0)
+            ->latest()
+            ->take(24)
+            ->get();
+
+        return view('store.home', compact('products', 'categories', 'totalProductsCount'));
+    }
+
+    public function apiProducts(Request $request): JsonResponse
+    {
+        $categorySlug = $request->query('category', 'all');
+        $search = trim($request->query('search', ''));
+        $perPage = 24;
+
+        $query = Product::with('category:id,name,slug')
+            ->where('is_active', true)
+            ->where('stock', '>', 0);
+
+        if ($categorySlug && $categorySlug !== 'all') {
+            $query->whereHas('category', function ($q) use ($categorySlug) {
+                $q->where('slug', $categorySlug);
+            });
+        }
+
+        if ($search !== '') {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+
+        $paginator = $query->latest()->paginate($perPage);
+
+        $html = '';
+        foreach ($paginator as $index => $product) {
+            $html .= view('partials.product-card', compact('product', 'index'))->render();
+        }
+
+        return response()->json([
+            'html' => $html,
+            'current_page' => $paginator->currentPage(),
+            'has_more' => $paginator->hasMorePages(),
+            'next_page' => $paginator->hasMorePages() ? $paginator->currentPage() + 1 : null,
+            'total' => $paginator->total(),
+            'count' => count($paginator->items()),
+        ]);
     }
 
     public function show(Product $product): View

@@ -141,6 +141,61 @@ class StoreTest extends TestCase
         $this->assertEmpty(session('cart', []));
     }
 
+    public function test_home_displays_catalog_and_category_counts(): void
+    {
+        $this->product();
+        $response = $this->get(route('home'));
+        $response->assertOk();
+        $response->assertSee('PICK YOUR PERSONALITY');
+        $response->assertSee('ALL DROPS');
+        $response->assertSee('Good Vibes');
+    }
+
+    public function test_api_products_endpoint_returns_paginated_json(): void
+    {
+        $this->product();
+        $response = $this->getJson(route('api.products', ['page' => 1]));
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'html',
+            'current_page',
+            'has_more',
+            'next_page',
+            'total',
+            'count'
+        ]);
+        $this->assertSame(1, $response->json('total'));
+        $this->assertStringContainsString('Good Vibes', $response->json('html'));
+    }
+
+    public function test_api_products_can_filter_by_category_and_search(): void
+    {
+        $animeCategory = Category::create(['name' => 'Anime & Manga', 'slug' => 'anime']);
+        $product = Product::create([
+            'category_id' => $animeCategory->id,
+            'name' => 'Naruto Uzumaki',
+            'slug' => 'naruto-uzumaki',
+            'description' => 'Ninja vinyl decal',
+            'price' => 49,
+            'stock' => 50,
+            'emoji' => '🍥',
+            'is_active' => true,
+        ]);
+
+        $response = $this->getJson(route('api.products', ['category' => 'anime']));
+        $response->assertOk();
+        $this->assertSame(1, $response->json('total'));
+        $this->assertStringContainsString('Naruto Uzumaki', $response->json('html'));
+
+        $searchResponse = $this->getJson(route('api.products', ['search' => 'Naruto']));
+        $searchResponse->assertOk();
+        $this->assertSame(1, $searchResponse->json('total'));
+
+        $missResponse = $this->getJson(route('api.products', ['search' => 'NonExistentXYZ']));
+        $missResponse->assertOk();
+        $this->assertSame(0, $missResponse->json('total'));
+    }
+
     private function product(): Product
     {
         $category = Category::create(['name' => 'Popular', 'slug' => 'popular']);

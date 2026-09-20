@@ -29,6 +29,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 Route::get('/', [StoreController::class, 'home'])->name('home');
+Route::get('/api/products', [StoreController::class, 'apiProducts'])->name('api.products');
 Route::get('/products/{product:slug}', [StoreController::class, 'show'])->name('products.show');
 Route::get('/cart', [StoreController::class, 'cart'])->name('cart.index');
 Route::post('/cart/{product}', [StoreController::class, 'addToCart'])->name('cart.add');

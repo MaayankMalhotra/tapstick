@@ -425,25 +425,31 @@
         }
 
         // Product Cards 3D Tilt
-        const tiltCards = document.querySelectorAll('.product-pop-card');
-        tiltCards.forEach(card => {
-            card.addEventListener('mousemove', function (e) {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const cx = rect.width / 2;
-                const cy = rect.height / 2;
-                const rotX = ((y - cy) / cy) * -7;
-                const rotY = ((x - cx) / cx) * 7;
-                card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-8px)`;
-            });
+        window.initCardInteractions = function (card) {
+            if (!card || card._popInit) return;
+            card._popInit = true;
 
-            card.addEventListener('mouseleave', function () {
-                card.style.transform = '';
-            });
+            if (!prefersReducedMotion && window.innerWidth > 768) {
+                card.addEventListener('mousemove', function (e) {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const cx = rect.width / 2;
+                    const cy = rect.height / 2;
+                    const rotX = ((y - cy) / cy) * -7;
+                    const rotY = ((x - cx) / cx) * 7;
+                    card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-8px)`;
+                });
 
-            card.addEventListener('mouseenter', playPeelSound);
-        });
+                card.addEventListener('mouseleave', function () {
+                    card.style.transform = '';
+                });
+
+                card.addEventListener('mouseenter', playPeelSound);
+            }
+        };
+
+        document.querySelectorAll('.product-pop-card').forEach(window.initCardInteractions);
     }
 
     // ==========================================================================
@@ -660,6 +666,184 @@
                 closeMobileDrawer();
             });
         });
+    }
+
+    // ==========================================================================
+    // 12. HIGH-PERFORMANCE INFINITE SCROLL & DYNAMIC CATALOG FILTER
+    // ==========================================================================
+    const productsGrid = document.getElementById('products-pop-grid');
+    if (productsGrid) {
+        const sentinel = document.getElementById('products-scroll-sentinel');
+        const searchInput = document.getElementById('products-search-input');
+        const searchClearBtn = document.getElementById('products-search-clear');
+        const categoryTabs = document.querySelectorAll('#pop-category-tabs .pop-filter-pill');
+        const lazyLoader = document.getElementById('products-lazy-loader');
+        const loadMoreWrap = document.getElementById('products-load-more-wrap');
+        const loadMoreBtn = document.getElementById('btn-load-more-drops');
+        const remainingSpan = document.getElementById('load-more-remaining-count');
+        const endBanner = document.getElementById('products-end-banner');
+        const shownCountSpan = document.getElementById('current-shown-count');
+        const totalCountSpan = document.getElementById('total-matching-count');
+
+        let currentCategory = 'all';
+        let currentSearch = '';
+        let currentPage = 1;
+        let hasNextPage = true;
+        let isLoading = false;
+        let searchDebounceTimer = null;
+        let abortController = null;
+
+        function updateCounts(shown, total) {
+            if (shownCountSpan) shownCountSpan.textContent = shown.toLocaleString();
+            if (totalCountSpan) totalCountSpan.textContent = total.toLocaleString();
+            if (remainingSpan) remainingSpan.textContent = Math.max(0, total - shown).toLocaleString();
+        }
+
+        async function fetchProducts(page, append) {
+            if (isLoading) return;
+            isLoading = true;
+
+            if (abortController) {
+                abortController.abort();
+            }
+            abortController = new AbortController();
+
+            if (lazyLoader) lazyLoader.classList.add('is-loading');
+
+            const params = new URLSearchParams({
+                page: page,
+                category: currentCategory,
+                search: currentSearch
+            });
+
+            try {
+                const response = await fetch(`/api/products?${params.toString()}`, {
+                    signal: abortController.signal,
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+
+                if (!response.ok) throw new Error('Network error');
+                const data = await response.json();
+
+                if (!append) {
+                    productsGrid.innerHTML = '';
+                }
+
+                if (data.html && data.html.trim() !== '') {
+                    productsGrid.insertAdjacentHTML('beforeend', data.html);
+                    if (window.initCardInteractions) {
+                        productsGrid.querySelectorAll('.product-pop-card').forEach(window.initCardInteractions);
+                    }
+                } else if (!append) {
+                    productsGrid.innerHTML = `
+                        <div class="products-empty-state" id="products-empty-message">
+                            <span style="font-size:3rem;">🔍</span>
+                            <h3>No matching stickers found!</h3>
+                            <p>Try searching for a different keyword or explore another category.</p>
+                        </div>
+                    `;
+                }
+
+                currentPage = data.current_page;
+                hasNextPage = data.has_more;
+
+                const currentCards = productsGrid.querySelectorAll('.product-pop-card').length;
+                updateCounts(currentCards, data.total);
+
+                if (loadMoreWrap) {
+                    loadMoreWrap.style.display = hasNextPage ? 'flex' : 'none';
+                }
+
+                if (endBanner) {
+                    if (!hasNextPage && currentCards > 0) {
+                        endBanner.classList.add('is-visible');
+                    } else {
+                        endBanner.classList.remove('is-visible');
+                    }
+                }
+            } catch (err) {
+                if (err.name !== 'AbortError') {
+                    console.error('Failed to load products:', err);
+                }
+            } finally {
+                isLoading = false;
+                if (lazyLoader) lazyLoader.classList.remove('is-loading');
+            }
+        }
+
+        // IntersectionObserver for Infinite Scroll
+        if ('IntersectionObserver' in window && sentinel) {
+            const scrollObserver = new IntersectionObserver((entries) => {
+                const entry = entries[0];
+                if (entry && entry.isIntersecting && hasNextPage && !isLoading) {
+                    fetchProducts(currentPage + 1, true);
+                }
+            }, {
+                rootMargin: '400px 0px',
+                threshold: 0.01
+            });
+            scrollObserver.observe(sentinel);
+        }
+
+        // Category Tab Buttons
+        categoryTabs.forEach(btn => {
+            btn.addEventListener('click', function () {
+                const cat = this.getAttribute('data-category');
+                if (cat === currentCategory) return;
+
+                categoryTabs.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentCategory = cat;
+                currentPage = 1;
+                playPeelSound();
+                createConfetti(this.getBoundingClientRect().left + this.offsetWidth / 2, this.getBoundingClientRect().top + this.offsetHeight / 2, 16);
+                fetchProducts(1, false);
+            });
+        });
+
+        // Search Input with 300ms Debounce
+        if (searchInput) {
+            searchInput.addEventListener('input', function () {
+                const val = this.value.trim();
+                if (searchClearBtn) {
+                    searchClearBtn.style.display = val ? 'flex' : 'none';
+                }
+
+                clearTimeout(searchDebounceTimer);
+                searchDebounceTimer = setTimeout(() => {
+                    currentSearch = val;
+                    currentPage = 1;
+                    fetchProducts(1, false);
+                }, 300);
+            });
+        }
+
+        // Clear Search Button
+        if (searchClearBtn && searchInput) {
+            searchClearBtn.addEventListener('click', function () {
+                searchInput.value = '';
+                this.style.display = 'none';
+                currentSearch = '';
+                currentPage = 1;
+                searchInput.focus();
+                playPopSound();
+                fetchProducts(1, false);
+            });
+        }
+
+        // Manual Load More Button
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', function () {
+                if (hasNextPage && !isLoading) {
+                    playPopSound();
+                    createConfetti(this.getBoundingClientRect().left + this.offsetWidth / 2, this.getBoundingClientRect().top + this.offsetHeight / 2, 20);
+                    fetchProducts(currentPage + 1, true);
+                }
+            });
+        }
     }
 
     // Expose utilities globally

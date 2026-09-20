@@ -208,118 +208,66 @@
                 Die-cut vinyl stickers built to take a beating on MacBooks, hydro flasks, skate decks, cars &amp; bikes.
             </p>
 
-            <!-- Filter Tabs -->
-            <div class="pop-filter-tabs">
-                <button type="button" class="pop-filter-pill active" onclick="filterPopTab(this, 'all')">
-                    <span>⚡ ALL DROPS</span>
+            <!-- Dynamic Category Filter Tabs -->
+            <div class="pop-filter-tabs" id="pop-category-tabs">
+                <button type="button" class="pop-filter-pill active" data-category="all">
+                    <span>⚡ ALL DROPS ({{ number_format($totalProductsCount ?? 4400) }})</span>
                 </button>
-                <button type="button" class="pop-filter-pill" onclick="filterPopTab(this, 'stickers')">
-                    <span>🔥 MEMES &amp; POP</span>
-                </button>
-                <button type="button" class="pop-filter-pill" onclick="filterPopTab(this, 'mystery-box')">
-                    <span>🎁 MYSTERY PACKS</span>
-                </button>
+                @if(isset($categories))
+                    @foreach($categories as $cat)
+                        <button type="button" class="pop-filter-pill" data-category="{{ $cat->slug }}">
+                            <span>{{ $cat->name }} ({{ number_format($cat->products_count) }})</span>
+                        </button>
+                    @endforeach
+                @endif
+            </div>
+
+            <!-- Live Search Bar & Realtime Count -->
+            <div class="products-search-wrap">
+                <div class="products-search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="search" id="products-search-input" placeholder="Search 4,400+ vinyl decals (e.g. Naruto, Chai, Cat, Coding, Enfield...)" autocomplete="off">
+                    <button type="button" id="products-search-clear" style="display:none;" aria-label="Clear search">✕</button>
+                </div>
+                <div class="products-live-counter">
+                    <span id="products-count-label">Showing <strong id="current-shown-count">{{ $products->count() }}</strong> of <strong id="total-matching-count">{{ number_format($totalProductsCount ?? 4400) }}</strong> stickers</span>
+                </div>
             </div>
         </div>
 
         <!-- Product Cards Grid: Collectible Pack Styling with Alternating Color Accents -->
-        <div class="products-pop-grid">
-            @php
-                $accentColorClasses = ['card-accent-yellow', 'card-accent-red', 'card-accent-blue', 'card-accent-pink', 'card-accent-green', 'card-accent-purple'];
-            @endphp
-
+        <div class="products-pop-grid" id="products-pop-grid">
             @forelse($products as $index => $product)
-                @php
-                    $colorClass = $accentColorClasses[$index % count($accentColorClasses)];
-                    $regularPrice = max(79.00, $product->price * 2);
-                    $savings = max(0, $regularPrice - $product->price);
-                    $imgSrc = $product->image ? (str_starts_with($product->image, 'http') ? $product->image : (str_starts_with($product->image, 'images/') ? asset($product->image) : asset('storage/'.$product->image))) : null;
-                    $stockLeft = max(4, min(18, ($product->stock % 15) + 3));
-                @endphp
-
-                <article class="product-pop-card {{ $colorClass }} reveal-on-scroll" data-category="{{ $product->category?->slug ?? 'stickers' }}">
-                    <!-- Card Top Pill: Stock & Category -->
-                    <div class="pop-card-top-bar">
-                        <span class="pop-category-tag">{{ $product->category?->name ?? 'Sticker Pack' }}</span>
-                        @if($stockLeft <= 8)
-                            <span class="pop-stock-pill urgent pulse">🔥 Almost gone! Only {{ $stockLeft }}</span>
-                        @else
-                            <span class="pop-stock-pill in-stock">✓ In Stock</span>
-                        @endif
-                    </div>
-
-                    <!-- Die-Cut Image Stage with Tactile Peel Corner -->
-                    <a href="{{ route('products.show', $product) }}" class="pop-card-image-stage">
-                        @if($savings > 0)
-                            <div class="pop-savings-corner-badge">
-                                <span>SAVE ₹{{ number_format($savings, 0) }}</span>
-                            </div>
-                        @endif
-
-                        <div class="pop-card-peel-corner" title="Peel me!"></div>
-
-                        <div class="pop-sticker-preview-wrapper">
-                            @if($imgSrc)
-                                <img src="{{ $imgSrc }}" alt="{{ $product->name }}" loading="lazy" class="pop-card-sticker-img">
-                            @else
-                                <span class="pop-card-fallback-emoji">{{ $product->emoji ?: '✨' }}</span>
-                            @endif
-                            <div class="pop-sticker-diecut-halo"></div>
-                        </div>
-
-                        <div class="pop-quick-view-badge" title="View details">
-                            <span>Inspect 👁️</span>
-                        </div>
-                    </a>
-
-                    <!-- Card Body -->
-                    <div class="pop-card-body">
-                        <div class="pop-rating-row">
-                            <span class="pop-stars">★★★★★</span>
-                            <span class="pop-rating-num">4.9</span>
-                            <span class="pop-review-total">({{ 450 + ($product->id * 37) % 350 }})</span>
-                        </div>
-
-                        <h3 class="pop-product-name">
-                            <a href="{{ route('products.show', $product) }}">{{ $product->name }}</a>
-                        </h3>
-
-                        <div class="pop-price-block">
-                            <div class="pop-price-numbers">
-                                @if($savings > 0)
-                                    <span class="pop-original-price">₹{{ number_format($regularPrice, 0) }}</span>
-                                @endif
-                                <span class="pop-current-price">₹{{ number_format($product->price, 2) }}</span>
-                            </div>
-                            <span class="pop-price-note">Incl. all taxes</span>
-                        </div>
-
-                        <!-- Add to Cart Form with Magnetic Hover & Flying Sticker Animation -->
-                        <form action="{{ route('cart.add', $product) }}" method="POST" class="pop-add-cart-form">
-                            @csrf
-                            <button type="submit" class="btn-add-pop-cart trigger-confetti" data-confetti="true">
-                                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                                </svg>
-                                <span>Add to Cart</span>
-                            </button>
-                        </form>
-                    </div>
-                </article>
+                @include('partials.product-card', ['product' => $product, 'index' => $index])
             @empty
-                <div class="products-empty-state">
+                <div class="products-empty-state" id="products-empty-message">
                     <span style="font-size:3rem;">📦</span>
-                    <h3>Fresh drops are baking!</h3>
-                    <p>New anime, meme &amp; streetwear packs dropping very soon.</p>
+                    <h3>No matching stickers found!</h3>
+                    <p>Try searching for something else or pick a different category.</p>
                 </div>
             @endforelse
         </div>
 
-        <div class="section-pop-footer reveal-on-scroll">
-            <a href="#shop" class="btn-pop-outline btn-magnetic">
-                <span>Explore All 5000+ Designs →</span>
-            </a>
+        <!-- Lazy Loader Spinner -->
+        <div class="products-lazy-loader" id="products-lazy-loader">
+            <span class="spinner-sticker-roll">⚡</span>
+            <span>UNBOXING MORE DROPS...</span>
         </div>
+
+        <!-- Manual Load More Button -->
+        <div class="products-load-more-wrap" id="products-load-more-wrap">
+            <button type="button" class="btn-load-more-drops" id="btn-load-more-drops">
+                <span>⚡ Load More Stickers (<span id="load-more-remaining-count">{{ max(0, ($totalProductsCount ?? 4400) - $products->count()) }}</span> more)</span>
+            </button>
+        </div>
+
+        <!-- End of Collection Banner -->
+        <div class="products-end-banner" id="products-end-banner">
+            <span>🎉 You've reached the end of this collection!</span>
+        </div>
+
+        <!-- Infinite Scroll Intersection Sentinel -->
+        <div id="products-scroll-sentinel" style="height: 20px; margin-top: -10px;"></div>
     </div>
 </section>
 
@@ -822,21 +770,3 @@
 </section>
 
 @endsection
-
-@push('scripts')
-<script>
-    function filterPopTab(btn, category) {
-        document.querySelectorAll('.pop-filter-pill').forEach(el => el.classList.remove('active'));
-        btn.classList.add('active');
-        const cards = document.querySelectorAll('.product-pop-card');
-        if (category === 'all') {
-            cards.forEach(c => c.style.display = 'flex');
-        } else {
-            cards.forEach(c => {
-                const cat = c.getAttribute('data-category');
-                c.style.display = (cat === category) ? 'flex' : 'none';
-            });
-        }
-    }
-</script>
-@endpush
