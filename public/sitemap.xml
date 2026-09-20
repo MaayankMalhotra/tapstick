@@ -2,93 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://tabstick.in/</loc>
-    <lastmod>2026-09-20T08:54:26+00:00</lastmod>
+    <lastmod>2026-09-20T09:31:35+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://tabstick.in/#shop?category=popular</loc>
-    <lastmod>2026-09-19T06:54:58+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tabstick.in/#shop?category=stickers</loc>
-    <lastmod>2026-09-19T08:53:25+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tabstick.in/#shop?category=mystery-box</loc>
-    <lastmod>2026-09-19T08:53:25+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tabstick.in/#shop?category=memes</loc>
-    <lastmod>2026-09-20T08:08:07+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tabstick.in/#shop?category=glitter-holo</loc>
-    <lastmod>2026-09-20T08:08:07+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tabstick.in/#shop?category=anime</loc>
-    <lastmod>2026-09-20T08:08:07+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tabstick.in/#shop?category=cars-bikes</loc>
-    <lastmod>2026-09-20T08:08:07+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tabstick.in/#shop?category=aesthetic</loc>
-    <lastmod>2026-09-20T08:08:07+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tabstick.in/#shop?category=tech-dev</loc>
-    <lastmod>2026-09-20T08:08:07+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tabstick.in/#laptop-stickers</loc>
-    <lastmod>2026-09-20T08:54:26+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tabstick.in/#car-stickers</loc>
-    <lastmod>2026-09-20T08:54:26+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tabstick.in/#phone-stickers</loc>
-    <lastmod>2026-09-20T08:54:26+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tabstick.in/#college-stickers</loc>
-    <lastmod>2026-09-20T08:54:26+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tabstick.in/#custom-stickers</loc>
-    <lastmod>2026-09-20T08:54:26+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tabstick.in/products/superhero-v2-laptop-skin</loc>

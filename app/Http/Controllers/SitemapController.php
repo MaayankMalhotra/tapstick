@@ -39,30 +39,6 @@ class SitemapController extends Controller
         $xml .= "    <priority>1.0</priority>\n";
         $xml .= "  </url>\n";
 
-        // Curated Category Hubs
-        foreach ($categories as $category) {
-            $catLastMod = $category->updated_at ? $category->updated_at->toAtomString() : $now;
-            $catLoc = htmlspecialchars("{$baseUrl}/#shop?category=" . urlencode($category->slug), ENT_XML1, 'UTF-8');
-            $xml .= "  <url>\n";
-            $xml .= "    <loc>{$catLoc}</loc>\n";
-            $xml .= "    <lastmod>{$catLastMod}</lastmod>\n";
-            $xml .= "    <changefreq>weekly</changefreq>\n";
-            $xml .= "    <priority>0.8</priority>\n";
-            $xml .= "  </url>\n";
-        }
-
-        // Dedicated High-Intent Landing Sections
-        $seoSections = ['laptop-stickers', 'car-stickers', 'phone-stickers', 'college-stickers', 'custom-stickers'];
-        foreach ($seoSections as $sectionId) {
-            $secLoc = htmlspecialchars("{$baseUrl}/#{$sectionId}", ENT_XML1, 'UTF-8');
-            $xml .= "  <url>\n";
-            $xml .= "    <loc>{$secLoc}</loc>\n";
-            $xml .= "    <lastmod>{$now}</lastmod>\n";
-            $xml .= "    <changefreq>weekly</changefreq>\n";
-            $xml .= "    <priority>0.8</priority>\n";
-            $xml .= "  </url>\n";
-        }
-
         // Active Product URLs with Image Sitemap
         foreach ($products as $product) {
             $prodLoc = htmlspecialchars("{$baseUrl}/products/" . $product->slug, ENT_XML1, 'UTF-8');

@@ -91,7 +91,7 @@ class SeoTest extends TestCase
         $this->assertStringContainsString('application/xml', $response->headers->get('Content-Type'));
         $this->assertStringContainsString('<urlset', $response->getContent());
         $this->assertStringContainsString('https://tabstick.in/products/test-decal', $response->getContent());
-        $this->assertStringContainsString('https://tabstick.in/#laptop-stickers', $response->getContent());
+        $this->assertStringContainsString('https://tabstick.in/', $response->getContent());
     }
 
     public function test_robots_txt_disallows_private_paths_and_references_sitemap(): void
