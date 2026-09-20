@@ -558,7 +558,7 @@
                     </div>
 
                     <div class="founder-actions-row">
-                        <a href="[ADD_LINKEDIN_URL]" target="_blank" rel="noopener me" class="founder-linkedin-chip">
+                        <a href="https://www.linkedin.com/in/maayank-malhotra-a59a55186/" target="_blank" rel="noopener me" class="founder-linkedin-chip">
                             <span>Connect with Mayank Malhotra on LinkedIn →</span>
                         </a>
                         <a href="#shop" class="btn-pop-primary btn-magnetic">

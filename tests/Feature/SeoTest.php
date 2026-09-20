@@ -27,7 +27,7 @@ class SeoTest extends TestCase
         // Required Brand & Founder identity statements
         $response->assertSee('Tabstick is an Indian sticker brand founded by Mayank Malhotra. We create creative and durable stickers for laptops, cars, phones and college students.', false);
         $response->assertSee('Mayank Malhotra is the founder of Tabstick.', false);
-        $response->assertSee('[ADD_LINKEDIN_URL]', false);
+        $response->assertSee('https://www.linkedin.com/in/maayank-malhotra-a59a55186/', false);
 
         // 5 Dedicated SEO Category sections
         $response->assertSee('id="laptop-stickers"', false);

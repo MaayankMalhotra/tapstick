@@ -44,12 +44,12 @@
             "@type": "Person",
             "name": "Mayank Malhotra",
             "jobTitle": "Founder",
-            "sameAs": "[ADD_LINKEDIN_URL]"
+            "sameAs": "https://www.linkedin.com/in/maayank-malhotra-a59a55186/"
         },
         "sameAs": [
             "[ADD_INSTAGRAM_URL]",
             "[ADD_FACEBOOK_URL]",
-            "[ADD_LINKEDIN_URL]"
+            "https://www.linkedin.com/in/maayank-malhotra-a59a55186/"
         ],
         "contactPoint": {
             "@type": "ContactPoint",
@@ -335,7 +335,7 @@
                         <a href="[ADD_FACEBOOK_URL]" target="_blank" rel="noopener" class="social-chip" aria-label="Facebook">
                             <span>🌐 Facebook</span>
                         </a>
-                        <a href="[ADD_LINKEDIN_URL]" target="_blank" rel="noopener" class="social-chip" aria-label="LinkedIn">
+                        <a href="https://www.linkedin.com/in/maayank-malhotra-a59a55186/" target="_blank" rel="noopener me" class="social-chip" aria-label="LinkedIn">
                             <span>💼 LinkedIn</span>
                         </a>
                         <a href="mailto:hello@tabstick.in" class="social-chip" aria-label="Email">

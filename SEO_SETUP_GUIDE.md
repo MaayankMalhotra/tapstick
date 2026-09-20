@@ -122,9 +122,9 @@ Creating a Google Business Profile associates your brand name **Tabstick** with 
 
 Replace the following placeholders across the site when your official profiles are live:
 
-| Placeholder in Code | File Location | Target Destination |
+| Placeholder in Code | File Location | Target Destination / Status |
 | :--- | :--- | :--- |
-| `[ADD_LINKEDIN_URL]` | `layouts/app.blade.php`, `home.blade.php` | Founder Mayank Malhotra's LinkedIn Profile |
+| `https://www.linkedin.com/in/maayank-malhotra-a59a55186/` | `layouts/app.blade.php`, `home.blade.php` | ✅ **Configured**: Founder Mayank Malhotra's LinkedIn Profile |
 | `[ADD_INSTAGRAM_URL]` | `layouts/app.blade.php` | Official Tabstick Instagram profile (`@tabstick.in`) |
 | `[ADD_FACEBOOK_URL]` | `layouts/app.blade.php` | Official Tabstick Facebook Page |
 | `[ADD_TWITTER_URL]` | `layouts/app.blade.php` | Official Twitter / X Handle (optional) |
