@@ -5,7 +5,7 @@
         
         <!-- INITIAL FORM VIEW -->
         <div id="lead-form-state">
-            <div class="lead-modal-badge">✦ Tapstick Club Perks</div>
+            <div class="lead-modal-badge">✦ Tabstick Club Perks</div>
             <h3 class="lead-modal-title">Get 10% Off Your First Drop</h3>
             <p class="lead-modal-subtitle">
                 Join 25,000+ sticker heads. Enter your mobile &amp; email below to claim your instant 10% coupon code.
@@ -54,7 +54,7 @@
             </p>
 
             <div class="coupon-box" id="coupon-box-copy" title="Click to copy discount code">
-                <span class="coupon-code">TAPSTICK10</span>
+                <span class="coupon-code">TABSTICK10</span>
                 <span class="coupon-copy-tip" id="coupon-copy-feedback">Click to Copy Code 📋</span>
             </div>
 
@@ -118,8 +118,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Auto-open on landing page after 1.8 seconds if user hasn't already dismissed or joined in this session
-    const hasJoined = localStorage.getItem('tapstick_vip_joined') === 'true';
-    const hasDismissedSession = sessionStorage.getItem('tapstick_lead_dismissed') === 'true';
+    const hasJoined = localStorage.getItem('tabstick_vip_joined') === 'true' || localStorage.getItem('tapstick_vip_joined') === 'true';
+    const hasDismissedSession = sessionStorage.getItem('tabstick_lead_dismissed') === 'true' || sessionStorage.getItem('tapstick_lead_dismissed') === 'true';
     
     if (!hasJoined && !hasDismissedSession) {
         setTimeout(function() {
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (closeBtn) {
         closeBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            sessionStorage.setItem('tapstick_lead_dismissed', 'true');
+            sessionStorage.setItem('tabstick_lead_dismissed', 'true');
             closeModal();
         });
     }
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (modal) {
         modal.addEventListener('click', function(e) {
             if (e.target === modal) {
-                sessionStorage.setItem('tapstick_lead_dismissed', 'true');
+                sessionStorage.setItem('tabstick_lead_dismissed', 'true');
                 closeModal();
             }
         });
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Escape key closes modal
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
-            sessionStorage.setItem('tapstick_lead_dismissed', 'true');
+            sessionStorage.setItem('tabstick_lead_dismissed', 'true');
             closeModal();
         }
     });
@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(function(result) {
             if (result.success) {
-                localStorage.setItem('tapstick_vip_joined', 'true');
+                localStorage.setItem('tabstick_vip_joined', 'true');
                 formState.style.display = 'none';
                 successState.style.display = 'block';
                 if (floatingBtn) {
@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Click to copy coupon code
     if (couponBox) {
         couponBox.addEventListener('click', function() {
-            navigator.clipboard.writeText('TAPSTICK10').then(function() {
+            navigator.clipboard.writeText('TABSTICK10').then(function() {
                 couponFeedback.textContent = 'COPIED TO CLIPBOARD! 🎉';
                 couponFeedback.style.color = '#15803d';
                 setTimeout(function() {
@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     couponFeedback.style.color = '';
                 }, 3000);
             }).catch(function() {
-                couponFeedback.textContent = 'Use Code: TAPSTICK10';
+                couponFeedback.textContent = 'Use Code: TABSTICK10';
             });
         });
     }

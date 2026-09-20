@@ -37,7 +37,7 @@ class LeadController extends Controller
                 'name' => $name,
                 'phone' => $phone,
                 'auth_provider' => $provider,
-                'discount_code' => 'TAPSTICK10',
+                'discount_code' => 'TABSTICK10',
                 'ip_address' => $request->ip(),
             ]
         );
@@ -52,13 +52,13 @@ class LeadController extends Controller
         if ($lead->phone) {
             session(['customer_phone' => $lead->phone]);
         }
-        session(['vip_joined' => true, 'vip_discount_code' => 'TAPSTICK10']);
+        session(['vip_joined' => true, 'vip_discount_code' => 'TABSTICK10']);
 
         if ($request->expectsJson() || $request->ajax()) {
             return response()->json([
                 'success' => true,
-                'message' => 'Welcome to the Tapstick Club! Use coupon code TAPSTICK10 for 10% off.',
-                'discount_code' => 'TAPSTICK10',
+                'message' => 'Welcome to the Tabstick Club! Use coupon code TABSTICK10 for 10% off.',
+                'discount_code' => 'TABSTICK10',
                 'customer' => [
                     'name' => $lead->name,
                     'email' => $lead->email,
@@ -68,6 +68,6 @@ class LeadController extends Controller
             ]);
         }
 
-        return back()->with('success', 'Welcome to the Tapstick Club! Use coupon code TAPSTICK10 for 10% off.');
+        return back()->with('success', 'Welcome to the Tabstick Club! Use coupon code TABSTICK10 for 10% off.');
     }
 }

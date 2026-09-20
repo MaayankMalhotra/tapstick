@@ -4,8 +4,83 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="Tapstick - India's freshest pop sticker brand. 5000+ waterproof vinyl stickers for laptops, bikes, bottles & cars.">
-    <title>@yield('title', 'Tapstick | Express Your Story — Premium Vinyl Stickers & Skins')</title>
+    <title>@yield('title', 'Tabstick – Creative Laptop, Car & Custom Stickers')</title>
+    <meta name="description" content="@yield('meta_description', 'Tabstick creates creative, durable stickers for laptops, cars, phones and college students. Explore unique sticker designs and shop online in India.')">
+    <meta name="keywords" content="@yield('meta_keywords', 'Tabstick, Tabstick stickers, Tabstick laptop stickers, Tabstick car stickers, stickers for college students, custom stickers in India, waterproof vinyl decals, aesthetic phone stickers')">
+    <meta name="robots" content="@yield('robots', 'index, follow')">
+    <link rel="canonical" href="@yield('canonical', url()->current())">
+
+    <!-- Favicon & Brand Icons -->
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="alternate icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/logo.png') }}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:site_name" content="Tabstick">
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:title" content="@yield('title', 'Tabstick – Creative Laptop, Car & Custom Stickers')">
+    <meta property="og:description" content="@yield('meta_description', 'Tabstick creates creative, durable stickers for laptops, cars, phones and college students. Explore unique sticker designs and shop online in India.')">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="@yield('og_image', asset('images/hero-banner.webp'))">
+    <meta property="og:locale" content="en_IN">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('title', 'Tabstick – Creative Laptop, Car & Custom Stickers')">
+    <meta name="twitter:description" content="@yield('meta_description', 'Tabstick creates creative, durable stickers for laptops, cars, phones and college students. Explore unique sticker designs and shop online in India.')">
+    <meta name="twitter:image" content="@yield('og_image', asset('images/hero-banner.webp'))">
+
+    <!-- Organization & Founder Schema (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Tabstick",
+        "legalName": "Tabstick",
+        "url": "https://tabstick.in",
+        "logo": "{{ asset('favicon.svg') }}",
+        "description": "Tabstick is an Indian sticker brand founded by Mayank Malhotra. We create creative and durable stickers for laptops, cars, phones and college students.",
+        "founder": {
+            "@type": "Person",
+            "name": "Mayank Malhotra",
+            "jobTitle": "Founder",
+            "sameAs": "[ADD_LINKEDIN_URL]"
+        },
+        "sameAs": [
+            "[ADD_INSTAGRAM_URL]",
+            "[ADD_FACEBOOK_URL]",
+            "[ADD_LINKEDIN_URL]"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "Customer Support",
+            "email": "hello@tabstick.in",
+            "areaServed": "IN",
+            "availableLanguage": ["English", "Hindi"]
+        }
+    }
+    </script>
+
+    <!-- WebSite & SearchAction Schema (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Tabstick",
+        "url": "https://tabstick.in",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://tabstick.in/?search={search_term_string}#shop"
+            },
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+    @stack('schema')
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -24,7 +99,7 @@
                         <circle cx="23" cy="21" r="3.5" fill="#FF334B" stroke="#18181B" stroke-width="1.5"/>
                     </svg>
                 </div>
-                <div class="peel-stamp-title">TAP<span>STICK</span></div>
+                <div class="peel-stamp-title">TAB<span>STICK</span></div>
             </div>
             <div class="peel-loading-chip">
                 <span id="peel-loader-text">✦ UNBOXING STICKER UNIVERSE ✦</span>
@@ -46,11 +121,11 @@
         }, 1800);
     </script>
 
-    <!-- 2. TAPSTICK PLAYFUL POP HEADER -->
+    <!-- 2. TABSTICK PLAYFUL POP HEADER -->
     <header class="site-header">
         <div class="container header-inner">
             <div class="brand-wrap">
-                <a href="{{ route('home') }}" class="brand-link" aria-label="Tapstick Home">
+                <a href="{{ route('home') }}" class="brand-link" aria-label="Tabstick Home">
                     <div class="brand-logo-badge">
                         <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
                             <rect x="2" y="2" width="28" height="28" rx="8" fill="#FFE600" stroke="#18181B" stroke-width="2"/>
@@ -60,7 +135,7 @@
                         </svg>
                     </div>
                     <div class="brand-text-lockup">
-                        <span class="brand-main">TAP<span class="brand-accent">STICK</span></span>
+                        <span class="brand-main">TAB<span class="brand-accent">STICK</span></span>
                         <span class="brand-sub">STUDIO ✦</span>
                     </div>
                 </a>
@@ -112,7 +187,7 @@
             <div class="mobile-nav-inner">
                 <a href="{{ route('home') }}#shop" class="mobile-nav-chip active">All Drops</a>
                 <a href="{{ route('home') }}#why" class="mobile-nav-chip">Why Us</a>
-                <a href="{{ route('home') }}#club" class="mobile-nav-chip highlight">Tapstick Club ✦</a>
+                <a href="{{ route('home') }}#club" class="mobile-nav-chip highlight">Tabstick Club ✦</a>
                 <a href="{{ route('home') }}#reviews" class="mobile-nav-chip">Reviews</a>
                 <a href="{{ route('home') }}#gallery" class="mobile-nav-chip">Gallery</a>
                 <a href="{{ route('home') }}#author" class="mobile-nav-chip">Our Story</a>
@@ -131,7 +206,7 @@
                         <circle cx="23" cy="21" r="3.5" fill="#FF334B" stroke="#18181B" stroke-width="1.5"/>
                     </svg>
                 </div>
-                <span class="brand-main">TAP<span class="brand-accent">STICK</span></span>
+                <span class="brand-main">TAB<span class="brand-accent">STICK</span></span>
             </div>
             <button type="button" class="btn-close-mobile-drawer" id="btn-close-mobile-menu" aria-label="Close menu">&times;</button>
         </div>
@@ -155,7 +230,7 @@
             <a href="{{ route('home') }}#club" class="mobile-drawer-card card-pink">
                 <span class="drawer-card-emoji">🎁</span>
                 <div>
-                    <strong>The Tapstick Club</strong>
+                    <strong>The Tabstick Club</strong>
                     <small>Secret weekly drops &amp; 10% coupon</small>
                 </div>
                 <span class="drawer-arrow">➔</span>
@@ -224,7 +299,7 @@
                     <span class="footer-float-stk fstk-4">💧</span>
                 </div>
                 <h2 class="footer-big-brand-title footer-bouncy-title">STICK AROUND.</h2>
-                <p class="footer-big-brand-sub">Premium vinyl stickers crafted for creators, coders, riders, and dreamers who refuse to blend in.</p>
+                <p class="footer-big-brand-sub">Tabstick is an Indian sticker brand founded by Mayank Malhotra. We create creative and durable stickers for laptops, cars, phones and college students.</p>
 
                 <!-- Final Guarantee Sticker Seal -->
                 <div class="footer-seal-stamp" title="100% Authentic Vinyl Seal">
@@ -248,20 +323,23 @@
                                 <circle cx="23" cy="21" r="3.5" fill="#FF334B" stroke="#18181B" stroke-width="1.5"/>
                             </svg>
                         </div>
-                        <span class="brand-main" style="color:#0f172a;">TAP<span class="brand-accent">STICK</span></span>
+                        <span class="brand-main" style="color:#0f172a;">TAB<span class="brand-accent">STICK</span></span>
                     </div>
                     <p style="color:#475569;font-size:0.92rem;line-height:1.6;max-width:320px;">
-                        India's freshest sticker drop studio. Heavy-duty waterproof vinyl built for laptops, bottles, bikes, and phone cases.
+                        Tabstick creates creative, durable stickers for laptops, cars, phones and college students. Explore unique sticker designs and shop online in India.
                     </p>
                     <div class="footer-social-links">
-                        <a href="https://instagram.com" target="_blank" rel="noopener" class="social-chip" aria-label="Instagram">
-                            <span>📸 @tapstick.in</span>
+                        <a href="[ADD_INSTAGRAM_URL]" target="_blank" rel="noopener" class="social-chip" aria-label="Instagram">
+                            <span>📸 Instagram</span>
                         </a>
-                        <a href="https://wa.me/919876543210" target="_blank" rel="noopener" class="social-chip" aria-label="WhatsApp">
-                            <span>💬 WhatsApp Club</span>
+                        <a href="[ADD_FACEBOOK_URL]" target="_blank" rel="noopener" class="social-chip" aria-label="Facebook">
+                            <span>🌐 Facebook</span>
                         </a>
-                        <a href="mailto:hello@tapstick.in" class="social-chip" aria-label="Email">
-                            <span>✉️ hello@tapstick.in</span>
+                        <a href="[ADD_LINKEDIN_URL]" target="_blank" rel="noopener" class="social-chip" aria-label="LinkedIn">
+                            <span>💼 LinkedIn</span>
+                        </a>
+                        <a href="mailto:hello@tabstick.in" class="social-chip" aria-label="Email">
+                            <span>✉️ hello@tabstick.in</span>
                         </a>
                     </div>
                 </div>
@@ -270,17 +348,19 @@
                     <h4>Collections</h4>
                     <ul>
                         <li><a href="{{ route('home') }}#shop">Bestseller Stickers</a></li>
-                        <li><a href="{{ route('home') }}#shop">Laptop &amp; Mac Decals</a></li>
-                        <li><a href="{{ route('home') }}#shop">Bumper &amp; Moto Stickers</a></li>
-                        <li><a href="{{ route('home') }}#shop">Anime &amp; Gaming</a></li>
-                        <li><a href="{{ route('home') }}#shop">Curated Mystery Boxes</a></li>
+                        <li><a href="{{ route('home') }}#laptop-stickers">Laptop &amp; Mac Decals</a></li>
+                        <li><a href="{{ route('home') }}#car-stickers">Car &amp; Moto Stickers</a></li>
+                        <li><a href="{{ route('home') }}#phone-stickers">Phone Case Stickers</a></li>
+                        <li><a href="{{ route('home') }}#college-stickers">College Student Stickers</a></li>
+                        <li><a href="{{ route('home') }}#custom-stickers">Custom Stickers in India</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Customer Care</h4>
                     <ul>
-                        <li><a href="mailto:hello@tapstick.in">hello@tapstick.in</a></li>
+                        <li><a href="mailto:hello@tabstick.in">hello@tabstick.in</a></li>
+                        <li><a href="{{ route('home') }}#faq">Frequently Asked Questions</a></li>
                         <li><a href="{{ route('home') }}#why">48-Hour Dispatch Guarantee</a></li>
                         <li><a href="{{ route('home') }}#why">100% Waterproof Guarantee</a></li>
                         <li><a href="{{ route('cart.index') }}">Review Your Cart</a></li>
@@ -289,7 +369,7 @@
                 </div>
 
                 <div class="footer-col">
-                    <h4>The Tapstick Promise</h4>
+                    <h4>The Tabstick Promise</h4>
                     <div class="footer-perks-list">
                         <div class="footer-perk-item">
                             <span class="f-perk-icon">💧</span>
@@ -317,7 +397,7 @@
             </div>
 
             <div class="footer-bottom">
-                <p>© {{ date('Y') }} TAPSTICK STUDIO. Designed &amp; Crafted with ❤️ in India. All stickers 100% waterproof automotive-grade vinyl.</p>
+                <p>© {{ date('Y') }} TABSTICK. Designed &amp; Crafted with ❤️ in India. All stickers 100% waterproof automotive-grade vinyl.</p>
                 <div class="footer-payment-pills">
                     <span class="payment-pill">⚡ UPI / QR</span>
                     <span class="payment-pill">💳 Cards &amp; NetBanking</span>

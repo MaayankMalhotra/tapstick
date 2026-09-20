@@ -122,7 +122,7 @@
                             <div style="background-color:#fefce8; border:1px solid #fef08a; border-radius:10px; padding:16px; margin-bottom:10px;">
                                 <strong style="display:block; color:#854d0e; font-size:14px; margin-bottom:4px;">🚚 Pan-India 48-Hour Dispatch Guarantee:</strong>
                                 <p style="margin:0; font-size:13px; color:#a16207; line-height:1.5;">
-                                    Every TabStick sticker is printed on 100% waterproof vinyl with durable UV-resistant inks. We will dispatch your order within 48 hours and email you tracking updates as soon as it's on the road!
+                                    Every Tabstick sticker is printed on 100% waterproof vinyl with durable UV-resistant inks. We will dispatch your order within 48 hours and email you tracking updates as soon as it's on the road!
                                 </p>
                             </div>
                         </td>
@@ -135,7 +135,7 @@
                                 Need assistance with your order? Reply directly to this email or contact us at <a href="mailto:hello@tabstick.in" style="color:#fafe21; text-decoration:none;">hello@tabstick.in</a>.
                             </p>
                             <p style="margin:0; color:#64748b;">
-                                © {{ date('Y') }} TabStick Studio. All rights reserved. Designed &amp; Crafted in India.
+                                © {{ date('Y') }} Tabstick. All rights reserved. Designed &amp; Crafted in India.
                             </p>
                         </td>
                     </tr>

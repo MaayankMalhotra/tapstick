@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Your Cart | TAPSTICK')
+@section('title', 'Your Cart | Tabstick')
 
 @section('content')
 <div class="container cart-page-container">
@@ -24,7 +24,7 @@
                     <div class="cart-item-row" style="border-bottom:1.5px solid var(--color-border-subtle);padding:18px 0;display:flex;align-items:center;gap:18px;">
                         <div class="cart-thumb" style="width:72px;height:72px;border-radius:14px;background:var(--color-bg-page);border:1.5px solid var(--color-ink);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">
                             @if($imgSrc)
-                                <img src="{{ $imgSrc }}" alt="{{ $p->name }}" style="max-width:100%;max-height:100%;object-fit:contain;">
+                                <img src="{{ $imgSrc }}" alt="{{ $p->name }} Vinyl Sticker - Tabstick" style="max-width:100%;max-height:100%;object-fit:contain;">
                             @else
                                 <span style="font-size:2rem;">{{ $p->emoji ?: '✨' }}</span>
                             @endif

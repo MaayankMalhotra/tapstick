@@ -41,7 +41,7 @@ class LeadCaptureTest extends TestCase
         $response->assertOk();
         $response->assertJson([
             'success' => true,
-            'discount_code' => 'TAPSTICK10',
+            'discount_code' => 'TABSTICK10',
             'customer' => [
                 'name' => 'Aarav Patel',
                 'email' => 'aarav.patel@gmail.com',
@@ -55,7 +55,7 @@ class LeadCaptureTest extends TestCase
             'email' => 'aarav.patel@gmail.com',
             'phone' => '+91 9876543210',
             'auth_provider' => 'web_form',
-            'discount_code' => 'TAPSTICK10',
+            'discount_code' => 'TABSTICK10',
         ]);
 
         // Verify session data was set for checkout autofill
@@ -71,7 +71,7 @@ class LeadCaptureTest extends TestCase
             'email' => 'kavya@gmail.com',
             'phone' => '+91 9811122233',
             'auth_provider' => 'web_form',
-            'discount_code' => 'TAPSTICK10',
+            'discount_code' => 'TABSTICK10',
         ]);
 
         $admin = $this->admin();
@@ -91,7 +91,7 @@ class LeadCaptureTest extends TestCase
             'email' => 'maayank@example.com',
             'phone' => '+91 8799730966',
             'auth_provider' => 'web_form',
-            'discount_code' => 'TAPSTICK10',
+            'discount_code' => 'TABSTICK10',
         ]);
 
         $admin = $this->admin();
@@ -112,7 +112,7 @@ class LeadCaptureTest extends TestCase
             'email' => 'rohan@example.com',
             'phone' => '+91 9999888877',
             'auth_provider' => 'web_form',
-            'discount_code' => 'TAPSTICK10',
+            'discount_code' => 'TABSTICK10',
         ]);
 
         $admin = $this->admin();
@@ -132,7 +132,7 @@ class LeadCaptureTest extends TestCase
             'email' => 'aditi@example.com',
             'phone' => '+91 9123456780',
             'auth_provider' => 'web_form',
-            'discount_code' => 'TAPSTICK10',
+            'discount_code' => 'TABSTICK10',
         ]);
 
         $admin = $this->admin();

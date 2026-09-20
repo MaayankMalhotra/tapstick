@@ -37,7 +37,7 @@
                                 📦 New Customer Order Placed!
                             </h2>
                             <p style="margin:0 0 20px; color:#64748b; font-size:14px;">
-                                A new order has been received on the TabStick storefront. Details are below:
+                                A new order has been received on the Tabstick storefront. Details are below:
                             </p>
 
                             <!-- Customer Quick Summary -->
@@ -112,7 +112,7 @@
                     <!-- Footer -->
                     <tr>
                         <td style="background-color:#f8fafc; padding:16px 30px; text-align:center; color:#94a3b8; font-size:12px; border-top:1px solid #e2e8f0;">
-                            TabStick Automated Order Dispatch Alert
+                            Tabstick Automated Order Dispatch Alert
                         </td>
                     </tr>
                 </table>

@@ -16,6 +16,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'club/join',
             'api/*',
         ]);
+        $middleware->web(append: [
+            \App\Http\Middleware\EnsureCanonicalDomain::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

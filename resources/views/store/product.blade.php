@@ -1,9 +1,30 @@
 @extends('layouts.app')
 
-@section('title', $product->name . ' | TAPSTICK')
+@section('title', $product->name . ' Sticker | Tabstick')
+@section('meta_description', Str::limit(strip_tags($product->description), 155) ?: ($product->name . ' sticker by Tabstick. 100% waterproof, durable automotive vinyl decal for laptops, phones, cars and water bottles.'))
+@section('canonical', route('products.show', $product))
 
 @section('content')
-<div class="container product-detail-layout" style="padding: 40px 0 60px;">
+<div class="container" style="padding-top: 24px;">
+    <!-- Breadcrumb Navigation -->
+    <nav class="product-breadcrumbs" aria-label="Breadcrumb">
+        <ol style="display:flex;align-items:center;gap:8px;list-style:none;padding:0;margin:0;font-size:0.88rem;font-weight:700;flex-wrap:wrap;">
+            <li>
+                <a href="{{ url('/') }}" style="color:var(--color-ink-muted);text-decoration:none;">Home</a>
+            </li>
+            <li style="color:var(--color-ink-muted);">/</li>
+            <li>
+                <a href="{{ url('/#shop') }}" style="color:var(--color-ink-muted);text-decoration:none;">{{ $product->category?->name ?? 'Stickers' }}</a>
+            </li>
+            <li style="color:var(--color-ink-muted);">/</li>
+            <li style="color:var(--color-ink);font-weight:900;" aria-current="page">
+                {{ $product->name }}
+            </li>
+        </ol>
+    </nav>
+</div>
+
+<div class="container product-detail-layout" style="padding: 20px 0 60px;">
     <div class="product-gallery-box" style="background:#FFFFFF;border:var(--border-pop);border-radius:var(--radius-card);padding:24px;box-shadow:var(--shadow-pop);display:flex;align-items:center;justify-content:center;aspect-ratio:1;">
         @php
             $imgSrc = $product->image ? (str_starts_with($product->image, 'http') ? $product->image : (str_starts_with($product->image, 'images/') ? asset($product->image) : asset('storage/'.$product->image))) : null;
@@ -11,7 +32,7 @@
             $savings = max(0, $regularPrice - $product->price);
         @endphp
         @if($imgSrc)
-            <img src="{{ $imgSrc }}" alt="{{ $product->name }}" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:14px;">
+            <img src="{{ $imgSrc }}" alt="{{ $product->name }} Vinyl Sticker - Tabstick" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:14px;">
         @else
             <span style="font-size:8rem;">{{ $product->emoji ?: '✨' }}</span>
         @endif
@@ -63,4 +84,60 @@
         </form>
     </div>
 </div>
+
+<!-- JSON-LD Product & BreadcrumbList Structured Data -->
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org/",
+    "@type": "Product",
+    "name": "{{ addslashes($product->name) }} Sticker",
+    "image": [
+        "{{ $imgSrc ?? asset('images/hero-banner.webp') }}"
+    ],
+    "description": "{{ addslashes(Str::limit(strip_tags($product->description), 200) ?: ($product->name . ' - Waterproof die-cut vinyl sticker by Tabstick.')) }}",
+    "sku": "TAB-{{ $product->id }}",
+    "brand": {
+        "@type": "Brand",
+        "name": "Tabstick"
+    },
+    "offers": {
+        "@type": "Offer",
+        "url": "{{ route('products.show', $product) }}",
+        "priceCurrency": "INR",
+        "price": "{{ number_format($product->price, 2, '.', '') }}",
+        "availability": "{{ $product->stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' }}",
+        "seller": {
+            "@type": "Organization",
+            "name": "Tabstick"
+        }
+    }
+}
+</script>
+
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "{{ url('/') }}"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "{{ addslashes($product->category?->name ?? 'Stickers') }}",
+            "item": "{{ url('/#shop') }}"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "{{ addslashes($product->name) }}",
+            "item": "{{ route('products.show', $product) }}"
+        }
+    ]
+}
+</script>
 @endsection

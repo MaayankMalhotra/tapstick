@@ -1,5 +1,5 @@
 /**
- * Tapstick Interactive Animated Sticker Universe Engine
+ * Tabstick Interactive Animated Sticker Universe Engine
  * Pure Vanilla JavaScript • High Performance GPU Motion
  * Web Audio API Tactile Sound • Canvas Confetti • Parallax Physics
  * Respects prefers-reduced-motion
@@ -196,7 +196,7 @@
             } else if (nextUrl.pathname.includes('/products/')) {
                 message = '✦ INSPECTING VINYL DECAL ✦';
             } else if (nextUrl.pathname === '/') {
-                message = '✦ BACK TO TAPSTICK HQ ✦';
+                message = '✦ BACK TO TABSTICK HQ ✦';
             }
 
             e.preventDefault();
@@ -834,6 +834,21 @@
             });
         }
 
+        // Global helper for SEO category cards & quick filters
+        window.filterBySearch = function (query) {
+            if (searchInput) {
+                searchInput.value = query;
+                if (searchClearBtn) searchClearBtn.style.display = 'flex';
+                currentSearch = query;
+                currentPage = 1;
+                fetchProducts(1, false);
+                const shopEl = document.getElementById('shop');
+                if (shopEl) {
+                    shopEl.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        };
+
         // Manual Load More Button
         if (loadMoreBtn) {
             loadMoreBtn.addEventListener('click', function () {
@@ -846,8 +861,27 @@
         }
     }
 
+    // ==========================================================================
+    // 13. FAQ ACCORDION INTERACTION
+    // ==========================================================================
+    document.addEventListener('click', function (e) {
+        const header = e.target.closest('.faq-accordion-header');
+        if (!header) return;
+        const item = header.closest('.faq-accordion-item');
+        if (!item) return;
+
+        const isOpen = item.classList.contains('open');
+        // Close other items
+        document.querySelectorAll('.faq-accordion-item.open').forEach(el => {
+            if (el !== item) el.classList.remove('open');
+        });
+
+        item.classList.toggle('open', !isOpen);
+        playPeelSound();
+    });
+
     // Expose utilities globally
-    window.TapstickPop = {
+    window.TabstickPop = window.TapstickPop = {
         burst: createConfetti,
         playPop: playPopSound,
         playPeel: playPeelSound

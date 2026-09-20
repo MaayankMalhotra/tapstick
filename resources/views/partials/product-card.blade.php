@@ -30,7 +30,7 @@
 
         <div class="pop-sticker-preview-wrapper">
             @if($imgSrc)
-                <img src="{{ $imgSrc }}" alt="{{ $product->name }}" loading="lazy" class="pop-card-sticker-img" onerror="this.onerror=null; this.src='https://cdn.shopify.com/s/files/1/0561/0215/8500/files/{{ $product->slug }}.jpg';">
+                <img src="{{ $imgSrc }}" alt="{{ $product->name }} Vinyl Sticker - Tabstick" loading="lazy" class="pop-card-sticker-img" onerror="this.onerror=null; this.src='https://cdn.shopify.com/s/files/1/0561/0215/8500/files/{{ $product->slug }}.jpg';">
             @else
                 <span class="pop-card-fallback-emoji">{{ $product->emoji ?: '✨' }}</span>
             @endif

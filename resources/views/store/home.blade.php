@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title', 'Tabstick – Creative Laptop, Car & Custom Stickers')
+@section('meta_description', 'Tabstick creates creative, durable stickers for laptops, cars, phones and college students. Explore unique sticker designs and shop online in India.')
+@section('canonical', 'https://tabstick.in')
+
 @section('content')
 
 <!-- ==========================================================================
@@ -33,31 +37,31 @@
         <div class="hero-pop-text-col">
             <div class="hero-pop-eyebrow-pill reveal-on-scroll">
                 <span class="eyebrow-spark">⚡</span>
-                <span class="eyebrow-text">TAPSTICK DROP 04 • 100% WATERPROOF VINYL</span>
+                <span class="eyebrow-text">TABSTICK DROP • 100% WATERPROOF VINYL</span>
                 <span class="eyebrow-badge">NEW</span>
             </div>
 
             <!-- Independent Word Spans for Staggered Spring Animation -->
             <h1 class="hero-pop-headline reveal-on-scroll">
                 <span class="headline-line-1">
-                    <span class="pop-word-span word-make">MAKE</span>
-                    <span class="pop-word-span word-it">IT</span>
+                    <span class="pop-word-span word-make">TABSTICK</span>
+                    <span class="pop-word-span word-it">STICKERS</span>
                 </span>
                 <span class="headline-line-2">
                     <span class="headline-pop-word word-yours">
-                        YOURS.
+                        CREATIVE &amp; DURABLE.
                         <svg class="pop-wiggle-underline" viewBox="0 0 320 28" fill="none" preserveAspectRatio="none">
                             <path d="M4 18C45 4 85 24 130 14C175 4 215 24 260 14C285 8 305 16 316 12" stroke="#FFE600" stroke-width="8" stroke-linecap="round"/>
                         </svg>
                     </span>
                     <span class="hero-pill-badge-floating" data-parallax-depth="1.2" data-base-rotate="-8">
-                        PEEL &amp; FLEX 🔥
+                        FOR LAPTOPS, CARS &amp; MORE 🔥
                     </span>
                 </span>
             </h1>
 
             <p class="hero-pop-subtext reveal-on-scroll">
-                India's freshest streetwear sticker label. Automotive-grade die-cut vinyl built to survive monsoons, road trips, laptops, hydro flasks &amp; daily carry without peeling or leaving gooey residue.
+                Tabstick is an Indian sticker brand founded by Mayank Malhotra. We create creative and durable stickers for laptops, cars, phones and college students. Crafted with automotive-grade die-cut vinyl built to survive monsoons, road trips, laptops, hydro flasks &amp; daily carry without peeling or leaving gooey residue.
             </p>
 
             <div class="hero-pop-cta-row reveal-on-scroll">
@@ -103,7 +107,7 @@
                         <!-- Rotating Circular Text -->
                         <text font-family="sans-serif" font-size="11" font-weight="900" fill="#FFFFFF" letter-spacing="2.5">
                             <textPath href="#sunburstPath" startOffset="0%">
-                                ✦ STICK WITH IT ✦ TAPSTICK ✦ POP ✦
+                                ✦ STICK WITH IT ✦ TABSTICK ✦ POP ✦
                             </textPath>
                         </text>
                         <circle cx="80" cy="80" r="24" fill="#FF334B" stroke="#FFFFFF" stroke-width="2"/>
@@ -121,10 +125,10 @@
                             <span class="base-dot red"></span>
                             <span class="base-dot yellow"></span>
                             <span class="base-dot green"></span>
-                            <span class="base-card-tag">TAPSTICK COLLECTOR PACK • 2026</span>
+                            <span class="base-card-tag">TABSTICK COLLECTOR PACK • 2026</span>
                         </div>
                         <div class="base-card-main-visual">
-                            <img src="{{ asset('images/hero-banner.webp') }}" alt="Tapstick Vinyl Sticker Showcase" class="hero-main-featured-img">
+                            <img src="{{ asset('images/hero-banner.webp') }}" alt="Tabstick Vinyl Sticker Showcase" class="hero-main-featured-img">
                             <div class="base-card-gloss-sheen"></div>
                         </div>
                     </div>
@@ -303,7 +307,7 @@
             </div>
             <h2 class="section-pop-title text-ink">WHY YOU’LL LOVE THEM</h2>
             <p class="section-pop-subtitle">
-                Most cheap stickers are paper-thin and melt in the rain. Tapstick is crafted with automotive-grade engineering.
+                Most cheap stickers are paper-thin and melt in the rain. Tabstick is crafted with automotive-grade engineering.
             </p>
         </div>
 
@@ -360,7 +364,7 @@
         <!-- Banner Visual Spotlight -->
         <div class="why-banner-stage reveal-on-scroll">
             <div class="why-banner-frame">
-                <img src="{{ asset('images/why-banner.webp') }}" alt="Why Tapstick Vinyl Stickers Excel" class="why-banner-image">
+                <img src="{{ asset('images/why-banner.webp') }}" alt="Why Tabstick Vinyl Stickers Excel" class="why-banner-image">
                 <div class="why-banner-stamp">
                     <span>100% VINYL QUALITY GUARANTEED ✦</span>
                 </div>
@@ -370,7 +374,134 @@
 </section>
 
 <!-- ==========================================================================
-     5. SECTION: “THE TAPSTICK CLUB” (“Good things come in small packs.”)
+     5. SEO CATEGORY GUIDES (LAPTOP, CAR, PHONE, COLLEGE & CUSTOM STICKERS)
+     ========================================================================== -->
+<section id="categories" class="seo-categories-section">
+    <div class="container">
+        <div class="section-pop-header reveal-on-scroll">
+            <div class="section-pop-badge bg-yellow">
+                <span>✦ EXPLORE BY GEAR &amp; LIFESTYLE ✦</span>
+            </div>
+            <h2 class="section-pop-title text-ink">CREATIVE STICKERS FOR EVERY SURFACE</h2>
+            <p class="section-pop-subtitle">
+                Engineered for maximum durability. Discover Tabstick waterproof vinyl decals tailored for your tech, ride, and campus drip.
+            </p>
+        </div>
+
+        <div class="seo-categories-grid">
+            <!-- Category 1: Laptop Stickers -->
+            <div class="seo-category-card reveal-on-scroll" id="laptop-stickers">
+                <div>
+                    <span class="seo-cat-badge">💻 Tech Setup</span>
+                    <h3 class="seo-cat-title">Laptop Stickers</h3>
+                    <p class="seo-cat-desc">
+                        Turn boring laptop lids into personalized statement art. Tabstick laptop stickers are die-cut from premium automotive-grade vinyl engineered specifically to handle laptop operating heat and daily backpack friction. Because we use high-grade residue-free adhesive, you can peel, swap, and reposition stickers on MacBooks, ThinkPads, and gaming rigs without leaving sticky, gooey glue on aluminum or matte chassis.
+                    </p>
+                </div>
+                <div>
+                    <div class="seo-cat-meta-chips">
+                        <span class="seo-cat-chip">🚫 Zero Residue</span>
+                        <span class="seo-cat-chip">🔥 Heat Resistant</span>
+                        <span class="seo-cat-chip">✨ Matte Lamination</span>
+                    </div>
+                    <a href="#shop" class="seo-cat-btn" onclick="if(window.filterBySearch){window.filterBySearch('laptop');} return false;">
+                        <span>Shop Laptop Stickers →</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Category 2: Car & Bike Stickers -->
+            <div class="seo-category-card reveal-on-scroll" id="car-stickers">
+                <div>
+                    <span class="seo-cat-badge">🚗 Road &amp; Track</span>
+                    <h3 class="seo-cat-title">Car &amp; Bike Stickers</h3>
+                    <p class="seo-cat-desc">
+                        Built to withstand the open highway, harsh weather, and pressure washes. Tabstick car stickers and motorcycle decals are printed with UV-cured pigment inks that never fade or bleach under blistering Indian sun. Whether sticking them on bumpers, windshields, bike petrol tanks, or helmet visors, our 100% waterproof vinyl stands firm against monsoons, mud splashes, and grit.
+                    </p>
+                </div>
+                <div>
+                    <div class="seo-cat-meta-chips">
+                        <span class="seo-cat-chip">🌧️ 100% Waterproof</span>
+                        <span class="seo-cat-chip">☀️ UV Sunlight Safe</span>
+                        <span class="seo-cat-chip">🏍️ Moto &amp; Auto Grade</span>
+                    </div>
+                    <a href="#shop" class="seo-cat-btn" onclick="if(window.filterBySearch){window.filterBySearch('car');} return false;">
+                        <span>Shop Car Stickers →</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Category 3: Phone Case Stickers -->
+            <div class="seo-category-card reveal-on-scroll" id="phone-stickers">
+                <div>
+                    <span class="seo-cat-badge">📱 Daily Carry</span>
+                    <h3 class="seo-cat-title">Phone Case Stickers</h3>
+                    <p class="seo-cat-desc">
+                        Your smartphone travels in your hand and pocket all day long. Tabstick phone stickers are miniature die-cut decals created with scratchproof coatings that resist coin scratches, hand sweat, and jeans friction. Slip them seamlessly inside transparent clear cases or stick them securely onto silicone and matte cases without edge lifting or peeling.
+                    </p>
+                </div>
+                <div>
+                    <div class="seo-cat-meta-chips">
+                        <span class="seo-cat-chip">🛡️ Scratch Resistant</span>
+                        <span class="seo-cat-chip">👌 Easy Peel</span>
+                        <span class="seo-cat-chip">⚡ Pocket Proof</span>
+                    </div>
+                    <a href="#shop" class="seo-cat-btn" onclick="if(window.filterBySearch){window.filterBySearch('phone');} return false;">
+                        <span>Shop Phone Stickers →</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Category 4: Stickers for College Students -->
+            <div class="seo-category-card reveal-on-scroll" id="college-stickers">
+                <div>
+                    <span class="seo-cat-badge">🎓 Campus Vibe</span>
+                    <h3 class="seo-cat-title">Stickers for College Students</h3>
+                    <p class="seo-cat-desc">
+                        College life thrives on humor, hustle, and self-expression. Tabstick stickers for college students feature the internet's dopest meme drops, anime aesthetics, developer code jokes, and desi pop culture art. Designed to withstand campus rough-and-tumble on water bottles, spiral notebooks, hostel doors, and laptops—all at student-friendly pocket money pricing.
+                    </p>
+                </div>
+                <div>
+                    <div class="seo-cat-meta-chips">
+                        <span class="seo-cat-chip">👑 Viral Memes &amp; Anime</span>
+                        <span class="seo-cat-chip">💧 Bottle &amp; Flask Safe</span>
+                        <span class="seo-cat-chip">💸 Affordable Packs</span>
+                    </div>
+                    <a href="#shop" class="seo-cat-btn" onclick="if(window.filterBySearch){window.filterBySearch('meme');} return false;">
+                        <span>Shop Student Drops →</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Category 5: Custom Stickers in India (Wide Feature Card) -->
+            <div class="seo-category-card featured-wide reveal-on-scroll" id="custom-stickers">
+                <div>
+                    <span class="seo-cat-badge">⚡ Creator Studio</span>
+                    <h3 class="seo-cat-title">Custom Stickers in India</h3>
+                    <p class="seo-cat-desc">
+                        Need custom stickers for your tech startup, college fest, developer community, or personal brand? Tabstick manufactures custom die-cut vinyl stickers in India with ultra-sharp 1200 DPI resolution, custom die-cut contours, and protective waterproof lamination. Enjoy fast turnaround times, low minimum order quantities, and reliable pan-India doorstep delivery.
+                    </p>
+                    <div class="seo-cat-meta-chips">
+                        <span class="seo-cat-chip">📐 Custom Die-Cut</span>
+                        <span class="seo-cat-chip">📦 Bulk Pack Pricing</span>
+                        <span class="seo-cat-chip">🚀 Pan-India Fast Dispatch</span>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <p style="font-size: 0.92rem; color: #18181B; font-weight: 700; margin: 0;">
+                        Ready to print your artwork or startup swag?
+                    </p>
+                    <a href="mailto:hello@tabstick.in?subject=Custom%20Sticker%20Order%20Inquiry%20-%20Tabstick" class="seo-cat-btn">
+                        <span>Request Custom Quote (hello@tabstick.in) ✉️</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     6. SECTION: “THE TABSTICK CLUB” (“Good things come in small packs.”)
      ========================================================================== -->
 <section id="club" class="club-pop-section">
     <div class="container">
@@ -378,7 +509,7 @@
             <span class="club-badge-tag">✦ THE MOVEMENT ✦</span>
             <h2 class="club-pop-heading">GOOD THINGS COME IN SMALL PACKS.</h2>
             <p class="club-pop-subtext">
-                Tapstick started out of pure frustration with flimsy, cheap stickers that ruined MacBooks and peeled within days. Today, we're a community of 25,000+ creators turning ordinary tech into personal art.
+                Tabstick started out of pure frustration with flimsy, cheap stickers that ruined MacBooks and peeled within days. Today, we're a community of 25,000+ creators turning ordinary tech into personal art.
             </p>
         </div>
 
@@ -389,25 +520,25 @@
                 <div class="founder-photo-col">
                     <div class="founder-polaroid-frame">
                         <div class="polaroid-tape-strip tape-top"></div>
-                        <img src="{{ asset('images/author.jpg') }}" alt="Mayank Malhotra, Founder of Tapstick" class="founder-photo-img">
+                        <img src="{{ asset('images/author.jpg') }}" alt="Mayank Malhotra, Founder of Tabstick" class="founder-photo-img">
                         <div class="polaroid-handwriting-caption">
                             <strong>Mayank Malhotra</strong>
-                            <span>Founder &amp; Chief Sticker Head</span>
+                            <span>Founder of Tabstick</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Story & Metrics -->
                 <div class="founder-text-col">
-                    <div class="founder-kicker-pill">OUR ORIGIN STORY</div>
+                    <div class="founder-kicker-pill">FOUNDER &amp; BRAND STORY</div>
                     <h3 class="founder-quote-title">
                         “Stickers shouldn't be disposable paper. They should be wearable streetwear for your gear.”
                     </h3>
                     <p class="founder-story-paragraph">
-                        Back in 2024, I spent ₹1,500 on laptop stickers that arrived pixelated, peeled at the corners after a week, and left sticky glue all over my aluminum lid. I knew we could do better.
+                        <strong>Mayank Malhotra is the founder of Tabstick.</strong> Tabstick is an Indian sticker brand founded by Mayank Malhotra. We create creative and durable stickers for laptops, cars, phones and college students.
                     </p>
                     <p class="founder-story-paragraph">
-                        We sourced automotive-grade waterproof vinyl, partnered with local indie illustrators, and dialed in rich UV-cured inks. Today, Tapstick is proud to be India's fastest-growing sticker studio.
+                        Back in 2024, I spent ₹1,500 on laptop stickers that arrived pixelated, peeled at the corners after a week, and left sticky glue all over my aluminum lid. I knew we could do better. We sourced automotive-grade waterproof vinyl, partnered with local indie illustrators, and dialed in rich UV-cured inks. Today, Tabstick is proud to be India's fastest-growing sticker studio.
                     </p>
 
                     <!-- Real Impact Counters -->
@@ -427,12 +558,12 @@
                     </div>
 
                     <div class="founder-actions-row">
+                        <a href="[ADD_LINKEDIN_URL]" target="_blank" rel="noopener me" class="founder-linkedin-chip">
+                            <span>Connect with Mayank Malhotra on LinkedIn →</span>
+                        </a>
                         <a href="#shop" class="btn-pop-primary btn-magnetic">
                             <span>Shop Founder's Picks →</span>
                         </a>
-                        <button type="button" class="btn-pop-secondary btn-magnetic" onclick="document.getElementById('floating-lead-trigger')?.click();">
-                            <span>Join Club (10% Off) 🎁</span>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -483,7 +614,7 @@
             <div class="benefit-card benefit-blue reveal-on-scroll">
                 <div class="benefit-icon">🛡️</div>
                 <h4>Stick-For-Life Promise</h4>
-                <p>If your Tapstick sticker ever bubbles, peels or fades from normal use, we replace it free of cost.</p>
+                <p>If your Tabstick sticker ever bubbles, peels or fades from normal use, we replace it free of cost.</p>
             </div>
             <div class="benefit-card benefit-pink reveal-on-scroll">
                 <div class="benefit-icon">⚡</div>
@@ -495,7 +626,169 @@
 </section>
 
 <!-- ==========================================================================
-     6. CUSTOMER REVIEWS: ANIMATED ASYMMETRICAL QUOTE CARDS
+     7. FREQUENTLY ASKED QUESTIONS (WITH FAQPAGe SCHEMA)
+     ========================================================================== -->
+<section id="faq" class="faq-pop-section">
+    <div class="container">
+        <div class="section-pop-header reveal-on-scroll">
+            <div class="section-pop-badge bg-yellow">
+                <span>✦ GOT QUESTIONS? WE'VE GOT ANSWERS ✦</span>
+            </div>
+            <h2 class="section-pop-title text-ink">FREQUENTLY ASKED QUESTIONS</h2>
+            <p class="section-pop-subtitle">
+                Everything you need to know about Tabstick sticker quality, waterproof vinyl, shipping across India, and our founder.
+            </p>
+        </div>
+
+        <div class="faq-accordion-wrap reveal-on-scroll">
+            <!-- FAQ 1: Quality -->
+            <div class="faq-accordion-item">
+                <button type="button" class="faq-accordion-header" aria-expanded="false">
+                    <span>What makes Tabstick stickers different from ordinary stickers?</span>
+                    <span class="faq-icon-cross">+</span>
+                </button>
+                <div class="faq-accordion-body" style="display: none;">
+                    Tabstick stickers are manufactured with heavy-duty automotive-grade vinyl and cured with high-density pigment inks. Unlike thin paper stickers that rip or blur when touched, Tabstick decals feature a durable protective matte laminate that resists water, sun exposure, oil, and scratches.
+                </div>
+            </div>
+
+            <!-- FAQ 2: Waterproof -->
+            <div class="faq-accordion-item">
+                <button type="button" class="faq-accordion-header" aria-expanded="false">
+                    <span>Are Tabstick stickers completely waterproof and weatherproof?</span>
+                    <span class="faq-icon-cross">+</span>
+                </button>
+                <div class="faq-accordion-body" style="display: none;">
+                    Yes, 100%. All Tabstick stickers are fully waterproof, monsoon-tested, and dishwasher safe. You can stick them on outdoor car bumpers, motorcycle petrol tanks, helmets, and hydro flasks without worrying about rain, car washes, or summer heat peeling the edges.
+                </div>
+            </div>
+
+            <!-- FAQ 3: Residue -->
+            <div class="faq-accordion-item">
+                <button type="button" class="faq-accordion-header" aria-expanded="false">
+                    <span>Will Tabstick stickers leave sticky residue when removed?</span>
+                    <span class="faq-icon-cross">+</span>
+                </button>
+                <div class="faq-accordion-body" style="display: none;">
+                    No. We engineered our adhesive specifically for tech devices and delicate surfaces. When you peel a Tabstick sticker off your MacBook, iPad, phone case, or car paint, it leaves zero gooey residue. If any slight dust remains, it wipes off effortlessly with a dry cloth.
+                </div>
+            </div>
+
+            <!-- FAQ 4: Application -->
+            <div class="faq-accordion-item">
+                <button type="button" class="faq-accordion-header" aria-expanded="false">
+                    <span>How do I apply and remove Tabstick stickers for best results?</span>
+                    <span class="faq-icon-cross">+</span>
+                </button>
+                <div class="faq-accordion-body" style="display: none;">
+                    To apply, wipe the surface clean and ensure it is dry and free of oils. Peel the sticker from its backing, position it gently, and smooth down from the center toward the edges with your thumb. To remove, simply lift an edge with your fingernail and peel slowly at a 45-degree angle.
+                </div>
+            </div>
+
+            <!-- FAQ 5: Shipping -->
+            <div class="faq-accordion-item">
+                <button type="button" class="faq-accordion-header" aria-expanded="false">
+                    <span>What are the shipping and delivery timelines across India?</span>
+                    <span class="faq-icon-cross">+</span>
+                </button>
+                <div class="faq-accordion-body" style="display: none;">
+                    We dispatch all orders within 24 to 48 hours from our studio. Delivery typically takes 2 to 4 business days for metro cities (Bengaluru, Delhi NCR, Mumbai, Hyderabad, Chennai, Kolkata) and 3 to 6 business days for the rest of India with live SMS tracking.
+                </div>
+            </div>
+
+            <!-- FAQ 6: Custom Stickers -->
+            <div class="faq-accordion-item">
+                <button type="button" class="faq-accordion-header" aria-expanded="false">
+                    <span>Can I order custom stickers in India for startups, colleges, or events?</span>
+                    <span class="faq-icon-cross">+</span>
+                </button>
+                <div class="faq-accordion-body" style="display: none;">
+                    Absolutely! We specialize in custom die-cut vinyl stickers for tech startups, developer conferences, college fests, and indie creators in India. Email your designs, quantity, and dimensions to <strong>hello@tabstick.in</strong> for an instant quote and proof mockups.
+                </div>
+            </div>
+
+            <!-- FAQ 7: Founder Identity -->
+            <div class="faq-accordion-item">
+                <button type="button" class="faq-accordion-header" aria-expanded="false">
+                    <span>Who is the founder of Tabstick?</span>
+                    <span class="faq-icon-cross">+</span>
+                </button>
+                <div class="faq-accordion-body" style="display: none;">
+                    <strong>Mayank Malhotra is the founder of Tabstick.</strong> He founded Tabstick to bring streetwear aesthetics, automotive-grade durability, and creator culture to the Indian sticker ecosystem, ending the era of flimsy, peeling paper stickers.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JSON-LD FAQPage Schema -->
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What makes Tabstick stickers different from ordinary stickers?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Tabstick stickers are manufactured with heavy-duty automotive-grade vinyl and cured with high-density pigment inks. Unlike thin paper stickers, Tabstick decals feature a durable protective matte laminate that resists water, sun exposure, oil, and scratches."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Are Tabstick stickers completely waterproof and weatherproof?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, 100%. All Tabstick stickers are fully waterproof, monsoon-tested, and dishwasher safe for outdoor car bumpers, motorcycles, helmets, and hydro flasks."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Will Tabstick stickers leave sticky residue when removed?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. Tabstick uses a specialized residue-free acrylic adhesive. When peeled from MacBooks, laptops, or car paint, it leaves zero gooey residue."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I apply and remove Tabstick stickers for best results?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Clean and dry the surface. Peel the sticker from its easy-peel backing and smooth down from center to edges. To remove, peel slowly at a 45-degree angle."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What are the shipping and delivery timelines across India?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Orders are dispatched within 24 to 48 hours. Delivery takes 2 to 4 business days for metro cities and 3 to 6 business days for the rest of India."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I order custom stickers in India for startups, colleges, or events?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes! Tabstick manufactures custom die-cut vinyl stickers for tech startups, college fests, and creators in India. Email hello@tabstick.in for details."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Who is the founder of Tabstick?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Mayank Malhotra is the founder of Tabstick. Tabstick is an Indian sticker brand founded by Mayank Malhotra. We create creative and durable stickers for laptops, cars, phones and college students."
+                }
+            }
+        ]
+    }
+    </script>
+</section>
+
+<!-- ==========================================================================
+     8. CUSTOMER REVIEWS: ANIMATED ASYMMETRICAL QUOTE CARDS
      ========================================================================== -->
 <section id="reviews" class="reviews-pop-section">
     <div class="container">
@@ -503,7 +796,7 @@
             <div class="section-pop-badge bg-pink">
                 <span>✦ PROOF THAT STICKS ✦</span>
             </div>
-            <h2 class="section-pop-title">STUCK ON TAPSTICK</h2>
+            <h2 class="section-pop-title">STUCK ON TABSTICK</h2>
             <p class="section-pop-subtitle">
                 Over 25,000+ laptops, bottles, cars &amp; bikes upgraded. Here's what the community is saying.
             </p>
@@ -514,7 +807,7 @@
             <div class="review-pop-card tilt-left reveal-on-scroll">
                 <div class="review-stars-row">★★★★★</div>
                 <p class="review-quote-text">
-                    “Covered my entire MacBook Pro M3 with Tapstick drops. The colors pop insanely well in daylight and the matte finish feels premium under hand. Zero peel even after 6 months of daily backpack abuse!”
+                    “Covered my entire MacBook Pro M3 with Tabstick drops. The colors pop insanely well in daylight and the matte finish feels premium under hand. Zero peel even after 6 months of daily backpack abuse!”
                 </p>
                 <div class="review-author-row">
                     <div class="author-avatar-badge bg-yellow">💻</div>
@@ -572,7 +865,7 @@
             </div>
             <h2 class="section-pop-title">SEEN IN THE WILD</h2>
             <p class="section-pop-subtitle">
-                Tag <strong>@tapstick.in</strong> on Instagram to be featured on our official drop wall. Hover to pause.
+                Tag <strong>@tabstick.in</strong> on Instagram to be featured on our official drop wall. Hover to pause.
             </p>
         </div>
     </div>
@@ -585,7 +878,7 @@
                 <div class="gallery-tile-inner">
                     <img src="{{ asset('images/hero-banner.webp') }}" alt="Stickers on Laptop" loading="lazy">
                     <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tapstick.in</span>
+                        <span class="gallery-insta-handle">@tabstick.in</span>
                         <span class="gallery-gear-label">MacBook Air • Pop Drops</span>
                     </div>
                 </div>
@@ -596,7 +889,7 @@
                 <div class="gallery-tile-inner">
                     <img src="{{ asset('images/wasted.jpg') }}" alt="Wasted Sticker on Flask" loading="lazy">
                     <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tapstick.in</span>
+                        <span class="gallery-insta-handle">@tabstick.in</span>
                         <span class="gallery-gear-label">Hydro Flask • Meme Pack</span>
                     </div>
                 </div>
@@ -607,7 +900,7 @@
                 <div class="gallery-tile-inner">
                     <img src="{{ asset('images/limited-edition.jpg') }}" alt="Limited Edition on Bike" loading="lazy">
                     <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tapstick.in</span>
+                        <span class="gallery-insta-handle">@tabstick.in</span>
                         <span class="gallery-gear-label">Moto Helmet • Drop 04</span>
                     </div>
                 </div>
@@ -618,7 +911,7 @@
                 <div class="gallery-tile-inner">
                     <img src="{{ asset('images/ah-shit.jpg') }}" alt="Ah Shit on Skateboard" loading="lazy">
                     <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tapstick.in</span>
+                        <span class="gallery-insta-handle">@tabstick.in</span>
                         <span class="gallery-gear-label">Skate Deck • Street Drop</span>
                     </div>
                 </div>
@@ -629,7 +922,7 @@
                 <div class="gallery-tile-inner">
                     <img src="{{ asset('images/fizzy-zero.jpg') }}" alt="Fizzy Pop on iPad" loading="lazy">
                     <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tapstick.in</span>
+                        <span class="gallery-insta-handle">@tabstick.in</span>
                         <span class="gallery-gear-label">iPad Pro • Pop Art</span>
                     </div>
                 </div>
@@ -640,7 +933,7 @@
                 <div class="gallery-tile-inner">
                     <img src="{{ asset('images/mystery-box.jpg') }}" alt="Mystery Box Unboxing" loading="lazy">
                     <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tapstick.in</span>
+                        <span class="gallery-insta-handle">@tabstick.in</span>
                         <span class="gallery-gear-label">Mystery Unboxing • Collector</span>
                     </div>
                 </div>
@@ -651,7 +944,7 @@
                 <div class="gallery-tile-inner">
                     <img src="{{ asset('images/hero-banner.webp') }}" alt="Stickers on Laptop" loading="lazy">
                     <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tapstick.in</span>
+                        <span class="gallery-insta-handle">@tabstick.in</span>
                         <span class="gallery-gear-label">MacBook Air • Pop Drops</span>
                     </div>
                 </div>
@@ -660,7 +953,7 @@
                 <div class="gallery-tile-inner">
                     <img src="{{ asset('images/wasted.jpg') }}" alt="Wasted Sticker on Flask" loading="lazy">
                     <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tapstick.in</span>
+                        <span class="gallery-insta-handle">@tabstick.in</span>
                         <span class="gallery-gear-label">Hydro Flask • Meme Pack</span>
                     </div>
                 </div>
@@ -669,7 +962,7 @@
                 <div class="gallery-tile-inner">
                     <img src="{{ asset('images/limited-edition.jpg') }}" alt="Limited Edition on Bike" loading="lazy">
                     <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tapstick.in</span>
+                        <span class="gallery-insta-handle">@tabstick.in</span>
                         <span class="gallery-gear-label">Moto Helmet • Drop 04</span>
                     </div>
                 </div>
@@ -678,7 +971,7 @@
                 <div class="gallery-tile-inner">
                     <img src="{{ asset('images/ah-shit.jpg') }}" alt="Ah Shit on Skateboard" loading="lazy">
                     <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tapstick.in</span>
+                        <span class="gallery-insta-handle">@tabstick.in</span>
                         <span class="gallery-gear-label">Skate Deck • Street Drop</span>
                     </div>
                 </div>
@@ -687,7 +980,7 @@
                 <div class="gallery-tile-inner">
                     <img src="{{ asset('images/fizzy-zero.jpg') }}" alt="Fizzy Pop on iPad" loading="lazy">
                     <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tapstick.in</span>
+                        <span class="gallery-insta-handle">@tabstick.in</span>
                         <span class="gallery-gear-label">iPad Pro • Pop Art</span>
                     </div>
                 </div>
@@ -696,7 +989,7 @@
                 <div class="gallery-tile-inner">
                     <img src="{{ asset('images/mystery-box.jpg') }}" alt="Mystery Box Unboxing" loading="lazy">
                     <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tapstick.in</span>
+                        <span class="gallery-insta-handle">@tabstick.in</span>
                         <span class="gallery-gear-label">Mystery Unboxing • Collector</span>
                     </div>
                 </div>
@@ -751,7 +1044,7 @@
                     <div class="newsletter-eyebrow">✦ SECRET DROP CLUB ✦</div>
                     <h2 class="newsletter-headline">STICK WITH US.</h2>
                     <p class="newsletter-subtext">
-                        Join 25,000+ sticker collectors. Claim an instant <strong>10% discount code</strong> (`TAPSTICK10`) for your first drop and get notified about secret meme releases.
+                        Join 25,000+ sticker collectors. Claim an instant <strong>10% discount code</strong> (`TABSTICK10`) for your first drop and get notified about secret meme releases.
                     </p>
 
                     <form class="pop-newsletter-form" onsubmit="event.preventDefault(); const inp = this.querySelector('input'); if(inp && inp.value){ const mInp = document.getElementById('lead_email'); if(mInp){ mInp.value = inp.value; } } document.getElementById('floating-lead-trigger')?.click();">

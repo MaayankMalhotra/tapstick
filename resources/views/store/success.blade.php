@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Order Confirmed | TABSTICK')
+@section('title', 'Order Confirmed | Tabstick')
 
 @section('content')
 <div class="container" style="max-width: 660px; padding: 50px 20px 80px;">
@@ -13,7 +13,7 @@
 
         <span class="order-badge-label" style="color:#16a34a; background:#dcfce7; border: 1px solid #86efac; padding:4px 14px; border-radius:999px; font-weight:800; font-size:0.78rem; letter-spacing:1px; display:inline-block; margin-bottom:12px;">ORDER PLACED SUCCESSFULLY</span>
         <h1 class="payment-title" style="margin-bottom:8px;">Thank You, {{ explode(' ', $order->customer_name)[0] }}!</h1>
-        <p class="payment-subtitle" style="margin-bottom:20px;">Your TabStick order <strong>#{{ $order->order_number }}</strong> is confirmed.</p>
+        <p class="payment-subtitle" style="margin-bottom:20px;">Your Tabstick order <strong>#{{ $order->order_number }}</strong> is confirmed.</p>
 
         <div class="payment-order-box" style="margin: 20px 0; text-align: left;">
             <div class="order-box-header">

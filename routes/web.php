@@ -41,5 +41,6 @@ Route::post('/api/create-order', [CheckoutController::class, 'createRazorpayOrde
 Route::post('/api/verify-payment', [CheckoutController::class, 'verifyRazorpayPayment'])->middleware('throttle:10,1')->name('api.razorpay.verify');
 Route::post('/club/join', [\App\Http\Controllers\LeadController::class, 'capture'])->name('lead.capture');
 Route::get('/orders/{order:order_number}/success', [CheckoutController::class, 'success'])->name('orders.success');
+Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
 Route::redirect('/lander', '/');
 Route::post('/api/github-deploy', [\App\Http\Controllers\DeployWebhookController::class, 'handle'])->name('webhook.github.deploy');
