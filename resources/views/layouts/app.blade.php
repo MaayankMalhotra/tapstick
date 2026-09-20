@@ -9,6 +9,9 @@
     <meta name="keywords" content="@yield('meta_keywords', 'Tabstick, Tabstick stickers, Tabstick laptop stickers, Tabstick car stickers, stickers for college students, custom stickers in India, waterproof vinyl decals, aesthetic phone stickers')">
     <meta name="robots" content="@yield('robots', 'index, follow')">
     <link rel="canonical" href="@yield('canonical', url()->current())">
+    @if(config('services.google.site_verification'))
+    <meta name="google-site-verification" content="{{ config('services.google.site_verification') }}">
+    @endif
 
     <!-- Favicon & Brand Icons -->
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
