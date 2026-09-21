@@ -1408,19 +1408,21 @@
             background: rgba(5, 8, 16, 0.85);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            z-index: 99999;
+            z-index: 99990;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
             opacity: 0;
             visibility: hidden;
+            pointer-events: none;
             transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
         }
 
         .connect-modal-backdrop.open {
             opacity: 1;
             visibility: visible;
+            pointer-events: auto;
         }
 
         .connect-modal-card {
@@ -1548,7 +1550,7 @@
             position: fixed;
             bottom: 24px;
             right: 24px;
-            z-index: 99998;
+            z-index: 100002;
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -1563,6 +1565,9 @@
             cursor: pointer;
             font-family: var(--font-sans);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: auto !important;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         .ai-launcher-btn:hover {
@@ -1610,7 +1615,7 @@
             max-width: calc(100vw - 32px);
             height: 560px;
             max-height: calc(100vh - 110px);
-            z-index: 100000;
+            z-index: 100005;
             background: linear-gradient(180deg, rgba(17, 24, 39, 0.98) 0%, rgba(10, 14, 26, 0.99) 100%);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -1622,6 +1627,7 @@
             overflow: hidden;
             opacity: 0;
             visibility: hidden;
+            pointer-events: none;
             transform: translateY(20px) scale(0.95);
             transform-origin: bottom right;
             transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.28s ease;
@@ -1630,7 +1636,26 @@
         .ai-chat-card.open {
             opacity: 1;
             visibility: visible;
+            pointer-events: auto;
             transform: translateY(0) scale(1);
+        }
+
+        @media (max-width: 640px) {
+            .ai-launcher-btn {
+                bottom: 16px;
+                right: 16px;
+                padding: 10px 14px;
+                font-size: 0.8rem;
+            }
+            .ai-chat-card {
+                bottom: 74px;
+                right: 12px;
+                left: 12px;
+                width: auto;
+                max-width: calc(100vw - 24px);
+                height: 75vh;
+                max-height: 520px;
+            }
         }
 
         /* Chat Header */
@@ -3316,7 +3341,11 @@
         let chatHistory = [];
         let isAiResponding = false;
 
-        window.openAiChat = function() {
+        window.openAiChat = function(e) {
+            if (e && typeof e.preventDefault === 'function') {
+                e.preventDefault();
+                e.stopPropagation();
+            }
             const card = document.getElementById('ai-chat-card');
             if (!card) return;
             card.classList.add('open');
@@ -3326,19 +3355,27 @@
             }, 150);
         };
 
-        window.closeAiChat = function() {
+        window.closeAiChat = function(e) {
+            if (e && typeof e.preventDefault === 'function') {
+                e.preventDefault();
+                e.stopPropagation();
+            }
             const card = document.getElementById('ai-chat-card');
             if (!card) return;
             card.classList.remove('open');
         };
 
-        window.toggleAiChat = function() {
+        window.toggleAiChat = function(e) {
+            if (e && typeof e.preventDefault === 'function') {
+                e.preventDefault();
+                e.stopPropagation();
+            }
             const card = document.getElementById('ai-chat-card');
             if (!card) return;
             if (card.classList.contains('open')) {
-                window.closeAiChat();
+                window.closeAiChat(e);
             } else {
-                window.openAiChat();
+                window.openAiChat(e);
             }
         };
 
@@ -3348,32 +3385,38 @@
 
         if (aiLauncherBtn) {
             aiLauncherBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                window.toggleAiChat();
+                window.toggleAiChat(e);
             });
         }
 
         if (aiChatCloseBtn) {
             aiChatCloseBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                window.closeAiChat();
+                window.closeAiChat(e);
             });
         }
 
         if (heroOpenAiChat) {
             heroOpenAiChat.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                window.openAiChat();
+                window.openAiChat(e);
             });
         }
 
+        // Close on Escape key or click outside
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 const card = document.getElementById('ai-chat-card');
                 if (card && card.classList.contains('open')) {
+                    window.closeAiChat();
+                }
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            const card = document.getElementById('ai-chat-card');
+            const launcher = document.getElementById('ai-launcher-btn');
+            const heroBtn = document.getElementById('hero-open-ai-chat');
+            if (card && card.classList.contains('open')) {
+                if (!card.contains(e.target) && (!launcher || !launcher.contains(e.target)) && (!heroBtn || !heroBtn.contains(e.target))) {
                     window.closeAiChat();
                 }
             }

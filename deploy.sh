@@ -24,7 +24,7 @@ if [ -f .env ] && ! grep -q "GEMINI_API_KEY=" .env; then
     echo "" >> .env
     echo "# Google Gemini API" >> .env
     echo "GEMINI_API_KEY=$(echo 'QVEuQWI4Uk42SXgwc0RjZ3ZjWFg0cC1BTkNwN2xLOHlScUhnamc3bTg2ZjV4MUk4N0tyZVE=' | base64 -d)" >> .env
-    echo "GEMINI_MODEL=gemini-3.6-flash" >> .env
+    echo "GEMINI_MODEL=gemini-3-flash-preview" >> .env
 fi
 
 # 3. Clear and optimize caches

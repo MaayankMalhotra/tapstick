@@ -14,7 +14,24 @@ class GeminiService
     public function __construct()
     {
         $this->apiKey = (string) config('services.gemini.key', env('GEMINI_API_KEY', ''));
-        $this->model = (string) config('services.gemini.model', 'gemini-3.6-flash');
+        $this->model = (string) config('services.gemini.model', 'gemini-3-flash-preview');
+    }
+
+    /**
+     * List of models to try in sequence for maximum uptime and quota resilience.
+     */
+    protected function getCandidateModels(): array
+    {
+        $preferred = $this->model;
+        $fallbacks = [
+            'gemini-3-flash-preview',
+            'gemini-3.1-flash-lite',
+            'gemini-flash-latest',
+            'gemini-3.5-flash',
+            'gemini-3.6-flash',
+        ];
+
+        return array_values(array_unique(array_merge([$preferred], $fallbacks)));
     }
 
     /**
@@ -83,15 +100,13 @@ PROMPT;
     }
 
     /**
-     * Ask Gemini a question about Maayank Malhotra.
+     * Ask Gemini a question about Maayank Malhotra with multi-model failover.
      */
     public function askAboutMaayank(string $question, array $history = []): string
     {
         if (empty($this->apiKey)) {
-            return "I'm currently in offline mode. Please feel free to check out Maayank's portfolio sections or download his official resume directly at tabstick.in/maayank/resume!";
+            return $this->getHeuristicAnswer($question);
         }
-
-        $url = "{$this->baseUrl}/models/{$this->model}:generateContent?key={$this->apiKey}";
 
         $contents = [];
 
@@ -114,34 +129,69 @@ PROMPT;
             'parts' => [['text' => $question]],
         ];
 
-        try {
-            $response = Http::timeout(10)
-                ->withHeaders(['Content-Type' => 'application/json'])
-                ->post($url, [
-                    'systemInstruction' => [
-                        'parts' => [['text' => $this->getMaayankSystemPrompt()]],
-                    ],
-                    'contents' => $contents,
-                    'generationConfig' => [
-                        'temperature' => 0.4,
-                        'maxOutputTokens' => 600,
-                    ],
-                ]);
+        // Attempt each candidate model in sequence
+        foreach ($this->getCandidateModels() as $model) {
+            $url = "{$this->baseUrl}/models/{$model}:generateContent?key={$this->apiKey}";
 
-            if ($response->successful()) {
-                $data = $response->json();
-                $reply = $data['candidates'][0]['content']['parts'][0]['text'] ?? null;
-                if (!empty($reply)) {
-                    return trim($reply);
+            try {
+                $response = Http::timeout(8)
+                    ->withHeaders(['Content-Type' => 'application/json'])
+                    ->post($url, [
+                        'systemInstruction' => [
+                            'parts' => [['text' => $this->getMaayankSystemPrompt()]],
+                        ],
+                        'contents' => $contents,
+                        'generationConfig' => [
+                            'temperature' => 0.4,
+                            'maxOutputTokens' => 500,
+                        ],
+                    ]);
+
+                if ($response->successful()) {
+                    $data = $response->json();
+                    $reply = $data['candidates'][0]['content']['parts'][0]['text'] ?? null;
+                    if (!empty($reply)) {
+                        return trim($reply);
+                    }
+                } else {
+                    Log::warning("Gemini model {$model} returned status " . $response->status());
                 }
-            } else {
-                Log::warning('Gemini API error: ' . $response->status() . ' ' . $response->body());
+            } catch (\Throwable $e) {
+                Log::warning("Gemini model {$model} error: " . $e->getMessage());
             }
-        } catch (\Throwable $e) {
-            Log::error('Gemini Service Exception: ' . $e->getMessage());
         }
 
-        // Graceful fallback
+        // Context-aware heuristic answer if all remote models are temporarily throttled
+        return $this->getHeuristicAnswer($question);
+    }
+
+    /**
+     * Context-aware intelligent fallback when remote APIs are unavailable.
+     */
+    protected function getHeuristicAnswer(string $question): string
+    {
+        $q = strtolower($question);
+
+        if (str_contains($q, 'resume') || str_contains($q, 'cv') || str_contains($q, 'download') || str_contains($q, 'hire')) {
+            return "You can download Maayank Malhotra's verified official CV directly as a PDF at https://tabstick.in/maayank/resume. To discuss an engineering role or collaboration, feel free to drop him an email at maayankmalhotra095@gmail.com or call +91 8799730966!";
+        }
+
+        if (str_contains($q, 'stack') || str_contains($q, 'skill') || str_contains($q, 'tech') || str_contains($q, 'node') || str_contains($q, 'react') || str_contains($q, 'aws') || str_contains($q, 'laravel')) {
+            return "Maayank's core stack centers on **Node.js, Express, React.js, PHP/Laravel 11, and AWS Cloud Infrastructure (EC2, S3, RDS, CloudWatch)**. He is also experienced in WebRTC real-time systems, Docker, TypeScript, and Redis caching. Learn more or download his CV at https://tabstick.in/maayank/resume!";
+        }
+
+        if (str_contains($q, 'scale') || str_contains($q, 'transaction') || str_contains($q, 'cracode') || str_contains($q, 'henry') || str_contains($q, 'thinktail')) {
+            return "At Cracode Consulting, Maayank scaled enterprise Laravel & React APIs handling **1,500,000+ monthly transactions** with high fault tolerance. At Henry Harvin, he optimized microservices managing **1,000,000+ monthly API calls** with a 20% latency reduction. Currently at Thinktail Global, he leads full-stack engineering modules across React and Node.js.";
+        }
+
+        if (str_contains($q, 'tabstick') || str_contains($q, 'founder') || str_contains($q, 'project')) {
+            return "Maayank is the founder of Tabstick (tabstick.in), an Indian e-commerce platform for waterproof vinyl decals. He also engineered a WebRTC audio/video calling system (snoutiq.com), enterprise CRM platforms, and Jobrito job portal. Check out his live projects on his portfolio!";
+        }
+
+        if (str_contains($q, 'contact') || str_contains($q, 'email') || str_contains($q, 'phone') || str_contains($q, 'linkedin')) {
+            return "You can reach Maayank Malhotra directly via email at maayankmalhotra095@gmail.com, phone/WhatsApp at +91 8799730966, or connect on LinkedIn at https://www.linkedin.com/in/maayank-malhotra-a59a55186/.";
+        }
+
         return "Maayank Malhotra is a Full Stack Software Engineer with 4+ years of experience scaling Node.js, React, Laravel, and AWS cloud systems handling 1.5M+ monthly transactions. You can download his official CV directly at https://tabstick.in/maayank/resume or email him at maayankmalhotra095@gmail.com!";
     }
 
@@ -154,32 +204,34 @@ PROMPT;
             return null;
         }
 
-        $url = "{$this->baseUrl}/models/{$this->model}:generateContent?key={$this->apiKey}";
-
         $prompt = "You are the executive AI assistant for software engineer Maayank Malhotra. A visitor named '{$name}' sent an inquiry regarding '{$subject}' with the message: '{$message}'. Write exactly 1 or 2 professional, warm, concise sentences acknowledging their specific request or project requirements, highlighting how Maayank's full-stack & cloud background aligns with what they mentioned. Do not include greetings or sign-offs.";
 
-        try {
-            $response = Http::timeout(8)
-                ->withHeaders(['Content-Type' => 'application/json'])
-                ->post($url, [
-                    'contents' => [
-                        ['role' => 'user', 'parts' => [['text' => $prompt]]],
-                    ],
-                    'generationConfig' => [
-                        'temperature' => 0.5,
-                        'maxOutputTokens' => 150,
-                    ],
-                ]);
+        foreach ($this->getCandidateModels() as $model) {
+            $url = "{$this->baseUrl}/models/{$model}:generateContent?key={$this->apiKey}";
 
-            if ($response->successful()) {
-                $data = $response->json();
-                $text = $data['candidates'][0]['content']['parts'][0]['text'] ?? null;
-                if (!empty($text)) {
-                    return trim($text);
+            try {
+                $response = Http::timeout(6)
+                    ->withHeaders(['Content-Type' => 'application/json'])
+                    ->post($url, [
+                        'contents' => [
+                            ['role' => 'user', 'parts' => [['text' => $prompt]]],
+                        ],
+                        'generationConfig' => [
+                            'temperature' => 0.5,
+                            'maxOutputTokens' => 150,
+                        ],
+                    ]);
+
+                if ($response->successful()) {
+                    $data = $response->json();
+                    $text = $data['candidates'][0]['content']['parts'][0]['text'] ?? null;
+                    if (!empty($text)) {
+                        return trim($text);
+                    }
                 }
+            } catch (\Throwable $e) {
+                Log::warning("Gemini acknowledgement model {$model} error: " . $e->getMessage());
             }
-        } catch (\Throwable $e) {
-            Log::warning('Gemini personalized acknowledgement error: ' . $e->getMessage());
         }
 
         return null;
