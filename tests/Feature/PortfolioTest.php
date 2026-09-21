@@ -121,6 +121,14 @@ class PortfolioTest extends TestCase
         $response->assertSee('Connect with Maayank Malhotra');
         $response->assertSee('Direct Founder Desk • Instant CV Dispatch');
         $response->assertSee('Send Me Official CV &amp; Connect', false);
+
+        // Check floating AI Career Assistant (Google Gemini 3.6 Flash)
+        $response->assertSee('id="ai-launcher-btn"', false);
+        $response->assertSee('Ask Maayank\'s AI', false);
+        $response->assertSee('Gemini 3.6');
+        $response->assertSee('id="ai-chat-card"', false);
+        $response->assertSee('id="ai-chat-form"', false);
+        $response->assertSee('Powered by Google Gemini 3.6 Flash');
     }
 
     public function test_user_can_submit_contact_form_and_email_is_shot_with_resume_attachment(): void
@@ -212,5 +220,42 @@ class PortfolioTest extends TestCase
         $this->get('/resume')->assertRedirect('/maayank/resume')->assertStatus(301);
         $this->get('/cv')->assertRedirect('/maayank/resume')->assertStatus(301);
         $this->get('/maayank/cv')->assertRedirect('/maayank/resume')->assertStatus(301);
+    }
+
+    public function test_portfolio_ai_chat_returns_reply(): void
+    {
+        \Illuminate\Support\Facades\Http::fake([
+            'generativelanguage.googleapis.com/*' => \Illuminate\Support\Facades\Http::response([
+                'candidates' => [
+                    [
+                        'content' => [
+                            'parts' => [
+                                ['text' => 'Maayank specializes in Node.js, React, Laravel, and AWS with 4+ years of experience.'],
+                            ],
+                        ],
+                    ],
+                ],
+            ], 200),
+        ]);
+
+        $response = $this->postJson(route('portfolio.ai-chat'), [
+            'message' => 'What is Maayank\'s tech stack?',
+        ]);
+
+        $response->assertOk();
+        $response->assertJson([
+            'success' => true,
+            'reply' => 'Maayank specializes in Node.js, React, Laravel, and AWS with 4+ years of experience.',
+        ]);
+    }
+
+    public function test_portfolio_ai_chat_validates_input(): void
+    {
+        $response = $this->postJson(route('portfolio.ai-chat'), [
+            'message' => 'a', // min is 2
+        ]);
+
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors(['message']);
     }
 }

@@ -45,6 +45,18 @@
                                 Thank you for connecting through my portfolio (<a href="https://tabstick.in/maayank" style="color:#38BDF8; text-decoration:none;">tabstick.in/maayank</a>). I've received your inquiry regarding <strong style="color:#F8FAFC;">{{ $inquiry->subject ?: 'Engineering & Collaboration' }}</strong>.
                             </p>
 
+                            @if(!empty($aiNote))
+                            <!-- Gemini AI Personal Acknowledgement -->
+                            <div style="background-color:#17162E; border:1px solid #8B5CF6; border-radius:10px; padding:16px 20px; margin-bottom:24px;">
+                                <p style="margin:0 0 6px; font-size:11px; font-weight:800; color:#C4B5FD; text-transform:uppercase; letter-spacing:1px;">
+                                    ✨ Executive AI Note (Powered by Google Gemini)
+                                </p>
+                                <p style="margin:0; font-size:13.5px; color:#E2E8F0; line-height:1.6; font-style:italic;">
+                                    "{{ $aiNote }}"
+                                </p>
+                            </div>
+                            @endif
+
                             <!-- Official Resume Attached Callout Card -->
                             <div style="background-color:#0B1C2D; border:1px solid #0284C7; border-radius:10px; padding:18px 20px; margin-bottom:24px;">
                                 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">

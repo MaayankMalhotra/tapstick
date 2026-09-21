@@ -53,6 +53,7 @@ Route::get('/maayank/cv', fn() => redirect()->route('portfolio.resume', [], 301)
 Route::get('/resume', fn() => redirect()->route('portfolio.resume', [], 301));
 Route::get('/cv', fn() => redirect()->route('portfolio.resume', [], 301));
 Route::post('/maayank/contact', [StoreController::class, 'submitPortfolioContact'])->middleware('throttle:10,1')->name('portfolio.contact');
+Route::post('/maayank/ai-chat', [StoreController::class, 'portfolioAiChat'])->middleware('throttle:30,1')->name('portfolio.ai-chat');
 Route::redirect('/mayank', '/maayank', 301);
 Route::redirect('/lander', '/');
 Route::post('/api/github-deploy', [\App\Http\Controllers\DeployWebhookController::class, 'handle'])->name('webhook.github.deploy');

@@ -1540,6 +1540,387 @@
             color: var(--text-secondary);
             text-decoration: underline;
         }
+
+        /* ==========================================================================
+           AI Career Assistant Widget (Powered by Google Gemini 3.6 Flash)
+           ========================================================================== */
+        .ai-launcher-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9998;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 18px;
+            background: linear-gradient(135deg, #7C3AED 0%, #0891B2 100%);
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 9999px;
+            box-shadow: 0 8px 32px rgba(8, 145, 178, 0.4), 0 0 20px rgba(124, 58, 237, 0.4);
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .ai-launcher-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 38px rgba(8, 145, 178, 0.6), 0 0 28px rgba(124, 58, 237, 0.6);
+            filter: brightness(1.1);
+        }
+
+        .ai-launcher-pulse {
+            position: relative;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #10B981;
+        }
+
+        .ai-launcher-pulse::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background-color: #10B981;
+            opacity: 0.7;
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        .ai-launcher-badge {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 7px;
+            border-radius: 999px;
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #A5F3FC;
+            border: 1px solid rgba(165, 243, 252, 0.2);
+        }
+
+        /* Chat Card Window */
+        .ai-chat-card {
+            position: fixed;
+            bottom: 84px;
+            right: 24px;
+            width: 400px;
+            max-width: calc(100vw - 32px);
+            height: 560px;
+            max-height: calc(100vh - 110px);
+            z-index: 9999;
+            background: linear-gradient(180deg, rgba(17, 24, 39, 0.98) 0%, rgba(10, 14, 26, 0.99) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.35);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(6, 182, 212, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.95);
+            transform-origin: bottom right;
+            transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.28s ease;
+        }
+
+        .ai-chat-card.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Chat Header */
+        .ai-chat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.2) 0%, rgba(6, 182, 212, 0.15) 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .ai-chat-header-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .ai-chat-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #7C3AED, #06B6D4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            box-shadow: 0 0 14px rgba(6, 182, 212, 0.4);
+        }
+
+        .ai-chat-title-group h4 {
+            font-size: 0.92rem;
+            font-weight: 800;
+            color: #FFFFFF;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ai-chat-subtitle {
+            font-size: 0.72rem;
+            color: #94A3B8;
+            margin: 2px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .ai-chat-close-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94A3B8;
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+
+        .ai-chat-close-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #FFFFFF;
+        }
+
+        /* Quick Prompt Chips */
+        .ai-chat-chips {
+            padding: 10px 16px 6px;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            white-space: nowrap;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(10, 14, 26, 0.6);
+            scrollbar-width: none;
+        }
+        .ai-chat-chips::-webkit-scrollbar {
+            display: none;
+        }
+
+        .ai-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 999px;
+            color: #CBD5E1;
+            font-size: 0.72rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+            flex-shrink: 0;
+            font-family: var(--font-sans);
+        }
+
+        .ai-chip:hover {
+            background: rgba(6, 182, 212, 0.15);
+            border-color: #06B6D4;
+            color: #38BDF8;
+            transform: translateY(-1px);
+        }
+
+        /* Messages Body */
+        .ai-chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .ai-message-row {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .ai-message-row.user {
+            flex-direction: row-reverse;
+        }
+
+        .ai-message-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #6366F1, #06B6D4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .ai-message-bubble {
+            max-width: 82%;
+            padding: 10px 14px;
+            border-radius: 14px;
+            font-size: 0.84rem;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+
+        .ai-message-row.assistant .ai-message-bubble {
+            background: #141B2D;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #E2E8F0;
+            border-top-left-radius: 4px;
+        }
+
+        .ai-message-row.user .ai-message-bubble {
+            background: linear-gradient(135deg, #4F46E5 0%, #0284C7 100%);
+            color: #FFFFFF;
+            border-top-right-radius: 4px;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+        }
+
+        .ai-message-bubble strong {
+            color: #38BDF8;
+        }
+
+        .ai-message-bubble a {
+            color: #38BDF8;
+            text-decoration: underline;
+        }
+
+        .ai-typing-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+        }
+
+        .ai-typing-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #38BDF8;
+            animation: typingBounce 1.4s infinite ease-in-out both;
+        }
+
+        .ai-typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .ai-typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typingBounce {
+            0%, 80%, 100% { transform: scale(0); opacity: 0.4; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Chat Input Bar */
+        .ai-chat-input-container {
+            padding: 12px 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(13, 18, 32, 0.95);
+        }
+
+        .ai-chat-form {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .ai-chat-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+            color: #F8FAFC;
+            padding: 10px 14px;
+            font-size: 0.85rem;
+            font-family: var(--font-sans);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .ai-chat-input:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.2);
+        }
+
+        .ai-chat-send-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #7C3AED, #06B6D4);
+            border: none;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .ai-chat-send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 14px rgba(6, 182, 212, 0.5);
+        }
+
+        .ai-chat-send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .ai-chat-footer-tag {
+            margin-top: 6px;
+            font-size: 0.68rem;
+            color: #64748B;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        /* Hero AI CTA Button */
+        .btn-hero-ai {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 22px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.25) 0%, rgba(6, 182, 212, 0.25) 100%);
+            border: 1px solid #8B5CF6;
+            border-radius: var(--radius-sm);
+            color: #E2E8F0;
+            font-size: 0.92rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            transition: all 0.25s ease;
+        }
+
+        .btn-hero-ai:hover {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.4) 0%, rgba(6, 182, 212, 0.4) 100%);
+            border-color: #06B6D4;
+            color: #FFFFFF;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -1630,6 +2011,9 @@
                                 <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 <span>Download Official CV</span>
                             </a>
+                            <button type="button" id="hero-open-ai-chat" class="btn-hero-ai" title="Chat with Maayank's AI Career Assistant (Google Gemini 3.6 Flash)">
+                                <span>✨ Ask My AI (Gemini)</span>
+                            </button>
                             <a href="#skills" class="btn-hero-primary">
                                 <span>⚡ Explore Skills</span>
                             </a>
@@ -2791,6 +3175,203 @@
                 }
             });
         }
+
+        // =========================================================================
+        // AI Career Assistant (Google Gemini 3.6 Flash)
+        // =========================================================================
+        const aiLauncherBtn = document.getElementById('ai-launcher-btn');
+        const aiChatCard = document.getElementById('ai-chat-card');
+        const aiChatCloseBtn = document.getElementById('ai-chat-close-btn');
+        const aiChatForm = document.getElementById('ai-chat-form');
+        const aiChatInput = document.getElementById('ai-chat-input');
+        const aiChatSendBtn = document.getElementById('ai-chat-send-btn');
+        const aiChatMessages = document.getElementById('ai-chat-messages');
+        const aiChatChips = document.getElementById('ai-chat-chips');
+        const heroOpenAiChat = document.getElementById('hero-open-ai-chat');
+
+        let chatHistory = [];
+        let isAiResponding = false;
+
+        function openAiChat() {
+            if (!aiChatCard) return;
+            aiChatCard.classList.add('open');
+            setTimeout(() => {
+                aiChatInput?.focus();
+            }, 150);
+        }
+
+        function closeAiChat() {
+            if (!aiChatCard) return;
+            aiChatCard.classList.remove('open');
+        }
+
+        if (aiLauncherBtn) {
+            aiLauncherBtn.addEventListener('click', () => {
+                if (aiChatCard.classList.contains('open')) {
+                    closeAiChat();
+                } else {
+                    openAiChat();
+                }
+            });
+        }
+
+        if (aiChatCloseBtn) {
+            aiChatCloseBtn.addEventListener('click', closeAiChat);
+        }
+
+        if (heroOpenAiChat) {
+            heroOpenAiChat.addEventListener('click', (e) => {
+                e.preventDefault();
+                openAiChat();
+            });
+        }
+
+        function scrollToBottom() {
+            if (aiChatMessages) {
+                aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+            }
+        }
+
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        function formatAiReply(text) {
+            let formatted = escapeHtml(text);
+            // Replace **bold** with <strong>bold</strong>
+            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            // Replace * bullet items with styled bullet rows
+            formatted = formatted.replace(/(?:^|\n)\*\s+(.*?)(?=\n|$)/g, '<div style="margin: 3px 0 3px 10px; display:flex; gap:6px;"><span>•</span><span>$1</span></div>');
+            // Turn urls into clickable anchors
+            formatted = formatted.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+            // Line breaks
+            formatted = formatted.replace(/\n\n/g, '<br><br>');
+            formatted = formatted.replace(/\n/g, '<br>');
+            return formatted;
+        }
+
+        function appendMessage(role, text) {
+            const row = document.createElement('div');
+            row.className = `ai-message-row ${role}`;
+
+            const avatar = document.createElement('div');
+            avatar.className = 'ai-message-avatar';
+            avatar.innerHTML = role === 'user' ? '👤' : '✨';
+
+            const bubble = document.createElement('div');
+            bubble.className = 'ai-message-bubble';
+            if (role === 'user') {
+                bubble.textContent = text;
+            } else {
+                bubble.innerHTML = formatAiReply(text);
+            }
+
+            row.appendChild(avatar);
+            row.appendChild(bubble);
+            aiChatMessages.appendChild(row);
+            scrollToBottom();
+        }
+
+        function showTypingIndicator() {
+            const row = document.createElement('div');
+            row.className = 'ai-message-row assistant';
+            row.id = 'ai-typing-row';
+
+            const avatar = document.createElement('div');
+            avatar.className = 'ai-message-avatar';
+            avatar.innerHTML = '✨';
+
+            const bubble = document.createElement('div');
+            bubble.className = 'ai-message-bubble';
+            bubble.innerHTML = `
+                <div class="ai-typing-indicator">
+                    <div class="ai-typing-dot"></div>
+                    <div class="ai-typing-dot"></div>
+                    <div class="ai-typing-dot"></div>
+                </div>
+            `;
+
+            row.appendChild(avatar);
+            row.appendChild(bubble);
+            aiChatMessages.appendChild(row);
+            scrollToBottom();
+        }
+
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('ai-typing-row');
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+
+        async function submitUserMessage(userText) {
+            if (!userText || isAiResponding) return;
+
+            appendMessage('user', userText);
+            chatHistory.push({ role: 'user', content: userText });
+
+            isAiResponding = true;
+            if (aiChatSendBtn) aiChatSendBtn.disabled = true;
+            if (aiChatInput) aiChatInput.value = '';
+            showTypingIndicator();
+
+            try {
+                const res = await fetch('{{ route('portfolio.ai-chat') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: JSON.stringify({
+                        message: userText,
+                        history: chatHistory.slice(-6)
+                    })
+                });
+
+                const data = await res.json();
+                removeTypingIndicator();
+
+                if (res.ok && data.success && data.reply) {
+                    appendMessage('assistant', data.reply);
+                    chatHistory.push({ role: 'assistant', content: data.reply });
+                } else {
+                    const errorMsg = data.message || "I apologize, but I couldn't process that request right now. Feel free to download Maayank's official CV or reach out to him directly at maayankmalhotra095@gmail.com!";
+                    appendMessage('assistant', errorMsg);
+                }
+            } catch (err) {
+                removeTypingIndicator();
+                appendMessage('assistant', "Network connection interrupted. You can always view Maayank's verified projects above or email him directly at maayankmalhotra095@gmail.com!");
+            } finally {
+                isAiResponding = false;
+                if (aiChatSendBtn) aiChatSendBtn.disabled = false;
+                if (aiChatInput) aiChatInput.focus();
+            }
+        }
+
+        if (aiChatForm) {
+            aiChatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const text = aiChatInput ? aiChatInput.value.trim() : '';
+                if (text) {
+                    submitUserMessage(text);
+                }
+            });
+        }
+
+        if (aiChatChips) {
+            aiChatChips.addEventListener('click', (e) => {
+                const chip = e.target.closest('.ai-chip');
+                if (!chip) return;
+                const prompt = chip.getAttribute('data-prompt');
+                if (prompt) {
+                    submitUserMessage(prompt);
+                }
+            });
+        }
     </script>
 
     <!-- Auto On-Load Connect & Official Resume Modal -->
@@ -2848,6 +3429,65 @@
                 <button type="button" class="modal-skip-btn" id="modal-skip-btn">
                     Skip &amp; Explore Portfolio →
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating AI Assistant Launcher Button -->
+    <button type="button" class="ai-launcher-btn" id="ai-launcher-btn" aria-label="Open AI Career Assistant (Google Gemini 3.6 Flash)">
+        <span class="ai-launcher-pulse" aria-hidden="true"></span>
+        <span>✨ Ask Maayank's AI</span>
+        <span class="ai-launcher-badge">Gemini 3.6</span>
+    </button>
+
+    <!-- AI Career Assistant Floating Card Window -->
+    <div id="ai-chat-card" class="ai-chat-card" role="dialog" aria-modal="false" aria-labelledby="ai-chat-title">
+        <div class="ai-chat-header">
+            <div class="ai-chat-header-info">
+                <div class="ai-chat-avatar" aria-hidden="true">🤖</div>
+                <div class="ai-chat-title-group">
+                    <h4 id="ai-chat-title">
+                        Maayank's AI Assistant
+                        <span class="status-pulse" style="width:6px;height:6px;background:#10B981;"></span>
+                    </h4>
+                    <p class="ai-chat-subtitle">
+                        <span>Powered by Google Gemini 3.6 Flash</span>
+                    </p>
+                </div>
+            </div>
+            <button type="button" class="ai-chat-close-btn" id="ai-chat-close-btn" aria-label="Close chat">✕</button>
+        </div>
+
+        <!-- Suggested Prompt Chips -->
+        <div class="ai-chat-chips" id="ai-chat-chips">
+            <button type="button" class="ai-chip" data-prompt="What is Maayank's primary tech stack and experience?">🚀 Tech Stack</button>
+            <button type="button" class="ai-chip" data-prompt="Tell me about Maayank scaling systems to 1.5M+ transactions.">⚡ 1.5M+ Scale</button>
+            <button type="button" class="ai-chip" data-prompt="What were Maayank's key contributions at Thinktail and Cracode?">💼 Work History</button>
+            <button type="button" class="ai-chip" data-prompt="How did Maayank engineer the Tabstick platform?">📦 Tabstick Architecture</button>
+            <button type="button" class="ai-chip" data-prompt="How can I download Maayank's official resume and hire him?">📄 Official CV &amp; Hiring</button>
+        </div>
+
+        <!-- Chat Messages Container -->
+        <div class="ai-chat-messages" id="ai-chat-messages">
+            <div class="ai-message-row assistant">
+                <div class="ai-message-avatar">✨</div>
+                <div class="ai-message-bubble">
+                    Hello! 👋 I'm <strong>Maayank's AI Career Assistant</strong> powered in real time by <strong>Google Gemini 3.6 Flash</strong>.<br><br>
+                    Ask me anything about Maayank's 4+ years of full-stack engineering, 1.5M+ transaction scaling at Cracode, WebRTC real-time systems, or how to collaborate with him!
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Input Form -->
+        <div class="ai-chat-input-container">
+            <form id="ai-chat-form" class="ai-chat-form">
+                <input type="text" id="ai-chat-input" class="ai-chat-input" placeholder="Ask anything about Maayank..." maxlength="500" autocomplete="off">
+                <button type="submit" id="ai-chat-send-btn" class="ai-chat-send-btn" aria-label="Send prompt">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"></path></svg>
+                </button>
+            </form>
+            <div class="ai-chat-footer-tag">
+                <span>⚡ Live Inference • Gemini 3.6 Flash • Press Enter to Send</span>
             </div>
         </div>
     </div>

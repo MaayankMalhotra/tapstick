@@ -7,6 +7,7 @@ use App\Models\PortfolioInquiry;
 use App\Models\Product;
 use App\Mail\PortfolioUserConfirmationMail;
 use App\Mail\PortfolioAdminNotificationMail;
+use App\Services\GeminiService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -437,7 +438,7 @@ class StoreController extends Controller
         ]);
     }
 
-    public function submitPortfolioContact(Request $request): JsonResponse|RedirectResponse
+    public function submitPortfolioContact(Request $request, GeminiService $gemini): JsonResponse|RedirectResponse
     {
         $validated = $request->validate([
             'email' => 'required|email|max:150',
@@ -465,9 +466,17 @@ class StoreController extends Controller
             'ip_address' => $request->ip(),
         ]);
 
-        // 1. Send confirmation email to user via SMTP with official resume attached
+        // Generate tailored AI acknowledgement if message is substantial
+        $aiNote = null;
         try {
-            Mail::to($inquiry->email)->send(new PortfolioUserConfirmationMail($inquiry));
+            $aiNote = $gemini->generatePersonalizedAcknowledgement($name, $subject, $message);
+        } catch (\Throwable $e) {
+            Log::info('Gemini AI note generation skipped: ' . $e->getMessage());
+        }
+
+        // 1. Send confirmation email to user via SMTP with official resume attached and tailored AI note
+        try {
+            Mail::to($inquiry->email)->send(new PortfolioUserConfirmationMail($inquiry, $aiNote));
             $inquiry->update(['email_sent_to_user' => true]);
         } catch (\Throwable $e) {
             Log::error('Failed to send portfolio user confirmation email: ' . $e->getMessage());
@@ -497,6 +506,29 @@ class StoreController extends Controller
         }
 
         return redirect()->to(url('/maayank#contact'))->with('contact_success', $successMsg);
+    }
+
+    /**
+     * Interactive AI Career Assistant powered by Google Gemini 3.6 Flash.
+     */
+    public function portfolioAiChat(Request $request, GeminiService $gemini): JsonResponse
+    {
+        $validated = $request->validate([
+            'message' => 'required|string|min:2|max:500',
+            'history' => 'nullable|array|max:10',
+            'history.*.role' => 'required_with:history|string|in:user,assistant',
+            'history.*.content' => 'required_with:history|string|max:1000',
+        ]);
+
+        $message = trim($validated['message']);
+        $history = $validated['history'] ?? [];
+
+        $reply = $gemini->askAboutMaayank($message, $history);
+
+        return response()->json([
+            'success' => true,
+            'reply' => $reply,
+        ]);
     }
 }
 

@@ -14,8 +14,10 @@ class PortfolioUserConfirmationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct(public PortfolioInquiry $inquiry)
-    {
+    public function __construct(
+        public PortfolioInquiry $inquiry,
+        public ?string $aiNote = null
+    ) {
     }
 
     public function envelope(): Envelope
@@ -34,6 +36,9 @@ class PortfolioUserConfirmationMail extends Mailable
     {
         return new Content(
             view: 'emails.portfolio-user-confirmation',
+            with: [
+                'aiNote' => $this->aiNote,
+            ],
         );
     }
 
