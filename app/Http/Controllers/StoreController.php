@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\PortfolioInquiry;
 use App\Models\Product;
+use App\Mail\PortfolioUserConfirmationMail;
+use App\Mail\PortfolioAdminNotificationMail;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class StoreController extends Controller
@@ -411,6 +416,58 @@ class StoreController extends Controller
     public function portfolio(): View
     {
         return view('store.portfolio');
+    }
+
+    public function submitPortfolioContact(Request $request): JsonResponse|RedirectResponse
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|max:150',
+            'phone' => 'nullable|string|max:30',
+            'subject' => 'nullable|string|max:150',
+            'message' => 'required|string|min:5|max:3000',
+        ]);
+
+        $inquiry = PortfolioInquiry::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'] ?? null,
+            'subject' => !empty($validated['subject']) ? $validated['subject'] : 'Direct Engineering Inquiry',
+            'message' => $validated['message'],
+            'ip_address' => $request->ip(),
+        ]);
+
+        // 1. Send confirmation email to user via SMTP
+        try {
+            Mail::to($inquiry->email)->send(new PortfolioUserConfirmationMail($inquiry));
+            $inquiry->update(['email_sent_to_user' => true]);
+        } catch (\Throwable $e) {
+            Log::error('Failed to send portfolio user confirmation email: ' . $e->getMessage());
+        }
+
+        // 2. Send notification email to admin/founder via SMTP
+        try {
+            Mail::to('maayankmalhotra095@gmail.com')->send(new PortfolioAdminNotificationMail($inquiry));
+            $inquiry->update(['email_sent_to_admin' => true]);
+        } catch (\Throwable $e) {
+            Log::error('Failed to send portfolio admin notification email: ' . $e->getMessage());
+        }
+
+        $successMsg = 'Thank you, ' . $inquiry->name . '! Your message was received, and a confirmation email has been sent to ' . $inquiry->email . '.';
+
+        if ($request->expectsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => $successMsg,
+                'inquiry' => [
+                    'id' => $inquiry->id,
+                    'name' => $inquiry->name,
+                    'email' => $inquiry->email,
+                ],
+            ]);
+        }
+
+        return redirect()->to(url('/maayank#contact'))->with('contact_success', $successMsg);
     }
 }
 

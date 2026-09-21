@@ -957,6 +957,132 @@
             line-height: 1.65;
         }
 
+        /* Interactive Contact Form */
+        .portfolio-contact-form {
+            text-align: left;
+            margin: 0 auto 36px;
+            max-width: 740px;
+            background: rgba(9, 13, 22, 0.65);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: clamp(20px, 4vw, 36px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .form-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: var(--font-mono);
+        }
+
+        .form-label .req {
+            color: var(--accent-rose);
+            margin-left: 2px;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            background: #0D121F;
+            border: 1.5px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 12px 14px;
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18);
+            background: #101626;
+        }
+
+        .form-textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .btn-submit-contact {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-blue) 100%);
+            color: #090D16;
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 14px 24px;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(6, 182, 212, 0.35);
+            transition: all 0.2s ease;
+        }
+
+        .btn-submit-contact:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(6, 182, 212, 0.5);
+            filter: brightness(1.08);
+        }
+
+        .btn-submit-contact:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .form-status-alert {
+            padding: 14px 18px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 20px;
+            font-size: 0.92rem;
+            line-height: 1.5;
+            display: none;
+        }
+
+        .form-status-alert.success {
+            display: block;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #34D399;
+        }
+
+        .form-status-alert.error {
+            display: block;
+            background: rgba(244, 63, 94, 0.12);
+            border: 1px solid rgba(244, 63, 94, 0.4);
+            color: #FB7185;
+        }
+
+        @media (max-width: 650px) {
+            .form-grid-2 {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+
         .contact-methods {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -1792,8 +1918,61 @@
                 <div class="contact-box">
                     <h2 class="contact-title">Let's Build Something High-Impact.</h2>
                     <p class="contact-subtitle">
-                        Looking for a senior full-stack engineer, a microservices backend lead, or want to collaborate on innovative web products? Feel free to reach out directly.
+                        Looking for a senior full-stack engineer, a microservices backend lead, or want to collaborate on innovative web products? Drop a message below — an automated receipt copy will be sent to your email via SMTP.
                     </p>
+
+                    <!-- Interactive Contact Form -->
+                    <form id="portfolio-contact-form" class="portfolio-contact-form" action="{{ route('portfolio.contact') }}" method="POST">
+                        @csrf
+                        <div id="form-alert" class="form-status-alert"></div>
+
+                        @if(session('contact_success'))
+                        <div class="form-status-alert success" style="display:block;">
+                            {{ session('contact_success') }}
+                        </div>
+                        @endif
+
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label for="contact-name" class="form-label">Your Name <span class="req">*</span></label>
+                                <input type="text" id="contact-name" name="name" class="form-input" placeholder="e.g. Alex Johnson" required maxlength="100">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-email" class="form-label">Your Email <span class="req">*</span></label>
+                                <input type="email" id="contact-email" name="email" class="form-input" placeholder="alex@company.com" required maxlength="150">
+                            </div>
+                        </div>
+
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label for="contact-phone" class="form-label">Phone / WhatsApp <small style="color:var(--text-muted);">(Optional)</small></label>
+                                <input type="tel" id="contact-phone" name="phone" class="form-input" placeholder="+91 98765 43210" maxlength="30">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-subject" class="form-label">Inquiry Topic</label>
+                                <select id="contact-subject" name="subject" class="form-select">
+                                    <option value="Senior Full-Stack / Backend Engineering Role">💼 Full-Stack / Backend Engineering Role</option>
+                                    <option value="Freelance / SaaS Architecture Consulting">🛠️ SaaS Architecture / Consulting</option>
+                                    <option value="WebRTC & Real-Time Media Collaboration">📡 WebRTC &amp; Real-Time Systems</option>
+                                    <option value="General Engineering Chat">💬 General Tech Chat / Connect</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-message" class="form-label">Project Details / Message <span class="req">*</span></label>
+                            <textarea id="contact-message" name="message" class="form-textarea" placeholder="Tell me about your tech stack, requirements, timeline, or engineering role..." required minlength="5" maxlength="3000"></textarea>
+                        </div>
+
+                        <button type="submit" id="btn-submit-contact" class="btn-submit-contact">
+                            <span>⚡ Send Direct Message &amp; Trigger Confirmation Email</span>
+                        </button>
+                        <p style="margin: 12px 0 0; font-size: 0.78rem; color: var(--text-muted); text-align: center; font-family: var(--font-mono);">
+                            🔒 Direct SMTP delivery • An automated receipt copy will be sent to your email
+                        </p>
+                    </form>
 
                     <div class="contact-methods">
                         <div class="contact-method-item">
@@ -1943,6 +2122,59 @@
                     btn.style.color = '';
                     btn.style.borderColor = '';
                 }, 2000);
+            });
+        }
+
+        // Contact Form AJAX Submission
+        const contactForm = document.getElementById('portfolio-contact-form');
+        const formAlert = document.getElementById('form-alert');
+        const submitBtn = document.getElementById('btn-submit-contact');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                formAlert.style.display = 'none';
+                formAlert.className = 'form-status-alert';
+                formAlert.innerHTML = '';
+
+                const originalBtnText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span>⏳ Shooting email via SMTP...</span>';
+
+                const formData = new FormData(contactForm);
+
+                try {
+                    const res = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    });
+
+                    const data = await res.json();
+
+                    if (res.ok && data.success) {
+                        formAlert.className = 'form-status-alert success';
+                        formAlert.innerHTML = `<strong>🎉 Message Sent!</strong> ${data.message}`;
+                        formAlert.style.display = 'block';
+                        contactForm.reset();
+                    } else {
+                        const errorMsg = data.message || (data.errors ? Object.values(data.errors).flat().join('<br>') : 'Something went wrong. Please check your inputs or email me directly.');
+                        formAlert.className = 'form-status-alert error';
+                        formAlert.innerHTML = `<strong>⚠️ Submission Failed:</strong> ${errorMsg}`;
+                        formAlert.style.display = 'block';
+                    }
+                } catch (err) {
+                    formAlert.className = 'form-status-alert error';
+                    formAlert.innerHTML = '<strong>⚠️ Network or Server Error.</strong> Please try again or email directly at <a href="mailto:maayankmalhotra095@gmail.com" style="color:#FFF;text-decoration:underline;">maayankmalhotra095@gmail.com</a>.';
+                    formAlert.style.display = 'block';
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnText;
+                }
             });
         }
     </script>

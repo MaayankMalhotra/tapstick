@@ -48,6 +48,7 @@ Route::get('/feed/google-shopping.xml', [\App\Http\Controllers\FeedController::c
 Route::get('/feed/google-merchant.xml', [\App\Http\Controllers\FeedController::class, 'googleShopping']);
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
 Route::get('/maayank', [StoreController::class, 'portfolio'])->name('portfolio');
+Route::post('/maayank/contact', [StoreController::class, 'submitPortfolioContact'])->middleware('throttle:10,1')->name('portfolio.contact');
 Route::redirect('/mayank', '/maayank', 301);
 Route::redirect('/lander', '/');
 Route::post('/api/github-deploy', [\App\Http\Controllers\DeployWebhookController::class, 'handle'])->name('webhook.github.deploy');

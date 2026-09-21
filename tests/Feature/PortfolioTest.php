@@ -92,4 +92,67 @@ class PortfolioTest extends TestCase
         $response->assertSee('Connect directly with the founder');
         $response->assertSee(url('/maayank'));
     }
+
+    public function test_portfolio_page_renders_interactive_contact_form(): void
+    {
+        $response = $this->get('/maayank');
+        $response->assertOk();
+        $response->assertSee('id="portfolio-contact-form"', false);
+        $response->assertSee('name="name"', false);
+        $response->assertSee('name="email"', false);
+        $response->assertSee('name="phone"', false);
+        $response->assertSee('name="subject"', false);
+        $response->assertSee('name="message"', false);
+        $response->assertSee('Send Direct Message &amp; Trigger Confirmation Email', false);
+    }
+
+    public function test_user_can_submit_contact_form_and_email_is_shot_to_user_and_admin(): void
+    {
+        \Illuminate\Support\Facades\Mail::fake();
+
+        $payload = [
+            'name' => 'Sarah Connor',
+            'email' => 'sarah@skynet.com',
+            'phone' => '+91 9999988888',
+            'subject' => 'Senior Backend Role',
+            'message' => 'We want you to lead our distributed engineering team in building scalable microservices.',
+        ];
+
+        $response = $this->postJson(route('portfolio.contact'), $payload);
+        $response->assertOk();
+        $response->assertJson([
+            'success' => true,
+        ]);
+
+        // Assert database recorded the inquiry
+        $this->assertDatabaseHas('portfolio_inquiries', [
+            'name' => 'Sarah Connor',
+            'email' => 'sarah@skynet.com',
+            'subject' => 'Senior Backend Role',
+        ]);
+
+        // Assert confirmation email was shot to the USER
+        \Illuminate\Support\Facades\Mail::assertSent(\App\Mail\PortfolioUserConfirmationMail::class, function ($mail) {
+            return $mail->hasTo('sarah@skynet.com') &&
+                   $mail->inquiry->name === 'Sarah Connor';
+        });
+
+        // Assert notification email was shot to ADMIN
+        \Illuminate\Support\Facades\Mail::assertSent(\App\Mail\PortfolioAdminNotificationMail::class, function ($mail) {
+            return $mail->hasTo('maayankmalhotra095@gmail.com') &&
+                   $mail->inquiry->email === 'sarah@skynet.com';
+        });
+    }
+
+    public function test_portfolio_contact_form_validates_required_fields(): void
+    {
+        $response = $this->postJson(route('portfolio.contact'), [
+            'name' => '',
+            'email' => 'invalid-email',
+            'message' => 'hi',
+        ]);
+
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors(['name', 'email', 'message']);
+    }
 }
