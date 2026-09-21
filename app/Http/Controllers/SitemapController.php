@@ -71,11 +71,17 @@ class SitemapController extends Controller
             $xml .= "  </url>\n";
         }
 
-        // Founder & Engineer Portfolio
+        // Founder & Engineer Portfolio (Top Priority for Knowledge Graph Indexing)
         $xml .= "  <url>\n";
         $xml .= "    <loc>{$baseUrl}/maayank</loc>\n";
         $xml .= "    <lastmod>{$now}</lastmod>\n";
-        $xml .= "    <changefreq>monthly</changefreq>\n";
+        $xml .= "    <changefreq>daily</changefreq>\n";
+        $xml .= "    <priority>1.0</priority>\n";
+        $xml .= "  </url>\n";
+        $xml .= "  <url>\n";
+        $xml .= "    <loc>{$baseUrl}/maayank/resume</loc>\n";
+        $xml .= "    <lastmod>{$now}</lastmod>\n";
+        $xml .= "    <changefreq>weekly</changefreq>\n";
         $xml .= "    <priority>0.9</priority>\n";
         $xml .= "  </url>\n";
 

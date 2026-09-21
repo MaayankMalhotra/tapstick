@@ -3,17 +3,29 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Maayank Malhotra – Full Stack Software Engineer &amp; Founder</title>
-    <meta name="description" content="Official portfolio of Maayank Malhotra, Full Stack Software Engineer with 4+ years of experience architecting scalable Node.js, React.js, Laravel, and AWS cloud applications.">
-    <meta name="keywords" content="Maayank Malhotra, Mayank Malhotra, Full Stack Developer, Software Engineer, Node.js, React.js, Laravel, WebRTC, AWS, Tabstick Founder">
+    <title>Maayank Malhotra (Mayank Malhotra) – Full Stack Software Engineer &amp; Founder</title>
+    <meta name="description" content="Official portfolio and engineering resume of Maayank Malhotra (also spelled Mayank Malhotra), Full Stack Software Engineer &amp; Founder of Tabstick. 4+ years scaling Node.js, Express, React, Laravel, and AWS cloud applications.">
+    <meta name="keywords" content="Maayank Malhotra, Mayank Malhotra, Maayank Malhotra Tabstick, Mayank Malhotra Software Engineer, Maayank Malhotra Developer, Full Stack Engineer Delhi NCR, Node.js React Laravel AWS Architect">
+    <meta name="author" content="Maayank Malhotra">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <link rel="canonical" href="https://tabstick.in/maayank">
 
-    <!-- Open Graph / Social Cards -->
+    <!-- Open Graph / Facebook / LinkedIn Cards -->
+    <meta property="og:site_name" content="Tabstick">
     <meta property="og:type" content="profile">
-    <meta property="og:title" content="Maayank Malhotra – Full Stack Software Engineer &amp; Founder">
-    <meta property="og:description" content="4+ years scaling Node.js, React, Laravel, and AWS microservices handling 1.5M+ monthly transactions. Founder of Tabstick.">
+    <meta property="og:title" content="Maayank Malhotra (Mayank Malhotra) – Full Stack Software Engineer &amp; Founder">
+    <meta property="og:description" content="Official portfolio and resume of Maayank Malhotra, Full Stack Engineer and Founder of Tabstick. 4+ years scaling APIs, Node.js, Laravel, React, and AWS cloud systems.">
     <meta property="og:url" content="https://tabstick.in/maayank">
-    <meta property="og:image" content="{{ asset('favicon-192x192.png') }}">
+    <meta property="og:image" content="{{ asset('favicon-512x512.png') }}">
+    <meta property="profile:first_name" content="Maayank">
+    <meta property="profile:last_name" content="Malhotra">
+    <meta property="profile:username" content="MaayankMalhotra">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Maayank Malhotra (Mayank Malhotra) – Full Stack Software Engineer &amp; Founder">
+    <meta name="twitter:description" content="Official portfolio of Maayank Malhotra, Founder @ Tabstick &amp; Full Stack Engineer with 4+ years experience in distributed systems.">
+    <meta name="twitter:image" content="{{ asset('favicon-512x512.png') }}">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="48x48" href="{{ asset('favicon-48x48.png') }}">
@@ -1590,7 +1602,7 @@
                         </h1>
 
                         <p class="hero-subtitle">
-                            Full Stack Software Engineer with <strong>4+ years of experience</strong> architecting scalable backend microservices (Node.js, Express, PHP, Laravel), responsive frontends (React.js, Redux, TypeScript), and cloud pipelines on AWS (EC2, S3, Docker). Proven track record scaling APIs to <strong>1.5M+ monthly transactions</strong>, optimizing system performance by 20%, and mentoring engineering teams. Founder of <strong>Tabstick</strong>.
+                            Full Stack Software Engineer (also known as <strong>Mayank Malhotra</strong>) with <strong>4+ years of experience</strong> architecting scalable backend microservices (Node.js, Express, PHP, Laravel), responsive frontends (React.js, Redux, TypeScript), and cloud pipelines on AWS (EC2, S3, Docker). Proven track record scaling APIs to <strong>1.5M+ monthly transactions</strong>, optimizing system performance by 20%, and mentoring engineering teams. Founder of <strong>Tabstick</strong>.
                         </p>
 
                         <!-- Key Performance Metrics -->
@@ -2406,61 +2418,131 @@
         </div>
     </footer>
 
-    <!-- JSON-LD Person Structured Data for SEO Knowledge Graph -->
+    <!-- JSON-LD ProfilePage, Person & FAQ Structured Data for SEO Knowledge Graph -->
     @php
-    $personSchema = [
+    $structuredData = [
         '@context' => 'https://schema.org',
-        '@type' => 'Person',
-        'name' => 'Maayank Malhotra',
-        'alternateName' => 'Mayank Malhotra',
-        'givenName' => 'Maayank',
-        'familyName' => 'Malhotra',
-        'jobTitle' => 'Full Stack Software Engineer',
-        'description' => 'Full Stack Software Engineer with 4+ years of experience architecting scalable Node.js, Express, React, Laravel, and AWS cloud applications. Founder of Tabstick.',
-        'url' => 'https://tabstick.in/maayank',
-        'email' => 'maayankmalhotra095@gmail.com',
-        'telephone' => '+918799730966',
-        'founder' => [
-            '@type' => 'Organization',
-            'name' => 'Tabstick',
-            'url' => 'https://tabstick.in',
-        ],
-        'worksFor' => [
-            '@type' => 'Organization',
-            'name' => 'Thinktail Global Pvt. Ltd.',
-        ],
-        'alumniOf' => [
-            '@type' => 'CollegeOrUniversity',
-            'name' => 'YMCA University',
-        ],
-        'knowsAbout' => [
-            'Full Stack Web Development',
-            'Node.js',
-            'Express.js',
-            'PHP',
-            'Laravel',
-            'React.js',
-            'Redux',
-            'TypeScript',
-            'AWS EC2',
-            'AWS S3',
-            'Docker',
-            'WebRTC',
-            'Socket.io',
-            'MySQL',
-            'MongoDB',
-            'REST APIs',
-            'GraphQL',
-            'CI/CD Pipelines',
-        ],
-        'sameAs' => [
-            'https://www.linkedin.com/in/maayank-malhotra-a59a55186/',
-            'https://github.com/MaayankMalhotra',
+        '@graph' => [
+            [
+                '@type' => 'ProfilePage',
+                '@id' => 'https://tabstick.in/maayank#profilepage',
+                'url' => 'https://tabstick.in/maayank',
+                'name' => 'Maayank Malhotra (Mayank Malhotra) – Full Stack Software Engineer & Founder',
+                'description' => 'Official developer portfolio and verified credentials of Maayank Malhotra (Mayank Malhotra), Founder of Tabstick and Senior Full Stack Engineer.',
+                'isPartOf' => [
+                    '@type' => 'WebSite',
+                    '@id' => 'https://tabstick.in/#website',
+                    'name' => 'Tabstick',
+                    'url' => 'https://tabstick.in',
+                ],
+                'about' => [
+                    '@id' => 'https://tabstick.in/maayank#person',
+                ],
+                'mainEntity' => [
+                    '@id' => 'https://tabstick.in/maayank#person',
+                ],
+            ],
+            [
+                '@type' => 'Person',
+                '@id' => 'https://tabstick.in/maayank#person',
+                'name' => 'Maayank Malhotra',
+                'alternateName' => ['Mayank Malhotra', 'Mayank', 'Maayank'],
+                'givenName' => 'Maayank',
+                'familyName' => 'Malhotra',
+                'gender' => 'Male',
+                'jobTitle' => 'Full Stack Software Engineer',
+                'description' => 'Full Stack Software Engineer with 4+ years of experience architecting scalable Node.js, Express, React, Laravel, and AWS cloud applications. Founder of Tabstick.',
+                'url' => 'https://tabstick.in/maayank',
+                'image' => asset('favicon-512x512.png'),
+                'email' => 'maayankmalhotra095@gmail.com',
+                'telephone' => '+918799730966',
+                'address' => [
+                    '@type' => 'PostalAddress',
+                    'addressLocality' => 'Delhi NCR',
+                    'addressCountry' => 'IN',
+                ],
+                'founder' => [
+                    '@type' => 'Organization',
+                    'name' => 'Tabstick',
+                    'url' => 'https://tabstick.in',
+                ],
+                'worksFor' => [
+                    '@type' => 'Organization',
+                    'name' => 'Thinktail Global Pvt. Ltd.',
+                ],
+                'alumniOf' => [
+                    '@type' => 'CollegeOrUniversity',
+                    'name' => 'YMCA University',
+                ],
+                'knowsAbout' => [
+                    'Full Stack Web Development',
+                    'Node.js',
+                    'Express.js',
+                    'PHP',
+                    'Laravel',
+                    'React.js',
+                    'Redux',
+                    'TypeScript',
+                    'AWS EC2',
+                    'AWS S3',
+                    'Docker',
+                    'WebRTC',
+                    'Socket.io',
+                    'MySQL',
+                    'MongoDB',
+                    'REST APIs',
+                    'GraphQL',
+                    'CI/CD Pipelines',
+                ],
+                'sameAs' => [
+                    'https://www.linkedin.com/in/maayank-malhotra-a59a55186/',
+                    'https://github.com/MaayankMalhotra',
+                    'https://tabstick.in',
+                ],
+            ],
+            [
+                '@type' => 'FAQPage',
+                '@id' => 'https://tabstick.in/maayank#faq',
+                'mainEntity' => [
+                    [
+                        '@type' => 'Question',
+                        'name' => 'Who is Maayank Malhotra?',
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text' => 'Maayank Malhotra (also known as Mayank Malhotra) is a Full Stack Software Engineer and the founder of Tabstick (tabstick.in). He has 4+ years of professional engineering experience in distributed systems, Node.js, Laravel, React.js, and AWS cloud architecture.',
+                        ],
+                    ],
+                    [
+                        '@type' => 'Question',
+                        'name' => 'Where can I download Maayank Malhotra\'s official resume?',
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text' => 'You can download the verified official resume (PDF) of Maayank Malhotra directly at https://tabstick.in/maayank/resume or https://tabstick.in/resume.',
+                        ],
+                    ],
+                    [
+                        '@type' => 'Question',
+                        'name' => 'What is Tabstick and who founded it?',
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text' => 'Tabstick (tabstick.in) is an Indian e-commerce brand that manufactures premium die-cut waterproof vinyl stickers and decals for laptops, vehicles, and phones, founded by Maayank Malhotra.',
+                        ],
+                    ],
+                    [
+                        '@type' => 'Question',
+                        'name' => 'How can I contact or hire Maayank Malhotra?',
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text' => 'You can reach Maayank Malhotra via email at maayankmalhotra095@gmail.com, telephone at +91 8799730966, or via his LinkedIn profile at https://www.linkedin.com/in/maayank-malhotra-a59a55186/.',
+                        ],
+                    ],
+                ],
+            ],
         ],
     ];
     @endphp
     <script type="application/ld+json">
-    {!! json_encode($personSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
+    {!! json_encode($structuredData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
     </script>
 
     <!-- Client Scripts for Interactive Filtering and Copy -->
