@@ -1570,6 +1570,10 @@
             -webkit-user-select: none;
         }
 
+        .ai-launcher-btn * {
+            pointer-events: none;
+        }
+
         .ai-launcher-btn:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 12px 38px rgba(8, 145, 178, 0.6), 0 0 28px rgba(124, 58, 237, 0.6);
@@ -2036,7 +2040,7 @@
                                 <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 <span>Download Official CV</span>
                             </a>
-                            <button type="button" id="hero-open-ai-chat" class="btn-hero-ai" onclick="window.openAiChat()" title="Chat with Maayank's AI Career Assistant (Google Gemini 3.6 Flash)">
+                            <button type="button" id="hero-open-ai-chat" class="btn-hero-ai" title="Chat with Maayank's AI Career Assistant (Google Gemini)">
                                 <span>✨ Ask My AI (Gemini)</span>
                             </button>
                             <a href="#skills" class="btn-hero-primary">
@@ -3014,10 +3018,10 @@
     </div>
 
     <!-- Floating AI Assistant Launcher Button -->
-    <button type="button" class="ai-launcher-btn" id="ai-launcher-btn" onclick="window.toggleAiChat()" aria-label="Open AI Career Assistant (Google Gemini 3.6 Flash)">
+    <button type="button" class="ai-launcher-btn" id="ai-launcher-btn" aria-label="Open AI Career Assistant (Google Gemini)">
         <span class="ai-launcher-pulse" aria-hidden="true"></span>
         <span>✨ Ask Maayank's AI</span>
-        <span class="ai-launcher-badge">Gemini 3.6</span>
+        <span class="ai-launcher-badge">Gemini AI</span>
     </button>
 
     <!-- AI Career Assistant Floating Card Window -->
@@ -3031,11 +3035,11 @@
                         <span class="status-pulse" style="width:6px;height:6px;background:#10B981;"></span>
                     </h4>
                     <p class="ai-chat-subtitle">
-                        <span>Powered by Google Gemini 3.6 Flash</span>
+                        <span>Powered by Google Gemini</span>
                     </p>
                 </div>
             </div>
-            <button type="button" class="ai-chat-close-btn" id="ai-chat-close-btn" onclick="window.closeAiChat()" aria-label="Close chat">✕</button>
+            <button type="button" class="ai-chat-close-btn" id="ai-chat-close-btn" aria-label="Close chat">✕</button>
         </div>
 
         <!-- Suggested Prompt Chips -->
@@ -3342,34 +3346,25 @@
         let isAiResponding = false;
 
         window.openAiChat = function(e) {
-            if (e && typeof e.preventDefault === 'function') {
-                e.preventDefault();
-                e.stopPropagation();
-            }
+            if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
             const card = document.getElementById('ai-chat-card');
             if (!card) return;
             card.classList.add('open');
             setTimeout(() => {
                 const input = document.getElementById('ai-chat-input');
                 if (input) input.focus();
-            }, 150);
+            }, 120);
         };
 
         window.closeAiChat = function(e) {
-            if (e && typeof e.preventDefault === 'function') {
-                e.preventDefault();
-                e.stopPropagation();
-            }
+            if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
             const card = document.getElementById('ai-chat-card');
             if (!card) return;
             card.classList.remove('open');
         };
 
         window.toggleAiChat = function(e) {
-            if (e && typeof e.preventDefault === 'function') {
-                e.preventDefault();
-                e.stopPropagation();
-            }
+            if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
             const card = document.getElementById('ai-chat-card');
             if (!card) return;
             if (card.classList.contains('open')) {
@@ -3384,24 +3379,36 @@
         const toggleAiChat = window.toggleAiChat;
 
         if (aiLauncherBtn) {
-            aiLauncherBtn.addEventListener('click', (e) => {
+            aiLauncherBtn.onclick = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
                 window.toggleAiChat(e);
-            });
+            };
         }
 
         if (aiChatCloseBtn) {
-            aiChatCloseBtn.addEventListener('click', (e) => {
+            aiChatCloseBtn.onclick = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
                 window.closeAiChat(e);
-            });
+            };
         }
 
         if (heroOpenAiChat) {
-            heroOpenAiChat.addEventListener('click', (e) => {
+            heroOpenAiChat.onclick = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
                 window.openAiChat(e);
-            });
+            };
         }
 
-        // Close on Escape key or click outside
+        if (aiChatCard) {
+            aiChatCard.onclick = function(e) {
+                e.stopPropagation();
+            };
+        }
+
+        // Close on Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 const card = document.getElementById('ai-chat-card');
@@ -3411,14 +3418,16 @@
             }
         });
 
+        // Close when clicking outside card and buttons
         document.addEventListener('click', (e) => {
             const card = document.getElementById('ai-chat-card');
             const launcher = document.getElementById('ai-launcher-btn');
             const heroBtn = document.getElementById('hero-open-ai-chat');
             if (card && card.classList.contains('open')) {
-                if (!card.contains(e.target) && (!launcher || !launcher.contains(e.target)) && (!heroBtn || !heroBtn.contains(e.target))) {
-                    window.closeAiChat();
+                if (card.contains(e.target) || (launcher && launcher.contains(e.target)) || (heroBtn && heroBtn.contains(e.target))) {
+                    return;
                 }
+                window.closeAiChat();
             }
         });
 
