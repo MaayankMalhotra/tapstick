@@ -142,14 +142,13 @@
             background: #3A2F2B;
             border: none;
             border-radius: 6px;
-            width: 100%;
-            padding: 18px 24px;
+            padding: 16px 28px;
             font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
             font-size: 13px;
             font-weight: 700;
             text-decoration: none;
             transition: opacity 0.15s;
-            display: block;
+            display: inline-block;
         }
         .btn-espresso:hover {
             opacity: 0.85;
@@ -342,56 +341,76 @@
         </section>
 
         <!-- ==========================================================================
-             INDO-FUSION FULL CATERING MENU SECTION (FROM OFFICIAL PDF)
+             INDO-FUSION FULL CATERING MENU SECTION (OFFICIAL PDF SPEC)
              ========================================================================== -->
-        <section id="menu" class="py-20 md:py-28 px-6 md:px-12 lg:px-20 bg-white">
+        <section id="menu" class="py-20 md:py-28 px-6 md:px-12 lg:px-20 bg-parchment/60 border-t border-b border-divider">
             <div class="max-w-6xl mx-auto">
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-2">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-3">
                     <div>
-                        <span class="eyebrow">Epicurean Selections</span>
+                        <span class="eyebrow">Epicurean Artistry</span>
                         <h2 class="section-heading text-espresso">Catering Menu</h2>
-                        <p class="font-serif text-[18px] text-taupe italic mt-1">Indo-Fusion Grazing Table — Full Menu</p>
+                        <p class="font-serif text-[19px] text-taupe italic mt-1">Indo-Fusion Grazing Table &middot; Full Menu &amp; À La Carte</p>
                     </div>
                     <div class="flex flex-wrap items-center gap-3">
-                        <a href="{{ asset('graze-assets/graze-and-gifts-indo-fusion-menu.pdf') }}" download="Graze-and-Gifts-Indo-Fusion-Menu.pdf" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md border border-taupe text-espresso hover:bg-taupe hover:text-white font-sans text-[12px] font-bold uppercase tracking-[0.16em] transition-all shadow-sm">
-                            <span>📄 Download Official PDF Menu</span>
+                        <a href="{{ asset('graze-assets/graze-and-gifts-indo-fusion-menu.pdf') }}" download="Graze-and-Gifts-Indo-Fusion-Menu.pdf" target="_blank" class="inline-flex items-center gap-2 px-5 py-3 rounded-md border border-taupe/70 bg-white hover:bg-taupe hover:text-white text-espresso font-sans text-[12px] font-bold uppercase tracking-[0.16em] transition-all shadow-sm">
+                            <svg class="w-4 h-4 text-taupe group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                            <span>Download PDF Menu</span>
                         </a>
-                        <a href="#inquiry" onclick="preselectService('indo-fusion')" class="btn-taupe text-[12px] py-2.5 px-5 text-center">
+                        <a href="#inquiry" onclick="preselectService('indo-fusion')" class="btn-taupe text-[12px] py-3 px-6 text-center">
                             Request This Menu
                         </a>
                     </div>
                 </div>
 
-                <div class="flex flex-wrap gap-2 my-5">
-                    <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 bg-parchment rounded-full border border-divider text-espresso">Nut-Free</span>
-                    <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 bg-parchment rounded-full border border-divider text-espresso">Sesame-Free</span>
-                    <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 bg-parchment rounded-full border border-divider text-espresso">Halal-Friendly</span>
-                    <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 bg-parchment rounded-full border border-divider text-espresso">Vegetarian &amp; Vegan Options</span>
+                <!-- Dietary Highlights -->
+                <div class="flex flex-wrap items-center gap-2 my-6">
+                    <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 bg-white rounded-full border border-divider shadow-2xs text-espresso">Nut-Free</span>
+                    <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 bg-white rounded-full border border-divider shadow-2xs text-espresso">Sesame-Free</span>
+                    <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 bg-white rounded-full border border-divider shadow-2xs text-espresso">Halal-Friendly</span>
+                    <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 bg-white rounded-full border border-divider shadow-2xs text-espresso">Vegetarian &amp; Vegan Options</span>
                 </div>
 
                 <div class="taupe-rule"></div>
 
-                <!-- On-Page Category Tabs -->
-                <div class="flex overflow-x-auto mt-8 border-b border-divider [scrollbar-width:none]" id="onpage-menu-tabs">
-                    <!-- Injected by JS -->
+                <!-- Modern Segmented Pill Selector -->
+                <div class="flex items-center justify-start lg:justify-center overflow-x-auto py-3 my-6 [scrollbar-width:none]" id="onpage-menu-tabs-wrapper">
+                    <div class="inline-flex items-center gap-1.5 p-1.5 bg-[#EAE2D7] rounded-full border border-divider/80 shadow-inner shrink-0" id="onpage-menu-tabs">
+                        <!-- Injected by JS -->
+                    </div>
+                </div>
+
+                <!-- Category Subtitle -->
+                <div class="text-center mb-8">
+                    <p id="onpage-category-subtitle" class="font-sans text-[13px] sm:text-[14px] italic text-body-mid font-medium max-w-xl mx-auto"></p>
                 </div>
 
                 <!-- Active Menu Items Grid -->
-                <div id="onpage-menu-items" class="pt-8 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+                <div id="onpage-menu-items" class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                     <!-- Injected by JS -->
                 </div>
 
-                <!-- Menu Note & Custom Orders Banner -->
-                <div class="mt-14 p-6 sm:p-8 bg-parchment rounded-xl border border-divider flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
-                    <div>
-                        <h4 class="font-serif text-[20px] font-bold text-espresso">Custom Packages &amp; Dietary Accommodations Always Welcome</h4>
-                        <p class="font-sans text-[14px] text-body-mid mt-1">
-                            Serving Oakville, Burlington, Mississauga &amp; the Greater Toronto Area (GTA) &middot; @graze_n_gifts
-                        </p>
+                <!-- Luxury Custom Orders Banner -->
+                <div class="mt-16 p-8 sm:p-12 rounded-2xl bg-espresso text-parchment relative overflow-hidden shadow-2xl border border-taupe/30">
+                    <div class="absolute -right-16 -bottom-16 w-64 h-64 bg-taupe/15 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 text-center lg:text-left">
+                        <div class="max-w-2xl">
+                            <span class="text-[11px] font-bold uppercase tracking-[0.25em] text-taupe block mb-2">Bespoke Catering &amp; Events</span>
+                            <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-parchment leading-tight">
+                                Custom Packages &amp; Dietary Accommodations
+                            </h3>
+                            <p class="font-sans text-sm sm:text-[15px] text-parchment/75 mt-2 leading-relaxed">
+                                Looking for a personalized Indo-Fusion spread, live chaat styling, or specific allergy rebuilds? We design custom grazing tables for weddings, bridal showers, birthdays, and corporate celebrations across Oakville, Burlington &amp; the GTA.
+                            </p>
+                        </div>
+                        <div class="flex flex-col sm:flex-row items-center gap-3.5 w-full sm:w-auto shrink-0">
+                            <a href="#inquiry" onclick="preselectService('indo-fusion')" class="w-full sm:w-auto px-8 py-4 bg-taupe hover:bg-[#b88e73] text-espresso font-sans text-[12px] font-bold uppercase tracking-[0.2em] rounded-md transition-all shadow-md text-center">
+                                Request a Quote
+                            </a>
+                            <a href="https://wa.me/16047616232?text=Hi%20Graze%20%26%20Gift%20Co.!%20I%20would%20like%20to%20inquire%20about%20a%20custom%20catering%20package." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-6 py-4 border border-white/25 hover:bg-white/10 text-parchment font-sans text-[12px] font-bold uppercase tracking-[0.16em] rounded-md transition-all text-center flex items-center justify-center gap-2">
+                                <span>💬 WhatsApp Us</span>
+                            </a>
+                        </div>
                     </div>
-                    <a href="#inquiry" onclick="preselectService('indo-fusion')" class="btn-espresso shrink-0 text-center">
-                        <span>Get a Custom Quote</span>
-                    </a>
                 </div>
             </div>
         </section>
@@ -635,7 +654,7 @@
                             <textarea id="vision" name="vision" class="field-textarea" placeholder="Theme, colour scheme, specific foods, timing, or anything else you have in mind..."></textarea>
                         </div>
 
-                        <button type="submit" class="btn-espresso mt-2">
+                        <button type="submit" class="btn-espresso w-full mt-2">
                             <span>Request Quote via WhatsApp</span>
                         </button>
                     </form>
@@ -1081,29 +1100,41 @@
             const tabs = document.getElementById('onpage-menu-tabs');
             if (!tabs) return;
 
-            tabs.innerHTML = indoService.fullMenu.categories.map(cat => `
-                <button type="button" onclick="switchOnPageMenuCategory('${cat.id}')" class="px-5 py-3 text-[13px] font-bold uppercase tracking-[0.16em] whitespace-nowrap border-b-2 transition-all duration-200 ${cat.id === onpageActiveCategory ? 'border-taupe text-espresso font-bold' : 'border-transparent text-muted hover:text-espresso'}">
-                    ${cat.label}
-                </button>
-            `).join('');
+            tabs.innerHTML = indoService.fullMenu.categories.map(cat => {
+                const isActive = cat.id === onpageActiveCategory;
+                return `
+                    <button type="button" onclick="switchOnPageMenuCategory('${cat.id}')"
+                            class="px-5 py-2.5 rounded-full text-[12px] font-bold uppercase tracking-[0.14em] whitespace-nowrap transition-all duration-200 ${isActive ? 'bg-espresso text-parchment shadow-sm' : 'text-espresso/70 hover:text-espresso hover:bg-white/70'}">
+                        ${cat.label}
+                    </button>
+                `;
+            }).join('');
 
             const activeCat = indoService.fullMenu.categories.find(c => c.id === onpageActiveCategory) || indoService.fullMenu.categories[0];
+            
+            const subElem = document.getElementById('onpage-category-subtitle');
+            if (subElem) {
+                subElem.textContent = activeCat.subtitle || '';
+            }
+
             const itemsCont = document.getElementById('onpage-menu-items');
             if (!itemsCont) return;
 
             itemsCont.innerHTML = activeCat.items.map(it => `
-                <div class="py-3 border-b border-divider/60 flex flex-col justify-between group hover:border-taupe/50 transition-colors">
-                    <div class="flex items-baseline justify-between gap-3">
-                        <div class="flex items-center gap-2 flex-wrap">
-                            <h4 class="font-serif text-[18px] font-bold text-espresso group-hover:text-taupe transition-colors">${it.name}</h4>
-                            <span class="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded ${it.type === 'Veg' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : (it.type === 'Non-Veg' ? 'bg-amber-50 text-amber-900 border border-amber-200' : 'bg-slate-100 text-slate-800 border border-slate-200')}">${it.type}</span>
+                <div class="bg-white hover:bg-[#FAF8F5] border border-divider/70 rounded-xl p-4 sm:p-5 transition-all duration-200 flex flex-col justify-between shadow-[0_1px_4px_rgba(0,0,0,0.02)] hover:shadow-md hover:border-taupe/60 group">
+                    <div>
+                        <div class="flex items-baseline justify-between gap-3">
+                            <div class="flex items-center gap-2 flex-wrap flex-1">
+                                <h4 class="font-serif text-[18px] sm:text-[19px] font-bold text-espresso group-hover:text-taupe transition-colors leading-snug">${it.name}</h4>
+                                <span class="text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full ${it.type === 'Veg' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : (it.type === 'Non-Veg' ? 'bg-amber-50 text-amber-900 border border-amber-200' : 'bg-stone-100 text-stone-800 border border-stone-200')}">${it.type}</span>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="font-serif text-[19px] font-bold text-taupe">${it.price}</span>
+                                ${it.unit ? `<span class="font-sans text-[11px] text-body-mid font-medium inline-block ml-0.5">${it.unit}</span>` : ''}
+                            </div>
                         </div>
-                        <div class="text-right shrink-0">
-                            <span class="font-serif text-[18px] font-semibold text-espresso">${it.price}</span>
-                            ${it.unit ? `<span class="font-sans text-[11px] text-muted inline-block ml-0.5">${it.unit}</span>` : ''}
-                        </div>
+                        ${it.desc ? `<p class="font-sans text-[13px] text-body-mid italic mt-2 leading-relaxed">${it.desc}</p>` : ''}
                     </div>
-                    ${it.desc ? `<p class="font-sans text-[13px] text-body-mid italic mt-1 leading-relaxed">${it.desc}</p>` : ''}
                 </div>
             `).join('');
         }
