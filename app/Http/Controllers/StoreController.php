@@ -418,26 +418,54 @@ class StoreController extends Controller
         return view('store.portfolio');
     }
 
+    public function downloadResume(Request $request)
+    {
+        $path = public_path('resumes/Maayank_Malhotra_Resume.pdf');
+        if (!file_exists($path)) {
+            abort(404, 'Official resume file not found.');
+        }
+
+        if ($request->has('inline') || $request->query('view') === '1') {
+            return response()->file($path, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="Maayank_Malhotra_Resume.pdf"',
+            ]);
+        }
+
+        return response()->download($path, 'Maayank_Malhotra_Resume.pdf', [
+            'Content-Type' => 'application/pdf',
+        ]);
+    }
+
     public function submitPortfolioContact(Request $request): JsonResponse|RedirectResponse
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:100',
             'email' => 'required|email|max:150',
+            'name' => 'nullable|string|max:100',
             'phone' => 'nullable|string|max:30',
             'subject' => 'nullable|string|max:150',
-            'message' => 'required|string|min:5|max:3000',
+            'message' => 'nullable|string|max:3000',
         ]);
 
+        $rawName = trim($validated['name'] ?? '');
+        $name = !empty($rawName) ? $rawName : 'Portfolio Visitor';
+
+        $rawSubject = trim($validated['subject'] ?? '');
+        $subject = !empty($rawSubject) ? $rawSubject : 'Engineering Inquiry & Resume Request';
+
+        $rawMessage = trim($validated['message'] ?? '');
+        $message = !empty($rawMessage) ? $rawMessage : "Hi Maayank, I reviewed your engineering portfolio on tabstick.in/maayank and would love to connect regarding opportunities and technical collaboration. Please share your official resume!";
+
         $inquiry = PortfolioInquiry::create([
-            'name' => $validated['name'],
+            'name' => $name,
             'email' => $validated['email'],
-            'phone' => $validated['phone'] ?? null,
-            'subject' => !empty($validated['subject']) ? $validated['subject'] : 'Direct Engineering Inquiry',
-            'message' => $validated['message'],
+            'phone' => !empty($validated['phone']) ? trim($validated['phone']) : null,
+            'subject' => $subject,
+            'message' => $message,
             'ip_address' => $request->ip(),
         ]);
 
-        // 1. Send confirmation email to user via SMTP
+        // 1. Send confirmation email to user via SMTP with official resume attached
         try {
             Mail::to($inquiry->email)->send(new PortfolioUserConfirmationMail($inquiry));
             $inquiry->update(['email_sent_to_user' => true]);
@@ -453,7 +481,8 @@ class StoreController extends Controller
             Log::error('Failed to send portfolio admin notification email: ' . $e->getMessage());
         }
 
-        $successMsg = 'Thank you, ' . $inquiry->name . '! Your message was received, and a confirmation email has been sent to ' . $inquiry->email . '.';
+        $greeting = !empty($rawName) ? "Thank you, {$rawName}!" : "Thank you!";
+        $successMsg = "{$greeting} Your inquiry was received, and a confirmation email with Maayank's official Resume (PDF) has been dispatched to {$inquiry->email}.";
 
         if ($request->expectsJson() || $request->ajax()) {
             return response()->json([

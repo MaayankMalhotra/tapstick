@@ -34,12 +34,39 @@
                     <!-- Body Content -->
                     <tr>
                         <td style="padding:32px;">
+                            @php
+                                $rawName = trim($inquiry->name);
+                                $displayGreeting = ($rawName && strcasecmp($rawName, 'Portfolio Visitor') !== 0) ? $rawName : 'there';
+                            @endphp
                             <p style="margin:0 0 16px; font-size:16px; color:#F8FAFC;">
-                                Hi <strong>{{ $inquiry->name }}</strong>,
+                                Hi <strong>{{ $displayGreeting }}</strong>,
                             </p>
                             <p style="margin:0 0 20px; font-size:14px; color:#94A3B8; line-height:1.7;">
-                                Thank you for reaching out through my portfolio (<a href="https://tabstick.in/maayank" style="color:#38BDF8; text-decoration:none;">tabstick.in/maayank</a>). I've successfully received your message regarding <strong style="color:#F8FAFC;">{{ $inquiry->subject ?: 'Engineering & Collaboration' }}</strong>.
+                                Thank you for connecting through my portfolio (<a href="https://tabstick.in/maayank" style="color:#38BDF8; text-decoration:none;">tabstick.in/maayank</a>). I've received your inquiry regarding <strong style="color:#F8FAFC;">{{ $inquiry->subject ?: 'Engineering & Collaboration' }}</strong>.
                             </p>
+
+                            <!-- Official Resume Attached Callout Card -->
+                            <div style="background-color:#0B1C2D; border:1px solid #0284C7; border-radius:10px; padding:18px 20px; margin-bottom:24px;">
+                                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                    <tr>
+                                        <td width="36" valign="top" style="font-size:24px; line-height:1;">
+                                            📎
+                                        </td>
+                                        <td>
+                                            <p style="margin:0 0 4px; font-size:14px; font-weight:800; color:#38BDF8;">
+                                                Official Resume Attached (PDF)
+                                            </p>
+                                            <p style="margin:0 0 10px; font-size:13px; color:#CBD5E1; line-height:1.5;">
+                                                As requested, I have attached a copy of my official CV (<strong>Maayank_Malhotra_Resume.pdf</strong>) directly to this email for your review.
+                                            </p>
+                                            <a href="https://tabstick.in/maayank/resume" style="display:inline-block; background-color:#0284C7; color:#FFFFFF; font-size:12px; font-weight:700; text-decoration:none; padding:6px 14px; border-radius:6px;">
+                                                ⬇ Download Direct PDF Copy
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
                             <p style="margin:0 0 24px; font-size:14px; color:#94A3B8; line-height:1.7;">
                                 I personally review all technical inquiries, consulting requests, and full-stack engineering opportunities. I will get back to you within <strong>24 hours</strong>.
                             </p>

@@ -48,6 +48,10 @@ Route::get('/feed/google-shopping.xml', [\App\Http\Controllers\FeedController::c
 Route::get('/feed/google-merchant.xml', [\App\Http\Controllers\FeedController::class, 'googleShopping']);
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
 Route::get('/maayank', [StoreController::class, 'portfolio'])->name('portfolio');
+Route::get('/maayank/resume', [StoreController::class, 'downloadResume'])->name('portfolio.resume');
+Route::get('/maayank/cv', fn() => redirect()->route('portfolio.resume', [], 301));
+Route::get('/resume', fn() => redirect()->route('portfolio.resume', [], 301));
+Route::get('/cv', fn() => redirect()->route('portfolio.resume', [], 301));
 Route::post('/maayank/contact', [StoreController::class, 'submitPortfolioContact'])->middleware('throttle:10,1')->name('portfolio.contact');
 Route::redirect('/mayank', '/maayank', 301);
 Route::redirect('/lander', '/');

@@ -5,6 +5,7 @@ namespace App\Mail;
 use App\Models\PortfolioInquiry;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -19,10 +20,13 @@ class PortfolioUserConfirmationMail extends Mailable
 
     public function envelope(): Envelope
     {
-        $firstName = explode(' ', trim($this->inquiry->name))[0] ?: 'there';
+        $rawName = trim($this->inquiry->name);
+        $firstName = ($rawName && strcasecmp($rawName, 'Portfolio Visitor') !== 0)
+            ? explode(' ', $rawName)[0]
+            : 'there';
 
         return new Envelope(
-            subject: "Thanks for reaching out, {$firstName}! · Maayank Malhotra",
+            subject: "Thanks for reaching out, {$firstName}! · Maayank Malhotra (Resume Attached)",
         );
     }
 
@@ -31,5 +35,19 @@ class PortfolioUserConfirmationMail extends Mailable
         return new Content(
             view: 'emails.portfolio-user-confirmation',
         );
+    }
+
+    public function attachments(): array
+    {
+        $resumePath = public_path('resumes/Maayank_Malhotra_Resume.pdf');
+        if (file_exists($resumePath)) {
+            return [
+                Attachment::fromPath($resumePath)
+                    ->as('Maayank_Malhotra_Resume.pdf')
+                    ->withMime('application/pdf'),
+            ];
+        }
+
+        return [];
     }
 }

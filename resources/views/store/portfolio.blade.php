@@ -1076,10 +1076,195 @@
             color: #FB7185;
         }
 
+        /* Resume Download Buttons & Quick Banner */
+        .btn-nav-resume {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(6, 182, 212, 0.12);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.45);
+            padding: 8px 15px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-nav-resume:hover {
+            background: rgba(6, 182, 212, 0.22);
+            border-color: var(--accent-cyan);
+            color: #FFFFFF;
+            transform: translateY(-1px);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.35);
+        }
+
+        .btn-hero-resume {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.12);
+            color: #34D399;
+            border: 1.5px solid rgba(16, 185, 129, 0.5);
+            padding: 12px 22px;
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-hero-resume:hover {
+            background: #10B981;
+            color: #090D16;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .resume-download-banner {
+            max-width: 740px;
+            margin: 0 auto 28px;
+            background: linear-gradient(135deg, rgba(14, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.7) 100%);
+            border: 1px solid rgba(6, 182, 212, 0.35);
+            border-radius: var(--radius-md);
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            text-align: left;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(12px);
+        }
+
+        .resume-banner-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-family: var(--font-mono);
+            font-weight: 800;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .resume-banner-title {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .resume-banner-desc {
+            font-size: 0.84rem;
+            color: var(--text-secondary);
+            margin-top: 3px;
+        }
+
+        .resume-banner-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .btn-download-cv {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-blue) 100%);
+            color: #090D16;
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            font-size: 0.88rem;
+            font-weight: 800;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.35);
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .btn-download-cv:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.5);
+            filter: brightness(1.08);
+        }
+
+        .btn-view-cv {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-subtle);
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .btn-view-cv:hover {
+            color: var(--text-primary);
+            border-color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .form-topic-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .form-topic-chip {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-subtle);
+            border-radius: 999px;
+            padding: 6px 13px;
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+
+        .form-topic-chip:hover {
+            background: rgba(6, 182, 212, 0.15);
+            border-color: var(--accent-cyan);
+            color: #FFFFFF;
+        }
+
+        .form-topic-chip.active {
+            background: rgba(6, 182, 212, 0.25);
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
         @media (max-width: 650px) {
             .form-grid-2 {
                 grid-template-columns: 1fr;
                 gap: 0;
+            }
+
+            .resume-download-banner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
+            }
+
+            .resume-banner-actions {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .btn-download-cv, .btn-view-cv {
+                width: 100%;
+                justify-content: center;
             }
         }
 
@@ -1232,6 +1417,10 @@
             </ul>
 
             <div class="nav-cta-group">
+                <a href="{{ route('portfolio.resume') }}" download="Maayank_Malhotra_Resume.pdf" class="btn-nav-resume" title="Download Official CV (PDF)">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <span>Download CV</span>
+                </a>
                 <a href="https://github.com/MaayankMalhotra" target="_blank" rel="noopener noreferrer" class="btn-nav-secondary" title="GitHub">
                     <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                     <span>GitHub</span>
@@ -1285,6 +1474,10 @@
                         </div>
 
                         <div class="hero-actions">
+                            <a href="{{ route('portfolio.resume') }}" download="Maayank_Malhotra_Resume.pdf" class="btn-hero-resume" title="Download Official CV (PDF)">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                <span>Download Official CV</span>
+                            </a>
                             <a href="#skills" class="btn-hero-primary">
                                 <span>⚡ Explore Skills</span>
                             </a>
@@ -1918,10 +2111,28 @@
                 <div class="contact-box">
                     <h2 class="contact-title">Let's Build Something High-Impact.</h2>
                     <p class="contact-subtitle">
-                        Looking for a senior full-stack engineer, a microservices backend lead, or want to collaborate on innovative web products? Drop a message below — an automated receipt copy will be sent to your email via SMTP.
+                        Looking for a senior full-stack engineer, a microservices backend lead, or want to collaborate on innovative web products? Download my official CV directly below, or drop your email to receive it instantly with my credentials via SMTP.
                     </p>
 
-                    <!-- Interactive Contact Form -->
+                    <!-- Direct Official Resume Download Banner -->
+                    <div class="resume-download-banner">
+                        <div class="resume-banner-content">
+                            <span class="resume-banner-badge">📄 Official Verified Credentials</span>
+                            <div class="resume-banner-title">Maayank Malhotra — Full Stack Software Engineer</div>
+                            <div class="resume-banner-desc">4+ Years Exp • Node.js, Express, Laravel, React.js, AWS Cloud, WebRTC • PDF (58 KB)</div>
+                        </div>
+                        <div class="resume-banner-actions">
+                            <a href="{{ route('portfolio.resume') }}" download="Maayank_Malhotra_Resume.pdf" class="btn-download-cv" title="Download Resume PDF">
+                                <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                <span>Download CV (PDF)</span>
+                            </a>
+                            <a href="{{ route('portfolio.resume') }}?inline=1" target="_blank" class="btn-view-cv" title="View PDF in New Tab">
+                                <span>View PDF ↗</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Low-Friction Interactive Contact Form -->
                     <form id="portfolio-contact-form" class="portfolio-contact-form" action="{{ route('portfolio.contact') }}" method="POST">
                         @csrf
                         <div id="form-alert" class="form-status-alert"></div>
@@ -1934,27 +2145,28 @@
 
                         <div class="form-grid-2">
                             <div class="form-group">
-                                <label for="contact-name" class="form-label">Your Name <span class="req">*</span></label>
-                                <input type="text" id="contact-name" name="name" class="form-input" placeholder="e.g. Alex Johnson" required maxlength="100">
+                                <label for="contact-name" class="form-label">Your Name <small style="color:var(--text-muted);font-weight:normal;text-transform:none;">(Optional)</small></label>
+                                <input type="text" id="contact-name" name="name" class="form-input" placeholder="e.g. Alex Johnson" maxlength="100">
                             </div>
 
                             <div class="form-group">
-                                <label for="contact-email" class="form-label">Your Email <span class="req">*</span></label>
-                                <input type="email" id="contact-email" name="email" class="form-input" placeholder="alex@company.com" required maxlength="150">
+                                <label for="contact-email" class="form-label">Your Email <span class="req">*</span> <small style="color:var(--accent-cyan);font-weight:normal;text-transform:none;">(Resume sent here)</small></label>
+                                <input type="email" id="contact-email" name="email" class="form-input" placeholder="you@company.com" required maxlength="150">
                             </div>
                         </div>
 
                         <div class="form-grid-2">
                             <div class="form-group">
-                                <label for="contact-phone" class="form-label">Phone / WhatsApp <small style="color:var(--text-muted);">(Optional)</small></label>
+                                <label for="contact-phone" class="form-label">Phone / WhatsApp <small style="color:var(--text-muted);font-weight:normal;text-transform:none;">(Optional)</small></label>
                                 <input type="tel" id="contact-phone" name="phone" class="form-input" placeholder="+91 98765 43210" maxlength="30">
                             </div>
 
                             <div class="form-group">
-                                <label for="contact-subject" class="form-label">Inquiry Topic</label>
+                                <label for="contact-subject" class="form-label">Inquiry Topic <small style="color:var(--text-muted);font-weight:normal;text-transform:none;">(Optional)</small></label>
                                 <select id="contact-subject" name="subject" class="form-select">
-                                    <option value="Senior Full-Stack / Backend Engineering Role">💼 Full-Stack / Backend Engineering Role</option>
+                                    <option value="Senior Full-Stack / Backend Engineering Role" selected>💼 Full-Stack / Backend Engineering Role</option>
                                     <option value="Freelance / SaaS Architecture Consulting">🛠️ SaaS Architecture / Consulting</option>
+                                    <option value="Quick Official Resume Request">⚡ Quick Official Resume Request</option>
                                     <option value="WebRTC & Real-Time Media Collaboration">📡 WebRTC &amp; Real-Time Systems</option>
                                     <option value="General Engineering Chat">💬 General Tech Chat / Connect</option>
                                 </select>
@@ -1962,19 +2174,41 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="contact-message" class="form-label">Project Details / Message <span class="req">*</span></label>
-                            <textarea id="contact-message" name="message" class="form-textarea" placeholder="Tell me about your tech stack, requirements, timeline, or engineering role..." required minlength="5" maxlength="3000"></textarea>
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+                                <label for="contact-message" class="form-label" style="margin-bottom:0;">Message / Details <small style="color:var(--text-muted);font-weight:normal;text-transform:none;">(Optional)</small></label>
+                                <span style="font-size:0.75rem; color:var(--accent-cyan); font-family:var(--font-mono);">⚡ Pre-filled for 1-click send</span>
+                            </div>
+
+                            <!-- Quick One-Click Template Chips -->
+                            <div class="form-topic-chips">
+                                <span class="form-topic-chip active" data-subject="Senior Full-Stack / Backend Engineering Role" data-msg="Hi Maayank, I reviewed your engineering portfolio and would love to connect regarding an opportunity / technical collaboration. Please share your official resume and let's schedule a chat!">💼 Engineering Role</span>
+                                <span class="form-topic-chip" data-subject="Freelance / SaaS Architecture Consulting" data-msg="Hi Maayank, I'm building a modern web application / SaaS platform and would like to consult on high-scale architecture, APIs, and cloud infrastructure. Let's connect!">🛠️ SaaS &amp; Consulting</span>
+                                <span class="form-topic-chip" data-subject="Quick Official Resume Request" data-msg="Hi Maayank, please send over your official resume and technical case studies to my email. Looking forward to reviewing!">⚡ Quick CV Request</span>
+                                <span class="form-topic-chip" data-subject="WebRTC & Real-Time Media Collaboration" data-msg="Hi Maayank, impressed by your real-time WebRTC audio/video work. We'd like to collaborate or explore synergies.">📡 WebRTC / Media</span>
+                            </div>
+
+                            <textarea id="contact-message" name="message" class="form-textarea" rows="4" maxlength="3000">Hi Maayank, I reviewed your engineering portfolio and would love to connect regarding an opportunity / technical collaboration. Please share your official resume and let's schedule a chat!</textarea>
                         </div>
 
                         <button type="submit" id="btn-submit-contact" class="btn-submit-contact">
-                            <span>⚡ Send Direct Message &amp; Trigger Confirmation Email</span>
+                            <span>⚡ Send Message &amp; Receive Official Resume (PDF)</span>
                         </button>
                         <p style="margin: 12px 0 0; font-size: 0.78rem; color: var(--text-muted); text-align: center; font-family: var(--font-mono);">
-                            🔒 Direct SMTP delivery • An automated receipt copy will be sent to your email
+                            🔒 Direct SMTP Delivery • Maayank's official Resume (PDF) will be attached directly to your email
                         </p>
                     </form>
 
                     <div class="contact-methods">
+                        <div class="contact-method-item">
+                            <div class="method-info">
+                                <span class="method-type">Official Resume</span>
+                                <span class="method-val">Maayank_Malhotra_Resume.pdf</span>
+                            </div>
+                            <a href="{{ route('portfolio.resume') }}" download="Maayank_Malhotra_Resume.pdf" class="btn-action-sm">
+                                <span>Download ↓</span>
+                            </a>
+                        </div>
+
                         <div class="contact-method-item">
                             <div class="method-info">
                                 <span class="method-type">Direct Email</span>
@@ -2125,11 +2359,40 @@
             });
         }
 
-        // Contact Form AJAX Submission
+        // Contact Form Interactive Logic & Pre-population
         const contactForm = document.getElementById('portfolio-contact-form');
         const formAlert = document.getElementById('form-alert');
         const submitBtn = document.getElementById('btn-submit-contact');
+        const topicChips = document.querySelectorAll('.form-topic-chip');
+        const subjectSelect = document.getElementById('contact-subject');
+        const messageTextarea = document.getElementById('contact-message');
 
+        const defaultTemplateMsg = "Hi Maayank, I reviewed your engineering portfolio and would love to connect regarding an opportunity / technical collaboration. Please share your official resume and let's schedule a chat!";
+
+        // Pre-populate message if empty on load
+        if (messageTextarea && !messageTextarea.value.trim()) {
+            messageTextarea.value = defaultTemplateMsg;
+        }
+
+        // 1-Click Topic Chips to switch subject and pre-populate message
+        topicChips.forEach(chip => {
+            chip.addEventListener('click', function() {
+                topicChips.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+
+                const targetSubject = this.getAttribute('data-subject');
+                const targetMsg = this.getAttribute('data-msg');
+
+                if (subjectSelect && targetSubject) {
+                    subjectSelect.value = targetSubject;
+                }
+                if (messageTextarea && targetMsg) {
+                    messageTextarea.value = targetMsg;
+                }
+            });
+        });
+
+        // AJAX Submission
         if (contactForm) {
             contactForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
@@ -2140,7 +2403,7 @@
 
                 const originalBtnText = submitBtn.innerHTML;
                 submitBtn.disabled = true;
-                submitBtn.innerHTML = '<span>⏳ Shooting email via SMTP...</span>';
+                submitBtn.innerHTML = '<span>⏳ Shooting email &amp; official CV via SMTP...</span>';
 
                 const formData = new FormData(contactForm);
 
@@ -2161,6 +2424,14 @@
                         formAlert.innerHTML = `<strong>🎉 Message Sent!</strong> ${data.message}`;
                         formAlert.style.display = 'block';
                         contactForm.reset();
+
+                        // Restore sensible pre-populated template after reset
+                        if (messageTextarea) {
+                            messageTextarea.value = defaultTemplateMsg;
+                        }
+                        topicChips.forEach((c, idx) => {
+                            c.classList.toggle('active', idx === 0);
+                        });
                     } else {
                         const errorMsg = data.message || (data.errors ? Object.values(data.errors).flat().join('<br>') : 'Something went wrong. Please check your inputs or email me directly.');
                         formAlert.className = 'form-status-alert error';

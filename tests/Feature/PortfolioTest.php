@@ -93,20 +93,30 @@ class PortfolioTest extends TestCase
         $response->assertSee(url('/maayank'));
     }
 
-    public function test_portfolio_page_renders_interactive_contact_form(): void
+    public function test_portfolio_page_renders_interactive_contact_form_and_resume_download_options(): void
     {
         $response = $this->get('/maayank');
         $response->assertOk();
+
+        // Check resume download options
+        $response->assertSee(route('portfolio.resume'));
+        $response->assertSee('Download Official CV');
+        $response->assertSee('Download CV (PDF)');
+        $response->assertSee('Official Verified Credentials');
+
+        // Check form elements and pre-populated content
         $response->assertSee('id="portfolio-contact-form"', false);
         $response->assertSee('name="name"', false);
         $response->assertSee('name="email"', false);
         $response->assertSee('name="phone"', false);
         $response->assertSee('name="subject"', false);
         $response->assertSee('name="message"', false);
-        $response->assertSee('Send Direct Message &amp; Trigger Confirmation Email', false);
+        $response->assertSee('Pre-filled for 1-click send');
+        $response->assertSee('Hi Maayank, I reviewed your engineering portfolio');
+        $response->assertSee('Send Message &amp; Receive Official Resume (PDF)', false);
     }
 
-    public function test_user_can_submit_contact_form_and_email_is_shot_to_user_and_admin(): void
+    public function test_user_can_submit_contact_form_and_email_is_shot_with_resume_attachment(): void
     {
         \Illuminate\Support\Facades\Mail::fake();
 
@@ -131,10 +141,14 @@ class PortfolioTest extends TestCase
             'subject' => 'Senior Backend Role',
         ]);
 
-        // Assert confirmation email was shot to the USER
+        // Assert confirmation email was shot to the USER with resume attached
         \Illuminate\Support\Facades\Mail::assertSent(\App\Mail\PortfolioUserConfirmationMail::class, function ($mail) {
+            $attachments = $mail->attachments();
+            $hasResumeAttachment = count($attachments) > 0;
+
             return $mail->hasTo('sarah@skynet.com') &&
-                   $mail->inquiry->name === 'Sarah Connor';
+                   $mail->inquiry->name === 'Sarah Connor' &&
+                   $hasResumeAttachment;
         });
 
         // Assert notification email was shot to ADMIN
@@ -144,15 +158,52 @@ class PortfolioTest extends TestCase
         });
     }
 
-    public function test_portfolio_contact_form_validates_required_fields(): void
+    public function test_user_can_submit_with_only_email_and_defaults_are_applied(): void
+    {
+        \Illuminate\Support\Facades\Mail::fake();
+
+        $payload = [
+            'email' => 'recruiter@topfirm.com',
+        ];
+
+        $response = $this->postJson(route('portfolio.contact'), $payload);
+        $response->assertOk();
+        $response->assertJson([
+            'success' => true,
+        ]);
+
+        // Assert database recorded with default fallbacks
+        $this->assertDatabaseHas('portfolio_inquiries', [
+            'name' => 'Portfolio Visitor',
+            'email' => 'recruiter@topfirm.com',
+            'subject' => 'Engineering Inquiry & Resume Request',
+        ]);
+
+        // Assert confirmation email was shot with resume
+        \Illuminate\Support\Facades\Mail::assertSent(\App\Mail\PortfolioUserConfirmationMail::class, function ($mail) {
+            return $mail->hasTo('recruiter@topfirm.com') && count($mail->attachments()) > 0;
+        });
+    }
+
+    public function test_portfolio_contact_form_validates_required_email(): void
     {
         $response = $this->postJson(route('portfolio.contact'), [
-            'name' => '',
-            'email' => 'invalid-email',
-            'message' => 'hi',
+            'email' => 'not-an-email',
         ]);
 
         $response->assertStatus(422);
-        $response->assertJsonValidationErrors(['name', 'email', 'message']);
+        $response->assertJsonValidationErrors(['email']);
+    }
+
+    public function test_resume_download_endpoint_returns_pdf(): void
+    {
+        $response = $this->get('/maayank/resume');
+        $response->assertOk();
+        $response->assertHeader('content-type', 'application/pdf');
+
+        // Test aliases redirect 301
+        $this->get('/resume')->assertRedirect('/maayank/resume')->assertStatus(301);
+        $this->get('/cv')->assertRedirect('/maayank/resume')->assertStatus(301);
+        $this->get('/maayank/cv')->assertRedirect('/maayank/resume')->assertStatus(301);
     }
 }
