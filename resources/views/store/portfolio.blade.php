@@ -1548,7 +1548,7 @@
             position: fixed;
             bottom: 24px;
             right: 24px;
-            z-index: 9998;
+            z-index: 99998;
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -1610,7 +1610,7 @@
             max-width: calc(100vw - 32px);
             height: 560px;
             max-height: calc(100vh - 110px);
-            z-index: 9999;
+            z-index: 100000;
             background: linear-gradient(180deg, rgba(17, 24, 39, 0.98) 0%, rgba(10, 14, 26, 0.99) 100%);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -2011,7 +2011,7 @@
                                 <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 <span>Download Official CV</span>
                             </a>
-                            <button type="button" id="hero-open-ai-chat" class="btn-hero-ai" title="Chat with Maayank's AI Career Assistant (Google Gemini 3.6 Flash)">
+                            <button type="button" id="hero-open-ai-chat" class="btn-hero-ai" onclick="window.openAiChat()" title="Chat with Maayank's AI Career Assistant (Google Gemini 3.6 Flash)">
                                 <span>✨ Ask My AI (Gemini)</span>
                             </button>
                             <a href="#skills" class="btn-hero-primary">
@@ -2929,6 +2929,124 @@
     {!! json_encode($structuredData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
     </script>
 
+    <!-- Auto On-Load Connect & Official Resume Modal -->
+    <div id="connect-modal" class="connect-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+        <div class="connect-modal-card">
+            <button type="button" class="modal-close-btn" id="modal-close-btn" onclick="window.closeModal()" aria-label="Close dialog">✕</button>
+
+            <div class="modal-tag">
+                <span class="status-pulse" style="width:6px; height:6px;"></span>
+                <span>Direct Founder Desk • Instant CV Dispatch</span>
+            </div>
+
+            <h3 class="modal-title" id="modal-heading">Connect with Maayank Malhotra</h3>
+            <p class="modal-subtitle">
+                Looking to discuss a senior engineering role, SaaS architecture, or want my verified official CV? Drop your email below — a copy of my resume (PDF) will be shot to your inbox via SMTP instantly.
+            </p>
+
+            <form id="modal-contact-form" action="{{ route('portfolio.contact') }}" method="POST">
+                @csrf
+                <div id="modal-form-alert" class="form-status-alert"></div>
+
+                <div class="form-group" style="margin-bottom: 12px;">
+                    <label for="modal-email" class="form-label" style="font-size: 0.78rem;">Your Email <span class="req">*</span> <small style="color:var(--accent-cyan);text-transform:none;">(Resume sent here)</small></label>
+                    <input type="email" id="modal-email" name="email" class="form-input" placeholder="you@company.com" required maxlength="150">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 12px;">
+                    <label for="modal-name" class="form-label" style="font-size: 0.78rem;">Your Name <small style="color:var(--text-muted);text-transform:none;">(Optional)</small></label>
+                    <input type="text" id="modal-name" name="name" class="form-input" placeholder="e.g. Alex Johnson" maxlength="100">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 14px;">
+                    <label class="form-label" style="font-size: 0.78rem;">Inquiry Topic <small style="color:var(--text-muted);text-transform:none;">(Optional)</small></label>
+                    <div class="form-topic-chips" style="margin-bottom:0;">
+                        <span class="modal-topic-chip form-topic-chip active" data-subject="Senior Full-Stack / Backend Engineering Role" data-msg="Hi Maayank, I came across your portfolio and would like to connect regarding an engineering role / collaboration. Please share your official resume!">💼 Engineering Role</span>
+                        <span class="modal-topic-chip form-topic-chip" data-subject="Freelance / SaaS Architecture Consulting" data-msg="Hi Maayank, I have a web / cloud architecture project and would love to consult with you.">🛠️ Consulting</span>
+                        <span class="modal-topic-chip form-topic-chip" data-subject="Quick Official Resume Request" data-msg="Hi Maayank, please send over your official resume and latest project case studies to my email.">⚡ Get Official CV</span>
+                    </div>
+                    <input type="hidden" id="modal-subject" name="subject" value="Senior Full-Stack / Backend Engineering Role">
+                    <input type="hidden" id="modal-message" name="message" value="Hi Maayank, I came across your portfolio and would like to connect regarding an engineering role / collaboration. Please share your official resume!">
+                </div>
+
+                <button type="submit" id="modal-submit-btn" class="btn-submit-contact" style="padding: 12px 20px;">
+                    <span>⚡ Send Me Official CV &amp; Connect</span>
+                </button>
+            </form>
+
+            <div class="modal-direct-row">
+                <div>
+                    <span>Direct: </span>
+                    <a href="{{ route('portfolio.resume') }}" download="Maayank_Malhotra_Resume.pdf" class="modal-direct-link">
+                        <span>📄 Download PDF (58 KB)</span>
+                    </a>
+                </div>
+                <button type="button" class="modal-skip-btn" id="modal-skip-btn" onclick="window.closeModal()">
+                    Skip &amp; Explore Portfolio →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating AI Assistant Launcher Button -->
+    <button type="button" class="ai-launcher-btn" id="ai-launcher-btn" onclick="window.toggleAiChat()" aria-label="Open AI Career Assistant (Google Gemini 3.6 Flash)">
+        <span class="ai-launcher-pulse" aria-hidden="true"></span>
+        <span>✨ Ask Maayank's AI</span>
+        <span class="ai-launcher-badge">Gemini 3.6</span>
+    </button>
+
+    <!-- AI Career Assistant Floating Card Window -->
+    <div id="ai-chat-card" class="ai-chat-card" role="dialog" aria-modal="false" aria-labelledby="ai-chat-title">
+        <div class="ai-chat-header">
+            <div class="ai-chat-header-info">
+                <div class="ai-chat-avatar" aria-hidden="true">🤖</div>
+                <div class="ai-chat-title-group">
+                    <h4 id="ai-chat-title">
+                        Maayank's AI Assistant
+                        <span class="status-pulse" style="width:6px;height:6px;background:#10B981;"></span>
+                    </h4>
+                    <p class="ai-chat-subtitle">
+                        <span>Powered by Google Gemini 3.6 Flash</span>
+                    </p>
+                </div>
+            </div>
+            <button type="button" class="ai-chat-close-btn" id="ai-chat-close-btn" onclick="window.closeAiChat()" aria-label="Close chat">✕</button>
+        </div>
+
+        <!-- Suggested Prompt Chips -->
+        <div class="ai-chat-chips" id="ai-chat-chips">
+            <button type="button" class="ai-chip" data-prompt="What is Maayank's primary tech stack and experience?">🚀 Tech Stack</button>
+            <button type="button" class="ai-chip" data-prompt="Tell me about Maayank scaling systems to 1.5M+ transactions.">⚡ 1.5M+ Scale</button>
+            <button type="button" class="ai-chip" data-prompt="What were Maayank's key contributions at Thinktail and Cracode?">💼 Work History</button>
+            <button type="button" class="ai-chip" data-prompt="How did Maayank engineer the Tabstick platform?">📦 Tabstick Architecture</button>
+            <button type="button" class="ai-chip" data-prompt="How can I download Maayank's official resume and hire him?">📄 Official CV &amp; Hiring</button>
+        </div>
+
+        <!-- Chat Messages Container -->
+        <div class="ai-chat-messages" id="ai-chat-messages">
+            <div class="ai-message-row assistant">
+                <div class="ai-message-avatar">✨</div>
+                <div class="ai-message-bubble">
+                    Hello! 👋 I'm <strong>Maayank's AI Career Assistant</strong> powered in real time by <strong>Google Gemini 3.6 Flash</strong>.<br><br>
+                    Ask me anything about Maayank's 4+ years of full-stack engineering, 1.5M+ transaction scaling at Cracode, WebRTC real-time systems, or how to collaborate with him!
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Input Form -->
+        <div class="ai-chat-input-container">
+            <form id="ai-chat-form" class="ai-chat-form">
+                <input type="text" id="ai-chat-input" class="ai-chat-input" placeholder="Ask anything about Maayank..." maxlength="500" autocomplete="off">
+                <button type="submit" id="ai-chat-send-btn" class="ai-chat-send-btn" aria-label="Send prompt">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"></path></svg>
+                </button>
+            </form>
+            <div class="ai-chat-footer-tag">
+                <span>⚡ Live Inference • Gemini 3.6 Flash • Press Enter to Send</span>
+            </div>
+        </div>
+    </div>
+
     <!-- Client Scripts for Interactive Filtering and Copy -->
     <script>
         // Skills Interactive Filtering
@@ -3067,20 +3185,26 @@
         const modalMessage = document.getElementById('modal-message');
         const modalEmailInput = document.getElementById('modal-email');
 
-        function openModal() {
-            if (connectModal) {
-                connectModal.classList.add('open');
-                if (modalEmailInput) {
-                    setTimeout(() => modalEmailInput.focus(), 350);
-                }
+        window.openModal = function() {
+            const modal = document.getElementById('connect-modal');
+            if (modal) {
+                modal.classList.add('open');
+                setTimeout(() => {
+                    const emailInput = document.getElementById('modal-email');
+                    if (emailInput) emailInput.focus();
+                }, 350);
             }
-        }
+        };
 
-        function closeModal() {
-            if (connectModal) {
-                connectModal.classList.remove('open');
+        window.closeModal = function() {
+            const modal = document.getElementById('connect-modal');
+            if (modal) {
+                modal.classList.remove('open');
             }
-        }
+        };
+
+        const openModal = window.openModal;
+        const closeModal = window.closeModal;
 
         // Open modal automatically on page load (600ms delay for smooth entrance)
         window.addEventListener('DOMContentLoaded', () => {
@@ -3192,39 +3316,68 @@
         let chatHistory = [];
         let isAiResponding = false;
 
-        function openAiChat() {
-            if (!aiChatCard) return;
-            aiChatCard.classList.add('open');
+        window.openAiChat = function() {
+            const card = document.getElementById('ai-chat-card');
+            if (!card) return;
+            card.classList.add('open');
             setTimeout(() => {
-                aiChatInput?.focus();
+                const input = document.getElementById('ai-chat-input');
+                if (input) input.focus();
             }, 150);
-        }
+        };
 
-        function closeAiChat() {
-            if (!aiChatCard) return;
-            aiChatCard.classList.remove('open');
-        }
+        window.closeAiChat = function() {
+            const card = document.getElementById('ai-chat-card');
+            if (!card) return;
+            card.classList.remove('open');
+        };
+
+        window.toggleAiChat = function() {
+            const card = document.getElementById('ai-chat-card');
+            if (!card) return;
+            if (card.classList.contains('open')) {
+                window.closeAiChat();
+            } else {
+                window.openAiChat();
+            }
+        };
+
+        const openAiChat = window.openAiChat;
+        const closeAiChat = window.closeAiChat;
+        const toggleAiChat = window.toggleAiChat;
 
         if (aiLauncherBtn) {
-            aiLauncherBtn.addEventListener('click', () => {
-                if (aiChatCard.classList.contains('open')) {
-                    closeAiChat();
-                } else {
-                    openAiChat();
-                }
+            aiLauncherBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                window.toggleAiChat();
             });
         }
 
         if (aiChatCloseBtn) {
-            aiChatCloseBtn.addEventListener('click', closeAiChat);
+            aiChatCloseBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                window.closeAiChat();
+            });
         }
 
         if (heroOpenAiChat) {
             heroOpenAiChat.addEventListener('click', (e) => {
                 e.preventDefault();
-                openAiChat();
+                e.stopPropagation();
+                window.openAiChat();
             });
         }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const card = document.getElementById('ai-chat-card');
+                if (card && card.classList.contains('open')) {
+                    window.closeAiChat();
+                }
+            }
+        });
 
         function scrollToBottom() {
             if (aiChatMessages) {
@@ -3373,123 +3526,5 @@
             });
         }
     </script>
-
-    <!-- Auto On-Load Connect & Official Resume Modal -->
-    <div id="connect-modal" class="connect-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
-        <div class="connect-modal-card">
-            <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Close dialog">✕</button>
-
-            <div class="modal-tag">
-                <span class="status-pulse" style="width:6px; height:6px;"></span>
-                <span>Direct Founder Desk • Instant CV Dispatch</span>
-            </div>
-
-            <h3 class="modal-title" id="modal-heading">Connect with Maayank Malhotra</h3>
-            <p class="modal-subtitle">
-                Looking to discuss a senior engineering role, SaaS architecture, or want my verified official CV? Drop your email below — a copy of my resume (PDF) will be shot to your inbox via SMTP instantly.
-            </p>
-
-            <form id="modal-contact-form" action="{{ route('portfolio.contact') }}" method="POST">
-                @csrf
-                <div id="modal-form-alert" class="form-status-alert"></div>
-
-                <div class="form-group" style="margin-bottom: 12px;">
-                    <label for="modal-email" class="form-label" style="font-size: 0.78rem;">Your Email <span class="req">*</span> <small style="color:var(--accent-cyan);text-transform:none;">(Resume sent here)</small></label>
-                    <input type="email" id="modal-email" name="email" class="form-input" placeholder="you@company.com" required maxlength="150">
-                </div>
-
-                <div class="form-group" style="margin-bottom: 12px;">
-                    <label for="modal-name" class="form-label" style="font-size: 0.78rem;">Your Name <small style="color:var(--text-muted);text-transform:none;">(Optional)</small></label>
-                    <input type="text" id="modal-name" name="name" class="form-input" placeholder="e.g. Alex Johnson" maxlength="100">
-                </div>
-
-                <div class="form-group" style="margin-bottom: 14px;">
-                    <label class="form-label" style="font-size: 0.78rem;">Inquiry Topic <small style="color:var(--text-muted);text-transform:none;">(Optional)</small></label>
-                    <div class="form-topic-chips" style="margin-bottom:0;">
-                        <span class="modal-topic-chip form-topic-chip active" data-subject="Senior Full-Stack / Backend Engineering Role" data-msg="Hi Maayank, I came across your portfolio and would like to connect regarding an engineering role / collaboration. Please share your official resume!">💼 Engineering Role</span>
-                        <span class="modal-topic-chip form-topic-chip" data-subject="Freelance / SaaS Architecture Consulting" data-msg="Hi Maayank, I have a web / cloud architecture project and would love to consult with you.">🛠️ Consulting</span>
-                        <span class="modal-topic-chip form-topic-chip" data-subject="Quick Official Resume Request" data-msg="Hi Maayank, please send over your official resume and latest project case studies to my email.">⚡ Get Official CV</span>
-                    </div>
-                    <input type="hidden" id="modal-subject" name="subject" value="Senior Full-Stack / Backend Engineering Role">
-                    <input type="hidden" id="modal-message" name="message" value="Hi Maayank, I came across your portfolio and would like to connect regarding an engineering role / collaboration. Please share your official resume!">
-                </div>
-
-                <button type="submit" id="modal-submit-btn" class="btn-submit-contact" style="padding: 12px 20px;">
-                    <span>⚡ Send Me Official CV &amp; Connect</span>
-                </button>
-            </form>
-
-            <div class="modal-direct-row">
-                <div>
-                    <span>Direct: </span>
-                    <a href="{{ route('portfolio.resume') }}" download="Maayank_Malhotra_Resume.pdf" class="modal-direct-link">
-                        <span>📄 Download PDF (58 KB)</span>
-                    </a>
-                </div>
-                <button type="button" class="modal-skip-btn" id="modal-skip-btn">
-                    Skip &amp; Explore Portfolio →
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Floating AI Assistant Launcher Button -->
-    <button type="button" class="ai-launcher-btn" id="ai-launcher-btn" aria-label="Open AI Career Assistant (Google Gemini 3.6 Flash)">
-        <span class="ai-launcher-pulse" aria-hidden="true"></span>
-        <span>✨ Ask Maayank's AI</span>
-        <span class="ai-launcher-badge">Gemini 3.6</span>
-    </button>
-
-    <!-- AI Career Assistant Floating Card Window -->
-    <div id="ai-chat-card" class="ai-chat-card" role="dialog" aria-modal="false" aria-labelledby="ai-chat-title">
-        <div class="ai-chat-header">
-            <div class="ai-chat-header-info">
-                <div class="ai-chat-avatar" aria-hidden="true">🤖</div>
-                <div class="ai-chat-title-group">
-                    <h4 id="ai-chat-title">
-                        Maayank's AI Assistant
-                        <span class="status-pulse" style="width:6px;height:6px;background:#10B981;"></span>
-                    </h4>
-                    <p class="ai-chat-subtitle">
-                        <span>Powered by Google Gemini 3.6 Flash</span>
-                    </p>
-                </div>
-            </div>
-            <button type="button" class="ai-chat-close-btn" id="ai-chat-close-btn" aria-label="Close chat">✕</button>
-        </div>
-
-        <!-- Suggested Prompt Chips -->
-        <div class="ai-chat-chips" id="ai-chat-chips">
-            <button type="button" class="ai-chip" data-prompt="What is Maayank's primary tech stack and experience?">🚀 Tech Stack</button>
-            <button type="button" class="ai-chip" data-prompt="Tell me about Maayank scaling systems to 1.5M+ transactions.">⚡ 1.5M+ Scale</button>
-            <button type="button" class="ai-chip" data-prompt="What were Maayank's key contributions at Thinktail and Cracode?">💼 Work History</button>
-            <button type="button" class="ai-chip" data-prompt="How did Maayank engineer the Tabstick platform?">📦 Tabstick Architecture</button>
-            <button type="button" class="ai-chip" data-prompt="How can I download Maayank's official resume and hire him?">📄 Official CV &amp; Hiring</button>
-        </div>
-
-        <!-- Chat Messages Container -->
-        <div class="ai-chat-messages" id="ai-chat-messages">
-            <div class="ai-message-row assistant">
-                <div class="ai-message-avatar">✨</div>
-                <div class="ai-message-bubble">
-                    Hello! 👋 I'm <strong>Maayank's AI Career Assistant</strong> powered in real time by <strong>Google Gemini 3.6 Flash</strong>.<br><br>
-                    Ask me anything about Maayank's 4+ years of full-stack engineering, 1.5M+ transaction scaling at Cracode, WebRTC real-time systems, or how to collaborate with him!
-                </div>
-            </div>
-        </div>
-
-        <!-- Chat Input Form -->
-        <div class="ai-chat-input-container">
-            <form id="ai-chat-form" class="ai-chat-form">
-                <input type="text" id="ai-chat-input" class="ai-chat-input" placeholder="Ask anything about Maayank..." maxlength="500" autocomplete="off">
-                <button type="submit" id="ai-chat-send-btn" class="ai-chat-send-btn" aria-label="Send prompt">
-                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"></path></svg>
-                </button>
-            </form>
-            <div class="ai-chat-footer-tag">
-                <span>⚡ Live Inference • Gemini 3.6 Flash • Press Enter to Send</span>
-            </div>
-        </div>
-    </div>
 </body>
 </html>
