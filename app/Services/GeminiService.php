@@ -14,7 +14,7 @@ class GeminiService
     public function __construct()
     {
         $this->apiKey = (string) config('services.gemini.key', env('GEMINI_API_KEY', ''));
-        $this->model = (string) config('services.gemini.model', 'gemini-3-flash-preview');
+        $this->model = (string) config('services.gemini.model', 'gemini-flash-lite-latest');
     }
 
     /**
@@ -24,12 +24,24 @@ class GeminiService
     {
         $preferred = $this->model;
         $fallbacks = [
-            'gemini-3-flash-preview',
+            'gemini-flash-lite-latest',
+            'gemini-3.5-flash-lite',
             'gemini-3.1-flash-lite',
             'gemini-flash-latest',
             'gemini-3.5-flash',
             'gemini-3.6-flash',
+            'gemini-3-flash-preview',
         ];
+
+        // Ensure robust flash-lite models are prioritized over quota-exhausted models
+        if (in_array($preferred, ['gemini-3.6-flash', 'gemini-3-flash-preview', 'gemini-3.7-flash'])) {
+            return array_values(array_unique(array_merge([
+                'gemini-flash-lite-latest',
+                'gemini-3.5-flash-lite',
+                'gemini-3.1-flash-lite',
+                $preferred,
+            ], $fallbacks)));
+        }
 
         return array_values(array_unique(array_merge([$preferred], $fallbacks)));
     }
@@ -92,10 +104,11 @@ Your job is to speak knowledgeably, professionally, concisely, and accurately ab
 
 ### GUIDELINES FOR RESPONSES:
 - Be helpful, polite, confident, and direct.
-- Keep responses focused (typically 2-4 sentences or short bullet points), perfect for a chat interface.
+- Keep responses informative and clear (typically 2-4 sentences or structured bullet points), perfect for a chat interface.
 - Highlight metrics (1.5M+ transactions, 1M+ API calls, 20% latency reduction) when relevant.
 - Offer to connect them directly with Maayank via email (maayankmalhotra095@gmail.com) or download his official resume (https://tabstick.in/maayank/resume).
 - Never fabricate experience or say he has worked at companies not listed above.
+- NEVER output internal thinking, planning steps, draft tags, or prefixes like "Refinement:" or "Draft:". Directly output the final formatted answer.
 PROMPT;
     }
 
@@ -143,7 +156,7 @@ PROMPT;
                         'contents' => $contents,
                         'generationConfig' => [
                             'temperature' => 0.4,
-                            'maxOutputTokens' => 500,
+                            'maxOutputTokens' => 2048,
                         ],
                     ]);
 
@@ -151,7 +164,9 @@ PROMPT;
                     $data = $response->json();
                     $reply = $data['candidates'][0]['content']['parts'][0]['text'] ?? null;
                     if (!empty($reply)) {
-                        return trim($reply);
+                        // Strip any accidental thinking/refinement headers
+                        $cleanedReply = preg_replace('/^(?:Refinement|Draft|Thinking Process)[^\n]*:\s*\*?\s*\n*/i', '', $reply);
+                        return trim($cleanedReply);
                     }
                 } else {
                     Log::warning("Gemini model {$model} returned status " . $response->status());
@@ -218,7 +233,7 @@ PROMPT;
                         ],
                         'generationConfig' => [
                             'temperature' => 0.5,
-                            'maxOutputTokens' => 150,
+                            'maxOutputTokens' => 500,
                         ],
                     ]);
 

@@ -3243,7 +3243,7 @@
             <div class="ai-message-row assistant">
                 <div class="ai-message-avatar">✨</div>
                 <div class="ai-message-bubble">
-                    Hello! 👋 I'm <strong>Maayank's AI Career Assistant</strong> powered in real time by <strong>Google Gemini 3.6 Flash</strong>.<br><br>
+                    Hello! 👋 I'm <strong>Maayank's AI Career Assistant</strong> powered in real time by <strong>Google Gemini AI</strong>.<br><br>
                     Ask me anything about Maayank's 4+ years of full-stack engineering, 1.5M+ transaction scaling at Cracode, WebRTC real-time systems, or how to collaborate with him!
                 </div>
             </div>
@@ -3258,7 +3258,7 @@
                 </button>
             </form>
             <div class="ai-chat-footer-tag">
-                <span>⚡ Live Inference • Gemini 3.6 Flash • Press Enter to Send</span>
+                <span>⚡ Live Inference • Google Gemini AI • Press Enter to Send</span>
             </div>
         </div>
     </div>
@@ -3631,13 +3631,18 @@
         }
 
         function formatAiReply(text) {
-            let formatted = escapeHtml(text);
+            if (!text) return '';
+            // Strip any accidental planning or refinement labels
+            let cleaned = text.replace(/^(?:Refinement|Draft|Thinking Process)[^\n]*:\s*\*?\s*\n*/gi, '');
+            let formatted = escapeHtml(cleaned);
+            // Replace markdown headings ### or ##
+            formatted = formatted.replace(/(?:^|\n)#{1,3}\s+(.*?)(?=\n|$)/g, '<div style="font-weight:700; font-size:0.92rem; margin:8px 0 4px 0; color:#38BDF8;">$1</div>');
             // Replace **bold** with <strong>bold</strong>
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            // Replace * bullet items with styled bullet rows
-            formatted = formatted.replace(/(?:^|\n)\*\s+(.*?)(?=\n|$)/g, '<div style="margin: 3px 0 3px 10px; display:flex; gap:6px;"><span>•</span><span>$1</span></div>');
+            // Replace * and - bullet items with styled bullet rows
+            formatted = formatted.replace(/(?:^|\n)[\*\-]\s+(.*?)(?=\n|$)/g, '<div style="margin: 4px 0 4px 8px; display:flex; gap:8px; align-items:flex-start;"><span style="color:#38BDF8; font-weight:bold; line-height:1.4;">•</span><span style="flex:1;">$1</span></div>');
             // Turn urls into clickable anchors
-            formatted = formatted.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+            formatted = formatted.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" style="color:#38BDF8; text-decoration:underline;">$1</a>');
             // Line breaks
             formatted = formatted.replace(/\n\n/g, '<br><br>');
             formatted = formatted.replace(/\n/g, '<br>');
