@@ -132,6 +132,15 @@
         }, 1800);
     </script>
 
+    <!-- TOP ANNOUNCEMENT BAR: MINIMUM ORDER & SHIPPING -->
+    <div class="top-announcement-bar" style="background:#FFE600;border-bottom:2px solid var(--color-ink);padding:7px 14px;text-align:center;font-size:0.82rem;font-weight:900;letter-spacing:0.02em;color:var(--color-ink);display:flex;align-items:center;justify-content:center;gap:12px;overflow:hidden;flex-wrap:wrap;">
+        <span>⚡ <strong>MINIMUM ORDER ₹100</strong> (Mix &amp; match any vinyl decals)</span>
+        <span style="opacity:0.4;font-weight:900;">•</span>
+        <span>🚚 <strong>FREE SHIPPING</strong> on orders ₹499+</span>
+        <span style="opacity:0.4;font-weight:900;">•</span>
+        <span>🔥 100% Waterproof Automotive-Grade Vinyl</span>
+    </div>
+
     <!-- 2. TABSTICK PLAYFUL POP HEADER -->
     <header class="site-header">
         <div class="container header-inner">
@@ -288,6 +297,9 @@
 
     @if(session('success'))
         <div class="container"><div class="alert success">{{ session('success') }}</div></div>
+    @endif
+    @if(session('warning'))
+        <div class="container"><div class="alert warning" style="background:#FFF3CD;border:2px solid var(--color-ink);color:#856404;font-weight:700;padding:14px 20px;border-radius:12px;margin:16px auto;box-shadow:3px 3px 0 var(--color-ink);">{{ session('warning') }}</div></div>
     @endif
     @if(session('error'))
         <div class="container"><div class="alert error">{{ session('error') }}</div></div>

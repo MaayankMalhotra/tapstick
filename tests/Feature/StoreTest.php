@@ -69,6 +69,7 @@ class StoreTest extends TestCase
         };
         $this->app->instance(RazorpayGateway::class, $gateway);
         $product = $this->product();
+        $product->update(['price' => 100]);
         $this->post(route('cart.add', $product), ['quantity' => 1]);
 
         $this->post(route('checkout.store'), [
@@ -84,12 +85,12 @@ class StoreTest extends TestCase
         $order = Order::where('email', 'mayank@example.com')->firstOrFail();
 
         $this->postJson(route('api.razorpay.create'), [
-            'amount' => 14800,
+            'amount' => 14900,
             'currency' => 'INR',
             'receipt' => $order->order_number,
-        ])->assertOk()->assertJson(['order_id' => 'order_test_123', 'amount' => 14800, 'currency' => 'INR']);
+        ])->assertOk()->assertJson(['order_id' => 'order_test_123', 'amount' => 14900, 'currency' => 'INR']);
 
-        $this->assertSame(14800, $gateway->payload['amount']);
+        $this->assertSame(14900, $gateway->payload['amount']);
         $this->assertSame('INR', $gateway->payload['currency']);
         $this->assertSame($order->order_number, $gateway->payload['receipt']);
         $this->assertDatabaseHas('orders', [

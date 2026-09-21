@@ -2386,6 +2386,20 @@ button {
   color: #991b1b;
   border: 1px solid #fecaca;
 }
+.alert.warning {
+  background: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+@keyframes shakeLocked {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+.shake-locked {
+  animation: shakeLocked 0.4s ease-in-out;
+}
 
 .cart-layout, .checkout-layout {
   display: grid;

@@ -82,6 +82,14 @@
                 Add to Cart
             </button>
         </form>
+
+        <div style="margin-top:14px;display:flex;align-items:center;gap:10px;font-size:0.82rem;font-weight:800;color:var(--color-ink-muted);flex-wrap:wrap;">
+            <span>⚡ Min. order ₹100 (mix &amp; match)</span>
+            <span>•</span>
+            <span>🚚 Free Delivery ₹499+</span>
+            <span>•</span>
+            <span>🛡️ 100% Waterproof</span>
+        </div>
     </div>
 </div>
 

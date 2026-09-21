@@ -11,6 +11,8 @@ use Illuminate\View\View;
 
 class StoreController extends Controller
 {
+    public const MIN_ORDER_AMOUNT = 100;
+
     public function home(): View
     {
         $categories = Category::whereHas('products', function ($q) {
@@ -95,7 +97,24 @@ class StoreController extends Controller
         $request->session()->put('cart', $cart);
 
         if ($request->input('redirect') === 'checkout') {
+            $productPrices = Product::whereIn('id', array_keys($cart))->pluck('price', 'id');
+            $currentSubtotal = 0;
+            foreach ($cart as $id => $qty) {
+                if (isset($productPrices[$id])) {
+                    $currentSubtotal += $productPrices[$id] * $qty;
+                }
+            }
+
+            if ($currentSubtotal < self::MIN_ORDER_AMOUNT) {
+                $needed = self::MIN_ORDER_AMOUNT - $currentSubtotal;
+                return redirect()->route('cart.index')->with('warning', $product->name.' added! Minimum order is ₹'.self::MIN_ORDER_AMOUNT.'. Add ₹'.number_format($needed, 2).' more to checkout.');
+            }
+
             return redirect()->route('checkout.create');
+        }
+
+        if ($request->input('redirect') === 'back') {
+            return back()->with('success', $product->name.' added to your cart!');
         }
 
         return redirect()->route('cart.index')->with('success', $product->name.' added to your cart!');
@@ -128,9 +147,48 @@ class StoreController extends Controller
             $product = $products->get($productId);
             return $product ? ['product' => $product, 'quantity' => $quantity, 'line_total' => $product->price * $quantity] : null;
         })->filter()->values();
-        $subtotal = $items->sum('line_total');
-        $shipping = $subtotal >= 499 || $subtotal === 0 ? 0 : 49;
-        return compact('items', 'subtotal', 'shipping') + ['total' => $subtotal + $shipping];
+        $subtotal = (float) $items->sum('line_total');
+        $shipping = $subtotal >= 499 || $subtotal === 0.0 ? 0 : 49;
+        $total = $subtotal + $shipping;
+
+        $minOrderAmount = self::MIN_ORDER_AMOUNT;
+        $minOrderReached = $subtotal >= $minOrderAmount;
+        $minOrderDiff = max(0, $minOrderAmount - $subtotal);
+        $minOrderProgress = $subtotal > 0 ? min(100, round(($subtotal / $minOrderAmount) * 100)) : 0;
+
+        $freeShippingThreshold = 499;
+        $freeShippingReached = $subtotal >= $freeShippingThreshold;
+        $freeShippingDiff = max(0, $freeShippingThreshold - $subtotal);
+        $freeShippingProgress = $subtotal > 0 ? min(100, round(($subtotal / $freeShippingThreshold) * 100)) : 0;
+
+        // Fetch quick-add recommendations when cart is under min order
+        $quickAddStickers = collect();
+        if ($subtotal > 0 && ! $minOrderReached) {
+            $cartProductIds = array_keys($cart);
+            $quickAddStickers = Product::where('is_active', true)
+                ->where('stock', '>', 0)
+                ->whereNotIn('id', $cartProductIds)
+                ->where('price', '<=', 99)
+                ->latest()
+                ->take(4)
+                ->get();
+        }
+
+        return compact(
+            'items',
+            'subtotal',
+            'shipping',
+            'total',
+            'minOrderAmount',
+            'minOrderReached',
+            'minOrderDiff',
+            'minOrderProgress',
+            'freeShippingThreshold',
+            'freeShippingReached',
+            'freeShippingDiff',
+            'freeShippingProgress',
+            'quickAddStickers'
+        );
     }
 
     public function categories(): View
