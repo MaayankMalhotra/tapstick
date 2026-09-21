@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\GrazeAdminController;
+use App\Http\Controllers\GrazeInquiryController;
 use App\Http\Middleware\RequireAdmin;
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -59,4 +61,25 @@ Route::redirect('/lander', '/');
 Route::get('/gaze-n-gifts', [StoreController::class, 'gazeNGifts'])->name('store.gaze-n-gifts');
 Route::get('/graze-n-gifts', [StoreController::class, 'gazeNGifts']);
 Route::get('/graze-and-gifts', [StoreController::class, 'gazeNGifts']);
+
+// Graze & Gift Co. Lead Inquiries API
+Route::post('/api/graze/inquiry', [GrazeInquiryController::class, 'store'])->middleware('throttle:20,1')->name('api.graze.inquiry');
+Route::post('/api/graze-inquiry', [GrazeInquiryController::class, 'store'])->middleware('throttle:20,1');
+
+// Graze & Gift Co. Admin Portal
+Route::prefix('graze-n-gifts/admin')->name('graze.admin.')->group(function () {
+    Route::get('/login', [GrazeAdminController::class, 'loginForm'])->name('login');
+    Route::post('/login', [GrazeAdminController::class, 'login'])->middleware('throttle:10,1')->name('login.submit');
+    Route::post('/logout', [GrazeAdminController::class, 'logout'])->name('logout');
+    Route::get('/', [GrazeAdminController::class, 'index'])->name('index');
+    Route::get('/export', [GrazeAdminController::class, 'export'])->name('export');
+    Route::patch('/inquiries/{inquiry}', [GrazeAdminController::class, 'update'])->name('inquiries.update');
+    Route::delete('/inquiries/{inquiry}', [GrazeAdminController::class, 'destroy'])->name('inquiries.destroy');
+});
+
+// Admin aliases
+Route::redirect('/gaze-n-gifts/admin', '/graze-n-gifts/admin', 301);
+Route::redirect('/graze-and-gifts/admin', '/graze-n-gifts/admin', 301);
+Route::redirect('/admin/graze-inquiries', '/graze-n-gifts/admin', 302);
+
 Route::post('/api/github-deploy', [\App\Http\Controllers\DeployWebhookController::class, 'handle'])->name('webhook.github.deploy');

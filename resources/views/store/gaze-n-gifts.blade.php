@@ -9,6 +9,7 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{{ url('/gaze-n-gifts') }}">
     <link rel="icon" href="{{ asset('graze-assets/graze_n_gifts_logo.jpg') }}" type="image/jpeg">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Open Graph / Social Meta -->
     <meta property="og:title" content="Graze &amp; Gift Co. — Luxury Grazing Tables &amp; Custom Gifts">
@@ -615,6 +616,7 @@
                     <a href="#gallery" class="font-sans text-[12px] font-semibold uppercase tracking-[0.18em] no-underline text-body-mid hover:text-taupe transition-colors">Gallery</a>
                     <a href="#reviews" class="font-sans text-[12px] font-semibold uppercase tracking-[0.18em] no-underline text-body-mid hover:text-taupe transition-colors">Reviews</a>
                     <a href="#inquiry" class="font-sans text-[12px] font-semibold uppercase tracking-[0.18em] no-underline text-body-mid hover:text-taupe transition-colors">Inquire</a>
+                    <a href="{{ route('graze.admin.index') }}" class="font-sans text-[12px] font-semibold uppercase tracking-[0.18em] no-underline text-body-mid/70 hover:text-taupe transition-colors">Admin Portal</a>
                 </div>
 
                 <div class="flex flex-col gap-3">
@@ -1107,8 +1109,15 @@
             }, 5000);
         }
 
-        inquiryForm.addEventListener('submit', (e) => {
+        inquiryForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            const submitBtn = inquiryForm.querySelector('button[type="submit"]');
+            const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span>Saving &amp; Opening WhatsApp...</span>';
+            }
+
             const formData = new FormData(inquiryForm);
             const data = Object.fromEntries(formData.entries());
 
@@ -1128,10 +1137,36 @@
             ].filter(Boolean);
 
             const waText = encodeURIComponent(lines.join("\n"));
-            window.open(`https://wa.me/16047616232?text=${waText}`, '_blank');
+            const waUrl = `https://wa.me/16047616232?text=${waText}`;
 
-            showToast("Inquiry Dispatched", "Opening WhatsApp chat. We'll be in touch within 24 hours!");
+            // Save inquiry to backend database
+            const csrfMeta = document.querySelector('meta[name="csrf-token"]');
+            const csrfToken = csrfMeta ? csrfMeta.getAttribute('content') : '';
+
+            try {
+                await fetch('/api/graze/inquiry', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    body: JSON.stringify(data)
+                });
+            } catch (err) {
+                console.warn('API submission note:', err);
+            }
+
+            // Always open WhatsApp for seamless customer experience
+            window.open(waUrl, '_blank');
+
+            showToast("Inquiry Confirmed", "Opening WhatsApp chat. We have saved your event details and will be in touch!");
             inquiryForm.reset();
+
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHtml;
+            }
         });
 
         // Initialize on load

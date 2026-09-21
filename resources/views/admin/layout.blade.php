@@ -20,6 +20,14 @@
     @endif
 </a>
 <a class="{{ request()->routeIs('admin.customers.*') ? 'selected' : '' }}" href="{{ route('admin.customers.index') }}">Customers</a>
+<p style="margin-top:20px;">GRAZE &amp; GIFT CO.</p>
+<a class="{{ request()->is('*graze*') ? 'selected' : '' }}" href="{{ route('graze.admin.index') }}">
+    Inquiries &amp; Quotes
+    @php $grazeNewCount = \App\Models\GrazeInquiry::where('status', 'new')->count(); @endphp
+    @if($grazeNewCount > 0)
+        <span class="badge" style="float:right;padding:2px 7px;font-size:11px;background:#D4AF37;color:#1C1513;font-weight:800;">{{ $grazeNewCount }} NEW</span>
+    @endif
+</a>
 <p style="margin-top:20px;">STORE MANAGEMENT</p>
 <a class="{{ request()->routeIs('admin.dashboard') ? 'selected' : '' }}" href="{{ route('admin.dashboard') }}">Overview</a>
 <a class="{{ request()->routeIs('admin.products.*') ? 'selected' : '' }}" href="{{ route('admin.products.index') }}">Products &amp; stock</a>
