@@ -57,6 +57,6 @@ Route::post('/maayank/ai-chat', [StoreController::class, 'portfolioAiChat'])->mi
 Route::redirect('/mayank', '/maayank', 301);
 Route::redirect('/lander', '/');
 Route::get('/gaze-n-gifts', [StoreController::class, 'gazeNGifts'])->name('store.gaze-n-gifts');
-Route::redirect('/graze-n-gifts', '/gaze-n-gifts');
-Route::redirect('/graze-and-gifts', '/gaze-n-gifts');
+Route::get('/graze-n-gifts', [StoreController::class, 'gazeNGifts']);
+Route::get('/graze-and-gifts', [StoreController::class, 'gazeNGifts']);
 Route::post('/api/github-deploy', [\App\Http\Controllers\DeployWebhookController::class, 'handle'])->name('webhook.github.deploy');
