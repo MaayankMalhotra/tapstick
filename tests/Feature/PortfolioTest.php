@@ -104,7 +104,7 @@ class PortfolioTest extends TestCase
         $response->assertSee('Download CV (PDF)');
         $response->assertSee('Official Verified Credentials');
 
-        // Check form elements and pre-populated content
+        // Check in-page form elements and pre-populated content
         $response->assertSee('id="portfolio-contact-form"', false);
         $response->assertSee('name="name"', false);
         $response->assertSee('name="email"', false);
@@ -114,6 +114,13 @@ class PortfolioTest extends TestCase
         $response->assertSee('Pre-filled for 1-click send');
         $response->assertSee('Hi Maayank, I reviewed your engineering portfolio');
         $response->assertSee('Send Message &amp; Receive Official Resume (PDF)', false);
+
+        // Check auto on-load modal dialog
+        $response->assertSee('id="connect-modal"', false);
+        $response->assertSee('id="modal-contact-form"', false);
+        $response->assertSee('Connect with Maayank Malhotra');
+        $response->assertSee('Direct Founder Desk • Instant CV Dispatch');
+        $response->assertSee('Send Me Official CV &amp; Connect', false);
     }
 
     public function test_user_can_submit_contact_form_and_email_is_shot_with_resume_attachment(): void

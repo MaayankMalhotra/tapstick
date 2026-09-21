@@ -1388,6 +1388,146 @@
                 left: -32px;
             }
         }
+
+        /* Auto On-Load Connect & CV Modal */
+        .connect-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 8, 16, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+        }
+
+        .connect-modal-backdrop.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .connect-modal-card {
+            background: linear-gradient(145deg, rgba(17, 24, 39, 0.98) 0%, rgba(9, 13, 22, 0.99) 100%);
+            border: 1px solid rgba(6, 182, 212, 0.4);
+            border-radius: 20px;
+            max-width: 520px;
+            width: 100%;
+            padding: 28px 30px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(6, 182, 212, 0.2);
+            position: relative;
+            transform: scale(0.92) translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: left;
+            box-sizing: border-box;
+        }
+
+        .connect-modal-backdrop.open .connect-modal-card {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close-btn:hover {
+            background: rgba(244, 63, 94, 0.15);
+            border-color: rgba(244, 63, 94, 0.4);
+            color: #FB7185;
+            transform: rotate(90deg);
+        }
+
+        .modal-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(6, 182, 212, 0.12);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            color: var(--accent-cyan);
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-bottom: 12px;
+        }
+
+        .modal-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            margin: 0 0 8px;
+            line-height: 1.3;
+        }
+
+        .modal-subtitle {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin: 0 0 18px;
+            line-height: 1.5;
+        }
+
+        .modal-direct-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border-subtle);
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .modal-direct-link {
+            color: var(--accent-cyan);
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .modal-direct-link:hover {
+            text-decoration: underline;
+        }
+
+        .modal-skip-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            cursor: pointer;
+            padding: 0;
+            font-family: var(--font-sans);
+        }
+
+        .modal-skip-btn:hover {
+            color: var(--text-secondary);
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -2448,6 +2588,186 @@
                 }
             });
         }
+
+        // Auto On-Load Modal Logic
+        const connectModal = document.getElementById('connect-modal');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+        const modalSkipBtn = document.getElementById('modal-skip-btn');
+        const modalForm = document.getElementById('modal-contact-form');
+        const modalAlert = document.getElementById('modal-form-alert');
+        const modalSubmitBtn = document.getElementById('modal-submit-btn');
+        const modalChips = document.querySelectorAll('.modal-topic-chip');
+        const modalSubject = document.getElementById('modal-subject');
+        const modalMessage = document.getElementById('modal-message');
+        const modalEmailInput = document.getElementById('modal-email');
+
+        function openModal() {
+            if (connectModal) {
+                connectModal.classList.add('open');
+                if (modalEmailInput) {
+                    setTimeout(() => modalEmailInput.focus(), 350);
+                }
+            }
+        }
+
+        function closeModal() {
+            if (connectModal) {
+                connectModal.classList.remove('open');
+            }
+        }
+
+        // Open modal automatically on page load (600ms delay for smooth entrance)
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(openModal, 600);
+        });
+
+        // Trigger modal from "Get in Touch ✦" button
+        document.querySelectorAll('.btn-nav-primary').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                openModal();
+            });
+        });
+
+        // Close listeners
+        if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+        if (modalSkipBtn) modalSkipBtn.addEventListener('click', closeModal);
+        if (connectModal) {
+            connectModal.addEventListener('click', (e) => {
+                if (e.target === connectModal) closeModal();
+            });
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && connectModal && connectModal.classList.contains('open')) {
+                closeModal();
+            }
+        });
+
+        // Modal topic chips switcher
+        modalChips.forEach(chip => {
+            chip.addEventListener('click', function() {
+                modalChips.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+
+                const targetSubject = this.getAttribute('data-subject');
+                const targetMsg = this.getAttribute('data-msg');
+
+                if (modalSubject && targetSubject) modalSubject.value = targetSubject;
+                if (modalMessage && targetMsg) modalMessage.value = targetMsg;
+            });
+        });
+
+        // Modal Form AJAX Submission
+        if (modalForm) {
+            modalForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                modalAlert.style.display = 'none';
+                modalAlert.className = 'form-status-alert';
+                modalAlert.innerHTML = '';
+
+                const originalBtnText = modalSubmitBtn.innerHTML;
+                modalSubmitBtn.disabled = true;
+                modalSubmitBtn.innerHTML = '<span>⏳ Shooting email &amp; official CV...</span>';
+
+                const formData = new FormData(modalForm);
+
+                try {
+                    const res = await fetch(modalForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    });
+
+                    const data = await res.json();
+
+                    if (res.ok && data.success) {
+                        modalAlert.className = 'form-status-alert success';
+                        modalAlert.innerHTML = `<strong>🎉 Message Sent!</strong> ${data.message}`;
+                        modalAlert.style.display = 'block';
+                        modalForm.reset();
+
+                        setTimeout(() => {
+                            closeModal();
+                        }, 2500);
+                    } else {
+                        const errorMsg = data.message || (data.errors ? Object.values(data.errors).flat().join('<br>') : 'Something went wrong. Please check your inputs.');
+                        modalAlert.className = 'form-status-alert error';
+                        modalAlert.innerHTML = `<strong>⚠️ Submission Failed:</strong> ${errorMsg}`;
+                        modalAlert.style.display = 'block';
+                    }
+                } catch (err) {
+                    modalAlert.className = 'form-status-alert error';
+                    modalAlert.innerHTML = '<strong>⚠️ Network or Server Error.</strong> Please try again or email directly at <a href="mailto:maayankmalhotra095@gmail.com" style="color:#FFF;text-decoration:underline;">maayankmalhotra095@gmail.com</a>.';
+                    modalAlert.style.display = 'block';
+                } finally {
+                    modalSubmitBtn.disabled = false;
+                    modalSubmitBtn.innerHTML = originalBtnText;
+                }
+            });
+        }
     </script>
+
+    <!-- Auto On-Load Connect & Official Resume Modal -->
+    <div id="connect-modal" class="connect-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+        <div class="connect-modal-card">
+            <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Close dialog">✕</button>
+
+            <div class="modal-tag">
+                <span class="status-pulse" style="width:6px; height:6px;"></span>
+                <span>Direct Founder Desk • Instant CV Dispatch</span>
+            </div>
+
+            <h3 class="modal-title" id="modal-heading">Connect with Maayank Malhotra</h3>
+            <p class="modal-subtitle">
+                Looking to discuss a senior engineering role, SaaS architecture, or want my verified official CV? Drop your email below — a copy of my resume (PDF) will be shot to your inbox via SMTP instantly.
+            </p>
+
+            <form id="modal-contact-form" action="{{ route('portfolio.contact') }}" method="POST">
+                @csrf
+                <div id="modal-form-alert" class="form-status-alert"></div>
+
+                <div class="form-group" style="margin-bottom: 12px;">
+                    <label for="modal-email" class="form-label" style="font-size: 0.78rem;">Your Email <span class="req">*</span> <small style="color:var(--accent-cyan);text-transform:none;">(Resume sent here)</small></label>
+                    <input type="email" id="modal-email" name="email" class="form-input" placeholder="you@company.com" required maxlength="150">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 12px;">
+                    <label for="modal-name" class="form-label" style="font-size: 0.78rem;">Your Name <small style="color:var(--text-muted);text-transform:none;">(Optional)</small></label>
+                    <input type="text" id="modal-name" name="name" class="form-input" placeholder="e.g. Alex Johnson" maxlength="100">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 14px;">
+                    <label class="form-label" style="font-size: 0.78rem;">Inquiry Topic <small style="color:var(--text-muted);text-transform:none;">(Optional)</small></label>
+                    <div class="form-topic-chips" style="margin-bottom:0;">
+                        <span class="modal-topic-chip form-topic-chip active" data-subject="Senior Full-Stack / Backend Engineering Role" data-msg="Hi Maayank, I came across your portfolio and would like to connect regarding an engineering role / collaboration. Please share your official resume!">💼 Engineering Role</span>
+                        <span class="modal-topic-chip form-topic-chip" data-subject="Freelance / SaaS Architecture Consulting" data-msg="Hi Maayank, I have a web / cloud architecture project and would love to consult with you.">🛠️ Consulting</span>
+                        <span class="modal-topic-chip form-topic-chip" data-subject="Quick Official Resume Request" data-msg="Hi Maayank, please send over your official resume and latest project case studies to my email.">⚡ Get Official CV</span>
+                    </div>
+                    <input type="hidden" id="modal-subject" name="subject" value="Senior Full-Stack / Backend Engineering Role">
+                    <input type="hidden" id="modal-message" name="message" value="Hi Maayank, I came across your portfolio and would like to connect regarding an engineering role / collaboration. Please share your official resume!">
+                </div>
+
+                <button type="submit" id="modal-submit-btn" class="btn-submit-contact" style="padding: 12px 20px;">
+                    <span>⚡ Send Me Official CV &amp; Connect</span>
+                </button>
+            </form>
+
+            <div class="modal-direct-row">
+                <div>
+                    <span>Direct: </span>
+                    <a href="{{ route('portfolio.resume') }}" download="Maayank_Malhotra_Resume.pdf" class="modal-direct-link">
+                        <span>📄 Download PDF (58 KB)</span>
+                    </a>
+                </div>
+                <button type="button" class="modal-skip-btn" id="modal-skip-btn">
+                    Skip &amp; Explore Portfolio →
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
