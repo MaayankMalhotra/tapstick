@@ -1,1076 +1,1143 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Graze &amp; Gift Co. — Luxury Grazing Tables &amp; Custom Gifts | Oakville &amp; GTA</title>
+    <meta name="description" content="Graze &amp; Gift Co. creates luxury grazing tables, Indo-Fusion high tea, charcuterie cups, and custom gift boxes for birthdays, baby showers, and corporate events in Oakville &amp; the GTA.">
+    <meta name="keywords" content="grazing table Oakville,charcuterie board GTA,Indo-fusion high tea,custom gift boxes Oakville,luxury grazing Mississauga,Graze and Gift Co">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ url('/gaze-n-gifts') }}">
+    <link rel="icon" href="{{ asset('graze-n-gifts/graze_n_gifts_logo.jpg') }}" type="image/jpeg">
 
-@section('title', 'Tabstick – Creative Laptop, Car & Custom Stickers')
-@section('meta_description', 'Tabstick creates creative, durable stickers for laptops, cars, phones and college students. Explore unique sticker designs and shop online in India.')
-@section('canonical', url('/gaze-n-gifts'))
+    <!-- Open Graph / Social Meta -->
+    <meta property="og:title" content="Graze &amp; Gift Co. — Luxury Grazing Tables &amp; Custom Gifts">
+    <meta property="og:description" content="Luxury grazing tables, Indo-Fusion high tea, charcuterie cups &amp; custom gift boxes. Serving Oakville &amp; the GTA.">
+    <meta property="og:url" content="{{ url('/gaze-n-gifts') }}">
+    <meta property="og:site_name" content="Graze &amp; Gift Co.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{ asset('graze-n-gifts/images/grazing%20table_1.jpeg') }}">
 
-@section('content')
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- ==========================================================================
-     1. FULL-SCREEN ANIMATED PLAYFUL POP HERO SECTION
-     ========================================================================== -->
-<section class="hero-pop-section" id="hero">
-    <!-- Moving Organic Gradient / Blob Mesh Background -->
-    <div class="hero-blob-canvas" aria-hidden="true">
-        <div class="blob-mesh blob-mesh-1"></div>
-        <div class="blob-mesh blob-mesh-2"></div>
-        <div class="blob-mesh blob-mesh-3"></div>
-        <div class="hero-halftone-overlay"></div>
-    </div>
-
-    <div class="container hero-pop-container">
-        <!-- Floating Doodles & Stickers Around Headline (Parallax Depth) -->
-        <div class="hero-floating-doodle doodle-star-1" data-parallax-depth="0.9" data-base-rotate="-12" aria-hidden="true">
-            <span class="doodle-sparkle">✦</span>
-        </div>
-        <div class="hero-floating-doodle doodle-star-2" data-parallax-depth="1.4" data-base-rotate="15" aria-hidden="true">
-            <span class="doodle-sparkle color-pink">✴</span>
-        </div>
-        <div class="hero-floating-doodle doodle-arrow" data-parallax-depth="0.6" data-base-rotate="8" aria-hidden="true">
-            <svg width="60" height="40" viewBox="0 0 60 40" fill="none">
-                <path d="M5 30C20 10 38 12 52 18M52 18L44 8M52 18L46 28" stroke="#FF334B" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span class="doodle-arrow-label">STICK EM!</span>
-        </div>
-
-        <!-- Left Column: Oversized Rounded Headline & Magnetic CTAs -->
-        <div class="hero-pop-text-col">
-            <div class="hero-pop-eyebrow-pill reveal-on-scroll">
-                <span class="eyebrow-spark">⚡</span>
-                <span class="eyebrow-text">TABSTICK DROP • 100% WATERPROOF VINYL</span>
-                <span class="eyebrow-badge">NEW</span>
-            </div>
-
-            <!-- Independent Word Spans for Staggered Spring Animation -->
-            <h1 class="hero-pop-headline reveal-on-scroll">
-                <span class="headline-line-1">
-                    <span class="pop-word-span word-make">TABSTICK</span>
-                    <span class="pop-word-span word-it">STICKERS</span>
-                </span>
-                <span class="headline-line-2">
-                    <span class="headline-pop-word word-yours">
-                        CREATIVE &amp; DURABLE.
-                        <svg class="pop-wiggle-underline" viewBox="0 0 320 28" fill="none" preserveAspectRatio="none">
-                            <path d="M4 18C45 4 85 24 130 14C175 4 215 24 260 14C285 8 305 16 316 12" stroke="#FFE600" stroke-width="8" stroke-linecap="round"/>
-                        </svg>
-                    </span>
-                    <span class="hero-pill-badge-floating" data-parallax-depth="1.2" data-base-rotate="-8">
-                        FOR LAPTOPS, CARS &amp; MORE 🔥
-                    </span>
-                </span>
-            </h1>
-
-            <p class="hero-pop-subtext reveal-on-scroll">
-                Tabstick is an Indian sticker brand founded by Mayank Malhotra. We create creative and durable stickers for laptops, cars, phones and college students. Crafted with automotive-grade die-cut vinyl built to survive monsoons, road trips, laptops, hydro flasks &amp; daily carry without peeling or leaving gooey residue.
-            </p>
-
-            <div class="hero-pop-cta-row reveal-on-scroll">
-                <a href="#shop" class="btn-pop-primary btn-magnetic trigger-confetti" data-confetti="true">
-                    <span>Shop the drop 🛍️</span>
-                </a>
-                <a href="#why" class="btn-pop-secondary btn-magnetic">
-                    <span>Why we stick ✦</span>
-                </a>
-            </div>
-
-            <div class="hero-pop-perks-bar reveal-on-scroll">
-                <div class="hero-perk-chip">
-                    <span class="chip-emoji">💧</span>
-                    <span>100% Waterproof</span>
-                </div>
-                <div class="hero-perk-chip">
-                    <span class="chip-emoji">⚡</span>
-                    <span>Zero Sticky Residue</span>
-                </div>
-                <div class="hero-perk-chip">
-                    <span class="chip-emoji">🚚</span>
-                    <span>48h Pan-India Dispatch</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Right Column: 3D Interactive Sticker Pile & Rotating Sunburst Badge -->
-        <div class="hero-pop-visual-col">
-            <!-- Animated Rotating Sunburst Badge: “STICK WITH IT” -->
-            <div class="hero-sunburst-badge-wrap" data-parallax-depth="1.6" data-base-rotate="0">
-                <div class="sunburst-badge-rotator">
-                    <svg class="sunburst-svg" viewBox="0 0 160 160">
-                        <defs>
-                            <path id="sunburstPath" d="M 80, 80 m -56, 0 a 56,56 0 1,1 112,0 a 56,56 0 1,1 -112,0" />
-                        </defs>
-                        <!-- Sunburst Rays Background -->
-                        <g class="sunburst-rays" fill="#FFE600" stroke="#18181B" stroke-width="2.5">
-                            <circle cx="80" cy="80" r="74" fill="#FFE600" />
-                            <polygon points="80,4 86,16 98,10 100,24 114,22 112,36 126,38 120,52 134,58 124,70 136,80 124,90 134,102 120,108 126,122 112,124 114,138 100,136 98,150 86,144 80,156 74,144 62,150 60,136 46,138 48,124 34,122 40,108 26,102 36,90 24,80 36,70 26,58 40,52 34,38 48,36 46,22 60,24 62,10 74,16" />
-                        </g>
-                        <circle cx="80" cy="80" r="54" fill="#18181B" />
-                        <!-- Rotating Circular Text -->
-                        <text font-family="sans-serif" font-size="11" font-weight="900" fill="#FFFFFF" letter-spacing="2.5">
-                            <textPath href="#sunburstPath" startOffset="0%">
-                                ✦ STICK WITH IT ✦ TABSTICK ✦ POP ✦
-                            </textPath>
-                        </text>
-                        <circle cx="80" cy="80" r="24" fill="#FF334B" stroke="#FFFFFF" stroke-width="2"/>
-                        <text x="80" y="85" text-anchor="middle" font-size="16" font-family="sans-serif">⚡</text>
-                    </svg>
-                </div>
-            </div>
-
-            <!-- 3D Layered Sticker Composition with Tilt & Physics -->
-            <div class="hero-sticker-stage">
-                <!-- Center Stage Collector Base Card -->
-                <div class="stage-base-card" data-parallax-depth="0.4" data-base-rotate="-2">
-                    <div class="base-card-inner">
-                        <div class="base-card-header">
-                            <span class="base-dot red"></span>
-                            <span class="base-dot yellow"></span>
-                            <span class="base-dot green"></span>
-                            <span class="base-card-tag">TABSTICK COLLECTOR PACK • 2026</span>
-                        </div>
-                        <div class="base-card-main-visual">
-                            <img src="{{ asset('images/hero-banner.webp') }}" alt="Tabstick Vinyl Sticker Showcase" class="hero-main-featured-img">
-                            <div class="base-card-gloss-sheen"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Floating Physical Sticker Layers (Authentic Visuals) -->
-                <div class="interactive-sticker-layer sticker-pop-1" data-parallax-depth="1.5" data-base-rotate="-12" title="Wasted Vinyl Decal">
-                    <div class="die-cut-sticker-wrap">
-                        <img src="{{ asset('images/wasted.jpg') }}" alt="Wasted Sticker">
-                        <span class="sticker-tag-badge badge-yellow">⭐ BESTSELLER</span>
-                        <div class="pop-card-peel-corner"></div>
-                    </div>
-                </div>
-
-                <div class="interactive-sticker-layer sticker-pop-2" data-parallax-depth="1.8" data-base-rotate="14" title="Ah Shit Here We Go Again">
-                    <div class="die-cut-sticker-wrap">
-                        <img src="{{ asset('images/ah-shit.jpg') }}" alt="Ah Shit Here We Go Again">
-                        <span class="sticker-tag-badge badge-blue">👑 MEME DROP</span>
-                        <div class="pop-card-peel-corner"></div>
-                    </div>
-                </div>
-
-                <div class="interactive-sticker-layer sticker-pop-3" data-parallax-depth="1.2" data-base-rotate="-6" title="Limited Edition Drop">
-                    <div class="die-cut-sticker-wrap">
-                        <img src="{{ asset('images/limited-edition.jpg') }}" alt="Limited Edition Sticker">
-                        <span class="sticker-tag-badge badge-red">🔥 DROP 04</span>
-                        <div class="pop-card-peel-corner"></div>
-                    </div>
-                </div>
-
-                <div class="interactive-sticker-layer sticker-pop-4" data-parallax-depth="2.1" data-base-rotate="18" title="Fizzy Zero Pop Sticker">
-                    <div class="die-cut-sticker-wrap">
-                        <img src="{{ asset('images/fizzy-zero.jpg') }}" alt="Fizzy Zero Sticker">
-                        <span class="sticker-tag-badge badge-green">⚡ POP ART</span>
-                        <div class="pop-card-peel-corner"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==========================================================================
-     2. SCROLLING TICKER: “WATERPROOF ✦ UV RESISTANT ✦ EASY PEEL ✦ MADE TO LAST”
-     ========================================================================== -->
-<div class="ticker-pop-strip">
-    <div class="ticker-pop-track">
-        <span class="ticker-unit"><span class="ticker-star">✦</span> WATERPROOF VINYL</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> UV RESISTANT INKS</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> EASY PEEL BACKING</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> MADE TO LAST</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> ZERO STICKY RESIDUE</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> 5000+ ORIGINAL DESIGNS</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> 48H PAN-INDIA DISPATCH</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> AUTOMOTIVE GRADE</span>
-        <!-- Duplicated for seamless infinite continuous CSS loop -->
-        <span class="ticker-unit"><span class="ticker-star">✦</span> WATERPROOF VINYL</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> UV RESISTANT INKS</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> EASY PEEL BACKING</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> MADE TO LAST</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> ZERO STICKY RESIDUE</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> 5000+ ORIGINAL DESIGNS</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> 48H PAN-INDIA DISPATCH</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> AUTOMOTIVE GRADE</span>
-    </div>
-</div>
-
-<!-- ==========================================================================
-     3. PRODUCT SECTION: “PICK YOUR PERSONALITY”
-     ========================================================================== -->
-<section id="shop" class="products-pop-section">
-    <div class="container">
-        <div class="section-pop-header reveal-on-scroll">
-            <div class="section-pop-badge">
-                <span class="badge-spark">✦</span>
-                <span>CURATED COLLECTIBLE PACKS</span>
-                <span class="badge-spark">✦</span>
-            </div>
-            <h2 class="section-pop-title">PICK YOUR PERSONALITY</h2>
-            <p class="section-pop-subtitle">
-                Die-cut vinyl stickers built to take a beating on MacBooks, hydro flasks, skate decks, cars &amp; bikes.
-            </p>
-
-            <!-- Dynamic Category Filter Tabs -->
-            <div class="pop-filter-tabs" id="pop-category-tabs">
-                <button type="button" class="pop-filter-pill active" data-category="all">
-                    <span>⚡ ALL DROPS ({{ number_format($totalProductsCount ?? 4400) }})</span>
-                </button>
-                @if(isset($categories))
-                    @foreach($categories as $cat)
-                        <button type="button" class="pop-filter-pill" data-category="{{ $cat->slug }}">
-                            <span>{{ $cat->name }} ({{ number_format($cat->products_count) }})</span>
-                        </button>
-                    @endforeach
-                @endif
-            </div>
-
-            <!-- Live Search Bar & Realtime Count -->
-            <div class="products-search-wrap">
-                <div class="products-search-bar">
-                    <span class="search-icon">🔍</span>
-                    <input type="search" id="products-search-input" placeholder="Search 4,400+ vinyl decals (e.g. Naruto, Chai, Cat, Coding, Enfield...)" autocomplete="off">
-                    <button type="button" id="products-search-clear" style="display:none;" aria-label="Clear search">✕</button>
-                </div>
-                <div class="products-live-counter">
-                    <span id="products-count-label">Showing <strong id="current-shown-count">{{ $products->count() }}</strong> of <strong id="total-matching-count">{{ number_format($totalProductsCount ?? 4400) }}</strong> stickers</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Product Cards Grid: Collectible Pack Styling with Alternating Color Accents -->
-        <div class="products-pop-grid" id="products-pop-grid">
-            @forelse($products as $index => $product)
-                @include('partials.product-card', ['product' => $product, 'index' => $index])
-            @empty
-                <div class="products-empty-state" id="products-empty-message">
-                    <span style="font-size:3rem;">📦</span>
-                    <h3>No matching stickers found!</h3>
-                    <p>Try searching for something else or pick a different category.</p>
-                </div>
-            @endforelse
-        </div>
-
-        <!-- Lazy Loader Spinner -->
-        <div class="products-lazy-loader" id="products-lazy-loader">
-            <span class="spinner-sticker-roll">⚡</span>
-            <span>UNBOXING MORE DROPS...</span>
-        </div>
-
-        <!-- Manual Load More Button -->
-        <div class="products-load-more-wrap" id="products-load-more-wrap">
-            <button type="button" class="btn-load-more-drops" id="btn-load-more-drops">
-                <span>⚡ Load More Stickers (<span id="load-more-remaining-count">{{ max(0, ($totalProductsCount ?? 4400) - $products->count()) }}</span> more)</span>
-            </button>
-        </div>
-
-        <!-- End of Collection Banner -->
-        <div class="products-end-banner" id="products-end-banner">
-            <span>🎉 You've reached the end of this collection!</span>
-        </div>
-
-        <!-- Infinite Scroll Intersection Sentinel -->
-        <div id="products-scroll-sentinel" style="height: 20px; margin-top: -10px;"></div>
-    </div>
-</section>
-
-<!-- ==========================================================================
-     CUSTOMER PHRASES FLOATING MARQUEE
-     ========================================================================== -->
-<div class="phrases-marquee-strip">
-    <div class="phrases-marquee-track">
-        <span class="phrase-item"><span class="phrase-star">★</span> “LOOKS AMAZING”</span>
-        <span class="phrase-item"><span class="phrase-star">★</span> “STICKS PERFECTLY”</span>
-        <span class="phrase-item"><span class="phrase-star">★</span> “BEST LAPTOP UPGRADE”</span>
-        <span class="phrase-item"><span class="phrase-star">★</span> “SO SATISFYING TO PEEL”</span>
-        <span class="phrase-item"><span class="phrase-star">★</span> “100% WATERPROOF MONSOON PROOF”</span>
-        <span class="phrase-item"><span class="phrase-star">★</span> “COLORS POP LIKE CRAZY”</span>
-        <!-- Duplicated for continuous infinite marquee -->
-        <span class="phrase-item"><span class="phrase-star">★</span> “LOOKS AMAZING”</span>
-        <span class="phrase-item"><span class="phrase-star">★</span> “STICKS PERFECTLY”</span>
-        <span class="phrase-item"><span class="phrase-star">★</span> “BEST LAPTOP UPGRADE”</span>
-        <span class="phrase-item"><span class="phrase-star">★</span> “SO SATISFYING TO PEEL”</span>
-        <span class="phrase-item"><span class="phrase-star">★</span> “100% WATERPROOF MONSOON PROOF”</span>
-        <span class="phrase-item"><span class="phrase-star">★</span> “COLORS POP LIKE CRAZY”</span>
-    </div>
-</div>
-
-<!-- ==========================================================================
-     4. SECTION: “WHY YOU’LL LOVE THEM” (WEATHERPROOF, CLEAN CUTS, BOLD COLOUR)
-     ========================================================================== -->
-<section id="why" class="why-pop-section">
-    <div class="container">
-        <div class="section-pop-header reveal-on-scroll">
-            <div class="section-pop-badge bg-yellow">
-                <span>✦ BUILT DIFFERENT ✦</span>
-            </div>
-            <h2 class="section-pop-title text-ink">WHY YOU’LL LOVE THEM</h2>
-            <p class="section-pop-subtitle">
-                Most cheap stickers are paper-thin and melt in the rain. Tabstick is crafted with automotive-grade engineering.
-            </p>
-        </div>
-
-        <div class="why-pop-grid">
-            <!-- Feature 1: Weather Resistant -->
-            <div class="why-pop-card card-weather reveal-on-scroll">
-                <div class="why-pop-icon-badge icon-blue">
-                    <span class="why-emoji">🌧️</span>
-                </div>
-                <div class="why-tape-doodle"></div>
-                <h3 class="why-card-title">Weather Resistant</h3>
-                <p class="why-card-desc">
-                    100% waterproof and scratchproof. Tested on outdoor bikes, car bumpers, helmets and hydro flasks through monsoons, car washes, and harsh Indian summers.
-                </p>
-                <div class="why-card-meta-chips">
-                    <span class="why-chip">💧 100% Waterproof</span>
-                    <span class="why-chip">☀️ UV Safe</span>
-                </div>
-            </div>
-
-            <!-- Feature 2: Clean Cuts -->
-            <div class="why-pop-card card-cuts reveal-on-scroll">
-                <div class="why-pop-icon-badge icon-red">
-                    <span class="why-emoji">✂️</span>
-                </div>
-                <div class="why-tape-doodle"></div>
-                <h3 class="why-card-title">Clean Precision Cuts</h3>
-                <p class="why-card-desc">
-                    Laser-guided optical die-cutting creates a flawless white outline with smooth edges and easy-peel backing. Plus, zero sticky residue when you decide to swap them.
-                </p>
-                <div class="why-card-meta-chips">
-                    <span class="why-chip">🚫 No Gooey Residue</span>
-                    <span class="why-chip">👌 Easy Peel</span>
-                </div>
-            </div>
-
-            <!-- Feature 3: Bold Colour -->
-            <div class="why-pop-card card-colour reveal-on-scroll">
-                <div class="why-pop-icon-badge icon-yellow">
-                    <span class="why-emoji">🎨</span>
-                </div>
-                <div class="why-tape-doodle"></div>
-                <h3 class="why-card-title">Ultra-Bold Colour</h3>
-                <p class="why-card-desc">
-                    High-density UV-cured pigment inks print deep blacks, blazing neon reds, and punchy yellows that never fade, smudge, or blur over years of daily handling.
-                </p>
-                <div class="why-card-meta-chips">
-                    <span class="why-chip">🌈 1200 DPI Inks</span>
-                    <span class="why-chip">🛡️ Non-Fade Finish</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Banner Visual Spotlight -->
-        <div class="why-banner-stage reveal-on-scroll">
-            <div class="why-banner-frame">
-                <img src="{{ asset('images/why-banner.webp') }}" alt="Why Tabstick Vinyl Stickers Excel" class="why-banner-image">
-                <div class="why-banner-stamp">
-                    <span>100% VINYL QUALITY GUARANTEED ✦</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==========================================================================
-     5. SEO CATEGORY GUIDES (LAPTOP, CAR, PHONE, COLLEGE & CUSTOM STICKERS)
-     ========================================================================== -->
-<section id="categories" class="seo-categories-section">
-    <div class="container">
-        <div class="section-pop-header reveal-on-scroll">
-            <div class="section-pop-badge bg-yellow">
-                <span>✦ EXPLORE BY GEAR &amp; LIFESTYLE ✦</span>
-            </div>
-            <h2 class="section-pop-title text-ink">CREATIVE STICKERS FOR EVERY SURFACE</h2>
-            <p class="section-pop-subtitle">
-                Engineered for maximum durability. Discover Tabstick waterproof vinyl decals tailored for your tech, ride, and campus drip.
-            </p>
-        </div>
-
-        <div class="seo-categories-grid">
-            <!-- Category 1: Laptop Stickers -->
-            <div class="seo-category-card reveal-on-scroll" id="laptop-stickers">
-                <div>
-                    <span class="seo-cat-badge">💻 Tech Setup</span>
-                    <h3 class="seo-cat-title">Laptop Stickers</h3>
-                    <p class="seo-cat-desc">
-                        Turn boring laptop lids into personalized statement art. Tabstick laptop stickers are die-cut from premium automotive-grade vinyl engineered specifically to handle laptop operating heat and daily backpack friction. Because we use high-grade residue-free adhesive, you can peel, swap, and reposition stickers on MacBooks, ThinkPads, and gaming rigs without leaving sticky, gooey glue on aluminum or matte chassis.
-                    </p>
-                </div>
-                <div>
-                    <div class="seo-cat-meta-chips">
-                        <span class="seo-cat-chip">🚫 Zero Residue</span>
-                        <span class="seo-cat-chip">🔥 Heat Resistant</span>
-                        <span class="seo-cat-chip">✨ Matte Lamination</span>
-                    </div>
-                    <a href="{{ route('category.show', 'laptop-stickers') }}" class="seo-cat-btn">
-                        <span>Explore Laptop Stickers →</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Category 2: Car & Bike Stickers -->
-            <div class="seo-category-card reveal-on-scroll" id="car-stickers">
-                <div>
-                    <span class="seo-cat-badge">🚗 Road &amp; Track</span>
-                    <h3 class="seo-cat-title">Car &amp; Bike Stickers</h3>
-                    <p class="seo-cat-desc">
-                        Built to withstand the open highway, harsh weather, and pressure washes. Tabstick car stickers and motorcycle decals are printed with UV-cured pigment inks that never fade or bleach under blistering Indian sun. Whether sticking them on bumpers, windshields, bike petrol tanks, or helmet visors, our 100% waterproof vinyl stands firm against monsoons, mud splashes, and grit.
-                    </p>
-                </div>
-                <div>
-                    <div class="seo-cat-meta-chips">
-                        <span class="seo-cat-chip">🌧️ 100% Waterproof</span>
-                        <span class="seo-cat-chip">☀️ UV Sunlight Safe</span>
-                        <span class="seo-cat-chip">🏍️ Moto &amp; Auto Grade</span>
-                    </div>
-                    <a href="{{ route('category.show', 'car-stickers') }}" class="seo-cat-btn">
-                        <span>Explore Car Stickers →</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Category 3: Phone Case Stickers -->
-            <div class="seo-category-card reveal-on-scroll" id="phone-stickers">
-                <div>
-                    <span class="seo-cat-badge">📱 Daily Carry</span>
-                    <h3 class="seo-cat-title">Phone Case Stickers</h3>
-                    <p class="seo-cat-desc">
-                        Your smartphone travels in your hand and pocket all day long. Tabstick phone stickers are miniature die-cut decals created with scratchproof coatings that resist coin scratches, hand sweat, and jeans friction. Slip them seamlessly inside transparent clear cases or stick them securely onto silicone and matte cases without edge lifting or peeling.
-                    </p>
-                </div>
-                <div>
-                    <div class="seo-cat-meta-chips">
-                        <span class="seo-cat-chip">🛡️ Scratch Resistant</span>
-                        <span class="seo-cat-chip">👌 Easy Peel</span>
-                        <span class="seo-cat-chip">⚡ Pocket Proof</span>
-                    </div>
-                    <a href="{{ route('category.show', 'phone-stickers') }}" class="seo-cat-btn">
-                        <span>Explore Phone Stickers →</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Category 4: Stickers for College Students -->
-            <div class="seo-category-card reveal-on-scroll" id="college-stickers">
-                <div>
-                    <span class="seo-cat-badge">🎓 Campus Vibe</span>
-                    <h3 class="seo-cat-title">Stickers for College Students</h3>
-                    <p class="seo-cat-desc">
-                        College life thrives on humor, hustle, and self-expression. Tabstick stickers for college students feature the internet's dopest meme drops, anime aesthetics, developer code jokes, and desi pop culture art. Designed to withstand campus rough-and-tumble on water bottles, spiral notebooks, hostel doors, and laptops—all at student-friendly pocket money pricing.
-                    </p>
-                </div>
-                <div>
-                    <div class="seo-cat-meta-chips">
-                        <span class="seo-cat-chip">👑 Viral Memes &amp; Anime</span>
-                        <span class="seo-cat-chip">💧 Bottle &amp; Flask Safe</span>
-                        <span class="seo-cat-chip">💸 Affordable Packs</span>
-                    </div>
-                    <a href="{{ route('category.show', 'college-stickers') }}" class="seo-cat-btn">
-                        <span>Explore Student Drops →</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Category 5: Custom Stickers in India (Wide Feature Card) -->
-            <div class="seo-category-card featured-wide reveal-on-scroll" id="custom-stickers">
-                <div>
-                    <span class="seo-cat-badge">⚡ Creator Studio</span>
-                    <h3 class="seo-cat-title">Custom Stickers in India</h3>
-                    <p class="seo-cat-desc">
-                        Need custom stickers for your tech startup, college fest, developer community, or personal brand? Tabstick manufactures custom die-cut vinyl stickers in India with ultra-sharp 1200 DPI resolution, custom die-cut contours, and protective waterproof lamination. Enjoy fast turnaround times, low minimum order quantities, and reliable pan-India doorstep delivery.
-                    </p>
-                    <div class="seo-cat-meta-chips">
-                        <span class="seo-cat-chip">📐 Custom Die-Cut</span>
-                        <span class="seo-cat-chip">📦 Bulk Pack Pricing</span>
-                        <span class="seo-cat-chip">🚀 Pan-India Fast Dispatch</span>
-                    </div>
-                </div>
-                <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
-                    <p style="font-size: 0.92rem; color: #18181B; font-weight: 700; margin: 0;">
-                        Ready to print your artwork or startup swag?
-                    </p>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="{{ route('category.show', 'custom-stickers') }}" class="seo-cat-btn">
-                            <span>Explore Custom Specs →</span>
-                        </a>
-                        <a href="mailto:hello@tabstick.in?subject=Custom%20Sticker%20Order%20Inquiry%20-%20Tabstick" class="seo-cat-btn" style="background:#FFFFFF;">
-                            <span>Email Quote Request ✉️</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==========================================================================
-     6. SECTION: “THE TABSTICK CLUB” (“Good things come in small packs.”)
-     ========================================================================== -->
-<section id="club" class="club-pop-section">
-    <div class="container">
-        <div class="club-pop-header reveal-on-scroll">
-            <span class="club-badge-tag">✦ THE MOVEMENT ✦</span>
-            <h2 class="club-pop-heading">GOOD THINGS COME IN SMALL PACKS.</h2>
-            <p class="club-pop-subtext">
-                Tabstick started out of pure frustration with flimsy, cheap stickers that ruined MacBooks and peeled within days. Today, we're a community of 25,000+ creators turning ordinary tech into personal art.
-            </p>
-        </div>
-
-        <!-- Founder Story Spotlight (#author) -->
-        <div id="author" class="founder-spotlight-box reveal-on-scroll">
-            <div class="founder-spotlight-grid">
-                <!-- Polaroid Frame with Realistic Tape Sticker -->
-                <div class="founder-photo-col">
-                    <div class="founder-polaroid-frame">
-                        <div class="polaroid-tape-strip tape-top"></div>
-                        <img src="{{ asset('images/author.jpg') }}" alt="Mayank Malhotra, Founder of Tabstick" class="founder-photo-img">
-                        <div class="polaroid-handwriting-caption">
-                            <strong>Mayank Malhotra</strong>
-                            <span>Founder of Tabstick</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Story & Metrics -->
-                <div class="founder-text-col">
-                    <div class="founder-kicker-pill">FOUNDER &amp; BRAND STORY</div>
-                    <h3 class="founder-quote-title">
-                        “Stickers shouldn't be disposable paper. They should be wearable streetwear for your gear.”
-                    </h3>
-                    <p class="founder-story-paragraph">
-                        <strong>Mayank Malhotra is the founder of Tabstick.</strong> Tabstick is an Indian sticker brand founded by Mayank Malhotra. We create creative and durable stickers for laptops, cars, phones and college students.
-                    </p>
-                    <p class="founder-story-paragraph">
-                        Back in 2024, I spent ₹1,500 on laptop stickers that arrived pixelated, peeled at the corners after a week, and left sticky glue all over my aluminum lid. I knew we could do better. We sourced automotive-grade waterproof vinyl, partnered with local indie illustrators, and dialed in rich UV-cured inks. Today, Tabstick is proud to be India's fastest-growing sticker studio.
-                    </p>
-
-                    <!-- Real Impact Counters -->
-                    <div class="founder-metrics-strip">
-                        <div class="metric-card">
-                            <strong class="metric-number">10L+</strong>
-                            <span class="metric-label">Stickers Shipped</span>
-                        </div>
-                        <div class="metric-card">
-                            <strong class="metric-number">5000+</strong>
-                            <span class="metric-label">Original Drops</span>
-                        </div>
-                        <div class="metric-card">
-                            <strong class="metric-number">4.8★</strong>
-                            <span class="metric-label">Community Rating</span>
-                        </div>
-                    </div>
-
-                    <div class="founder-actions-row" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
-                        <a href="{{ url('/maayank') }}" class="btn-pop-primary" style="background:#18181B;color:#FFE600;border-color:#18181B;box-shadow:3px 3px 0 #18181B;">
-                            <span>👨‍💻 Connect Directly with the Founder ↗</span>
-                        </a>
-                        <a href="https://www.linkedin.com/in/maayank-malhotra-a59a55186/" target="_blank" rel="noopener me" class="founder-linkedin-chip">
-                            <span>Connect on LinkedIn →</span>
-                        </a>
-                        <a href="#shop" class="btn-pop-primary btn-magnetic" style="background:#FFE600;color:#18181B;">
-                            <span>Shop Founder's Picks →</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Interactive Sticker Playground Wall -->
-        <div class="interactive-sticker-wall-wrap reveal-on-scroll">
-            <div class="wall-header-pill">
-                <span class="wall-spark">🎮</span>
-                <span>INTERACTIVE STICKER WALL • DRAG &amp; PLAY AROUND!</span>
-                <span class="wall-spark">✦</span>
-            </div>
-            <div class="sticker-wall-stage" id="sticker-wall">
-                <div class="draggable-sticker wall-stk-1" data-base-rotate="-8" title="Drag me!">
-                    <img src="{{ asset('images/wasted.jpg') }}" alt="Wasted Sticker">
-                    <span class="sticker-pin">📌</span>
-                </div>
-                <div class="draggable-sticker wall-stk-2" data-base-rotate="12" title="Drag me!">
-                    <img src="{{ asset('images/ah-shit.jpg') }}" alt="Ah Shit Sticker">
-                    <span class="sticker-pin">📌</span>
-                </div>
-                <div class="draggable-sticker wall-stk-3" data-base-rotate="-14" title="Drag me!">
-                    <img src="{{ asset('images/limited-edition.jpg') }}" alt="Limited Drop">
-                    <span class="sticker-pin">📌</span>
-                </div>
-                <div class="draggable-sticker wall-stk-4" data-base-rotate="6" title="Drag me!">
-                    <img src="{{ asset('images/fizzy-zero.jpg') }}" alt="Fizzy Pop">
-                    <span class="sticker-pin">📌</span>
-                </div>
-                <div class="draggable-sticker wall-stk-5" data-base-rotate="-4" title="Drag me!">
-                    <img src="{{ asset('images/keep-distance.jpg') }}" alt="Keep Distance">
-                    <span class="sticker-pin">📌</span>
-                </div>
-                <div class="draggable-sticker wall-stk-6" data-base-rotate="10" title="Drag me!">
-                    <img src="{{ asset('images/uchiha.jpg') }}" alt="Uchiha Clan">
-                    <span class="sticker-pin">📌</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 3 Club Benefits Cards -->
-        <div class="club-benefits-grid">
-            <div class="benefit-card benefit-yellow reveal-on-scroll">
-                <div class="benefit-icon">🎁</div>
-                <h4>Secret Weekly Drops</h4>
-                <p>Members get 24-hour early access to limited anime, meme &amp; indie artist drops before they sell out.</p>
-            </div>
-            <div class="benefit-card benefit-blue reveal-on-scroll">
-                <div class="benefit-icon">🛡️</div>
-                <h4>Stick-For-Life Promise</h4>
-                <p>If your Tabstick sticker ever bubbles, peels or fades from normal use, we replace it free of cost.</p>
-            </div>
-            <div class="benefit-card benefit-pink reveal-on-scroll">
-                <div class="benefit-icon">⚡</div>
-                <h4>Surprise Mystery Gifts</h4>
-                <p>Exclusive surprise die-cut stickers and holographic bonus decals tucked into every club order over ₹499.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==========================================================================
-     7. FREQUENTLY ASKED QUESTIONS (WITH FAQPAGe SCHEMA)
-     ========================================================================== -->
-<section id="faq" class="faq-pop-section">
-    <div class="container">
-        <div class="section-pop-header reveal-on-scroll">
-            <div class="section-pop-badge bg-yellow">
-                <span>✦ GOT QUESTIONS? WE'VE GOT ANSWERS ✦</span>
-            </div>
-            <h2 class="section-pop-title text-ink">FREQUENTLY ASKED QUESTIONS</h2>
-            <p class="section-pop-subtitle">
-                Everything you need to know about Tabstick sticker quality, waterproof vinyl, shipping across India, and our founder.
-            </p>
-        </div>
-
-        <div class="faq-accordion-wrap reveal-on-scroll">
-            <!-- FAQ 1: Quality -->
-            <div class="faq-accordion-item">
-                <button type="button" class="faq-accordion-header" aria-expanded="false">
-                    <span>What makes Tabstick stickers different from ordinary stickers?</span>
-                    <span class="faq-icon-cross">+</span>
-                </button>
-                <div class="faq-accordion-body" style="display: none;">
-                    Tabstick stickers are manufactured with heavy-duty automotive-grade vinyl and cured with high-density pigment inks. Unlike thin paper stickers that rip or blur when touched, Tabstick decals feature a durable protective matte laminate that resists water, sun exposure, oil, and scratches.
-                </div>
-            </div>
-
-            <!-- FAQ 2: Waterproof -->
-            <div class="faq-accordion-item">
-                <button type="button" class="faq-accordion-header" aria-expanded="false">
-                    <span>Are Tabstick stickers completely waterproof and weatherproof?</span>
-                    <span class="faq-icon-cross">+</span>
-                </button>
-                <div class="faq-accordion-body" style="display: none;">
-                    Yes, 100%. All Tabstick stickers are fully waterproof, monsoon-tested, and dishwasher safe. You can stick them on outdoor car bumpers, motorcycle petrol tanks, helmets, and hydro flasks without worrying about rain, car washes, or summer heat peeling the edges.
-                </div>
-            </div>
-
-            <!-- FAQ 3: Residue -->
-            <div class="faq-accordion-item">
-                <button type="button" class="faq-accordion-header" aria-expanded="false">
-                    <span>Will Tabstick stickers leave sticky residue when removed?</span>
-                    <span class="faq-icon-cross">+</span>
-                </button>
-                <div class="faq-accordion-body" style="display: none;">
-                    No. We engineered our adhesive specifically for tech devices and delicate surfaces. When you peel a Tabstick sticker off your MacBook, iPad, phone case, or car paint, it leaves zero gooey residue. If any slight dust remains, it wipes off effortlessly with a dry cloth.
-                </div>
-            </div>
-
-            <!-- FAQ 4: Application -->
-            <div class="faq-accordion-item">
-                <button type="button" class="faq-accordion-header" aria-expanded="false">
-                    <span>How do I apply and remove Tabstick stickers for best results?</span>
-                    <span class="faq-icon-cross">+</span>
-                </button>
-                <div class="faq-accordion-body" style="display: none;">
-                    To apply, wipe the surface clean and ensure it is dry and free of oils. Peel the sticker from its backing, position it gently, and smooth down from the center toward the edges with your thumb. To remove, simply lift an edge with your fingernail and peel slowly at a 45-degree angle.
-                </div>
-            </div>
-
-            <!-- FAQ 5: Shipping -->
-            <div class="faq-accordion-item">
-                <button type="button" class="faq-accordion-header" aria-expanded="false">
-                    <span>What are the shipping and delivery timelines across India?</span>
-                    <span class="faq-icon-cross">+</span>
-                </button>
-                <div class="faq-accordion-body" style="display: none;">
-                    We dispatch all orders within 24 to 48 hours from our studio. Delivery typically takes 2 to 4 business days for metro cities (Bengaluru, Delhi NCR, Mumbai, Hyderabad, Chennai, Kolkata) and 3 to 6 business days for the rest of India with live SMS tracking.
-                </div>
-            </div>
-
-            <!-- FAQ 6: Custom Stickers -->
-            <div class="faq-accordion-item">
-                <button type="button" class="faq-accordion-header" aria-expanded="false">
-                    <span>Can I order custom stickers in India for startups, colleges, or events?</span>
-                    <span class="faq-icon-cross">+</span>
-                </button>
-                <div class="faq-accordion-body" style="display: none;">
-                    Absolutely! We specialize in custom die-cut vinyl stickers for tech startups, developer conferences, college fests, and indie creators in India. Email your designs, quantity, and dimensions to <strong>hello@tabstick.in</strong> for an instant quote and proof mockups.
-                </div>
-            </div>
-
-            <!-- FAQ 7: Founder Identity -->
-            <div class="faq-accordion-item">
-                <button type="button" class="faq-accordion-header" aria-expanded="false">
-                    <span>Who is the founder of Tabstick?</span>
-                    <span class="faq-icon-cross">+</span>
-                </button>
-                <div class="faq-accordion-body" style="display: none;">
-                    <strong>Mayank Malhotra is the founder of Tabstick.</strong> He founded Tabstick to bring streetwear aesthetics, automotive-grade durability, and creator culture to the Indian sticker ecosystem, ending the era of flimsy, peeling paper stickers.
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- JSON-LD FAQPage Schema -->
-    @php
-    $faqSchema = [
-        '@context' => 'https://schema.org',
-        '@type' => 'FAQPage',
-        'mainEntity' => [
-            [
-                '@type' => 'Question',
-                'name' => 'What makes Tabstick stickers different from ordinary stickers?',
-                'acceptedAnswer' => [
-                    '@type' => 'Answer',
-                    'text' => 'Tabstick stickers are manufactured with heavy-duty automotive-grade vinyl and cured with high-density pigment inks. Unlike thin paper stickers, Tabstick decals feature a durable protective matte laminate that resists water, sun exposure, oil, and scratches.',
-                ],
-            ],
-            [
-                '@type' => 'Question',
-                'name' => 'Are Tabstick stickers completely waterproof and weatherproof?',
-                'acceptedAnswer' => [
-                    '@type' => 'Answer',
-                    'text' => 'Yes, 100%. All Tabstick stickers are fully waterproof, monsoon-tested, and dishwasher safe for outdoor car bumpers, motorcycles, helmets, and hydro flasks.',
-                ],
-            ],
-            [
-                '@type' => 'Question',
-                'name' => 'Will Tabstick stickers leave sticky residue when removed?',
-                'acceptedAnswer' => [
-                    '@type' => 'Answer',
-                    'text' => 'No. Tabstick uses a specialized residue-free acrylic adhesive. When peeled from MacBooks, laptops, or car paint, it leaves zero gooey residue.',
-                ],
-            ],
-            [
-                '@type' => 'Question',
-                'name' => 'How do I apply and remove Tabstick stickers for best results?',
-                'acceptedAnswer' => [
-                    '@type' => 'Answer',
-                    'text' => 'Clean and dry the surface. Peel the sticker from its easy-peel backing and smooth down from center to edges. To remove, peel slowly at a 45-degree angle.',
-                ],
-            ],
-            [
-                '@type' => 'Question',
-                'name' => 'What are the shipping and delivery timelines across India?',
-                'acceptedAnswer' => [
-                    '@type' => 'Answer',
-                    'text' => 'Orders are dispatched within 24 to 48 hours. Delivery takes 2 to 4 business days for metro cities and 3 to 6 business days for the rest of India.',
-                ],
-            ],
-            [
-                '@type' => 'Question',
-                'name' => 'Can I order custom stickers in India for startups, colleges, or events?',
-                'acceptedAnswer' => [
-                    '@type' => 'Answer',
-                    'text' => 'Yes! Tabstick manufactures custom die-cut vinyl stickers for tech startups, college fests, and creators in India. Email hello@tabstick.in for details.',
-                ],
-            ],
-            [
-                '@type' => 'Question',
-                'name' => 'Who is the founder of Tabstick?',
-                'acceptedAnswer' => [
-                    '@type' => 'Answer',
-                    'text' => 'Mayank Malhotra is the founder of Tabstick. Tabstick is an Indian sticker brand founded by Mayank Malhotra. We create creative and durable stickers for laptops, cars, phones and college students.',
-                ],
-            ],
-        ],
-    ];
-    @endphp
-    <script type="application/ld+json">
-    {!! json_encode($faqSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        parchment: '#FBF9F4',
+                        surface: '#FFFFFF',
+                        espresso: '#3A2F2B',
+                        taupe: '#C9A68F',
+                        'body-mid': '#6B5C55',
+                        muted: '#999999',
+                        divider: '#DDD5CC',
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        widest2: '0.2em',
+                    }
+                }
+            }
+        };
     </script>
-</section>
 
-<!-- ==========================================================================
-     8. CUSTOMER REVIEWS: ANIMATED ASYMMETRICAL QUOTE CARDS
-     ========================================================================== -->
-<section id="reviews" class="reviews-pop-section">
-    <div class="container">
-        <div class="section-pop-header reveal-on-scroll">
-            <div class="section-pop-badge bg-pink">
-                <span>✦ PROOF THAT STICKS ✦</span>
-            </div>
-            <h2 class="section-pop-title">STUCK ON TABSTICK</h2>
-            <p class="section-pop-subtitle">
-                Over 25,000+ laptops, bottles, cars &amp; bikes upgraded. Here's what the community is saying.
-            </p>
-        </div>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: #FBF9F4;
+            color: #3A2F2B;
+            overflow-x: hidden;
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+        }
+        body::-webkit-scrollbar, html::-webkit-scrollbar {
+            display: none;
+        }
+        body, html {
+            scrollbar-width: none;
+        }
+        .eyebrow {
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #C9A68F;
+            margin-bottom: 14px;
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            display: block;
+        }
+        .section-heading {
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(34px, 5vw, 54px);
+            font-weight: 600;
+            line-height: 1.1;
+        }
+        .taupe-rule {
+            background: #C9A68F;
+            width: 32px;
+            height: 1px;
+            margin-bottom: 28px;
+        }
+        .btn-taupe {
+            color: #FBF9F4;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            background: #C9A68F;
+            border: none;
+            border-radius: 6px;
+            padding: 16px 36px;
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: opacity 0.15s;
+            display: inline-block;
+        }
+        .btn-taupe:hover {
+            opacity: 0.85;
+        }
+        .btn-outline {
+            color: #3A2F2B;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            background: transparent;
+            border: 1px solid #3A2F2B;
+            border-radius: 6px;
+            padding: 15px 36px;
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.15s, color 0.15s;
+            display: inline-block;
+        }
+        .btn-outline:hover {
+            color: #FBF9F4;
+            background: #3A2F2B;
+        }
+        .btn-espresso {
+            color: #FBF9F4;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-align: center;
+            background: #3A2F2B;
+            border: none;
+            border-radius: 6px;
+            width: 100%;
+            padding: 18px 24px;
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: opacity 0.15s;
+            display: block;
+        }
+        .btn-espresso:hover {
+            opacity: 0.85;
+        }
+        .field-wrap {
+            flex-direction: column;
+            gap: 8px;
+            display: flex;
+        }
+        .field-label {
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #3A2F2B;
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .field-label .sub {
+            letter-spacing: 0.04em;
+            text-transform: none;
+            color: #999;
+            margin-left: 6px;
+            font-weight: 400;
+        }
+        .field-input, .field-select, .field-textarea {
+            color: #3A2F2B;
+            appearance: none;
+            background: #FBF9F4;
+            border: 1px solid #DDD5CC;
+            border-radius: 6px;
+            outline: none;
+            width: 100%;
+            padding: 14px 16px;
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            font-size: 16px;
+            transition: border-color 0.15s;
+        }
+        .field-input:focus, .field-select:focus, .field-textarea:focus {
+            border-color: #C9A68F;
+        }
+        .field-input::placeholder, .field-textarea::placeholder {
+            color: #BBB;
+        }
+        .field-select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%23C9A68F' stroke-width='1.5' fill='none' stroke-linecap='square'/%3E%3C/svg%3E");
+            background-position: right 16px center;
+            background-repeat: no-repeat;
+            padding-right: 44px;
+        }
+        .field-textarea {
+            resize: none;
+            min-height: 120px;
+            line-height: 1.7;
+        }
+        .carousel-track {
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            gap: 12px;
+            display: flex;
+            overflow-x: auto;
+        }
+        .carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+        .carousel-slide {
+            scroll-snap-align: start;
+            flex-shrink: 0;
+        }
+        @keyframes heroIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .hero-in {
+            animation: 0.8s both heroIn;
+        }
+    </style>
+</head>
+<body class="bg-parchment text-espresso">
 
-        <div class="reviews-pop-grid">
-            <!-- Review 1 -->
-            <div class="review-pop-card tilt-left reveal-on-scroll">
-                <div class="review-stars-row">★★★★★</div>
-                <p class="review-quote-text">
-                    “Covered my entire MacBook Pro M3 with Tabstick drops. The colors pop insanely well in daylight and the matte finish feels premium under hand. Zero peel even after 6 months of daily backpack abuse!”
-                </p>
-                <div class="review-author-row">
-                    <div class="author-avatar-badge bg-yellow">💻</div>
-                    <div>
-                        <strong class="author-name">Arjun S.</strong>
-                        <span class="author-tag">Frontend Dev • Bengaluru</span>
-                    </div>
-                    <span class="verified-buyer-pill">✓ Verified</span>
-                </div>
-            </div>
+    <!-- ==========================================================================
+         NAVIGATION BAR
+         ========================================================================== -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between py-4 transition-all duration-300" style="padding-left: clamp(20px, 4vw, 48px); padding-right: clamp(20px, 4vw, 48px);">
+        <!-- Brand Logo -->
+        <a href="#hero" class="flex items-center gap-2.5 no-underline">
+            <img src="{{ asset('graze-n-gifts/graze_n_gifts_logo.jpg') }}" alt="Graze &amp; Gift Co." class="w-9 h-9 rounded-full object-cover shrink-0 shadow-sm">
+            <span id="header-brand-text" class="font-serif font-bold uppercase text-[17px] tracking-[0.12em] text-[#FBF9F4] transition-colors duration-300">
+                Graze <span class="italic text-taupe">&amp;</span> Gift Co.
+            </span>
+        </a>
 
-            <!-- Review 2 -->
-            <div class="review-pop-card tilt-right reveal-on-scroll">
-                <div class="review-stars-row">★★★★★</div>
-                <p class="review-quote-text">
-                    “Put the ‘Wasted’ and meme decals on my Royal Enfield petrol tank. Survived heavy Mumbai monsoon rains, mud, and water washes with zero damage. Genuinely 100% waterproof.”
-                </p>
-                <div class="review-author-row">
-                    <div class="author-avatar-badge bg-red">🏍️</div>
-                    <div>
-                        <strong class="author-name">Rohan V.</strong>
-                        <span class="author-tag">Rider • Mumbai</span>
-                    </div>
-                    <span class="verified-buyer-pill">✓ Verified</span>
-                </div>
-            </div>
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-8">
+            <a href="#services" class="header-nav-link font-sans text-[14px] font-semibold uppercase tracking-widest2 no-underline transition-colors duration-150 text-white/85 hover:text-taupe">Services</a>
+            <a href="#about" class="header-nav-link font-sans text-[14px] font-semibold uppercase tracking-widest2 no-underline transition-colors duration-150 text-white/85 hover:text-taupe">About</a>
+            <a href="#gallery" class="header-nav-link font-sans text-[14px] font-semibold uppercase tracking-widest2 no-underline transition-colors duration-150 text-white/85 hover:text-taupe">Gallery</a>
+            <a href="#reviews" class="header-nav-link font-sans text-[14px] font-semibold uppercase tracking-widest2 no-underline transition-colors duration-150 text-white/85 hover:text-taupe">Reviews</a>
+            <a href="#inquiry" id="header-cta-btn" class="font-sans inline-block px-5 py-3 text-[13px] font-bold uppercase tracking-[0.18em] no-underline rounded-md transition-all duration-300" style="background: rgba(255,255,255,0.15); color: #FBF9F4; border: 1px solid rgba(255,255,255,0.5);">Request a Quote</a>
+        </nav>
 
-            <!-- Review 3 -->
-            <div class="review-pop-card tilt-straight reveal-on-scroll">
-                <div class="review-stars-row">★★★★★</div>
-                <p class="review-quote-text">
-                    “The Mystery Pack is the best value hands down. Got 12 dope holographic &amp; die-cut anime stickers. The packaging had so much personality and arrived in 48 hours in Delhi!”
-                </p>
-                <div class="review-author-row">
-                    <div class="author-avatar-badge bg-blue">🎨</div>
-                    <div>
-                        <strong class="author-name">Sneha K.</strong>
-                        <span class="author-tag">Designer • New Delhi</span>
-                    </div>
-                    <span class="verified-buyer-pill">✓ Verified</span>
-                </div>
-            </div>
-        </div>
+        <!-- Mobile Hamburger Button -->
+        <button type="button" id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 focus:outline-none" aria-label="Toggle Navigation">
+            <span class="w-6 h-0.5 bg-white transition-all duration-300 mobile-line-1"></span>
+            <span class="w-6 h-0.5 bg-white transition-all duration-300 mobile-line-2"></span>
+            <span class="w-6 h-0.5 bg-white transition-all duration-300 mobile-line-3"></span>
+        </button>
+    </header>
+
+    <!-- Mobile Drawer Overlay -->
+    <div id="mobile-drawer" class="fixed inset-0 z-40 bg-[#FBF9F4] flex flex-col justify-center items-center gap-6 px-8 transition-all duration-300 opacity-0 pointer-events-none translate-y-[-10px]">
+        <a href="#services" class="mobile-nav-link font-serif text-[24px] font-semibold uppercase tracking-[0.12em] text-espresso hover:text-taupe">Services</a>
+        <a href="#about" class="mobile-nav-link font-serif text-[24px] font-semibold uppercase tracking-[0.12em] text-espresso hover:text-taupe">About</a>
+        <a href="#gallery" class="mobile-nav-link font-serif text-[24px] font-semibold uppercase tracking-[0.12em] text-espresso hover:text-taupe">Gallery</a>
+        <a href="#reviews" class="mobile-nav-link font-serif text-[24px] font-semibold uppercase tracking-[0.12em] text-espresso hover:text-taupe">Reviews</a>
+        <div class="w-12 h-px bg-divider my-2"></div>
+        <a href="#inquiry" class="mobile-nav-link btn-taupe w-full max-w-xs text-center">Request a Quote</a>
     </div>
-</section>
 
-<!-- ==========================================================================
-     7. INSTAGRAM-STYLE LIFESTYLE GALLERY: “SEEN IN THE WILD” (AUTO-SCROLLING)
-     ========================================================================== -->
-<section id="gallery" class="gallery-pop-section">
-    <div class="container">
-        <div class="section-pop-header reveal-on-scroll">
-            <div class="section-pop-badge bg-yellow">
-                <span>📸 STREETWEAR ON YOUR GEAR</span>
-            </div>
-            <h2 class="section-pop-title">SEEN IN THE WILD</h2>
-            <p class="section-pop-subtitle">
-                Tag <strong>@tabstick.in</strong> on Instagram to be featured on our official drop wall. Hover to pause.
-            </p>
-        </div>
-    </div>
+    <main>
+        <!-- ==========================================================================
+             HERO SECTION
+             ========================================================================== -->
+        <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center px-6 md:px-10 lg:px-16 overflow-hidden hero-in">
+            <!-- Background Image -->
+            <img src="{{ asset('graze-n-gifts/images/grazing table_1.jpeg') }}" alt="Grazing table spread" class="absolute inset-0 w-full h-full object-cover object-[center_25%] select-none pointer-events-none">
+            
+            <!-- Warm Overlay -->
+            <div class="absolute inset-0" style="background: rgba(20, 13, 10, 0.52);"></div>
 
-    <!-- Continuous Auto-Scrolling Track with Hover Pause -->
-    <div class="lifestyle-autoscroll-container">
-        <div class="lifestyle-autoscroll-track">
-            <!-- Tile 1 -->
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/hero-banner.webp') }}" alt="Stickers on Laptop" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">MacBook Air • Pop Drops</span>
-                    </div>
-                </div>
-            </div>
+            <!-- Content -->
+            <div class="relative z-10 flex flex-col items-center pt-28 pb-20 max-w-4xl mx-auto">
+                <p class="font-sans mb-6 text-[13px] font-semibold uppercase tracking-widest2 text-white/75">
+                    Fine Epicurean Artistry &nbsp;·&nbsp; Burlington &amp; The GTA
+                </p>
 
-            <!-- Tile 2 -->
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/wasted.jpg') }}" alt="Wasted Sticker on Flask" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">Hydro Flask • Meme Pack</span>
-                    </div>
-                </div>
-            </div>
+                <h1 class="font-serif mb-4 font-bold uppercase leading-none tracking-[0.14em] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]" style="font-size: clamp(46px, 8vw, 78px);">
+                    Graze <span class="text-[#C9A68F] italic">&amp;</span> Gift Co.
+                </h1>
 
-            <!-- Tile 3 -->
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/limited-edition.jpg') }}" alt="Limited Edition on Bike" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">Moto Helmet • Drop 04</span>
-                    </div>
-                </div>
-            </div>
+                <p class="font-serif mb-10 font-normal italic text-white/85 tracking-[0.06em]" style="font-size: clamp(26px, 3.5vw, 40px);">
+                    Gather. Graze. Gift.
+                </p>
 
-            <!-- Tile 4 -->
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/ah-shit.jpg') }}" alt="Ah Shit on Skateboard" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">Skate Deck • Street Drop</span>
+                <!-- Decorative Ornament -->
+                <div class="flex items-center gap-3 w-full max-w-xs mb-8">
+                    <div class="flex-1 h-px bg-white/40"></div>
+                    <div class="flex items-center gap-1">
+                        <div class="w-1.5 h-1.5 rounded-full bg-white/60"></div>
+                        <div class="w-4 h-2 rounded-full border border-white/60"></div>
+                        <div class="w-1.5 h-1.5 rounded-full bg-white/60"></div>
                     </div>
+                    <div class="flex-1 h-px bg-white/40"></div>
                 </div>
-            </div>
 
-            <!-- Tile 5 -->
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/fizzy-zero.jpg') }}" alt="Fizzy Pop on iPad" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">iPad Pro • Pop Art</span>
-                    </div>
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-[260px] sm:max-w-none">
+                    <a href="#inquiry" class="w-full sm:w-[240px] text-center font-sans inline-block px-8 py-4 text-[13px] font-bold uppercase tracking-[0.2em] no-underline rounded-md transition-opacity hover:opacity-85" style="background: #C9A68F; color: #FBF9F4;">
+                        Request a Quote
+                    </a>
+                    <a href="#services" class="w-full sm:w-[240px] text-center font-sans inline-block px-8 py-4 text-[13px] font-bold uppercase tracking-[0.2em] no-underline rounded-md border border-white/70 text-white transition-colors hover:bg-white/10">
+                        View Services
+                    </a>
                 </div>
             </div>
+        </section>
 
-            <!-- Tile 6 -->
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/mystery-box.jpg') }}" alt="Mystery Box Unboxing" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">Mystery Unboxing • Collector</span>
-                    </div>
-                </div>
-            </div>
+        <!-- ==========================================================================
+             SERVICES SECTION
+             ========================================================================== -->
+        <section id="services" class="py-20 md:py-28 px-6 md:px-12 lg:px-20 bg-parchment">
+            <div class="max-w-6xl mx-auto">
+                <span class="eyebrow">Our Offerings</span>
+                <h2 class="section-heading text-espresso">Services</h2>
+                <div class="taupe-rule"></div>
 
-            <!-- DUPLICATED FOR SEAMLESS INFINITE LOOP -->
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/hero-banner.webp') }}" alt="Stickers on Laptop" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">MacBook Air • Pop Drops</span>
-                    </div>
+                <!-- Tabs Container -->
+                <div class="flex overflow-x-auto mt-8 border-b border-divider [scrollbar-width:none]" style="touch-action: pan-x;" id="services-tabs-bar">
+                    <!-- Tab buttons generated by JS -->
                 </div>
-            </div>
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/wasted.jpg') }}" alt="Wasted Sticker on Flask" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">Hydro Flask • Meme Pack</span>
-                    </div>
-                </div>
-            </div>
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/limited-edition.jpg') }}" alt="Limited Edition on Bike" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">Moto Helmet • Drop 04</span>
-                    </div>
-                </div>
-            </div>
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/ah-shit.jpg') }}" alt="Ah Shit on Skateboard" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">Skate Deck • Street Drop</span>
-                    </div>
-                </div>
-            </div>
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/fizzy-zero.jpg') }}" alt="Fizzy Pop on iPad" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">iPad Pro • Pop Art</span>
-                    </div>
-                </div>
-            </div>
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/mystery-box.jpg') }}" alt="Mystery Box Unboxing" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">Mystery Unboxing • Collector</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- ==========================================================================
-     8. NEWSLETTER SIGNUP WITH ANIMATED STICKER MASCOT: “STICK WITH US.”
-     ========================================================================== -->
-<section id="newsletter" class="newsletter-pop-section">
-    <div class="container">
-        <div class="newsletter-pop-card reveal-on-scroll">
-            <div class="newsletter-grid">
-                <!-- Mascot Column with Interactive Animated Eyes -->
-                <div class="mascot-col">
-                    <div class="mascot-character-wrap">
-                        <div class="mascot-body-badge">
-                            <!-- SVG Playful Mascot with Eye-Tracking Pupils -->
-                            <svg width="180" height="180" viewBox="0 0 160 160" fill="none">
-                                <!-- Mascot Shadow -->
-                                <ellipse cx="80" cy="148" rx="55" ry="10" fill="#18181B" opacity="0.2"/>
-                                <!-- Mascot Body Blob -->
-                                <path d="M80 12C118 12 144 38 144 76C144 116 116 142 80 142C44 142 16 116 16 76C16 38 42 12 80 12Z" fill="#FFE600" stroke="#18181B" stroke-width="4"/>
-                                <!-- Peel Corner -->
-                                <path d="M125 24L144 43L125 43Z" fill="#FF334B" stroke="#18181B" stroke-width="3"/>
-                                <!-- Left Eye Outer -->
-                                <circle cx="56" cy="68" r="18" fill="#FFFFFF" stroke="#18181B" stroke-width="3.5"/>
-                                <!-- Left Eye Pupil (Tracks Cursor) -->
-                                <circle cx="56" cy="68" r="8" fill="#18181B" class="mascot-pupil"/>
-                                <circle cx="53" cy="65" r="2.5" fill="#FFFFFF"/>
-                                <!-- Right Eye Outer -->
-                                <circle cx="104" cy="68" r="18" fill="#FFFFFF" stroke="#18181B" stroke-width="3.5"/>
-                                <!-- Right Eye Pupil (Tracks Cursor) -->
-                                <circle cx="104" cy="68" r="8" fill="#18181B" class="mascot-pupil"/>
-                                <circle cx="101" cy="65" r="2.5" fill="#FFFFFF"/>
-                                <!-- Blushing Cheeks -->
-                                <ellipse cx="40" cy="88" rx="8" ry="5" fill="#FF80BF"/>
-                                <ellipse cx="120" cy="88" rx="8" ry="5" fill="#FF80BF"/>
-                                <!-- Playful Smile -->
-                                <path d="M62 96C72 110 88 110 98 96" stroke="#18181B" stroke-width="4" stroke-linecap="round"/>
-                                <path d="M74 104C77 108 83 108 86 104" fill="#FF334B"/>
-                            </svg>
+                <!-- Active Service Container -->
+                <div id="active-service-content" class="pt-10 pb-2">
+                    <!-- Injected dynamically based on active tab -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             ABOUT FOUNDER SECTION
+             ========================================================================== -->
+        <section id="about" class="py-20 md:py-28 px-6 md:px-12 lg:px-20" style="background: #F4EFE8;">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
+                <!-- Founder Photo with Offset Border -->
+                <div class="relative mx-auto lg:mx-0 w-full" style="padding-right: 20px; padding-bottom: 20px;">
+                    <div class="relative w-full h-full min-h-[400px]">
+                        <div class="absolute inset-0" style="border: 2px solid #C9A68F; transform: translate(20px, 20px);"></div>
+                        <div class="relative w-full h-full overflow-hidden shadow-lg">
+                            <img src="{{ asset('graze-n-gifts/images/founder.jpeg') }}" alt="Manica — founder of Graze &amp; Gift Co." class="w-full h-full object-cover object-top">
                         </div>
-                        <span class="mascot-tag-chip">STICKY • THE MASCOT</span>
                     </div>
                 </div>
 
-                <!-- Form Column -->
-                <div class="newsletter-content-col">
-                    <div class="newsletter-eyebrow">✦ SECRET DROP CLUB ✦</div>
-                    <h2 class="newsletter-headline">STICK WITH US.</h2>
-                    <p class="newsletter-subtext">
-                        Join 25,000+ sticker collectors. Claim an instant <strong>10% discount code</strong> (`TABSTICK10`) for your first drop and get notified about secret meme releases.
+                <!-- Founder Story -->
+                <div class="flex flex-col justify-center">
+                    <span class="eyebrow">Meet the Founder</span>
+                    <h2 class="section-heading text-espresso">Meet Manica 🤍</h2>
+                    <div class="taupe-rule"></div>
+
+                    <p class="font-sans text-[17px] text-body-mid leading-[1.85] mb-5">
+                        Hi, I'm the founder of Graze &amp; Gift. I'm a proud mom of two and an analyst by profession — but I found the courage to pursue what truly brings me joy: creating beautiful, memorable experiences through food styling and gifting.
                     </p>
 
-                    <form class="pop-newsletter-form" onsubmit="event.preventDefault(); const inp = this.querySelector('input'); if(inp && inp.value){ const mInp = document.getElementById('lead_email'); if(mInp){ mInp.value = inp.value; } } document.getElementById('floating-lead-trigger')?.click();">
-                        <div class="newsletter-input-group">
-                            <input type="email" placeholder="Enter your email address..." class="pop-newsletter-input" required autocomplete="email">
-                            <button type="submit" class="btn-pop-primary btn-newsletter-submit trigger-confetti" data-confetti="true">
-                                <span>Get 10% Off 🎁</span>
-                            </button>
+                    <p class="font-sans text-[17px] text-body-mid leading-[1.85] mb-5">
+                        What started as a passion has grown into Graze &amp; Gift, where I get to combine creativity with thoughtful details to make every celebration feel special. From elegant grazing tables and curated gift boxes to customized return gifts, every setup is designed with care, quality, and a personal touch.
+                    </p>
+
+                    <p class="font-sans text-[17px] text-body-mid leading-[1.85] mb-8">
+                        I believe every celebration deserves something unique — whether it's a birthday, bridal shower, baby shower, wedding, corporate event, or an intimate gathering with loved ones. Thank you for supporting this dream and being part of the journey.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#inquiry" class="btn-taupe text-center">Request a Quote</a>
+                        <a href="https://www.instagram.com/graze_n_gifts" target="_blank" rel="noopener noreferrer" class="btn-outline text-center">Follow on Instagram</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             GALLERY SECTION
+             ========================================================================== -->
+        <section id="gallery" class="py-20 md:py-28 px-6 md:px-12 lg:px-20 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex items-end justify-between mb-2">
+                    <div>
+                        <span class="eyebrow">Our Work</span>
+                        <h2 class="section-heading text-espresso">Gallery</h2>
+                    </div>
+                    <a href="https://www.instagram.com/graze_n_gifts" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-block mb-1 font-sans text-[11px] font-bold uppercase tracking-[0.22em] no-underline pb-0.5 text-espresso border-b border-taupe hover:text-taupe transition-colors">
+                        @graze_n_gifts →
+                    </a>
+                </div>
+                <div class="taupe-rule"></div>
+
+                <!-- Carousel Wrapper with Left/Right Chevrons -->
+                <div class="relative">
+                    <button type="button" id="gallery-prev-btn" class="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/90 shadow-md flex items-center justify-center text-espresso hover:bg-white transition-all" aria-label="Previous image">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+                    <button type="button" id="gallery-next-btn" class="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/90 shadow-md flex items-center justify-center text-espresso hover:bg-white transition-all" aria-label="Next image">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+
+                    <div id="gallery-carousel-track" class="carousel-track py-2">
+                        <!-- 24 cards injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             REVIEWS SECTION
+             ========================================================================== -->
+        <section id="reviews" class="py-20 md:py-28 px-6 md:px-12 lg:px-20 bg-espresso text-parchment">
+            <div class="max-w-6xl mx-auto">
+                <span class="eyebrow" style="color: #C9A68F;">Client Love</span>
+                <h2 class="section-heading mb-12 text-parchment">Reviews</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Review 1 -->
+                    <div class="flex flex-col bg-[#2F2622] rounded-lg overflow-hidden border border-white/10 p-3">
+                        <video src="{{ asset('graze-n-gifts/reviews/review_1.mp4') }}" controls playsinline class="w-full aspect-[9/16] object-cover rounded bg-black"></video>
+                        <p class="mt-4 font-sans italic text-[14px] leading-relaxed text-parchment/80 text-center">
+                            "It looks so pretty, so stunning. It's something different. Every time we go to a party, it's all just kept on one table, but this looks so organized and so pretty. I loved it!"
+                        </p>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="flex flex-col bg-[#2F2622] rounded-lg overflow-hidden border border-white/10 p-3">
+                        <video src="{{ asset('graze-n-gifts/reviews/review_2.mp4') }}" controls playsinline class="w-full aspect-[9/16] object-cover rounded bg-black"></video>
+                        <p class="mt-4 font-sans italic text-[14px] leading-relaxed text-parchment/80 text-center">
+                            "The setup is amazing and it looks very presentable. There's stuff for the kids, there's stuff for the grown-ups, and it's all very appetizing, very nicely done. Thank you everyone for decorating and setting tables for our event today!"
+                        </p>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="flex flex-col bg-[#2F2622] rounded-lg overflow-hidden border border-white/10 p-3">
+                        <video src="{{ asset('graze-n-gifts/reviews/review_3.mp4') }}" controls playsinline class="w-full aspect-[9/16] object-cover rounded bg-black"></video>
+                        <p class="mt-4 font-sans italic text-[14px] leading-relaxed text-parchment/80 text-center">
+                            "It is amazing — the snacks, the structures that are amazingly placed, and the easy access. It's very properly categorized. I would any day go for that!"
+                        </p>
+                    </div>
+
+                    <!-- Review 4 -->
+                    <div class="flex flex-col bg-[#2F2622] rounded-lg overflow-hidden border border-white/10 p-3">
+                        <video src="{{ asset('graze-n-gifts/reviews/review_4.mp4') }}" controls playsinline class="w-full aspect-[9/16] object-cover rounded bg-black"></video>
+                        <p class="mt-4 font-sans italic text-[14px] leading-relaxed text-parchment/80 text-center">
+                            "Very good decoration!"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             INQUIRE FORM SECTION
+             ========================================================================== -->
+        <section id="inquiry" class="py-20 md:py-28 px-6 md:px-12 lg:px-20 bg-parchment">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+                    <!-- Left Column -->
+                    <div>
+                        <span class="eyebrow">Get In Touch</span>
+                        <h2 class="section-heading text-espresso">Inquire</h2>
+                        <div class="taupe-rule"></div>
+                        <p class="font-sans mb-12 text-[17px] text-body-mid leading-[1.85]">
+                            Tell us about your vision and we'll craft something extraordinary. We respond within 24 hours via WhatsApp or email.
+                        </p>
+
+                        <div class="space-y-6 pt-4 border-t border-divider">
+                            <div>
+                                <p class="font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-taupe mb-1">Direct Contact</p>
+                                <p class="font-sans text-[15px] font-semibold text-espresso">+1 (604) 761-6232</p>
+                            </div>
+                            <div>
+                                <p class="font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-taupe mb-1">Service Areas</p>
+                                <p class="font-sans text-[15px] text-body-mid">Oakville, Burlington, Mississauga, Milton &amp; the Greater Toronto Area (GTA)</p>
+                            </div>
                         </div>
-                        <small class="newsletter-privacy-note">🔒 No spam ever. One email per week with fresh drops. Unsubscribe anytime.</small>
+                    </div>
+
+                    <!-- Right Column: Form -->
+                    <form id="inquiry-form" class="flex flex-col gap-5 bg-white p-8 md:p-10 rounded-lg shadow-sm border border-divider">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div class="field-wrap">
+                                <label for="fullName" class="field-label">Full Name *</label>
+                                <input type="text" id="fullName" name="fullName" class="field-input" placeholder="e.g. Sarah Jenkins" required>
+                            </div>
+                            <div class="field-wrap">
+                                <label for="phone" class="field-label">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" class="field-input" placeholder="(416) 000-0000" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div class="field-wrap">
+                                <label for="email" class="field-label">Email Address *</label>
+                                <input type="email" id="email" name="email" class="field-input" placeholder="sarah@example.com" required>
+                            </div>
+                            <div class="field-wrap">
+                                <label for="date" class="field-label">Event Date *</label>
+                                <input type="date" id="date" name="date" class="field-input" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div class="field-wrap">
+                                <label for="city" class="field-label">City / Venue Location *</label>
+                                <input type="text" id="city" name="city" class="field-input" placeholder="e.g. Oakville, ON" required>
+                            </div>
+                            <div class="field-wrap">
+                                <label for="guests" class="field-label">Estimated Guest Count *</label>
+                                <input type="number" id="guests" name="guests" min="1" class="field-input" placeholder="e.g. 35" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div class="field-wrap">
+                                <label for="budget" class="field-label">Estimated Budget *</label>
+                                <select id="budget" name="budget" class="field-select" required>
+                                    <option value="" disabled selected>Select a range</option>
+                                    <option value="under-300">Under $300</option>
+                                    <option value="300-600">$300 – $600</option>
+                                    <option value="600-1000">$600 – $1,000</option>
+                                    <option value="1000-2000">$1,000 – $2,000</option>
+                                    <option value="2000+">$2,000+</option>
+                                </select>
+                            </div>
+                            <div class="field-wrap">
+                                <label for="eventType" class="field-label">Event Type *</label>
+                                <select id="eventType" name="eventType" class="field-select" required>
+                                    <option value="" disabled selected>Select event type</option>
+                                    <option value="birthday">Birthday</option>
+                                    <option value="wedding">Wedding / Engagement</option>
+                                    <option value="baby-shower">Baby Shower</option>
+                                    <option value="bridal-shower">Bridal Shower</option>
+                                    <option value="corporate">Corporate Event</option>
+                                    <option value="eid-diwali">Eid / Diwali</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div class="field-wrap">
+                                <label for="service" class="field-label">Service Interested In *</label>
+                                <select id="service" name="service" class="field-select" required>
+                                    <option value="" disabled selected>Select primary service</option>
+                                    <option value="charcuterie-cups">Charcuterie Cups &amp; Grazing Boxes</option>
+                                    <option value="grazing-table">Grazing Table (4ft / 6ft / 8ft)</option>
+                                    <option value="indo-fusion">Indo-Fusion Grazing Table</option>
+                                    <option value="high-tea">High Tea</option>
+                                    <option value="gift-boxes">Custom Return Gifts</option>
+                                    <option value="paint-sip">Paint &amp; Sip</option>
+                                    <option value="platter-rental">Platter Rental</option>
+                                    <option value="multiple">Multiple Services</option>
+                                </select>
+                            </div>
+                            <div class="field-wrap">
+                                <label for="dietary" class="field-label">Dietary Preference</label>
+                                <select id="dietary" name="dietary" class="field-select">
+                                    <option value="" disabled selected>Select preference</option>
+                                    <option value="standard">Standard</option>
+                                    <option value="vegetarian">Vegetarian / Vegan</option>
+                                    <option value="halal">Halal</option>
+                                    <option value="gluten-free">Gluten-Free</option>
+                                    <option value="na">No preference / Mix</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field-wrap">
+                            <label for="vision" class="field-label">Tell Us About Your Vision <span class="sub">(Optional)</span></label>
+                            <textarea id="vision" name="vision" class="field-textarea" placeholder="Theme, colour scheme, specific foods, timing, or anything else you have in mind..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-espresso mt-2">
+                            <span>Request Quote via WhatsApp</span>
+                        </button>
                     </form>
                 </div>
             </div>
+        </section>
+    </main>
+
+    <!-- Floating Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 max-w-sm w-full px-5 py-4 rounded-md shadow-lg border transition-all duration-300 opacity-0 translate-x-8 pointer-events-none bg-espresso border-taupe text-parchment">
+        <p id="toast-title" class="font-serif text-[15px] font-semibold mb-0.5">Inquiry Received</p>
+        <p id="toast-message" class="font-sans text-[13px] leading-relaxed opacity-90">We'll be in touch via WhatsApp or email within 24 hours.</p>
+    </div>
+
+    <!-- ==========================================================================
+         FOOTER
+         ========================================================================== -->
+    <footer class="py-14 px-6 md:px-12 lg:px-20 bg-parchment border-t border-divider">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-10 mb-10">
+                <div>
+                    <p class="font-serif text-[22px] font-bold uppercase tracking-[0.14em] text-espresso mb-1">
+                        Graze <span class="text-taupe italic">&amp;</span> Gift Co.
+                    </p>
+                    <p class="font-sans text-[10px] font-semibold uppercase tracking-[0.24em] text-taupe mb-4">Gather. Graze. Gift.</p>
+                    <p class="font-sans text-[14px] text-muted leading-[1.75] max-w-xs">
+                        Luxury grazing tables, Indo-Fusion high tea, charcuterie cups, and custom gift experiences. Serving Burlington, Oakville &amp; the GTA.
+                    </p>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <p class="font-sans text-[10px] font-bold uppercase tracking-[0.24em] text-espresso mb-1">Navigate</p>
+                    <a href="#services" class="font-sans text-[12px] font-semibold uppercase tracking-[0.18em] no-underline text-body-mid hover:text-taupe transition-colors">Services</a>
+                    <a href="#about" class="font-sans text-[12px] font-semibold uppercase tracking-[0.18em] no-underline text-body-mid hover:text-taupe transition-colors">About</a>
+                    <a href="#gallery" class="font-sans text-[12px] font-semibold uppercase tracking-[0.18em] no-underline text-body-mid hover:text-taupe transition-colors">Gallery</a>
+                    <a href="#reviews" class="font-sans text-[12px] font-semibold uppercase tracking-[0.18em] no-underline text-body-mid hover:text-taupe transition-colors">Reviews</a>
+                    <a href="#inquiry" class="font-sans text-[12px] font-semibold uppercase tracking-[0.18em] no-underline text-body-mid hover:text-taupe transition-colors">Inquire</a>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <p class="font-sans text-[10px] font-bold uppercase tracking-[0.24em] text-espresso mb-1">Connect</p>
+                    <a href="https://www.instagram.com/graze_n_gifts" target="_blank" rel="noopener noreferrer" class="font-sans w-fit text-[12px] font-semibold uppercase tracking-[0.18em] no-underline text-body-mid hover:text-taupe transition-colors">Instagram</a>
+                    <a href="https://wa.me/16047616232" target="_blank" rel="noopener noreferrer" class="font-sans w-fit text-[12px] font-semibold uppercase tracking-[0.18em] no-underline text-body-mid hover:text-taupe transition-colors">WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="border-t border-divider pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="font-sans text-[12px] text-muted">
+                    &copy; 2026 Graze &amp; Gift Co. All rights reserved.
+                </p>
+                <p class="font-sans text-[12px] text-muted">
+                    Fine Epicurean Artistry &middot; Serving Oakville, Burlington &amp; GTA
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================================================
+         MODAL: INDO-FUSION FULL MENU
+         ========================================================================== -->
+    <div id="indo-fusion-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-200" role="dialog" aria-modal="true">
+        <div class="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+            <!-- Modal Header -->
+            <div class="p-6 border-b border-divider flex items-center justify-between bg-parchment">
+                <div>
+                    <span class="font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-taupe block mb-1">Indo-Fusion Grazing Table</span>
+                    <h3 class="font-serif text-[24px] font-bold text-espresso uppercase tracking-[0.06em]">Full Menu Options</h3>
+                </div>
+                <button type="button" class="close-modal-btn w-9 h-9 rounded-full bg-white flex items-center justify-center text-espresso hover:bg-taupe hover:text-white transition-colors" aria-label="Close modal">✕</button>
+            </div>
+
+            <!-- Category Tabs -->
+            <div class="flex overflow-x-auto border-b border-divider px-6 bg-white [scrollbar-width:none]" id="indo-menu-tabs">
+                <!-- Injected by JS -->
+            </div>
+
+            <!-- Items List -->
+            <div class="p-6 overflow-y-auto flex-1 divide-y divide-divider/60" id="indo-menu-items">
+                <!-- Injected by JS -->
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 bg-parchment border-t border-divider flex justify-between items-center">
+                <span class="font-sans text-[12px] text-muted">All items subject to seasonal availability and custom spice preferences.</span>
+                <a href="#inquiry" class="close-modal-btn btn-taupe text-[11px] py-2.5 px-5">Inquire Now</a>
+            </div>
         </div>
     </div>
-</section>
 
-@endsection
+    <!-- ==========================================================================
+         MODAL: HIGH TEA FULL MENU
+         ========================================================================== -->
+    <div id="high-tea-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-200" role="dialog" aria-modal="true">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+            <!-- Modal Header -->
+            <div class="p-6 border-b border-divider flex items-center justify-between bg-parchment">
+                <div>
+                    <span id="ht-modal-badge" class="font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-taupe block mb-1">High Tea Menu</span>
+                    <h3 id="ht-modal-title" class="font-serif text-[24px] font-bold text-espresso uppercase tracking-[0.06em]">Classic High Tea</h3>
+                    <p id="ht-modal-price" class="font-sans text-[13px] text-muted mt-1">$28 per person</p>
+                </div>
+                <button type="button" class="close-modal-btn w-9 h-9 rounded-full bg-white flex items-center justify-center text-espresso hover:bg-taupe hover:text-white transition-colors" aria-label="Close modal">✕</button>
+            </div>
+
+            <!-- Items List -->
+            <div class="p-6 overflow-y-auto flex-1 space-y-6" id="ht-modal-sections">
+                <!-- Injected by JS -->
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 bg-parchment border-t border-divider flex justify-between items-center">
+                <span class="font-sans text-[12px] text-muted">Includes fine china setting and floral table decor.</span>
+                <a href="#inquiry" class="close-modal-btn btn-taupe text-[11px] py-2.5 px-5">Inquire Now</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         CLIENT DATA & JAVASCRIPT
+         ========================================================================== -->
+    <script>
+        const servicesData = JSON.parse('[{"id": "charcuterie-cups", "number": "01", "name": "Charcuterie Cups & Grazing Boxes", "shortName": "Charcuterie Cups", "tagline": "Individual portions, elevated.", "photo": "/graze-n-gifts/images/charcuterie cups_2.JPG", "photoPosition": "object-bottom lg:object-center", "desc": "Individually styled, grab-and-go charcuterie cups \\u2014 perfect for parties, showers, weddings, corporate events, and lunchboxes. Each cup is built fresh and packed abundantly. Choose from four tiers to match your crowd and budget.", "badges": ["Nut-Free", "Sesame-Free", "Halal-Friendly"], "note": "Minimum order of 10 cups. Mix & match tiers within one order.", "cupTiers": [{"name": "Classic", "price": "$11", "tagline": "The signature cup", "items": ["Two artisan cheeses", "Cured Italian salami", "Crackers & grissini", "Fresh grapes & berries", "Dried fruit, olives & nuts"]}, {"name": "Vegetarian", "price": "$11", "tagline": "No meat, all flavour", "items": ["Two artisan cheeses", "Marinated vegetables", "Crackers & grissini", "Fresh grapes & berries", "Hummus, olives & nuts"]}, {"name": "Premium", "price": "$15", "tagline": "Elevated picks", "items": ["Prosciutto di Parma", "Parmigiano & soft cheese", "Caprese skewer", "Fresh figs & berries", "Fig jam & marcona almonds"]}], "boardTiers": [{"name": "Petite", "price": "$65", "tagline": "Serves 4\\u20136", "items": ["3 cheeses", "2 meats"]}, {"name": "Medium", "price": "$105", "tagline": "Serves 8\\u201310", "items": ["4 cheeses", "3 meats"]}, {"name": "Large", "price": "$165", "tagline": "Serves 12\\u201315", "items": ["5 cheeses", "4 meats"]}, {"name": "Grand", "price": "$260", "tagline": "Serves 20\\u201325", "items": ["6 cheeses", "5 meats"]}], "volumePricing": [{"qty": "10\\u201324 cups", "discount": "Standard pricing", "bestFor": "Small gatherings"}, {"qty": "25\\u201349 cups", "discount": "5% off", "bestFor": "Showers & birthdays"}, {"qty": "50+ cups", "discount": "10% off", "bestFor": "Weddings & corporate"}], "menu": [{"title": "Add-Ons & Customization", "items": ["Simple dietary swap (no pork, halal, vegetarian) \\u2014 add $2 per cup", "Full allergy rebuild (nut-free, dairy-free) \\u2014 add $5 per cup", "Individual dietary tags \\u2014 $1 per cup", "Mini desserts \\u2014 $3 per piece", "Scones & clotted cream \\u2014 $4 per person", "Cheese fondue dip \\u2014 $20 per bowl", "Fresh floral styling \\u2014 from $35", "Custom branding & tags \\u2014 from $30"]}, {"title": "Delivery & Setup", "items": ["Pickup \\u2014 Burlington \\u2014 complimentary", "Burlington & Oakville \\u2014 $20", "Hamilton, Milton, Mississauga \\u2014 $35", "Toronto, Vaughan, Brampton \\u2014 $55", "On-site styling & setup \\u2014 from $75"]}, {"title": "Booking Terms", "items": ["A 50% deposit confirms your date; balance due at pickup or delivery", "Final guest count, dietary needs & allergy builds confirmed 5 days prior \\u2014 no late additions", "Quotes valid 7 days. Peak dates book 3\\u20134 weeks ahead", "Cancellations within 72 hours retain the deposit", "Cups and boards are prepared fresh \\u2014 best enjoyed within 4 hours"]}]}, {"id": "grazing-table", "number": "02", "name": "Grazing Table", "shortName": "Grazing Table", "tagline": "A statement centrepiece.", "photo": "/graze-n-gifts/images/grazing table_2.jpeg", "desc": "Every grazing table is styled fresh on-site into an abundant, edible centrepiece \\u2014 layered with cured meats, artisan and local cheeses, seasonal fruit, house dips, crackers, and florals. All builds are nut-free and sesame-free by default, with halal-friendly meats and an Indo-fusion twist available on request.", "badges": ["Nut-Free", "Sesame-Free", "Halal-Friendly", "Indo-Fusion Available"], "note": "Plus: full styling with florals, greenery, boards, bowls & serving labels \\u2014 set up and arranged at your venue.", "pricing": [{"size": "4 ft", "guests": "15\\u201325 guests", "price": "$375", "perGuest": "approx. $18\\u201322 / guest"}, {"size": "6 ft", "guests": "30\\u201345 guests", "price": "$595", "perGuest": "approx. $14\\u201318 / guest"}, {"size": "8 ft", "guests": "50\\u201370 guests", "price": "$795", "perGuest": "approx. $12\\u201315 / guest"}], "menu": [{"title": "The Savoury", "items": ["Cured & halal-friendly meats \\u2014 folded salami, prosciutto-style, turkey", "Artisan + local Ontario cheeses (soft, hard & aged)", "Marinated olives & cornichons", "Roasted & marinated vegetables", "Indo-fusion bites \\u2014 spiced paneer, samosa minis, chutney (on request)"]}, {"title": "The Sweet & Crisp", "items": ["Seasonal fresh fruit & berries", "Dried fruit & candied (nut-free) clusters", "Honeycomb, fig jam & house dips", "Artisan crackers, crostini & breadsticks", "Dark chocolate & sweet garnishes"]}, {"title": "Premium Additions", "items": ["Grazing boxes / individual cups \\u2014 $14 ea", "Dessert grazing extension \\u2014 from $120", "Imported & specialty cheeses \\u2014 from $40", "Fresh floral upgrade \\u2014 from $50", "Warm dips & sliders station \\u2014 from $90"]}, {"title": "Make It a Moment", "items": ["Custom signage & name cards \\u2014 from $25", "Mocktail / kanji & kombucha pairing \\u2014 from $60", "Return gifts & favours \\u2014 from $8 ea", "Extended 10 ft / U-shape builds \\u2014 quoted", "Themed colour palettes \\u2014 complimentary"]}], "steps": ["Reach out with your date, guest count, venue & any dietary needs", "We send a tailored quote and lock your date with a 50% deposit", "We arrive 1.5\\u20132 hrs before service to build and style on-site", "You enjoy a stunning centrepiece \\u2014 we handle setup & board pickup"]}, {"id": "indo-fusion", "number": "03", "name": "Indo-Fusion Grazing Table", "shortName": "Indo-Fusion", "tagline": "Charcuterie meets South Asian flair.", "photo": "/graze-n-gifts/images/indo fusion_1.jpeg", "desc": "A vibrant spread where chaat-stall favourites meet grazing-table styling. Every item is made fresh, nut-free and sesame-free, with halal meats throughout. Build your own by the piece, or choose a package below for the best value.", "badges": ["Nut-Free", "Sesame-Free", "Halal-Friendly"], "packages": [{"name": "Chaat Starter", "price": "$16", "perGuest": "per guest", "min": "Min. 15 guests", "items": ["Choose 4 snacks", "1 dip / chutney trio", "Fresh fruit accent", "Crackers & garnish", "Styled mini grazing setup"]}, {"name": "Fusion Feast", "price": "$22", "perGuest": "per guest", "min": "Min. 20 guests", "highlight": true, "items": ["Choose 6 snacks", "Veg + non-veg mix", "2 dips + chutney trio", "1 dessert (gulab jamun)", "1 welcome drink", "Full styling & florals"]}, {"name": "Royal Spread", "price": "$28", "perGuest": "per guest", "min": "Min. 25 guests", "items": ["Choose 8 snacks", "Premium non-veg picks", "Live-style plating", "2 desserts", "2 drinks (incl. mocktail)", "Signage + premium florals"]}], "serviceNotes": ["Free 6-piece tasting box for first-time clients booking 25+ guests.", "Mix-and-match any snacks; veg and non-veg kept clearly separated.", "Custom Indo-fusion requests & regional dishes welcome.", "Delivery & setup within Burlington and the GTA \\u2014 quoted by distance.", "50% deposit secures your date; balance due on event day."], "fullMenu": {"title": "Indo-Fusion Grazing Table", "badges": ["Nut-Free", "Sesame-Free", "Halal-Friendly", "Vegetarian & Vegan Options"], "categories": [{"id": "snacks", "label": "Snacks & Bites", "subtitle": "Priced per piece unless noted. Mix veg & non-veg freely. Minimum 10 pieces per item.", "items": [{"name": "Caprese Skewers", "desc": "Tomato, bocconcini, basil, balsamic glaze", "type": "Veg", "price": "$2.50"}, {"name": "Veg Samosas", "desc": "Crisp pastry, spiced potato & peas", "type": "Veg", "price": "$2.00"}, {"name": "Spring Rolls", "desc": "Crunchy veg rolls, sweet-chili dip", "type": "Veg", "price": "$2.00"}, {"name": "Cream Cheese Cucumber Sandwiches", "desc": "Soft tea sandwiches, fresh dill", "type": "Veg", "price": "$2.00"}, {"name": "Bruschetta", "desc": "Toasted baguette, tomato-basil", "type": "Veg", "price": "$2.00", "unit": "/ pc"}, {"name": "Cheese Corn Tart", "desc": "Cheesy sweet-corn in a crisp tart", "type": "Veg", "price": "$1.50", "unit": "/ pc"}, {"name": "Aloo Tikki Bites", "desc": "Mini crispy potato patties, chutney drizzle", "type": "Veg", "price": "$2.00", "unit": "/ pc"}, {"name": "Hara Bhara Kebab", "desc": "Spinach & green-pea cutlets", "type": "Veg", "price": "$2.50", "unit": "/ pc"}, {"name": "Corn & Cheese Balls", "desc": "Golden-fried, gooey centre", "type": "Veg", "price": "$2.00", "unit": "/ pc"}, {"name": "Mac & Cheese Bites", "desc": "Crumbed & fried, creamy centre", "type": "Veg", "price": "$2.50", "unit": "/ pc"}, {"name": "Mini Grilled Cheese", "desc": "Buttery, golden triangles", "type": "Veg", "price": "$2.00", "unit": "/ pc"}, {"name": "Falafel", "desc": "Served with tzatziki", "type": "Veg", "price": "$2.00", "unit": "/ pc"}, {"name": "Stuffed Mushrooms", "desc": "Herbed cheese filling", "type": "Veg", "price": "$2.50", "unit": "/ pc"}, {"name": "Chilli Idli Cube Skewers", "desc": "Crispy idli cubes, Indo-Chinese glaze", "type": "Veg", "price": "$2.50", "unit": "/ pc"}, {"name": "Veg Manchurian (Dry)", "desc": "Indo-Chinese, tangy glaze", "type": "Veg", "price": "$3.00", "unit": "/ pp"}, {"name": "Honey Chilli Potatoes", "desc": "Crispy, sweet-spicy toss", "type": "Veg", "price": "$3.00", "unit": "/ pp"}, {"name": "Chilli Paneer", "desc": "Indo-Chinese, sweet-spicy sauce", "type": "Veg", "price": "$3.00", "unit": "/ pp"}, {"name": "Tandoori Soya Chaap", "desc": "Marinated & char-grilled, smoky glaze", "type": "Veg", "price": "$3.00", "unit": "/ pp"}, {"name": "Matar Kulcha", "desc": "Spiced chickpeas, soft kulcha", "type": "Veg", "price": "$3.00"}, {"name": "Pav Bhaji", "desc": "Buttery mashed veg curry, mini pav", "type": "Veg", "price": "$3.50"}, {"name": "Vada Pav", "desc": "Mumbai-style potato slider", "type": "Veg", "price": "$2.50"}, {"name": "Veg / Chicken Momos", "desc": "Steamed or tandoori, house chutney", "type": "Veg / Non-Veg", "price": "$3.00"}, {"name": "Paneer / Chicken Sliders", "desc": "Mini brioche, spiced patty, slaw", "type": "Veg / Non-Veg", "price": "$3.50"}, {"name": "Chicken Tikka Skewers", "desc": "Char-grilled, tandoori spice", "type": "Non-Veg", "price": "$3.50", "unit": "/ pp"}, {"name": "Chicken Malai Tikka", "desc": "Creamy, mildly spiced", "type": "Non-Veg", "price": "$4.00", "unit": "/ pp"}]}, {"id": "chaat", "label": "Chaat, Platters & Cones", "subtitle": "Crowd favourites for grazing counters & grab-and-go. Platters serve 4\\u20136.", "items": [{"name": "Chaat Platter", "desc": "Papdi, samosa, chutneys, sev, yogurt \\u2014 sharing size", "type": "Veg", "price": "$50.00"}, {"name": "Loaded Chaat Platter", "desc": "Papdi, samosa, chutneys, sev, yogurt", "type": "Veg", "price": "$28.00", "unit": "/ platter"}, {"name": "Papdi Chaat", "desc": "Crispy papdi, yogurt, chutneys, sev", "type": "Veg", "price": "$1.50", "unit": "/ pp"}, {"name": "Katori Chaat", "desc": "Edible basket, spiced filling, yogurt & chutney", "type": "Veg", "price": "$3.50", "unit": "/ pc"}, {"name": "Pani Puri Shots", "desc": "Pre-filled puris with spiced water shots", "type": "Veg", "price": "$3.00", "unit": "/ cup"}, {"name": "Dahi Puri", "desc": "Crispy puris, yogurt, chutneys, sev", "type": "Veg", "price": "$3.00", "unit": "/ cup"}, {"name": "Aloo Tikki Chaat", "desc": "Tikki, chutneys, yogurt, sev", "type": "Veg", "price": "$3.50", "unit": "/ pc"}, {"name": "Samosa Chaat", "desc": "Crushed samosa, chole, chutneys", "type": "Veg", "price": "$3.50", "unit": "/ pp"}, {"name": "Ragda Pattice", "desc": "Potato patties, white-pea curry", "type": "Veg", "price": "$3.50", "unit": "/ pp"}, {"name": "Sev Puri", "desc": "Papdi, potato, chutneys, sev", "type": "Veg", "price": "$3.00", "unit": "/ cup"}, {"name": "Bhel Puri", "desc": "Puffed rice, tangy chutneys, onion & sev", "type": "Veg", "price": "$3.00", "unit": "/ cup"}, {"name": "Fries Cones", "desc": "Masala fries, chutney drizzle, sev", "type": "Veg", "price": "$4.00", "unit": "/ cone"}]}, {"id": "wraps", "label": "Wraps, Rolls & Sliders", "items": [{"name": "Paneer Tikka Wrap", "desc": "Grilled paneer tikka, mint chutney \\u2014 bite-sized", "type": "Veg", "price": "$2.00", "unit": "/ pc"}, {"name": "Chicken Tikka Wrap", "desc": "Tandoori chicken, onions, chutney \\u2014 bite-sized", "type": "Non-Veg", "price": "$2.00", "unit": "/ pc"}, {"name": "Paneer Kathi Roll", "desc": "Spiced paneer, onions, mint chutney", "type": "Veg", "price": "$3.50", "unit": "/ pc"}, {"name": "Veg Frankie", "desc": "Mumbai-style veg roll", "type": "Veg", "price": "$3.00", "unit": "/ pc"}, {"name": "Hummus & Falafel Wrap", "desc": "Fresh veg, tahini-free", "type": "Veg", "price": "$3.50", "unit": "/ pc"}, {"name": "Chilli Paneer Slider", "desc": "Indo-Chinese paneer, mini bun", "type": "Veg", "price": "$3.50", "unit": "/ pc"}, {"name": "Mumbai Grilled Sandwich", "desc": "Veg, chutney, cheese, masala", "type": "Veg", "price": "$3.00", "unit": "/ pc"}]}, {"id": "pasta", "label": "Pasta & Fusion Mains", "items": [{"name": "Veg Noodles", "desc": "Wok-tossed hakka noodles", "type": "Veg", "price": "$2.50", "unit": "/ plate"}, {"name": "Schezwan Noodles", "desc": "Spicy Indo-Chinese", "type": "Veg", "price": "$2.50", "unit": "/ plate"}, {"name": "Veg Fried Rice", "desc": "Wok-tossed, mixed veg", "type": "Veg", "price": "$2.50", "unit": "/ plate"}, {"name": "White Sauce Pasta", "desc": "Creamy alfredo-style, herbed", "type": "Veg", "price": "$2.50", "unit": "/ plate"}, {"name": "Pink Sauce Pasta", "desc": "Creamy tomato-ros\\u00e9, herbed", "type": "Veg", "price": "$2.50", "unit": "/ plate"}, {"name": "Pesto Pasta", "desc": "Basil pesto, parmesan", "type": "Veg", "price": "$3.00", "unit": "/ plate"}, {"name": "Baked Penne", "desc": "Cheesy, oven-baked", "type": "Veg", "price": "$3.00", "unit": "/ plate"}, {"name": "Paneer Makhani + Mini Naan", "desc": "Rich butter gravy, soft naan", "type": "Veg", "price": "$4.00", "unit": "/ pp"}]}, {"id": "desserts", "label": "Desserts", "items": [{"name": "Gulab Jamun", "desc": "Warm, syrup-soaked classic", "type": "Veg", "price": "$1.50", "unit": "/ pc"}, {"name": "Rasmalai", "desc": "Saffron cream, chilled", "type": "Veg", "price": "$2.00", "unit": "/ pc"}, {"name": "Rabdi Jalebi Cups", "desc": "Warm jalebi layered with rabdi", "type": "Veg", "price": "$3.00", "unit": "ea"}, {"name": "Kulfi / Kulfi Falooda", "desc": "Traditional frozen dessert", "type": "Veg", "price": "$3.00", "unit": "/ pc"}, {"name": "Motichoor Laddoo", "desc": "Classic festive sweet", "type": "Veg", "price": "$1.50", "unit": "/ pc"}, {"name": "Gajar Halwa", "desc": "Warm carrot pudding (seasonal)", "type": "Veg", "price": "$3.00", "unit": "/ pp"}, {"name": "Mini Donuts", "desc": "Glazed & assorted toppings", "type": "Veg", "price": "$1.50", "unit": "/ pc"}, {"name": "Cupcakes", "desc": "Buttercream, custom colours", "type": "Veg", "price": "$2.50", "unit": "/ pc"}, {"name": "Brownie Bites", "desc": "Fudgy, bite-sized", "type": "Veg", "price": "$1.50", "unit": "/ pc"}, {"name": "Chocolate-Dipped Strawberries", "desc": "Hand-dipped, elegant", "type": "Veg", "price": "$2.00", "unit": "/ pc"}, {"name": "Fruit Tartlets", "desc": "Custard & fresh fruit", "type": "Veg", "price": "$2.50", "unit": "/ pc"}, {"name": "Mini Cheesecake Cups", "desc": "Individually styled", "type": "Veg", "price": "$3.00", "unit": "ea"}, {"name": "Mini Dessert Cups", "desc": "Layered, individually styled", "type": "Veg", "price": "$3.00", "unit": "ea"}, {"name": "Dessert Grazing Extension", "desc": "Assorted sweets display", "type": "Veg", "price": "from $90"}]}, {"id": "drinks", "label": "Drinks", "items": [{"name": "Masala Chai / Coffee", "desc": "Served warm, urn available", "type": "Veg", "price": "$2.00"}, {"name": "Filter Coffee", "desc": "South-Indian style", "type": "Veg", "price": "$2.00"}, {"name": "Mango Lassi", "desc": "Thick, sweet, chilled", "type": "Veg", "price": "$3.00"}, {"name": "Rose Falooda Milk", "desc": "Rose, vermicelli, basil seeds", "type": "Veg", "price": "$4.00"}, {"name": "Thandai", "desc": "Spiced festive milk", "type": "Veg", "price": "$3.50"}, {"name": "Nimbu Pani / Shikanji", "desc": "Fresh spiced lemonade", "type": "Veg", "price": "$2.00"}, {"name": "Virgin Mojito", "desc": "Mint, lime, soda", "type": "Veg", "price": "$3.00"}, {"name": "Buttermilk (Chaas)", "desc": "Spiced, chilled", "type": "Veg", "price": "$2.00"}, {"name": "Kanji / Kombucha", "desc": "Fermented, probiotic", "type": "Veg", "price": "$3.50"}]}]}}, {"id": "high-tea", "number": "04", "name": "High Tea", "shortName": "High Tea", "tagline": "Elegance in every pour.", "photo": "/graze-n-gifts/images/hightea_4.jpeg", "photoPosition": "object-[50%_75%]", "desc": "A curated high tea experience featuring fresh-baked scones, delicate finger sandwiches, tiered desserts, and a grazing spread \\u2014 fully styled to your colour palette and theme. Perfect for bridal showers, birthdays, and intimate gatherings. Themed experiences available on request.", "badges": ["Halal-Friendly", "Veg & Non-Veg Options", "Themed Events", "Custom Colour Palette"], "packages": [{"name": "Classic High Tea", "price": "$28", "perGuest": "per person", "min": "Table setting, food & floral d\\u00e9cor included", "items": ["Finger sandwiches (1 veg + 1 non-veg)", "Fresh baked scones with butter, jam & cream", "Choose 3 desserts", "Grazing table \\u2014 cookies, crackers & cheese", "Table setting & basic floral d\\u00e9cor"]}, {"name": "Bridgerton Picnic", "price": "Inquire", "perGuest": "for pricing", "min": "Themed outdoor picnic experience", "items": ["Indo-fusion savoury table", "Grazing spread with fruits & cheese", "Sweet temptations", "Refreshments & herbal teas", "Themed styling & d\\u00e9cor"]}]}, {"id": "gift-boxes", "number": "05", "name": "Custom Return Gifts", "shortName": "Return Gifts", "tagline": "Every occasion, beautifully gifted.", "photo": "/graze-n-gifts/images/return gift_1.jpeg", "desc": "You tell us your theme and budget \\u2014 we take care of the rest. From beautifully curated gifts to personalized details, we create return gifts that perfectly match your celebration. Every order includes a personalized note to make your guests feel truly special. Starting from $7 per gift.", "badges": ["Birthdays", "Baby Showers", "Weddings", "Bridal Showers", "Eid & Diwali", "Corporate"]}, {"id": "paint-sip", "number": "06", "name": "Paint & Sip", "shortName": "Paint & Sip", "tagline": "Creativity paired with indulgence.", "desc": "Guided art sessions paired with curated grazing boards and charcuterie cups \\u2014 perfect for birthday parties, bridal showers, or girls\' nights."}, {"id": "platter-rental", "number": "07", "name": "Platter Rental", "shortName": "Platter Rental", "tagline": "Premium serveware, without the investment.", "desc": "Rent our slate boards, marble platters, gold-rimmed trays, and tiered stands \\u2014 complementing your own spread or our setups."}]');
+        const highTeaData = JSON.parse('{"Classic High Tea": {"title": "Classic High Tea", "price": "", "priceLabel": "per person \\u2014 includes table setting, food & floral d\\u00e9cor", "badges": ["Halal-Friendly", "Veg & Non-Veg Options", "Custom Colour Palette"], "sections": [{"title": "Sandwich Selection", "subtitle": "Choose 1 Veg & 1 Non-Veg per guest", "items": ["Veg \\u2014 Cucumber & Cream Cheese", "Veg \\u2014 Paneer Tikka", "Veg \\u2014 Cheese & Chutney", "Non-Veg \\u2014 Chicken Mayo", "Non-Veg \\u2014 Chicken Tikka", "Non-Veg \\u2014 Egg Mayo"]}, {"title": "Fresh Baked Scones", "subtitle": "Served with butter, jam & cream", "items": ["Classic plain scones, warm from the oven"]}, {"title": "Desserts Selection", "subtitle": "Choose 3", "items": ["Macarons", "Mini Cupcakes", "Brownie Bites", "Fruit Tarts", "Mini Cheesecakes"]}, {"title": "Grazing Table", "items": ["Assorted cookies & crackers", "Artisanal cheese", "Chocolates & wafers"]}, {"title": "Optional Add-Ons", "subtitle": "On request", "items": ["Mini samosas & Indian snacks", "Paneer tikka skewers", "Juice & mocktail station"]}]}, "Bridgerton Picnic": {"title": "Bridgerton-Inspired High Tea Picnic", "priceLabel": "Inquire for pricing", "badges": ["Halal-Friendly", "Indo-Fusion", "Themed Experience", "Outdoor Picnic Style"], "sections": [{"title": "The Savoury Table", "items": ["Jalape\\u00f1o & cheese samosas", "Cucumber & mint sandwiches", "Mini chaat delicacies", "Golden crisp pakoras", "Soft dhokla bites", "Flaky masala puff pastries"]}, {"title": "The Grazing Spread", "items": ["Seasonal fruits", "Artisanal cheeses", "Garden veggies & dips"]}, {"title": "Sweet Temptations", "items": ["Chocolate-dipped strawberries", "Assorted French macarons"]}, {"title": "Refreshments", "items": ["Rose lemonade", "Aam panna & kaanji", "Herbal teas"]}]}}');
+        const galleryData = [{"src": "/graze-n-gifts/images/grazing table_3.jpeg", "label": "Full Spread with Florals"}, {"src": "/graze-n-gifts/images/grazing table_4.jpeg", "label": "Luxury Grazing Table"}, {"src": "/graze-n-gifts/images/indo fusion_2.jpeg", "label": "Indo-Fusion Spread"}, {"src": "/graze-n-gifts/images/indo fusion_3.jpeg", "label": "Gulab Jamun Display"}, {"src": "/graze-n-gifts/images/indo fusion_4.jpeg", "label": "Indo-Fusion Bites"}, {"src": "/graze-n-gifts/images/indo fusion_5.jpeg", "label": "Indo-Fusion Event"}, {"src": "/graze-n-gifts/images/hightea_3.jpeg", "label": "High Tea Styling"}, {"src": "/graze-n-gifts/images/hightea_5.jpeg", "label": "High Tea Setup"}, {"src": "/graze-n-gifts/images/hightea_7.jpeg", "label": "High Tea Table Layout"}, {"src": "/graze-n-gifts/images/hightea_8.jpeg", "label": "High Tea Ambiance"}, {"src": "/graze-n-gifts/images/grazing table_6.JPG", "label": "Grazing Table Detail"}, {"src": "/graze-n-gifts/images/grazing table_7.jpeg", "label": "Grazing Table Styling"}, {"src": "/graze-n-gifts/images/grazing table_8.jpeg", "label": "Grazing Table Spread"}, {"src": "/graze-n-gifts/images/grazing table_9.jpeg", "label": "Grazing Table Setup"}, {"src": "/graze-n-gifts/images/grazing table_10.jpeg", "label": "Grazing Table Detail"}, {"src": "/graze-n-gifts/images/charcuterie cups.JPG", "label": "Charcuterie Cups"}, {"src": "/graze-n-gifts/images/charcuterie cups_1.JPG", "label": "Charcuterie Cups"}, {"src": "/graze-n-gifts/images/kids charcuterie cups_1.JPG", "label": "Kids Charcuterie Cups"}, {"src": "/graze-n-gifts/images/kids charcuterie cups_2.JPG", "label": "Kids Charcuterie Cups"}, {"src": "/graze-n-gifts/images/return gift_2.jpeg", "label": "Custom Return Gifts"}, {"src": "/graze-n-gifts/images/return gift_3.jpeg", "label": "Edible Art Gift"}, {"src": "/graze-n-gifts/images/return gift_4.jpeg", "label": "Party Return Gifts"}, {"src": "/graze-n-gifts/images/return gift_5.jpeg", "label": "Gift Box Spread"}, {"src": "/graze-n-gifts/images/return gift_6.JPG", "label": "Custom Return Gifts"}];
+
+        let activeServiceId = 'charcuterie-cups';
+
+        // 1. Navigation Scroll Listener
+        const header = document.getElementById('main-header');
+        const headerBrandText = document.getElementById('header-brand-text');
+        const headerNavLinks = document.querySelectorAll('.header-nav-link');
+        const headerCtaBtn = document.getElementById('header-cta-btn');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileDrawer = document.getElementById('mobile-drawer');
+
+        function updateHeader() {
+            const scrolled = window.scrollY > 40;
+            if (scrolled) {
+                header.style.background = 'rgba(251, 249, 244, 0.97)';
+                header.style.backdropFilter = 'blur(10px)';
+                header.classList.add('shadow-[0_1px_0_#DDD5CC]');
+                headerBrandText.style.color = '#3A2F2B';
+                headerNavLinks.forEach(l => l.style.color = '#6B5C55');
+                headerCtaBtn.style.background = '#C9A68F';
+                headerCtaBtn.style.color = '#FBF9F4';
+                headerCtaBtn.style.border = 'none';
+                mobileMenuBtn.querySelectorAll('span').forEach(s => s.style.backgroundColor = '#3A2F2B');
+            } else {
+                header.style.background = 'transparent';
+                header.style.backdropFilter = 'none';
+                header.classList.remove('shadow-[0_1px_0_#DDD5CC]');
+                headerBrandText.style.color = '#FBF9F4';
+                headerNavLinks.forEach(l => l.style.color = 'rgba(255,255,255,0.85)');
+                headerCtaBtn.style.background = 'rgba(255,255,255,0.15)';
+                headerCtaBtn.style.color = '#FBF9F4';
+                headerCtaBtn.style.border = '1px solid rgba(255,255,255,0.5)';
+                mobileMenuBtn.querySelectorAll('span').forEach(s => s.style.backgroundColor = '#FFFFFF');
+            }
+        }
+        window.addEventListener('scroll', updateHeader, { passive: true });
+        updateHeader();
+
+        // 2. Mobile Drawer Toggle
+        let isDrawerOpen = false;
+        function toggleDrawer(open) {
+            isDrawerOpen = typeof open === 'boolean' ? open : !isDrawerOpen;
+            if (isDrawerOpen) {
+                mobileDrawer.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-[-10px]');
+                mobileDrawer.classList.add('opacity-100', 'translate-y-0');
+                document.body.style.overflow = 'hidden';
+            } else {
+                mobileDrawer.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-10px]');
+                mobileDrawer.classList.remove('opacity-100', 'translate-y-0');
+                document.body.style.overflow = '';
+            }
+        }
+        mobileMenuBtn.addEventListener('click', () => toggleDrawer());
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => toggleDrawer(false));
+        });
+
+        // 3. Render Services Tabs
+        const tabsBar = document.getElementById('services-tabs-bar');
+        const activeContent = document.getElementById('active-service-content');
+
+        function renderServicesTabs() {
+            tabsBar.innerHTML = '';
+            servicesData.forEach(s => {
+                const isActive = s.id === activeServiceId;
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = `relative flex flex-col items-start shrink-0 px-6 py-4 bg-transparent border-0 cursor-pointer transition-all duration-200 -mb-px border-b-2 ${isActive ? 'border-taupe' : 'border-transparent'}`;
+                btn.innerHTML = `
+                    <span class="font-sans text-[12px] font-bold uppercase tracking-[0.22em] mb-1.5 block text-taupe">${s.number}</span>
+                    <span class="font-serif text-[16px] font-bold uppercase tracking-[0.06em] leading-snug whitespace-nowrap transition-colors duration-150 ${isActive ? 'text-espresso' : 'text-body-mid'}">${s.shortName}</span>
+                `;
+                btn.addEventListener('click', () => {
+                    activeServiceId = s.id;
+                    renderServicesTabs();
+                    renderActiveService();
+                });
+                tabsBar.appendChild(btn);
+            });
+        }
+
+        function renderActiveService() {
+            const s = servicesData.find(item => item.id === activeServiceId);
+            if (!s) return;
+
+            let badgesHtml = '';
+            if (s.badges && s.badges.length) {
+                badgesHtml = '<div class="flex flex-wrap gap-2 mb-8">' +
+                    s.badges.map(b => `<span class="font-sans text-[13px] font-semibold uppercase tracking-[0.14em] text-taupe border border-taupe px-3 py-1 rounded-md">${b}</span>`).join('') +
+                    '</div>';
+            }
+
+            let buttonsHtml = `
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <a href="#inquiry" onclick="preselectService('${s.id}')" class="btn-taupe text-center">Inquire About This Service</a>
+                    ${s.fullMenu ? `<button type="button" onclick="openIndoMenuModal()" class="btn-outline">View Full Menu</button>` : ''}
+                </div>
+            `;
+
+            let pricingCardsHtml = '';
+            if (s.pricing) {
+                pricingCardsHtml = s.pricing.map(p => `
+                    <div class="p-5 border border-divider bg-surface rounded-md flex items-center justify-between gap-3">
+                        <div>
+                            <p class="font-serif text-[18px] font-bold uppercase tracking-[0.08em] text-espresso leading-snug">${p.size}</p>
+                            <p class="font-sans text-[13px] text-muted mt-0.5">${p.guests}</p>
+                        </div>
+                        <div class="text-right shrink-0">
+                            <p class="font-serif text-[24px] font-semibold text-espresso leading-none">${p.price}</p>
+                            <p class="font-sans text-[12px] text-muted mt-0.5">${p.perGuest}</p>
+                        </div>
+                    </div>
+                `).join('');
+            } else if (s.cupTiers) {
+                pricingCardsHtml = s.cupTiers.map(t => `
+                    <div class="p-5 border border-divider bg-surface rounded-md">
+                        <div class="flex items-center justify-between gap-3 mb-3">
+                            <div>
+                                <p class="font-serif text-[18px] font-bold uppercase tracking-[0.08em] text-espresso leading-snug">${t.name}</p>
+                                <p class="font-sans text-[13px] text-muted mt-0.5">${t.tagline}</p>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <p class="font-serif text-[24px] font-semibold text-espresso leading-none">${t.price}</p>
+                                <p class="font-sans text-[12px] text-muted mt-0.5">per cup</p>
+                            </div>
+                        </div>
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1">
+                            ${t.items.map(item => `<li class="font-sans text-[13px] text-body-mid flex gap-2 leading-snug"><span class="text-taupe shrink-0">—</span>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                `).join('');
+            } else if (s.packages) {
+                pricingCardsHtml = s.packages.map(pkg => `
+                    <div class="p-5 border border-divider bg-surface rounded-md">
+                        ${pkg.highlight ? `<span class="inline-block font-sans text-[10px] font-bold uppercase tracking-[0.14em] bg-taupe text-parchment px-2.5 py-1 rounded-full mb-2">Most Popular</span>` : ''}
+                        <div class="flex items-center justify-between gap-3 mb-3">
+                            <div>
+                                <p class="font-serif text-[18px] font-bold uppercase tracking-[0.08em] text-espresso leading-snug">${pkg.name}</p>
+                                <p class="font-sans text-[13px] text-muted mt-0.5">${pkg.min}</p>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <p class="font-serif text-[24px] font-semibold text-espresso leading-none">${pkg.price}</p>
+                                <p class="font-sans text-[12px] text-muted mt-0.5">${pkg.perGuest}</p>
+                            </div>
+                        </div>
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 mb-3">
+                            ${pkg.items.map(item => `<li class="font-sans text-[13px] text-body-mid flex gap-2 leading-snug"><span class="text-taupe shrink-0">—</span>${item}</li>`).join('')}
+                        </ul>
+                        ${highTeaData[pkg.name] ? `<button type="button" onclick="openHighTeaModal('${pkg.name}')" class="btn-outline text-[12px] py-1.5 px-3 mt-1">View Full Menu</button>` : ''}
+                    </div>
+                `).join('');
+            }
+
+            let boardsHtml = '';
+            if (s.boardTiers) {
+                boardsHtml = `
+                    <div class="mt-12">
+                        <p class="font-serif text-[18px] font-bold uppercase tracking-[0.1em] text-espresso mb-4">Charcuterie Boards</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            ${s.boardTiers.map(b => `
+                                <div class="p-5 border border-divider bg-surface rounded-md flex flex-col items-center text-center">
+                                    <p class="font-serif text-[18px] font-bold uppercase tracking-[0.08em] text-espresso leading-snug">${b.name}</p>
+                                    <p class="font-sans text-[13px] text-muted mt-0.5 mb-3">${b.tagline}</p>
+                                    <ul class="flex flex-col gap-1 mb-4">
+                                        ${b.items.map(it => `<li class="font-sans text-[13px] text-body-mid leading-snug">${it}</li>`).join('')}
+                                    </ul>
+                                    <p class="font-serif text-[24px] font-semibold text-espresso leading-none mt-auto">${b.price}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            let volumePricingHtml = '';
+            if (s.volumePricing) {
+                volumePricingHtml = `
+                    <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+                        <div>
+                            <p class="font-serif text-[20px] font-semibold uppercase tracking-[0.08em] text-espresso mb-4">Volume Pricing</p>
+                            <div class="space-y-3">
+                                ${s.volumePricing.map(v => `
+                                    <div class="p-4 border border-divider bg-surface rounded-md flex justify-between items-center">
+                                        <span class="font-sans text-[14px] font-bold text-espresso">${v.qty}</span>
+                                        <span class="font-sans text-[14px] text-taupe font-semibold">${v.discount}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        ${s.menu ? `
+                            <div>
+                                <p class="font-serif text-[20px] font-semibold uppercase tracking-[0.08em] text-espresso mb-4">What's in Every Cup</p>
+                                <div class="p-5 border border-divider bg-surface rounded-md space-y-4">
+                                    ${s.menu.map(m => `
+                                        <div>
+                                            <p class="font-sans text-[13px] font-bold uppercase tracking-[0.14em] text-espresso mb-1">${m.title}</p>
+                                            <p class="font-sans text-[14px] text-body-mid leading-relaxed">${m.desc}</p>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }
+
+            let stepsHtml = '';
+            if (s.steps) {
+                stepsHtml = `
+                    <div class="mt-12">
+                        <p class="font-serif text-[20px] font-semibold uppercase tracking-[0.08em] text-espresso mb-6">How It Works</p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            ${s.steps.map(st => `
+                                <div class="p-6 border border-divider bg-surface rounded-md">
+                                    <span class="font-serif text-[28px] font-bold text-taupe mb-2 block">${st.step}</span>
+                                    <h4 class="font-serif text-[17px] font-bold text-espresso mb-2 uppercase">${st.title}</h4>
+                                    <p class="font-sans text-[14px] text-body-mid leading-relaxed">${st.desc}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            activeContent.innerHTML = `
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+                    <div>
+                        <p class="font-sans text-[13px] font-bold uppercase tracking-[0.18em] mb-3 text-taupe">${s.number} &nbsp;/&nbsp; ${s.tagline}</p>
+                        <h3 class="font-serif font-bold uppercase leading-tight mb-3 tracking-[0.08em] text-espresso" style="font-size: clamp(26px, 3.5vw, 38px);">${s.name}</h3>
+                        <div class="taupe-rule"></div>
+                        <p class="font-sans mb-6 text-[17px] text-body-mid leading-[1.85]">${s.desc}</p>
+                        ${badgesHtml}
+                        ${buttonsHtml}
+                    </div>
+
+                    ${s.photo ? `
+                        <div class="relative w-full aspect-[4/5] max-h-[560px] overflow-hidden rounded-md shadow-md">
+                            <img src="${s.photo}" alt="${s.name}" class="w-full h-full object-cover ${s.photoPosition || 'object-center'}">
+                        </div>
+                    ` : `
+                        <div class="w-full min-h-[300px] rounded-md border-2 border-dashed border-divider bg-surface flex items-center justify-center">
+                            <p class="font-sans text-[13px] text-muted uppercase tracking-[0.18em]">Custom Curation Available</p>
+                        </div>
+                    `}
+                </div>
+
+                ${pricingCardsHtml ? `
+                    <div class="mt-12">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            ${pricingCardsHtml}
+                        </div>
+                        ${s.note ? `<p class="font-sans text-[13px] text-muted mt-3 italic">${s.note}</p>` : ''}
+                    </div>
+                ` : ''}
+
+                ${boardsHtml}
+                ${volumePricingHtml}
+                ${stepsHtml}
+            `;
+        }
+
+        // 4. Render Gallery
+        const galleryTrack = document.getElementById('gallery-carousel-track');
+        function renderGallery() {
+            galleryTrack.innerHTML = '';
+            galleryData.forEach(img => {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide flex-shrink-0 relative overflow-hidden aspect-[3/4] bg-parchment border border-divider rounded-md shadow-sm';
+                slide.style.width = 'clamp(280px, 75vw, 380px)';
+                slide.innerHTML = `
+                    <img src="${img.src}" alt="${img.label}" class="w-full h-full object-cover object-center" loading="lazy">
+                    <div class="absolute bottom-0 left-0 right-0 px-4 py-3" style="background: linear-gradient(to top, rgba(30,20,15,0.75), transparent);">
+                        <p class="font-serif text-[15px] font-semibold text-white tracking-[0.06em]">${img.label}</p>
+                    </div>
+                `;
+                galleryTrack.appendChild(slide);
+            });
+        }
+
+        document.getElementById('gallery-prev-btn').addEventListener('click', () => {
+            galleryTrack.scrollBy({ left: -360, behavior: 'smooth' });
+        });
+        document.getElementById('gallery-next-btn').addEventListener('click', () => {
+            galleryTrack.scrollBy({ left: 360, behavior: 'smooth' });
+        });
+
+        // 5. Pre-select service in quote form
+        window.preselectService = function(serviceId) {
+            const select = document.getElementById('service');
+            if (select) {
+                select.value = serviceId;
+            }
+        };
+
+        // 6. Indo-Fusion Menu Modal
+        const indoModal = document.getElementById('indo-fusion-modal');
+        let indoActiveCategory = 'chaat';
+
+        window.openIndoMenuModal = function() {
+            indoModal.classList.remove('opacity-0', 'pointer-events-none');
+            indoModal.classList.add('opacity-100');
+            document.body.style.overflow = 'hidden';
+            renderIndoMenu();
+        };
+
+        function renderIndoMenu() {
+            const indoService = servicesData.find(s => s.id === 'indo-fusion');
+            if (!indoService || !indoService.fullMenu) return;
+
+            const tabs = document.getElementById('indo-menu-tabs');
+            tabs.innerHTML = indoService.fullMenu.categories.map(cat => `
+                <button type="button" onclick="switchIndoCategory('${cat.id}')" class="px-4 py-3 text-[13px] font-bold uppercase tracking-[0.14em] whitespace-nowrap border-b-2 transition-colors ${cat.id === indoActiveCategory ? 'border-taupe text-espresso' : 'border-transparent text-muted hover:text-espresso'}">
+                    ${cat.label}
+                </button>
+            `).join('');
+
+            const activeCat = indoService.fullMenu.categories.find(c => c.id === indoActiveCategory) || indoService.fullMenu.categories[0];
+            const itemsCont = document.getElementById('indo-menu-items');
+            itemsCont.innerHTML = activeCat.items.map(it => `
+                <div class="py-3 flex justify-between items-start gap-4">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h4 class="font-serif text-[17px] font-bold text-espresso">${it.name}</h4>
+                            <span class="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded ${it.type === 'Veg' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">${it.type}</span>
+                        </div>
+                        <p class="font-sans text-[13px] text-muted mt-0.5">${it.desc || ''}</p>
+                    </div>
+                    <div class="text-right shrink-0">
+                        <span class="font-serif text-[18px] font-semibold text-espresso">${it.price}</span>
+                        ${it.unit ? `<span class="font-sans text-[12px] text-muted block">${it.unit}</span>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        window.switchIndoCategory = function(catId) {
+            indoActiveCategory = catId;
+            renderIndoMenu();
+        };
+
+        // 7. High Tea Menu Modal
+        const htModal = document.getElementById('high-tea-modal');
+        window.openHighTeaModal = function(pkgName) {
+            const data = highTeaData[pkgName];
+            if (!data) return;
+
+            document.getElementById('ht-modal-title').textContent = data.title;
+            document.getElementById('ht-modal-price').textContent = data.priceLabel || `${data.price || ''} per person`;
+
+            const secCont = document.getElementById('ht-modal-sections');
+            secCont.innerHTML = data.sections.map(sec => `
+                <div class="border-b border-divider pb-4 last:border-0">
+                    <h4 class="font-serif text-[18px] font-bold text-espresso uppercase tracking-[0.06em] mb-1">${sec.title}</h4>
+                    ${sec.subtitle ? `<p class="font-sans text-[12px] text-taupe uppercase font-semibold tracking-wider mb-2">${sec.subtitle}</p>` : ''}
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 mt-2">
+                        ${sec.items.map(it => `<li class="font-sans text-[13px] text-body-mid flex gap-2"><span class="text-taupe">—</span>${it}</li>`).join('')}
+                    </ul>
+                </div>
+            `).join('');
+
+            htModal.classList.remove('opacity-0', 'pointer-events-none');
+            htModal.classList.add('opacity-100');
+            document.body.style.overflow = 'hidden';
+        };
+
+        // Modal Close Handlers
+        document.querySelectorAll('.close-modal-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                indoModal.classList.add('opacity-0', 'pointer-events-none');
+                htModal.classList.add('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = '';
+            });
+        });
+        [indoModal, htModal].forEach(m => {
+            m.addEventListener('click', (e) => {
+                if (e.target === m) {
+                    m.classList.add('opacity-0', 'pointer-events-none');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                indoModal.classList.add('opacity-0', 'pointer-events-none');
+                htModal.classList.add('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // 8. Inquire Form WhatsApp Submission
+        const inquiryForm = document.getElementById('inquiry-form');
+        const toast = document.getElementById('toast');
+        let toastTimeout;
+
+        function showToast(title, message, isSuccess = true) {
+            if (toastTimeout) clearTimeout(toastTimeout);
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-message').textContent = message;
+            toast.className = `fixed bottom-6 right-6 z-50 max-w-sm w-full px-5 py-4 rounded-md shadow-lg border transition-all duration-300 opacity-100 translate-x-0 ${isSuccess ? 'bg-espresso border-taupe text-parchment' : 'bg-red-800 border-red-500 text-white'}`;
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-x-8', 'pointer-events-none');
+                toast.classList.remove('opacity-100', 'translate-x-0');
+            }, 5000);
+        }
+
+        inquiryForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(inquiryForm);
+            const data = Object.fromEntries(formData.entries());
+
+            const lines = [
+                "Hi Graze & Gift Co.! I'd like to inquire about your services.",
+                `Name: ${data.fullName}`,
+                `Phone: ${data.phone}`,
+                `Email: ${data.email}`,
+                `Event Date: ${data.date}`,
+                `City / Venue: ${data.city}`,
+                `Guests: ${data.guests}`,
+                `Budget: ${data.budget}`,
+                `Event Type: ${data.eventType}`,
+                `Service: ${data.service}`,
+                data.dietary ? `Dietary: ${data.dietary}` : null,
+                data.vision ? `Notes: ${data.vision}` : null
+            ].filter(Boolean);
+
+            const waText = encodeURIComponent(lines.join("\n"));
+            window.open(`https://wa.me/16047616232?text=${waText}`, '_blank');
+
+            showToast("Inquiry Dispatched", "Opening WhatsApp chat. We'll be in touch within 24 hours!");
+            inquiryForm.reset();
+        });
+
+        // Initialize on load
+        renderServicesTabs();
+        renderActiveService();
+        renderGallery();
+    </script>
+</body>
+</html>

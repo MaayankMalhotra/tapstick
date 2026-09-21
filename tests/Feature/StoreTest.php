@@ -154,12 +154,12 @@ class StoreTest extends TestCase
 
     public function test_gaze_n_gifts_renders_landing_page(): void
     {
-        $this->product();
         $response = $this->get(route('store.gaze-n-gifts'));
         $response->assertOk();
-        $response->assertSee('TABSTICK');
-        $response->assertSee('STICKERS');
-        $response->assertSee('Good Vibes');
+        $response->assertSee('Graze');
+        $response->assertSee('Gift Co.');
+        $response->assertSee('Fine Epicurean Artistry');
+        $response->assertSee('Meet Manica');
         $response->assertSee(url('/gaze-n-gifts'));
     }
 
