@@ -139,13 +139,21 @@
     </script>
     @endif
 
-    <!-- TOP ANNOUNCEMENT BAR: MINIMUM ORDER & SHIPPING -->
-    <div class="top-announcement-bar" style="background:#FFE600;border-bottom:2px solid var(--color-ink);padding:7px 14px;text-align:center;font-size:0.82rem;font-weight:900;letter-spacing:0.02em;color:var(--color-ink);display:flex;align-items:center;justify-content:center;gap:12px;overflow:hidden;flex-wrap:wrap;">
-        <span>⚡ <strong>MINIMUM ORDER ₹100</strong> (Mix &amp; match any vinyl decals)</span>
-        <span style="opacity:0.4;font-weight:900;">•</span>
-        <span>🚚 <strong>FREE SHIPPING</strong> on orders ₹499+</span>
-        <span style="opacity:0.4;font-weight:900;">•</span>
-        <span>🔥 100% Waterproof Automotive-Grade Vinyl</span>
+    <!-- TOP ANNOUNCEMENT BAR: MINIMUM ORDER, SHIPPING & FOUNDER CONNECT -->
+    <div class="top-announcement-bar">
+        <div class="top-announcement-inner">
+            <span class="top-announcement-item">⚡ <strong>MINIMUM ORDER ₹100</strong> (Mix &amp; match any vinyl decals)</span>
+            <span class="top-announcement-bullet">•</span>
+            <span class="top-announcement-item">🚚 <strong>FREE SHIPPING</strong> on orders ₹499+</span>
+            <span class="top-announcement-bullet hide-on-mobile">•</span>
+            <span class="top-announcement-item hide-on-mobile">🔥 100% Waterproof Vinyl</span>
+            <span class="top-announcement-bullet">•</span>
+            <a href="{{ url('/maayank') }}" class="top-founder-btn" aria-label="Connect directly with the founder">
+                <span class="top-founder-pulse"></span>
+                <span>Connect directly with the founder</span>
+                <span class="top-founder-arrow">↗</span>
+            </a>
+        </div>
     </div>
 
     <!-- 2. TABSTICK PLAYFUL POP HEADER -->
@@ -175,6 +183,10 @@
                 <a href="{{ route('home') }}#club" class="nav-item club-pill">The Club ✦</a>
                 <a href="{{ route('home') }}#reviews" class="nav-item">Reviews</a>
                 <a href="{{ route('home') }}#author" class="nav-item">Our Story</a>
+                <a href="{{ url('/maayank') }}" class="founder-nav-item" title="Connect directly with the founder Maayank Malhotra">
+                    <span class="top-founder-pulse" style="width:6px;height:6px;"></span>
+                    <span>Founder ↗</span>
+                </a>
             </nav>
 
             <div class="header-actions">
@@ -216,8 +228,8 @@
                 <a href="{{ route('home') }}#why" class="mobile-nav-chip">Why Us</a>
                 <a href="{{ route('home') }}#club" class="mobile-nav-chip highlight">Tabstick Club ✦</a>
                 <a href="{{ route('home') }}#reviews" class="mobile-nav-chip">Reviews</a>
-                <a href="{{ route('home') }}#gallery" class="mobile-nav-chip">Gallery</a>
                 <a href="{{ route('home') }}#author" class="mobile-nav-chip">Our Story</a>
+                <a href="{{ url('/maayank') }}" class="mobile-nav-chip" style="background:var(--color-ink);color:#FFE600;font-weight:900;">👨‍💻 Founder ↗</a>
             </div>
         </div>
     </header>
@@ -238,6 +250,14 @@
             <button type="button" class="btn-close-mobile-drawer" id="btn-close-mobile-menu" aria-label="Close menu">&times;</button>
         </div>
         <div class="mobile-drawer-links">
+            <a href="{{ url('/maayank') }}" class="mobile-drawer-card" style="background:#FFE600;border:2px solid var(--color-ink);margin-bottom:8px;">
+                <span class="drawer-card-emoji">👨‍💻</span>
+                <div>
+                    <strong>Connect directly with the founder</strong>
+                    <small>Maayank Malhotra • Portfolio &amp; Direct Desk</small>
+                </div>
+                <span class="drawer-arrow">➔</span>
+            </a>
             <a href="{{ route('category.index') }}" class="mobile-drawer-card card-yellow">
                 <span class="drawer-card-emoji">⚡</span>
                 <div>

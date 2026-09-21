@@ -84,4 +84,12 @@ class PortfolioTest extends TestCase
         $response->assertOk();
         $response->assertSee('https://tabstick.in/maayank');
     }
+
+    public function test_homepage_and_storefront_render_connect_directly_with_the_founder_button(): void
+    {
+        $response = $this->get('/');
+        $response->assertOk();
+        $response->assertSee('Connect directly with the founder');
+        $response->assertSee(url('/maayank'));
+    }
 }

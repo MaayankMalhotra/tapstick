@@ -562,11 +562,14 @@
                         </div>
                     </div>
 
-                    <div class="founder-actions-row">
-                        <a href="https://www.linkedin.com/in/maayank-malhotra-a59a55186/" target="_blank" rel="noopener me" class="founder-linkedin-chip">
-                            <span>Connect with Mayank Malhotra on LinkedIn →</span>
+                    <div class="founder-actions-row" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+                        <a href="{{ url('/maayank') }}" class="btn-pop-primary" style="background:#18181B;color:#FFE600;border-color:#18181B;box-shadow:3px 3px 0 #18181B;">
+                            <span>👨‍💻 Connect Directly with the Founder ↗</span>
                         </a>
-                        <a href="#shop" class="btn-pop-primary btn-magnetic">
+                        <a href="https://www.linkedin.com/in/maayank-malhotra-a59a55186/" target="_blank" rel="noopener me" class="founder-linkedin-chip">
+                            <span>Connect on LinkedIn →</span>
+                        </a>
+                        <a href="#shop" class="btn-pop-primary btn-magnetic" style="background:#FFE600;color:#18181B;">
                             <span>Shop Founder's Picks →</span>
                         </a>
                     </div>
