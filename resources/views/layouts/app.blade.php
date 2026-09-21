@@ -43,9 +43,11 @@
         "@@context": "https://schema.org",
         "@type": "Organization",
         "name": "Tabstick",
+        "alternateName": ["Tabstick Stickers", "Tabstick India", "Tabstick Store"],
         "legalName": "Tabstick",
         "url": "https://tabstick.in",
         "logo": "{{ asset('favicon-192x192.png') }}",
+        "image": "{{ asset('images/hero-banner.webp') }}",
         "description": "Tabstick is an Indian sticker brand founded by Mayank Malhotra. We create creative and durable stickers for laptops, cars, phones and college students.",
         "founder": {
             "@type": "Person",
@@ -74,6 +76,7 @@
         "@@context": "https://schema.org",
         "@type": "WebSite",
         "name": "Tabstick",
+        "alternateName": ["Tabstick Stickers", "Tabstick India", "Tabstick Store"],
         "url": "https://tabstick.in",
         "potentialAction": {
             "@type": "SearchAction",
