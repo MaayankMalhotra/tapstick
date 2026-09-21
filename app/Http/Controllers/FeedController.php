@@ -16,8 +16,8 @@ class FeedController extends Controller
         $cacheFile = public_path('feed/google-shopping.xml');
         $cacheDir = public_path('feed');
 
-        // Check if cached file exists and is less than 24 hours old
-        if (File::exists($cacheFile) && (time() - File::lastModified($cacheFile) < 86400)) {
+        // Check if cached file exists and is less than 24 hours old (bypassed in testing)
+        if (!app()->environment('testing') && File::exists($cacheFile) && (time() - File::lastModified($cacheFile) < 86400)) {
             $content = File::get($cacheFile);
             return response($content, 200, [
                 'Content-Type' => 'application/xml; charset=utf-8',
@@ -64,8 +64,10 @@ class FeedController extends Controller
 
         foreach ($products as $product) {
             $id = $product->id;
-            $title = htmlspecialchars(trim($product->name) . ' Vinyl Sticker - Tabstick', ENT_XML1, 'UTF-8');
-            $descText = $product->description ? trim($product->description) : "Premium automotive-grade waterproof vinyl sticker by Tabstick. Perfect for laptops, cars, bikes, phone cases, and water bottles. Residue-free removal, scratch-resistant, and UV weatherproof.";
+            $cleanTitle = str_ireplace(['Stick It Up', 'STICK IT UP', 'StickItUp', 'Tapstick'], 'Tabstick', trim($product->name));
+            $title = htmlspecialchars($cleanTitle . ' Vinyl Sticker - Tabstick', ENT_XML1, 'UTF-8');
+            $rawDesc = $product->description ? trim($product->description) : "Premium automotive-grade waterproof vinyl sticker by Tabstick. Perfect for laptops, cars, bikes, phone cases, and water bottles. Residue-free removal, scratch-resistant, and UV weatherproof.";
+            $descText = str_ireplace(['Stick It Up', 'STICK IT UP', 'StickItUp', 'Tapstick'], 'Tabstick', $rawDesc);
             $description = htmlspecialchars($descText, ENT_XML1, 'UTF-8');
             $link = htmlspecialchars("{$baseUrl}/products/{$product->slug}", ENT_XML1, 'UTF-8');
             
