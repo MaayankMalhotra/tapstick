@@ -103,4 +103,72 @@ class SeoTest extends TestCase
         $this->assertStringContainsString('Disallow: /cart', $robotsContent);
         $this->assertStringContainsString('Disallow: /checkout', $robotsContent);
     }
+
+    public function test_structured_data_on_all_pages_is_valid_rfc_json_with_zero_bad_escape_sequences(): void
+    {
+        $category = Category::create(['name' => "Collector's & Gamer's Pack", 'slug' => 'collectors-gamers-pack']);
+        $product = Product::create([
+            'category_id' => $category->id,
+            'name' => "We Ain't Broke & We Won't Stop",
+            'slug' => 'we-aint-broke-wont-stop',
+            'description' => "Collector's item with \"high durability\" & waterproof vinyl.",
+            'price' => 59,
+            'stock' => 15,
+            'emoji' => '⚡',
+            'image' => 'images/stickers/we-aint-broke.jpg',
+            'is_active' => true,
+        ]);
+
+        // 1. Product Page Verification
+        $productRes = $this->get(route('products.show', $product));
+        $productRes->assertOk();
+        preg_match_all('/<script type="application\/ld\+json">(.*?)<\/script>/s', $productRes->getContent(), $productMatches);
+        $this->assertNotEmpty($productMatches[1], 'Product page must contain JSON-LD scripts');
+        foreach ($productMatches[1] as $idx => $jsonSnippet) {
+            $trimmed = trim($jsonSnippet);
+            $decoded = json_decode($trimmed, true);
+            $this->assertNotNull($decoded, "Product JSON-LD block #{$idx} failed to parse: " . json_last_error_msg());
+            $this->assertStringNotContainsString("&#039;", $trimmed, 'JSON-LD must not contain HTML entity &#039;');
+            $this->assertStringNotContainsString("\\'", $trimmed, 'JSON-LD must not contain bad escape sequence \\\'');
+        }
+
+        // 2. Category Page Verification
+        $catRes = $this->get(route('category.show', $category->slug));
+        $catRes->assertOk();
+        preg_match_all('/<script type="application\/ld\+json">(.*?)<\/script>/s', $catRes->getContent(), $catMatches);
+        $this->assertNotEmpty($catMatches[1], 'Category page must contain JSON-LD scripts');
+        foreach ($catMatches[1] as $idx => $jsonSnippet) {
+            $trimmed = trim($jsonSnippet);
+            $decoded = json_decode($trimmed, true);
+            $this->assertNotNull($decoded, "Category JSON-LD block #{$idx} failed to parse: " . json_last_error_msg());
+            $this->assertStringNotContainsString("&#039;", $trimmed, 'JSON-LD must not contain HTML entity &#039;');
+            $this->assertStringNotContainsString("\\'", $trimmed, 'JSON-LD must not contain bad escape sequence \\\'');
+        }
+
+        // 3. Homepage Verification
+        $homeRes = $this->get('/');
+        $homeRes->assertOk();
+        preg_match_all('/<script type="application\/ld\+json">(.*?)<\/script>/s', $homeRes->getContent(), $homeMatches);
+        $this->assertNotEmpty($homeMatches[1], 'Home page must contain JSON-LD scripts');
+        foreach ($homeMatches[1] as $idx => $jsonSnippet) {
+            $trimmed = trim($jsonSnippet);
+            $decoded = json_decode($trimmed, true);
+            $this->assertNotNull($decoded, "Homepage JSON-LD block #{$idx} failed to parse: " . json_last_error_msg());
+            $this->assertStringNotContainsString("&#039;", $trimmed, 'JSON-LD must not contain HTML entity &#039;');
+            $this->assertStringNotContainsString("\\'", $trimmed, 'JSON-LD must not contain bad escape sequence \\\'');
+        }
+
+        // 4. Portfolio Page Verification
+        $portfolioRes = $this->get('/maayank');
+        $portfolioRes->assertOk();
+        preg_match_all('/<script type="application\/ld\+json">(.*?)<\/script>/s', $portfolioRes->getContent(), $portfolioMatches);
+        $this->assertNotEmpty($portfolioMatches[1], 'Portfolio page must contain JSON-LD scripts');
+        foreach ($portfolioMatches[1] as $idx => $jsonSnippet) {
+            $trimmed = trim($jsonSnippet);
+            $decoded = json_decode($trimmed, true);
+            $this->assertNotNull($decoded, "Portfolio JSON-LD block #{$idx} failed to parse: " . json_last_error_msg());
+            $this->assertStringNotContainsString("&#039;", $trimmed, 'JSON-LD must not contain HTML entity &#039;');
+            $this->assertStringNotContainsString("\\'", $trimmed, 'JSON-LD must not contain bad escape sequence \\\'');
+        }
+    }
 }

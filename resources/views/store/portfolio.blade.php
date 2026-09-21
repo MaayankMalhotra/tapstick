@@ -1854,57 +1854,60 @@
     </footer>
 
     <!-- JSON-LD Person Structured Data for SEO Knowledge Graph -->
-    <script type="application/ld+json">
-    {
-        "@@context": "https://schema.org",
-        "@@type": "Person",
-        "name": "Maayank Malhotra",
-        "alternateName": "Mayank Malhotra",
-        "givenName": "Maayank",
-        "familyName": "Malhotra",
-        "jobTitle": "Full Stack Software Engineer",
-        "description": "Full Stack Software Engineer with 4+ years of experience architecting scalable Node.js, Express, React, Laravel, and AWS cloud applications. Founder of Tabstick.",
-        "url": "https://tabstick.in/maayank",
-        "email": "maayankmalhotra095@gmail.com",
-        "telephone": "+918799730966",
-        "founder": {
-            "@@type": "Organization",
-            "name": "Tabstick",
-            "url": "https://tabstick.in"
-        },
-        "worksFor": {
-            "@@type": "Organization",
-            "name": "Thinktail Global Pvt. Ltd."
-        },
-        "alumniOf": {
-            "@@type": "CollegeOrUniversity",
-            "name": "YMCA University"
-        },
-        "knowsAbout": [
-            "Full Stack Web Development",
-            "Node.js",
-            "Express.js",
-            "PHP",
-            "Laravel",
-            "React.js",
-            "Redux",
-            "TypeScript",
-            "AWS EC2",
-            "AWS S3",
-            "Docker",
-            "WebRTC",
-            "Socket.io",
-            "MySQL",
-            "MongoDB",
-            "REST APIs",
-            "GraphQL",
-            "CI/CD Pipelines"
+    @php
+    $personSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Person',
+        'name' => 'Maayank Malhotra',
+        'alternateName' => 'Mayank Malhotra',
+        'givenName' => 'Maayank',
+        'familyName' => 'Malhotra',
+        'jobTitle' => 'Full Stack Software Engineer',
+        'description' => 'Full Stack Software Engineer with 4+ years of experience architecting scalable Node.js, Express, React, Laravel, and AWS cloud applications. Founder of Tabstick.',
+        'url' => 'https://tabstick.in/maayank',
+        'email' => 'maayankmalhotra095@gmail.com',
+        'telephone' => '+918799730966',
+        'founder' => [
+            '@type' => 'Organization',
+            'name' => 'Tabstick',
+            'url' => 'https://tabstick.in',
         ],
-        "sameAs": [
-            "https://www.linkedin.com/in/maayank-malhotra-a59a55186/",
-            "https://github.com/MaayankMalhotra"
-        ]
-    }
+        'worksFor' => [
+            '@type' => 'Organization',
+            'name' => 'Thinktail Global Pvt. Ltd.',
+        ],
+        'alumniOf' => [
+            '@type' => 'CollegeOrUniversity',
+            'name' => 'YMCA University',
+        ],
+        'knowsAbout' => [
+            'Full Stack Web Development',
+            'Node.js',
+            'Express.js',
+            'PHP',
+            'Laravel',
+            'React.js',
+            'Redux',
+            'TypeScript',
+            'AWS EC2',
+            'AWS S3',
+            'Docker',
+            'WebRTC',
+            'Socket.io',
+            'MySQL',
+            'MongoDB',
+            'REST APIs',
+            'GraphQL',
+            'CI/CD Pipelines',
+        ],
+        'sameAs' => [
+            'https://www.linkedin.com/in/maayank-malhotra-a59a55186/',
+            'https://github.com/MaayankMalhotra',
+        ],
+    ];
+    @endphp
+    <script type="application/ld+json">
+    {!! json_encode($personSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
     </script>
 
     <!-- Client Scripts for Interactive Filtering and Copy -->

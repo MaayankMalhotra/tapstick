@@ -726,69 +726,72 @@
     </div>
 
     <!-- JSON-LD FAQPage Schema -->
+    @php
+    $faqSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        'mainEntity' => [
+            [
+                '@type' => 'Question',
+                'name' => 'What makes Tabstick stickers different from ordinary stickers?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Tabstick stickers are manufactured with heavy-duty automotive-grade vinyl and cured with high-density pigment inks. Unlike thin paper stickers, Tabstick decals feature a durable protective matte laminate that resists water, sun exposure, oil, and scratches.',
+                ],
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'Are Tabstick stickers completely waterproof and weatherproof?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Yes, 100%. All Tabstick stickers are fully waterproof, monsoon-tested, and dishwasher safe for outdoor car bumpers, motorcycles, helmets, and hydro flasks.',
+                ],
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'Will Tabstick stickers leave sticky residue when removed?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'No. Tabstick uses a specialized residue-free acrylic adhesive. When peeled from MacBooks, laptops, or car paint, it leaves zero gooey residue.',
+                ],
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'How do I apply and remove Tabstick stickers for best results?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Clean and dry the surface. Peel the sticker from its easy-peel backing and smooth down from center to edges. To remove, peel slowly at a 45-degree angle.',
+                ],
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'What are the shipping and delivery timelines across India?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Orders are dispatched within 24 to 48 hours. Delivery takes 2 to 4 business days for metro cities and 3 to 6 business days for the rest of India.',
+                ],
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'Can I order custom stickers in India for startups, colleges, or events?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Yes! Tabstick manufactures custom die-cut vinyl stickers for tech startups, college fests, and creators in India. Email hello@tabstick.in for details.',
+                ],
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'Who is the founder of Tabstick?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Mayank Malhotra is the founder of Tabstick. Tabstick is an Indian sticker brand founded by Mayank Malhotra. We create creative and durable stickers for laptops, cars, phones and college students.',
+                ],
+            ],
+        ],
+    ];
+    @endphp
     <script type="application/ld+json">
-    {
-        "@@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "What makes Tabstick stickers different from ordinary stickers?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Tabstick stickers are manufactured with heavy-duty automotive-grade vinyl and cured with high-density pigment inks. Unlike thin paper stickers, Tabstick decals feature a durable protective matte laminate that resists water, sun exposure, oil, and scratches."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Are Tabstick stickers completely waterproof and weatherproof?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Yes, 100%. All Tabstick stickers are fully waterproof, monsoon-tested, and dishwasher safe for outdoor car bumpers, motorcycles, helmets, and hydro flasks."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Will Tabstick stickers leave sticky residue when removed?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "No. Tabstick uses a specialized residue-free acrylic adhesive. When peeled from MacBooks, laptops, or car paint, it leaves zero gooey residue."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "How do I apply and remove Tabstick stickers for best results?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Clean and dry the surface. Peel the sticker from its easy-peel backing and smooth down from center to edges. To remove, peel slowly at a 45-degree angle."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "What are the shipping and delivery timelines across India?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Orders are dispatched within 24 to 48 hours. Delivery takes 2 to 4 business days for metro cities and 3 to 6 business days for the rest of India."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Can I order custom stickers in India for startups, colleges, or events?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Yes! Tabstick manufactures custom die-cut vinyl stickers for tech startups, college fests, and creators in India. Email hello@tabstick.in for details."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Who is the founder of Tabstick?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Mayank Malhotra is the founder of Tabstick. Tabstick is an Indian sticker brand founded by Mayank Malhotra. We create creative and durable stickers for laptops, cars, phones and college students."
-                }
-            }
-        ]
-    }
+    {!! json_encode($faqSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
     </script>
 </section>
 

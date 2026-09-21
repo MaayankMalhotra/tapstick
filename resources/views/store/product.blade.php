@@ -94,58 +94,63 @@
 </div>
 
 <!-- JSON-LD Product & BreadcrumbList Structured Data -->
-<script type="application/ld+json">
-{
-    "@@context": "https://schema.org/",
-    "@type": "Product",
-    "name": "{{ addslashes($product->name) }} Sticker",
-    "image": [
-        "{{ $imgSrc ?? asset('images/hero-banner.webp') }}"
+@php
+$productSchema = [
+    '@context' => 'https://schema.org/',
+    '@type' => 'Product',
+    'name' => $product->name . ' Sticker',
+    'image' => [
+        $imgSrc ?? asset('images/hero-banner.webp')
     ],
-    "description": "{{ addslashes(Str::limit(strip_tags($product->description), 200) ?: ($product->name . ' - Waterproof die-cut vinyl sticker by Tabstick.')) }}",
-    "sku": "TAB-{{ $product->id }}",
-    "brand": {
-        "@type": "Brand",
-        "name": "Tabstick"
-    },
-    "offers": {
-        "@type": "Offer",
-        "url": "{{ route('products.show', $product) }}",
-        "priceCurrency": "INR",
-        "price": "{{ number_format($product->price, 2, '.', '') }}",
-        "availability": "{{ $product->stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' }}",
-        "seller": {
-            "@type": "Organization",
-            "name": "Tabstick"
-        }
-    }
-}
+    'description' => Str::limit(strip_tags($product->description), 200) ?: ($product->name . ' - Waterproof die-cut vinyl sticker by Tabstick.'),
+    'sku' => 'TAB-' . $product->id,
+    'brand' => [
+        '@type' => 'Brand',
+        'name' => 'Tabstick'
+    ],
+    'offers' => [
+        '@type' => 'Offer',
+        'url' => route('products.show', $product),
+        'priceCurrency' => 'INR',
+        'price' => number_format($product->price, 2, '.', ''),
+        'availability' => $product->stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+        'seller' => [
+            '@type' => 'Organization',
+            'name' => 'Tabstick'
+        ]
+    ]
+];
+
+$productBreadcrumbSchema = [
+    '@context' => 'https://schema.org',
+    '@type' => 'BreadcrumbList',
+    'itemListElement' => [
+        [
+            '@type' => 'ListItem',
+            'position' => 1,
+            'name' => 'Home',
+            'item' => url('/')
+        ],
+        [
+            '@type' => 'ListItem',
+            'position' => 2,
+            'name' => $product->category?->name ?? 'Stickers',
+            'item' => route('category.show', $product->category?->slug ?? 'stickers')
+        ],
+        [
+            '@type' => 'ListItem',
+            'position' => 3,
+            'name' => $product->name,
+            'item' => route('products.show', $product)
+        ]
+    ]
+];
+@endphp
+<script type="application/ld+json">
+{!! json_encode($productSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
 </script>
 
 <script type="application/ld+json">
-{
-    "@@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-        {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "{{ url('/') }}"
-        },
-        {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "{{ addslashes($product->category?->name ?? 'Stickers') }}",
-            "item": "{{ route('category.show', $product->category?->slug ?? 'stickers') }}"
-        },
-        {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "{{ addslashes($product->name) }}",
-            "item": "{{ route('products.show', $product) }}"
-        }
-    ]
-}
+{!! json_encode($productBreadcrumbSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
 </script>
 @endsection

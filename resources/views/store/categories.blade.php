@@ -5,20 +5,23 @@
 @section('canonical', route('category.index'))
 
 @section('head_scripts')
+@php
+$collectionsHubSchema = [
+    '@context' => 'https://schema.org',
+    '@type' => 'CollectionPage',
+    'name' => 'Tabstick Sticker Collections & Categories',
+    'url' => route('category.index'),
+    'description' => 'Explore all curated sticker categories from Tabstick. Waterproof, automotive-grade vinyl stickers for laptops, cars, bikes, and everyday tech.',
+    'isPartOf' => [
+        '@type' => 'WebSite',
+        'name' => 'Tabstick',
+        'url' => 'https://tabstick.in',
+    ],
+];
+@endphp
 <!-- Collections Hub Schema (JSON-LD) -->
 <script type="application/ld+json">
-{
-    "@@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": "Tabstick Sticker Collections & Categories",
-    "url": "{{ route('category.index') }}",
-    "description": "Explore all curated sticker categories from Tabstick. Waterproof, automotive-grade vinyl stickers for laptops, cars, bikes, and everyday tech.",
-    "isPartOf": {
-        "@type": "WebSite",
-        "name": "Tabstick",
-        "url": "https://tabstick.in"
-    }
-}
+{!! json_encode($collectionsHubSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
 </script>
 @endsection
 

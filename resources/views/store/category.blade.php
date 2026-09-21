@@ -5,69 +5,73 @@
 @section('canonical', route('category.show', $currentSlug))
 
 @section('head_scripts')
+@php
+$categoryItemList = [];
+foreach ($products->take(10) as $idx => $p) {
+    $categoryItemList[] = [
+        '@type' => 'ListItem',
+        'position' => $idx + 1,
+        'url' => route('products.show', $p),
+        'name' => $p->name,
+    ];
+}
+
+$categorySchema = [
+    '@context' => 'https://schema.org',
+    '@graph' => [
+        [
+            '@type' => 'CollectionPage',
+            '@id' => route('category.show', $currentSlug) . '#webpage',
+            'url' => route('category.show', $currentSlug),
+            'name' => $seoTitle,
+            'description' => $metaDescription,
+            'isPartOf' => [
+                '@type' => 'WebSite',
+                '@id' => 'https://tabstick.in/#website',
+                'name' => 'Tabstick',
+                'url' => 'https://tabstick.in',
+            ],
+            'about' => [
+                '@type' => 'Thing',
+                'name' => $categoryName . ' Vinyl Stickers',
+            ],
+        ],
+        [
+            '@type' => 'BreadcrumbList',
+            '@id' => route('category.show', $currentSlug) . '#breadcrumb',
+            'itemListElement' => [
+                [
+                    '@type' => 'ListItem',
+                    'position' => 1,
+                    'name' => 'Home',
+                    'item' => 'https://tabstick.in',
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'position' => 2,
+                    'name' => 'Collections',
+                    'item' => route('category.index'),
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'position' => 3,
+                    'name' => $categoryName,
+                    'item' => route('category.show', $currentSlug),
+                ],
+            ],
+        ],
+        [
+            '@type' => 'ItemList',
+            'name' => $categoryName . ' Sticker Collection',
+            'numberOfItems' => $products->total(),
+            'itemListElement' => $categoryItemList,
+        ],
+    ],
+];
+@endphp
 <!-- Collection & Breadcrumb Schema (JSON-LD) -->
 <script type="application/ld+json">
-{
-    "@@context": "https://schema.org",
-    "@graph": [
-        {
-            "@type": "CollectionPage",
-            "@id": "{{ route('category.show', $currentSlug) }}#webpage",
-            "url": "{{ route('category.show', $currentSlug) }}",
-            "name": "{{ addslashes($seoTitle) }}",
-            "description": "{{ addslashes($metaDescription) }}",
-            "isPartOf": {
-                "@type": "WebSite",
-                "@id": "https://tabstick.in/#website",
-                "name": "Tabstick",
-                "url": "https://tabstick.in"
-            },
-            "about": {
-                "@type": "Thing",
-                "name": "{{ addslashes($categoryName) }} Vinyl Stickers"
-            }
-        },
-        {
-            "@type": "BreadcrumbList",
-            "@id": "{{ route('category.show', $currentSlug) }}#breadcrumb",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": "https://tabstick.in"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Collections",
-                    "item": "{{ route('category.index') }}"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 3,
-                    "name": "{{ addslashes($categoryName) }}",
-                    "item": "{{ route('category.show', $currentSlug) }}"
-                }
-            ]
-        },
-        {
-            "@type": "ItemList",
-            "name": "{{ addslashes($categoryName) }} Sticker Collection",
-            "numberOfItems": {{ $products->total() }},
-            "itemListElement": [
-                @foreach($products->take(10) as $idx => $p)
-                {
-                    "@type": "ListItem",
-                    "position": {{ $idx + 1 }},
-                    "url": "{{ route('products.show', $p) }}",
-                    "name": "{{ addslashes($p->name) }}"
-                }@if(!$loop->last),@endif
-                @endforeach
-            ]
-        }
-    ]
-}
+{!! json_encode($categorySchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
 </script>
 @endsection
 
