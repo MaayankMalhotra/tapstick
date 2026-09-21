@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->validateCsrfTokens(except: [
             'club/join',
             'api/*',
+            'maayank/ai-chat',
         ]);
         $middleware->web(append: [
             \App\Http\Middleware\EnsureCanonicalDomain::class,
