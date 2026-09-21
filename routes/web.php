@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\GrazeAdminController;
+use App\Http\Controllers\Admin\GrazeMenuAdminController;
 use App\Http\Controllers\GrazeInquiryController;
 use App\Http\Middleware\RequireAdmin;
 
@@ -75,6 +76,17 @@ Route::prefix('graze-n-gifts/admin')->name('graze.admin.')->group(function () {
     Route::get('/export', [GrazeAdminController::class, 'export'])->name('export');
     Route::patch('/inquiries/{inquiry}', [GrazeAdminController::class, 'update'])->name('inquiries.update');
     Route::delete('/inquiries/{inquiry}', [GrazeAdminController::class, 'destroy'])->name('inquiries.destroy');
+
+    // Menu Management CMS
+    Route::prefix('menu')->name('menu.')->group(function () {
+        Route::get('/', [GrazeMenuAdminController::class, 'index'])->name('index');
+        Route::post('/', [GrazeMenuAdminController::class, 'store']);
+        Route::post('/items', [GrazeMenuAdminController::class, 'store'])->name('store');
+        Route::match(['put', 'patch'], '/items/{item}', [GrazeMenuAdminController::class, 'update'])->name('update');
+        Route::delete('/items/{item}', [GrazeMenuAdminController::class, 'destroy'])->name('destroy');
+        Route::patch('/items/{item}/toggle', [GrazeMenuAdminController::class, 'toggleActive'])->name('toggle');
+        Route::match(['put', 'patch'], '/categories/{category}', [GrazeMenuAdminController::class, 'updateCategory'])->name('category.update');
+    });
 });
 
 // Admin aliases

@@ -56,7 +56,29 @@ class StoreController extends Controller
             ->take(24)
             ->get();
 
-        return view('store.gaze-n-gifts', compact('products', 'categories', 'totalProductsCount'));
+        $grazeMenuCategories = \App\Models\GrazeMenuCategory::where('is_active', true)
+            ->with(['activeItems'])
+            ->orderBy('sort_order')
+            ->get();
+
+        $grazeMenuCategoriesJson = $grazeMenuCategories->map(function ($c) {
+            return [
+                'id' => $c->slug,
+                'label' => $c->name,
+                'subtitle' => $c->subtitle ?? '',
+                'items' => $c->activeItems->map(function ($i) {
+                    return [
+                        'name' => $i->name,
+                        'desc' => $i->description ?? '',
+                        'type' => $i->type,
+                        'price' => $i->price,
+                        'unit' => $i->unit,
+                    ];
+                })->values(),
+            ];
+        })->values()->toJson();
+
+        return view('store.gaze-n-gifts', compact('products', 'categories', 'totalProductsCount', 'grazeMenuCategories', 'grazeMenuCategoriesJson'));
     }
 
     public function apiProducts(Request $request): JsonResponse

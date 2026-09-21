@@ -82,6 +82,21 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
+        <!-- Top Navigation Mode Switcher -->
+        <div class="flex items-center gap-2 mb-8 border-b border-divider pb-4 overflow-x-auto">
+            <a href="{{ route('graze.admin.index') }}" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold tracking-wide bg-espresso text-parchment shadow-sm flex items-center gap-2">
+                <span>📋 Client Inquiries</span>
+                @if(($stats['new'] ?? 0) > 0)
+                    <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold border border-amber-300">{{ $stats['new'] }} NEW</span>
+                @endif
+            </a>
+            <a href="{{ route('graze.admin.menu.index') }}" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide text-espresso/70 hover:text-espresso hover:bg-white/60 transition-all flex items-center gap-2">
+                <span>🍽️ Catering Menu Manager</span>
+                @php $menuItemCount = \App\Models\GrazeMenuItem::count(); @endphp
+                <span class="px-2 py-0.5 rounded-full bg-linen text-espresso text-[10px] font-bold border border-divider">{{ $menuItemCount }} items</span>
+            </a>
+        </div>
+
         <!-- Flash Notices -->
         @if(session('success'))
             <div class="mb-6 p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl flex items-center justify-between text-sm shadow-sm">
