@@ -13,10 +13,14 @@
     <meta name="google-site-verification" content="{{ config('services.google.site_verification') }}">
     @endif
 
-    <!-- Favicon & Brand Icons -->
+    <!-- Favicon & Search Engine Icons -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/png" sizes="48x48" href="{{ asset('favicon-48x48.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('favicon-192x192.png') }}">
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
-    <link rel="alternate icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-    <link rel="apple-touch-icon" href="{{ asset('images/logo.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:site_name" content="Tabstick">
@@ -41,7 +45,7 @@
         "name": "Tabstick",
         "legalName": "Tabstick",
         "url": "https://tabstick.in",
-        "logo": "{{ asset('favicon.svg') }}",
+        "logo": "{{ asset('favicon-192x192.png') }}",
         "description": "Tabstick is an Indian sticker brand founded by Mayank Malhotra. We create creative and durable stickers for laptops, cars, phones and college students.",
         "founder": {
             "@type": "Person",

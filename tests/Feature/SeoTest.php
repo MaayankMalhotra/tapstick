@@ -45,6 +45,7 @@ class SeoTest extends TestCase
         // Favicon links
         $response->assertSee('favicon.svg', false);
         $response->assertSee('favicon.ico', false);
+        $response->assertSee('favicon-48x48.png', false);
     }
 
     public function test_product_page_contains_seo_metadata_and_schema(): void
