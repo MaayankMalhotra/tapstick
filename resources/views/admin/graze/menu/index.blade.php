@@ -96,7 +96,17 @@
             </div>
         @endif
 
-        @if($errors->any())
+        @if(session('error'))
+            <div class="mb-6 p-4 bg-rose-50 border border-rose-200 text-rose-800 rounded-xl flex items-center justify-between text-sm shadow-sm">
+                <div class="flex items-center gap-2">
+                    <span class="text-base">⚠️</span>
+                    <span>{{ session('error') }}</span>
+                </div>
+                <button onclick="this.parentElement.remove()" class="text-rose-500 hover:text-rose-800 text-sm font-bold">✕</button>
+            </div>
+        @endif
+
+        @if(isset($errors) && $errors->any())
             <div class="mb-6 p-4 bg-rose-50 border border-rose-200 text-rose-800 rounded-xl text-sm shadow-sm">
                 <div class="font-semibold mb-1">Please correct the following:</div>
                 <ul class="list-disc pl-5 space-y-0.5">
@@ -116,6 +126,10 @@
             </div>
 
             <div class="flex items-center gap-3">
+                <button type="button" onclick="openAddCategoryModal()" class="inline-flex items-center gap-2 px-4 py-3 bg-white hover:bg-linen border border-divider text-espresso rounded-xl text-xs font-bold tracking-wider uppercase transition-all shadow-sm">
+                    <span class="text-base leading-none font-bold">+</span>
+                    <span>New Category</span>
+                </button>
                 <button type="button" onclick="openAddModal()" class="inline-flex items-center gap-2 px-5 py-3 bg-taupe hover:bg-[#b88e73] text-espresso rounded-xl text-xs font-bold tracking-wider uppercase transition-all shadow-md">
                     <span class="text-base leading-none font-bold">+</span>
                     <span>Add New Dish</span>
@@ -163,7 +177,47 @@
                     {{ $cat->name }} ({{ $cat->items_count }})
                 </a>
             @endforeach
+            <button type="button" onclick="openAddCategoryModal()"
+                    class="px-3.5 py-2 rounded-full text-xs font-bold whitespace-nowrap bg-taupe/15 text-espresso hover:bg-taupe/25 border border-dashed border-taupe/40 transition-all flex items-center gap-1.5 shrink-0">
+                <span>+</span> Add Category
+            </button>
         </div>
+
+        @if($selectedCategory)
+            <div class="bg-linen/80 border border-divider rounded-2xl p-4 sm:p-5 mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] uppercase font-bold tracking-widest text-taupe">Active Category View</span>
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold {{ $selectedCategory->is_active ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800' }}">
+                            {{ $selectedCategory->is_active ? 'Visible on Storefront' : 'Hidden' }}
+                        </span>
+                    </div>
+                    <h2 class="font-serif text-xl sm:text-2xl font-bold text-espresso mt-1">{{ $selectedCategory->name }}</h2>
+                    @if($selectedCategory->subtitle)
+                        <p class="text-xs text-espresso/70 italic mt-1">{{ $selectedCategory->subtitle }}</p>
+                    @endif
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                    <button type="button" onclick="openEditCategoryModal({{ json_encode($selectedCategory) }})"
+                            class="px-3.5 py-2 bg-white hover:bg-linen border border-divider rounded-xl text-xs font-semibold text-espresso flex items-center gap-1.5 transition-colors shadow-sm">
+                        <span>✏️</span> Edit Category
+                    </button>
+                    <form method="POST" action="{{ route('graze.admin.menu.category.destroy', $selectedCategory) }}"
+                          onsubmit="return confirm('Delete category '{{ $selectedCategory->name }}'? {{ $selectedCategory->items()->count() > 0 ? 'WARNING: This category contains ' . $selectedCategory->items()->count() . ' dishes! Are you sure you want to proceed?' : '' }}');"
+                          class="inline">
+                        @csrf
+                        @method('DELETE')
+                        @if($selectedCategory->items()->count() > 0)
+                            <input type="hidden" name="force" value="1">
+                        @endif
+                        <button type="submit"
+                                class="px-3.5 py-2 bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-xl text-xs font-semibold text-rose-700 flex items-center gap-1.5 transition-colors">
+                            <span>🗑️</span> Delete Category
+                        </button>
+                    </form>
+                </div>
+            </div>
+        @endif
 
         <!-- Search & Filter Bar -->
         <div class="bg-white p-4 rounded-2xl border border-divider shadow-sm mb-6">
@@ -434,7 +488,139 @@
         </div>
     </div>
 
+    <!-- Modal: Add New Category -->
+    <div id="add-category-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-divider">
+            <div class="flex items-center justify-between pb-4 border-b border-divider">
+                <div>
+                    <h3 class="font-serif text-2xl font-semibold text-espresso">Add New Category</h3>
+                    <p class="text-[11px] text-espresso/60 mt-0.5">Creates a new category tab on the storefront menu</p>
+                </div>
+                <button type="button" onclick="closeAddCategoryModal()" class="text-espresso/60 hover:text-espresso text-lg font-bold">✕</button>
+            </div>
+
+            <form method="POST" action="{{ route('graze.admin.menu.category.store') }}" class="mt-5 space-y-4 text-xs">
+                @csrf
+                <div>
+                    <label class="block font-bold uppercase tracking-wider text-espresso/70 mb-1">Category Name *</label>
+                    <input type="text" name="name" required placeholder="e.g. Live Counters & Bars"
+                           class="w-full p-3 bg-linen/50 border border-divider rounded-xl text-espresso text-sm focus:outline-none focus:border-taupe">
+                </div>
+
+                <div>
+                    <label class="block font-bold uppercase tracking-wider text-espresso/70 mb-1">Slug / URL Identifier (Optional)</label>
+                    <input type="text" name="slug" placeholder="e.g. live-counters (auto-generated if empty)"
+                           class="w-full p-3 bg-linen/50 border border-divider rounded-xl text-espresso text-xs focus:outline-none focus:border-taupe">
+                </div>
+
+                <div>
+                    <label class="block font-bold uppercase tracking-wider text-espresso/70 mb-1">Subtitle / Guidance Note (Optional)</label>
+                    <textarea name="subtitle" rows="2" placeholder="e.g. Priced per guest. Minimum 20 guests. Mix & match freely."
+                              class="w-full p-3 bg-linen/50 border border-divider rounded-xl text-espresso text-xs focus:outline-none focus:border-taupe"></textarea>
+                </div>
+
+                <div>
+                    <label class="block font-bold uppercase tracking-wider text-espresso/70 mb-1">Display Sort Order</label>
+                    <input type="number" name="sort_order" min="0" value="{{ ($categories->max('sort_order') ?? 0) + 1 }}"
+                           class="w-full p-3 bg-linen/50 border border-divider rounded-xl text-espresso text-xs focus:outline-none focus:border-taupe">
+                </div>
+
+                <div class="flex items-center justify-end gap-3 pt-4 border-t border-divider">
+                    <button type="button" onclick="closeAddCategoryModal()" class="px-4 py-2.5 rounded-xl border border-divider text-espresso font-medium">Cancel</button>
+                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-espresso hover:bg-espresso-dark text-parchment font-bold uppercase tracking-wider">Create Category</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Edit Category -->
+    <div id="edit-category-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-divider">
+            <div class="flex items-center justify-between pb-4 border-b border-divider">
+                <div>
+                    <h3 class="font-serif text-2xl font-semibold text-espresso">Edit Category</h3>
+                    <p class="text-[11px] text-espresso/60 mt-0.5">Update category label, subtitle, and live visibility</p>
+                </div>
+                <button type="button" onclick="closeEditCategoryModal()" class="text-espresso/60 hover:text-espresso text-lg font-bold">✕</button>
+            </div>
+
+            <form id="edit-category-form" method="POST" action="" class="mt-5 space-y-4 text-xs">
+                @csrf
+                @method('PUT')
+                <div>
+                    <label class="block font-bold uppercase tracking-wider text-espresso/70 mb-1">Category Name *</label>
+                    <input type="text" id="edit-cat-name" name="name" required
+                           class="w-full p-3 bg-linen/50 border border-divider rounded-xl text-espresso text-sm focus:outline-none focus:border-taupe">
+                </div>
+
+                <div>
+                    <label class="block font-bold uppercase tracking-wider text-espresso/70 mb-1">Slug / Identifier</label>
+                    <input type="text" id="edit-cat-slug" name="slug"
+                           class="w-full p-3 bg-linen/50 border border-divider rounded-xl text-espresso text-xs focus:outline-none focus:border-taupe">
+                </div>
+
+                <div>
+                    <label class="block font-bold uppercase tracking-wider text-espresso/70 mb-1">Subtitle / Guidance Note</label>
+                    <textarea id="edit-cat-subtitle" name="subtitle" rows="2"
+                              class="w-full p-3 bg-linen/50 border border-divider rounded-xl text-espresso text-xs focus:outline-none focus:border-taupe"></textarea>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 items-center">
+                    <div>
+                        <label class="block font-bold uppercase tracking-wider text-espresso/70 mb-1">Sort Order</label>
+                        <input type="number" id="edit-cat-sort" name="sort_order" min="0"
+                               class="w-full p-3 bg-linen/50 border border-divider rounded-xl text-espresso text-xs focus:outline-none focus:border-taupe">
+                    </div>
+                    <div class="pt-4">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" id="edit-cat-is-active" name="is_active" value="1" class="w-4 h-4 text-espresso rounded border-divider">
+                            <span class="text-xs text-espresso font-semibold">Active &amp; Visible</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-end gap-3 pt-4 border-t border-divider">
+                    <button type="button" onclick="closeEditCategoryModal()" class="px-4 py-2.5 rounded-xl border border-divider text-espresso font-medium">Cancel</button>
+                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-espresso hover:bg-espresso-dark text-parchment font-bold uppercase tracking-wider">Update Category</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
+        const addCategoryModal = document.getElementById('add-category-modal');
+        const editCategoryModal = document.getElementById('edit-category-modal');
+
+        function openAddCategoryModal() {
+            addCategoryModal.classList.remove('hidden');
+            addCategoryModal.classList.add('flex');
+        }
+
+        function closeAddCategoryModal() {
+            addCategoryModal.classList.remove('flex');
+            addCategoryModal.classList.add('hidden');
+        }
+
+        function openEditCategoryModal(cat) {
+            document.getElementById('edit-category-form').action = "{{ url('/graze-n-gifts/admin/menu/categories') }}/" + cat.id;
+            document.getElementById('edit-cat-name').value = cat.name || '';
+            document.getElementById('edit-cat-slug').value = cat.slug || '';
+            document.getElementById('edit-cat-subtitle').value = cat.subtitle || '';
+            document.getElementById('edit-cat-sort').value = cat.sort_order ?? 0;
+            document.getElementById('edit-cat-is-active').checked = !!cat.is_active;
+
+            editCategoryModal.classList.remove('hidden');
+            editCategoryModal.classList.add('flex');
+        }
+
+        function closeEditCategoryModal() {
+            editCategoryModal.classList.remove('flex');
+            editCategoryModal.classList.add('hidden');
+        }
+
+        addCategoryModal.addEventListener('click', (e) => { if (e.target === addCategoryModal) closeAddCategoryModal(); });
+        editCategoryModal.addEventListener('click', (e) => { if (e.target === editCategoryModal) closeEditCategoryModal(); });
+
         const addModal = document.getElementById('add-modal');
         const editModal = document.getElementById('edit-modal');
 

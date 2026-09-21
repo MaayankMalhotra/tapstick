@@ -51,7 +51,7 @@ class GrazeMenuAdminTest extends TestCase
         $response = $this->actingAs($admin)->get(route('graze.admin.menu.index'));
 
         $response->assertStatus(200);
-        $response->assertSee('Catering Menu Manager');
+        $response->assertSee('Catering Menu Items');
         $response->assertSee('Truffle Paneer Skewers');
         $response->assertSee('$4.50');
         $response->assertSee('Snacks & Bites');
@@ -161,20 +161,106 @@ class GrazeMenuAdminTest extends TestCase
         $this->assertDatabaseMissing('graze_menu_items', ['id' => $item->id]);
     }
 
+    public function test_admin_can_create_new_category(): void
+    {
+        $admin = User::factory()->create(['is_admin' => true]);
+
+        $response = $this->actingAs($admin)->post(route('graze.admin.menu.category.store'), [
+            'name' => 'Live Chaat Counters',
+            'slug' => 'live-chaat-counters',
+            'subtitle' => 'Live culinary stations styled with premium florals.',
+            'sort_order' => 7,
+        ]);
+
+        $response->assertRedirect(route('graze.admin.menu.index', ['category' => 'live-chaat-counters']));
+
+        $this->assertDatabaseHas('graze_menu_categories', [
+            'name' => 'Live Chaat Counters',
+            'slug' => 'live-chaat-counters',
+            'subtitle' => 'Live culinary stations styled with premium florals.',
+            'sort_order' => 7,
+            'is_active' => true,
+        ]);
+    }
+
+    public function test_category_slug_auto_generated_when_omitted(): void
+    {
+        $admin = User::factory()->create(['is_admin' => true]);
+
+        $response = $this->actingAs($admin)->post(route('graze.admin.menu.category.store'), [
+            'name' => 'Beverages & Mocktails',
+        ]);
+
+        $response->assertRedirect();
+
+        $this->assertDatabaseHas('graze_menu_categories', [
+            'name' => 'Beverages & Mocktails',
+            'slug' => 'beverages-mocktails',
+            'is_active' => true,
+        ]);
+    }
+
     public function test_admin_can_update_category_details(): void
     {
         $admin = User::factory()->create(['is_admin' => true]);
 
         $response = $this->actingAs($admin)->patch(route('graze.admin.menu.category.update', $this->category), [
             'name' => 'Gourmet Canapés & Bites',
+            'slug' => 'gourmet-canapes',
             'subtitle' => 'Hand-crafted luxury finger foods for elite events.',
+            'sort_order' => 2,
+            'is_active' => '1',
         ]);
 
         $response->assertRedirect();
 
         $this->category->refresh();
         $this->assertEquals('Gourmet Canapés & Bites', $this->category->name);
+        $this->assertEquals('gourmet-canapes', $this->category->slug);
         $this->assertEquals('Hand-crafted luxury finger foods for elite events.', $this->category->subtitle);
+        $this->assertEquals(2, $this->category->sort_order);
+    }
+
+    public function test_admin_can_delete_empty_category(): void
+    {
+        $admin = User::factory()->create(['is_admin' => true]);
+
+        $newCat = GrazeMenuCategory::create([
+            'name' => 'Temporary Empty Category',
+            'slug' => 'temp-empty',
+            'sort_order' => 99,
+            'is_active' => true,
+        ]);
+
+        $response = $this->actingAs($admin)->delete(route('graze.admin.menu.category.destroy', $newCat));
+
+        $response->assertRedirect(route('graze.admin.menu.index'));
+        $this->assertDatabaseMissing('graze_menu_categories', ['id' => $newCat->id]);
+    }
+
+    public function test_category_with_items_requires_force_to_delete(): void
+    {
+        $admin = User::factory()->create(['is_admin' => true]);
+
+        GrazeMenuItem::create([
+            'category_id' => $this->category->id,
+            'name' => 'Sample Item',
+            'price' => '$3.00',
+            'type' => 'Veg',
+            'is_active' => true,
+        ]);
+
+        // Attempt without force
+        $response = $this->actingAs($admin)->delete(route('graze.admin.menu.category.destroy', $this->category));
+        $response->assertSessionHas('error');
+        $this->assertDatabaseHas('graze_menu_categories', ['id' => $this->category->id]);
+
+        // Attempt with force
+        $responseForce = $this->actingAs($admin)->delete(route('graze.admin.menu.category.destroy', $this->category), [
+            'force' => '1',
+        ]);
+        $responseForce->assertSessionHas('success');
+        $this->assertDatabaseMissing('graze_menu_categories', ['id' => $this->category->id]);
     }
 
     public function test_public_landing_page_receives_database_menu_items(): void

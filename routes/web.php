@@ -85,7 +85,9 @@ Route::prefix('graze-n-gifts/admin')->name('graze.admin.')->group(function () {
         Route::match(['put', 'patch'], '/items/{item}', [GrazeMenuAdminController::class, 'update'])->name('update');
         Route::delete('/items/{item}', [GrazeMenuAdminController::class, 'destroy'])->name('destroy');
         Route::patch('/items/{item}/toggle', [GrazeMenuAdminController::class, 'toggleActive'])->name('toggle');
+        Route::post('/categories', [GrazeMenuAdminController::class, 'storeCategory'])->name('category.store');
         Route::match(['put', 'patch'], '/categories/{category}', [GrazeMenuAdminController::class, 'updateCategory'])->name('category.update');
+        Route::delete('/categories/{category}', [GrazeMenuAdminController::class, 'destroyCategory'])->name('category.destroy');
     });
 });
 
