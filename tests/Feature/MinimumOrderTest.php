@@ -52,6 +52,20 @@ class MinimumOrderTest extends TestCase
         $response->assertSee('btn-qty-step minus-btn', false);
         $response->assertSee('btn-qty-step plus-btn', false);
         $response->assertSee('Quick Add to Reach Rs. 100');
+
+        // Verify sticker-peel-loader is NOT rendered on the cart page
+        $response->assertDontSee('id="sticker-peel-loader"', false);
+    }
+
+    public function test_sticker_peel_loader_is_only_present_on_homepage(): void
+    {
+        $homeResponse = $this->get('/');
+        $homeResponse->assertOk();
+        $homeResponse->assertSee('id="sticker-peel-loader"', false);
+
+        $cartResponse = $this->get(route('cart.index'));
+        $cartResponse->assertOk();
+        $cartResponse->assertDontSee('id="sticker-peel-loader"', false);
     }
 
     public function test_checkout_get_redirects_to_cart_if_under_minimum_order(): void

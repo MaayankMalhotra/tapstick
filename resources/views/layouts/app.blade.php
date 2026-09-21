@@ -99,7 +99,8 @@
 </head>
 <body>
 
-    <!-- 0. CINEMATIC FULL-SCREEN STICKER PEEL PAGE ENTRANCE -->
+    @if(request()->routeIs('home'))
+    <!-- 0. CINEMATIC FULL-SCREEN STICKER PEEL PAGE ENTRANCE (HOMEPAGE ONLY) -->
     <div id="sticker-peel-loader" class="sticker-peel-overlay" aria-hidden="true">
         <div class="peel-loader-center">
             <div class="peel-logo-stamp">
@@ -122,7 +123,7 @@
         <div class="peel-corner-curl"></div>
     </div>
     <script>
-        // Fail-safe: ensure loader peels away cleanly on every page even if external JS is delayed
+        // Fail-safe: ensure loader peels away cleanly on landing page even if external JS is delayed
         setTimeout(function() {
             var loader = document.getElementById('sticker-peel-loader');
             if (loader && !loader.classList.contains('peeling') && !loader.classList.contains('done')) {
@@ -131,6 +132,7 @@
             }
         }, 1800);
     </script>
+    @endif
 
     <!-- TOP ANNOUNCEMENT BAR: MINIMUM ORDER & SHIPPING -->
     <div class="top-announcement-bar" style="background:#FFE600;border-bottom:2px solid var(--color-ink);padding:7px 14px;text-align:center;font-size:0.82rem;font-weight:900;letter-spacing:0.02em;color:var(--color-ink);display:flex;align-items:center;justify-content:center;gap:12px;overflow:hidden;flex-wrap:wrap;">

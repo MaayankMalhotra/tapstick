@@ -86,10 +86,9 @@
     window.addEventListener('keydown', initAudio, { once: true });
 
     // ==========================================================================
-    // 2. STICKER UNIVERSE PAGE TRANSITIONS & ENTRANCE LOADER (EVERY PAGE CHANGE)
+    // 2. STICKER UNIVERSE PAGE ENTRANCE LOADER (LANDING / HOMEPAGE ONLY)
     // ==========================================================================
     const peelLoader = document.getElementById('sticker-peel-loader');
-    const peelTextSpan = document.getElementById('peel-loader-text') || (peelLoader ? peelLoader.querySelector('.peel-loading-chip span') : null);
 
     function runEntrancePeel() {
         if (!peelLoader) return;
@@ -103,7 +102,7 @@
         peelLoader.classList.remove('done');
         peelLoader.style.display = 'flex';
 
-        // Fast, punchy entrance peel-reveal on EVERY page load
+        // Fast, punchy entrance peel-reveal on initial landing page load
         setTimeout(() => {
             peelLoader.classList.add('peeling');
             playPopSound();
@@ -119,111 +118,6 @@
     if (peelLoader) {
         runEntrancePeel();
     }
-
-    // Handle BFCache (browser Back/Forward navigation)
-    window.addEventListener('pageshow', function (e) {
-        if (peelLoader) {
-            runEntrancePeel();
-        }
-    });
-
-    // Page exit transition trigger helper
-    function triggerPageExit(targetUrl, customMessage) {
-        if (!peelLoader || prefersReducedMotion) {
-            if (targetUrl) window.location.href = targetUrl;
-            return;
-        }
-
-        if (peelTextSpan && customMessage) {
-            peelTextSpan.textContent = customMessage;
-        }
-
-        peelLoader.classList.remove('done');
-        peelLoader.classList.remove('peeling');
-        peelLoader.classList.add('page-transition-exit');
-        playPeelSound();
-
-        if (targetUrl) {
-            const safetyTimeout = setTimeout(() => {
-                window.location.href = targetUrl;
-            }, 900);
-
-            setTimeout(() => {
-                clearTimeout(safetyTimeout);
-                window.location.href = targetUrl;
-            }, 260);
-        }
-    }
-
-    // Intercept internal navigation link clicks for animated page transitions
-    document.addEventListener('click', function (e) {
-        const link = e.target.closest('a');
-        if (!link) return;
-
-        // Skip if modifier keys held (Cmd+Click, Ctrl+Click for new tab)
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-
-        const rawHref = link.getAttribute('href');
-        if (!rawHref) return;
-
-        // Skip in-page hash anchors (#shop, #why) on the same current page
-        if (rawHref.startsWith('#')) return;
-
-        // Skip external protocols
-        if (rawHref.startsWith('mailto:') || rawHref.startsWith('tel:') || rawHref.startsWith('javascript:')) return;
-
-        // Skip new tab or file downloads
-        if (link.target === '_blank' || link.hasAttribute('download')) return;
-
-        try {
-            const currentUrl = new URL(window.location.href);
-            const nextUrl = new URL(link.href, window.location.origin);
-
-            // Only animate same origin
-            if (nextUrl.origin !== currentUrl.origin) return;
-
-            // If navigating to the same path & search with a hash (e.g. /#shop while on /)
-            if (nextUrl.pathname === currentUrl.pathname && nextUrl.search === currentUrl.search) {
-                return;
-            }
-
-            // Context-sensitive sticker universe loading text
-            let message = '✦ UNBOXING NEXT DROP ✦';
-            if (nextUrl.pathname.includes('/cart')) {
-                message = '✦ ROLLING TO YOUR CART ✦';
-            } else if (nextUrl.pathname.includes('/checkout')) {
-                message = '✦ SECURING YOUR PACK ✦';
-            } else if (nextUrl.pathname.includes('/products/')) {
-                message = '✦ INSPECTING VINYL DECAL ✦';
-            } else if (nextUrl.pathname === '/') {
-                message = '✦ BACK TO TABSTICK HQ ✦';
-            }
-
-            e.preventDefault();
-            triggerPageExit(nextUrl.href, message);
-        } catch (err) {
-            // Let default browser navigation occur
-        }
-    });
-
-    // Handle form submissions that trigger page change (checkout, cart updates)
-    document.addEventListener('submit', function (e) {
-        const form = e.target;
-        if (!form || form.id === 'lead-capture-form' || form.target === '_blank') return;
-        if (form.classList.contains('pop-add-cart-form')) return; // handled with flying sticker
-
-        if (peelLoader && !prefersReducedMotion && !form.dataset.submitting) {
-            form.dataset.submitting = 'true';
-            let message = '✦ PACKING YOUR DROP ✦';
-            if (form.action && form.action.includes('checkout')) {
-                message = '✦ PROCESSING YOUR ORDER ✦';
-            } else if (form.action && form.action.includes('cart')) {
-                message = '✦ UPDATING STICKER BAG ✦';
-            }
-
-            triggerPageExit(null, message);
-        }
-    });
 
     // ==========================================================================
     // 3. CANVAS CONFETTI & SPARKLE ENGINE
@@ -379,11 +273,8 @@
                 createConfetti(cartRect.left + cartRect.width / 2, cartRect.top + cartRect.height / 2, 20);
 
                 setTimeout(() => {
-                    triggerPageExit(null, '✦ ADDING TO YOUR CART ✦');
-                    setTimeout(() => {
-                        form.submit();
-                    }, 220);
-                }, 150);
+                    form.submit();
+                }, 180);
             }, 500);
         }
     });
