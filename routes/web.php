@@ -56,4 +56,5 @@ Route::post('/maayank/contact', [StoreController::class, 'submitPortfolioContact
 Route::post('/maayank/ai-chat', [StoreController::class, 'portfolioAiChat'])->middleware('throttle:30,1')->name('portfolio.ai-chat');
 Route::redirect('/mayank', '/maayank', 301);
 Route::redirect('/lander', '/');
+Route::get('/gaze-n-gifts', [StoreController::class, 'gazeNGifts'])->name('store.gaze-n-gifts');
 Route::post('/api/github-deploy', [\App\Http\Controllers\DeployWebhookController::class, 'handle'])->name('webhook.github.deploy');

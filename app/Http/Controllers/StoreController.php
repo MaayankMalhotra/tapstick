@@ -39,6 +39,26 @@ class StoreController extends Controller
         return view('store.home', compact('products', 'categories', 'totalProductsCount'));
     }
 
+    public function gazeNGifts(): View
+    {
+        $categories = Category::whereHas('products', function ($q) {
+            $q->where('is_active', true)->where('stock', '>', 0);
+        })->withCount(['products' => function ($q) {
+            $q->where('is_active', true)->where('stock', '>', 0);
+        }])->orderBy('name')->get();
+
+        $totalProductsCount = Product::where('is_active', true)->where('stock', '>', 0)->count();
+
+        $products = Product::with('category:id,name,slug')
+            ->where('is_active', true)
+            ->where('stock', '>', 0)
+            ->latest()
+            ->take(24)
+            ->get();
+
+        return view('store.gaze-n-gifts', compact('products', 'categories', 'totalProductsCount'));
+    }
+
     public function apiProducts(Request $request): JsonResponse
     {
         $categorySlug = $request->query('category', 'all');
