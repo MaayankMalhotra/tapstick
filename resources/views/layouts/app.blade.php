@@ -87,6 +87,7 @@
     </script>
 
     @stack('schema')
+    @yield('head_scripts')
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -149,11 +150,11 @@
             </div>
 
             <nav class="main-nav">
-                <a href="{{ route('home') }}#shop" class="nav-item">Stickers &amp; Decals</a>
+                <a href="{{ route('category.index') }}" class="nav-item">Collections ⚡</a>
+                <a href="{{ route('home') }}#shop" class="nav-item">All Stickers</a>
                 <a href="{{ route('home') }}#why" class="nav-item">Why We Stick</a>
                 <a href="{{ route('home') }}#club" class="nav-item club-pill">The Club ✦</a>
                 <a href="{{ route('home') }}#reviews" class="nav-item">Reviews</a>
-                <a href="{{ route('home') }}#gallery" class="nav-item">Gallery</a>
                 <a href="{{ route('home') }}#author" class="nav-item">Our Story</a>
             </nav>
 
@@ -218,7 +219,15 @@
             <button type="button" class="btn-close-mobile-drawer" id="btn-close-mobile-menu" aria-label="Close menu">&times;</button>
         </div>
         <div class="mobile-drawer-links">
-            <a href="{{ route('home') }}#shop" class="mobile-drawer-card card-yellow">
+            <a href="{{ route('category.index') }}" class="mobile-drawer-card card-yellow">
+                <span class="drawer-card-emoji">⚡</span>
+                <div>
+                    <strong>Sticker Collections</strong>
+                    <small>Anime, Cars, Laptop, Memes &amp; More</small>
+                </div>
+                <span class="drawer-arrow">➔</span>
+            </a>
+            <a href="{{ route('home') }}#shop" class="mobile-drawer-card card-blue">
                 <span class="drawer-card-emoji">🛍️</span>
                 <div>
                     <strong>Shop The Drop</strong>
@@ -354,12 +363,13 @@
                 <div class="footer-col">
                     <h4>Collections</h4>
                     <ul>
-                        <li><a href="{{ route('home') }}#shop">Bestseller Stickers</a></li>
-                        <li><a href="{{ route('home') }}#laptop-stickers">Laptop &amp; Mac Decals</a></li>
-                        <li><a href="{{ route('home') }}#car-stickers">Car &amp; Moto Stickers</a></li>
-                        <li><a href="{{ route('home') }}#phone-stickers">Phone Case Stickers</a></li>
-                        <li><a href="{{ route('home') }}#college-stickers">College Student Stickers</a></li>
-                        <li><a href="{{ route('home') }}#custom-stickers">Custom Stickers in India</a></li>
+                        <li><a href="{{ route('category.index') }}">All Collections Hub</a></li>
+                        <li><a href="{{ route('category.show', 'anime') }}">Anime &amp; Manga Decals</a></li>
+                        <li><a href="{{ route('category.show', 'cars-bikes') }}">Car &amp; Moto Stickers</a></li>
+                        <li><a href="{{ route('category.show', 'memes') }}">Desi Pop &amp; Meme Drops</a></li>
+                        <li><a href="{{ route('category.show', 'glitter-holo') }}">Holographic &amp; Glitter</a></li>
+                        <li><a href="{{ route('category.show', 'laptop-stickers') }}">Laptop &amp; MacBook Decals</a></li>
+                        <li><a href="{{ route('category.show', 'custom-stickers') }}">Custom Stickers in India</a></li>
                     </ul>
                 </div>
 

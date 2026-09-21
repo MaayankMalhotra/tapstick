@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Allow: /categories
+Allow: /category/
+Allow: /feed/
 Allow: /products/
 Allow: /images/
 Allow: /storage/

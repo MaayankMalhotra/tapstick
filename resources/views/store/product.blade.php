@@ -14,7 +14,7 @@
             </li>
             <li style="color:var(--color-ink-muted);">/</li>
             <li>
-                <a href="{{ url('/#shop') }}" style="color:var(--color-ink-muted);text-decoration:none;">{{ $product->category?->name ?? 'Stickers' }}</a>
+                <a href="{{ route('category.show', $product->category?->slug ?? 'stickers') }}" style="color:var(--color-ink-muted);text-decoration:none;">{{ $product->category?->name ?? 'Stickers' }}</a>
             </li>
             <li style="color:var(--color-ink-muted);">/</li>
             <li style="color:var(--color-ink);font-weight:900;" aria-current="page">
@@ -129,7 +129,7 @@
             "@type": "ListItem",
             "position": 2,
             "name": "{{ addslashes($product->category?->name ?? 'Stickers') }}",
-            "item": "{{ url('/#shop') }}"
+            "item": "{{ route('category.show', $product->category?->slug ?? 'stickers') }}"
         },
         {
             "@type": "ListItem",

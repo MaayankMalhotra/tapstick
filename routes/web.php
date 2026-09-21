@@ -41,6 +41,11 @@ Route::post('/api/create-order', [CheckoutController::class, 'createRazorpayOrde
 Route::post('/api/verify-payment', [CheckoutController::class, 'verifyRazorpayPayment'])->middleware('throttle:10,1')->name('api.razorpay.verify');
 Route::post('/club/join', [\App\Http\Controllers\LeadController::class, 'capture'])->name('lead.capture');
 Route::get('/orders/{order:order_number}/success', [CheckoutController::class, 'success'])->name('orders.success');
+Route::get('/categories', [StoreController::class, 'categories'])->name('category.index');
+Route::get('/category/{slug}', [StoreController::class, 'category'])->name('category.show');
+Route::get('/collection/{slug}', fn($slug) => redirect()->route('category.show', $slug, 301));
+Route::get('/feed/google-shopping.xml', [\App\Http\Controllers\FeedController::class, 'googleShopping'])->name('feed.google-shopping');
+Route::get('/feed/google-merchant.xml', [\App\Http\Controllers\FeedController::class, 'googleShopping']);
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
 Route::redirect('/lander', '/');
 Route::post('/api/github-deploy', [\App\Http\Controllers\DeployWebhookController::class, 'handle'])->name('webhook.github.deploy');

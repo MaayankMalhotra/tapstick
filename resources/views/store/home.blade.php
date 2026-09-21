@@ -404,8 +404,8 @@
                         <span class="seo-cat-chip">🔥 Heat Resistant</span>
                         <span class="seo-cat-chip">✨ Matte Lamination</span>
                     </div>
-                    <a href="#shop" class="seo-cat-btn" onclick="if(window.filterBySearch){window.filterBySearch('laptop');} return false;">
-                        <span>Shop Laptop Stickers →</span>
+                    <a href="{{ route('category.show', 'laptop-stickers') }}" class="seo-cat-btn">
+                        <span>Explore Laptop Stickers →</span>
                     </a>
                 </div>
             </div>
@@ -425,8 +425,8 @@
                         <span class="seo-cat-chip">☀️ UV Sunlight Safe</span>
                         <span class="seo-cat-chip">🏍️ Moto &amp; Auto Grade</span>
                     </div>
-                    <a href="#shop" class="seo-cat-btn" onclick="if(window.filterBySearch){window.filterBySearch('car');} return false;">
-                        <span>Shop Car Stickers →</span>
+                    <a href="{{ route('category.show', 'car-stickers') }}" class="seo-cat-btn">
+                        <span>Explore Car Stickers →</span>
                     </a>
                 </div>
             </div>
@@ -446,8 +446,8 @@
                         <span class="seo-cat-chip">👌 Easy Peel</span>
                         <span class="seo-cat-chip">⚡ Pocket Proof</span>
                     </div>
-                    <a href="#shop" class="seo-cat-btn" onclick="if(window.filterBySearch){window.filterBySearch('phone');} return false;">
-                        <span>Shop Phone Stickers →</span>
+                    <a href="{{ route('category.show', 'phone-stickers') }}" class="seo-cat-btn">
+                        <span>Explore Phone Stickers →</span>
                     </a>
                 </div>
             </div>
@@ -467,8 +467,8 @@
                         <span class="seo-cat-chip">💧 Bottle &amp; Flask Safe</span>
                         <span class="seo-cat-chip">💸 Affordable Packs</span>
                     </div>
-                    <a href="#shop" class="seo-cat-btn" onclick="if(window.filterBySearch){window.filterBySearch('meme');} return false;">
-                        <span>Shop Student Drops →</span>
+                    <a href="{{ route('category.show', 'college-stickers') }}" class="seo-cat-btn">
+                        <span>Explore Student Drops →</span>
                     </a>
                 </div>
             </div>
@@ -491,9 +491,14 @@
                     <p style="font-size: 0.92rem; color: #18181B; font-weight: 700; margin: 0;">
                         Ready to print your artwork or startup swag?
                     </p>
-                    <a href="mailto:hello@tabstick.in?subject=Custom%20Sticker%20Order%20Inquiry%20-%20Tabstick" class="seo-cat-btn">
-                        <span>Request Custom Quote (hello@tabstick.in) ✉️</span>
-                    </a>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="{{ route('category.show', 'custom-stickers') }}" class="seo-cat-btn">
+                            <span>Explore Custom Specs →</span>
+                        </a>
+                        <a href="mailto:hello@tabstick.in?subject=Custom%20Sticker%20Order%20Inquiry%20-%20Tabstick" class="seo-cat-btn" style="background:#FFFFFF;">
+                            <span>Email Quote Request ✉️</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

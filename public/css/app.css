@@ -5388,3 +5388,88 @@ button {
 }
 
 
+
+/* ==========================================================================
+   CATEGORY & COLLECTION PAGE STYLES
+   ========================================================================== */
+.category-hero-section {
+  padding: 40px 0 32px;
+  background: radial-gradient(circle at 50% 20%, rgba(255, 230, 0, 0.15) 0%, transparent 70%);
+}
+
+.category-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+
+.category-hero-desc {
+  font-size: 1.1rem;
+  color: var(--color-ink-muted);
+  max-width: 720px;
+  margin: 0 auto 20px;
+  line-height: 1.5;
+}
+
+.category-stats-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #FFFFFF;
+  border: var(--border-pop);
+  border-radius: var(--radius-pill);
+  padding: 8px 18px;
+  box-shadow: var(--shadow-pop-sm);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--color-ink);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.category-pagination-wrap nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.category-pagination-wrap .pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 6px;
+  align-items: center;
+}
+
+.category-pagination-wrap .page-item .page-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 14px;
+  border: 2px solid var(--color-ink);
+  border-radius: 10px;
+  background: #FFFFFF;
+  color: var(--color-ink);
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 2px 2px 0 var(--color-ink);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.category-pagination-wrap .page-item.active .page-link {
+  background: var(--color-pop-yellow);
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+.category-pagination-wrap .page-item .page-link:hover {
+  background: var(--color-pop-pink);
+  transform: translate(-1px, -1px);
+}

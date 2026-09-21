@@ -39,6 +39,38 @@ class SitemapController extends Controller
         $xml .= "    <priority>1.0</priority>\n";
         $xml .= "  </url>\n";
 
+        // Collections Directory Hub
+        $xml .= "  <url>\n";
+        $xml .= "    <loc>{$baseUrl}/categories</loc>\n";
+        $xml .= "    <lastmod>{$now}</lastmod>\n";
+        $xml .= "    <changefreq>weekly</changefreq>\n";
+        $xml .= "    <priority>0.9</priority>\n";
+        $xml .= "  </url>\n";
+
+        // Database Category Collections
+        foreach ($categories as $category) {
+            $catLoc = htmlspecialchars("{$baseUrl}/category/" . $category->slug, ENT_XML1, 'UTF-8');
+            $catLastMod = $category->updated_at ? $category->updated_at->toAtomString() : $now;
+            $xml .= "  <url>\n";
+            $xml .= "    <loc>{$catLoc}</loc>\n";
+            $xml .= "    <lastmod>{$catLastMod}</lastmod>\n";
+            $xml .= "    <changefreq>weekly</changefreq>\n";
+            $xml .= "    <priority>0.9</priority>\n";
+            $xml .= "  </url>\n";
+        }
+
+        // Curated High-Intent Collections
+        $curatedSlugs = ['laptop-stickers', 'car-stickers', 'phone-stickers', 'college-stickers', 'custom-stickers'];
+        foreach ($curatedSlugs as $cSlug) {
+            $curLoc = htmlspecialchars("{$baseUrl}/category/{$cSlug}", ENT_XML1, 'UTF-8');
+            $xml .= "  <url>\n";
+            $xml .= "    <loc>{$curLoc}</loc>\n";
+            $xml .= "    <lastmod>{$now}</lastmod>\n";
+            $xml .= "    <changefreq>weekly</changefreq>\n";
+            $xml .= "    <priority>0.9</priority>\n";
+            $xml .= "  </url>\n";
+        }
+
         // Active Product URLs with Image Sitemap
         foreach ($products as $product) {
             $prodLoc = htmlspecialchars("{$baseUrl}/products/" . $product->slug, ENT_XML1, 'UTF-8');
