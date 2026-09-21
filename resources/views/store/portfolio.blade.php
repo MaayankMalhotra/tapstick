@@ -560,7 +560,7 @@
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
             gap: 20px;
         }
 
@@ -673,7 +673,7 @@
            ========================================================================== */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
             gap: 24px;
         }
 
@@ -1369,11 +1369,13 @@
             text-align: center;
         }
 
-        /* Responsive Breakpoints */
+        /* ==========================================================================
+           RESPONSIVE BREAKPOINTS & MOBILE-FIRST OPTIMIZATION
+           ========================================================================== */
         @media (max-width: 900px) {
             .hero-grid {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 36px;
             }
             .metrics-strip {
                 grid-template-columns: repeat(2, 1fr);
@@ -1383,21 +1385,166 @@
             }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 16px !important;
+            }
+            .dev-navbar {
+                padding: 12px 0;
+            }
+            .btn-nav-secondary {
+                display: none;
+            }
+            .btn-nav-primary {
+                padding: 7px 14px;
+                font-size: 0.82rem;
+            }
             .hero-section {
-                padding: 60px 0 50px;
+                padding: 40px 0 35px;
             }
             .hero-title {
-                font-size: 2.2rem;
+                font-size: 2.1rem;
+                letter-spacing: -0.02em;
+            }
+            .hero-subtitle {
+                font-size: 1rem;
+                margin-bottom: 24px;
             }
             .metrics-strip {
                 grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                padding: 14px;
+                margin-bottom: 24px;
+            }
+            .metric-value {
+                font-size: 1.35rem;
+            }
+            .metric-title {
+                font-size: 0.68rem;
+            }
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+            .hero-actions a,
+            .hero-actions button {
+                width: 100%;
+                justify-content: center;
+                text-align: center;
+                padding: 12px 18px;
+            }
+            .terminal-window {
+                margin-top: 10px;
+            }
+            .terminal-body {
+                padding: 14px;
+                font-size: 0.78rem;
+            }
+            .section-wrap {
+                padding: 48px 0;
+            }
+            .section-header {
+                margin-bottom: 28px;
+            }
+            .section-title {
+                font-size: 1.65rem;
+            }
+            .section-lead {
+                font-size: 0.92rem;
+            }
+            .skills-filter-nav {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 8px;
+                margin-bottom: 20px;
+                gap: 8px;
+            }
+            .skill-filter-btn {
+                white-space: nowrap;
+                flex-shrink: 0;
+                padding: 7px 14px;
+                font-size: 0.8rem;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .skill-card {
+                padding: 18px 16px;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .project-card {
+                padding: 20px 16px;
             }
             .timeline-container {
-                padding-left: 24px;
+                padding-left: 18px;
+                border-left-width: 2px;
             }
             .timeline-point {
-                left: -32px;
+                left: -25px;
+                width: 12px;
+                height: 12px;
+            }
+            .timeline-content {
+                padding: 18px 16px;
+            }
+            .contact-methods {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .contact-form-card {
+                padding: 22px 16px;
+            }
+            .form-input, .form-select, .form-textarea {
+                font-size: 16px !important;
+            }
+            .form-topic-chips {
+                gap: 6px;
+            }
+            .form-topic-chip {
+                font-size: 0.74rem;
+                padding: 5px 10px;
+            }
+            .resume-download-banner {
+                padding: 20px 16px;
+            }
+            .connect-modal-backdrop {
+                padding: 12px;
+                align-items: center;
+            }
+            .connect-modal-card {
+                padding: 24px 18px 20px !important;
+                border-radius: 18px !important;
+                max-height: 90vh !important;
+                overflow-y: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+                width: 100% !important;
+            }
+            .modal-title {
+                font-size: 1.2rem !important;
+            }
+            .modal-subtitle {
+                font-size: 0.82rem !important;
+                margin-bottom: 14px !important;
+            }
+            .modal-close-btn {
+                top: 14px !important;
+                right: 14px !important;
+                width: 36px !important;
+                height: 36px !important;
+            }
+            .modal-direct-row {
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 10px !important;
+            }
+            .modal-skip-btn {
+                padding: 6px 0 !important;
             }
         }
 
@@ -1646,19 +1793,59 @@
 
         @media (max-width: 640px) {
             .ai-launcher-btn {
-                bottom: 16px;
-                right: 16px;
-                padding: 10px 14px;
-                font-size: 0.8rem;
+                bottom: 16px !important;
+                right: 14px !important;
+                padding: 10px 14px !important;
+                font-size: 0.8rem !important;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 18px rgba(124, 58, 237, 0.45) !important;
             }
             .ai-chat-card {
-                bottom: 74px;
-                right: 12px;
-                left: 12px;
-                width: auto;
-                max-width: calc(100vw - 24px);
-                height: 75vh;
-                max-height: 520px;
+                bottom: 0 !important;
+                right: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                max-width: 100vw !important;
+                height: 84vh !important;
+                max-height: 84vh !important;
+                border-radius: 22px 22px 0 0 !important;
+                border-bottom: none !important;
+                border-left: none !important;
+                border-right: none !important;
+                box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.85), 0 0 35px rgba(6, 182, 212, 0.3) !important;
+                transform: translateY(100%) scale(1) !important;
+            }
+            .ai-chat-card.open {
+                transform: translateY(0) scale(1) !important;
+            }
+            .ai-chat-header {
+                padding: 12px 16px !important;
+            }
+            .ai-chat-chips {
+                padding: 8px 12px !important;
+                gap: 6px !important;
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+                flex-wrap: nowrap !important;
+            }
+            .ai-chip {
+                flex-shrink: 0 !important;
+                white-space: nowrap !important;
+                padding: 5px 10px !important;
+                font-size: 0.74rem !important;
+            }
+            .ai-chat-messages {
+                padding: 12px 14px !important;
+            }
+            .ai-message-bubble {
+                font-size: 0.84rem !important;
+                padding: 10px 14px !important;
+            }
+            .ai-chat-input-container {
+                padding: 10px 12px !important;
+            }
+            .ai-chat-input {
+                font-size: 16px !important;
+                padding: 10px 12px !important;
             }
         }
 
