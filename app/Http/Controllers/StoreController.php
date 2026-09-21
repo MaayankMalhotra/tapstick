@@ -407,5 +407,10 @@ class StoreController extends Controller
             'description' => "Explore {$category->name} stickers crafted with automotive-grade vinyl and vibrant inks. Perfect for laptops, bikes, and personal gear.",
         ];
     }
+
+    public function portfolio(): View
+    {
+        return view('store.portfolio');
+    }
 }
 

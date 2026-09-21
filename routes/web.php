@@ -47,5 +47,7 @@ Route::get('/collection/{slug}', fn($slug) => redirect()->route('category.show',
 Route::get('/feed/google-shopping.xml', [\App\Http\Controllers\FeedController::class, 'googleShopping'])->name('feed.google-shopping');
 Route::get('/feed/google-merchant.xml', [\App\Http\Controllers\FeedController::class, 'googleShopping']);
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
+Route::get('/maayank', [StoreController::class, 'portfolio'])->name('portfolio');
+Route::redirect('/mayank', '/maayank', 301);
 Route::redirect('/lander', '/');
 Route::post('/api/github-deploy', [\App\Http\Controllers\DeployWebhookController::class, 'handle'])->name('webhook.github.deploy');

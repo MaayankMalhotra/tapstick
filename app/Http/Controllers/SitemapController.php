@@ -71,6 +71,14 @@ class SitemapController extends Controller
             $xml .= "  </url>\n";
         }
 
+        // Founder & Engineer Portfolio
+        $xml .= "  <url>\n";
+        $xml .= "    <loc>{$baseUrl}/maayank</loc>\n";
+        $xml .= "    <lastmod>{$now}</lastmod>\n";
+        $xml .= "    <changefreq>monthly</changefreq>\n";
+        $xml .= "    <priority>0.9</priority>\n";
+        $xml .= "  </url>\n";
+
         // Active Product URLs with Image Sitemap
         foreach ($products as $product) {
             $prodLoc = htmlspecialchars("{$baseUrl}/products/" . $product->slug, ENT_XML1, 'UTF-8');

@@ -52,7 +52,9 @@
         "founder": {
             "@type": "Person",
             "name": "Mayank Malhotra",
+            "alternateName": "Maayank Malhotra",
             "jobTitle": "Founder",
+            "url": "https://tabstick.in/maayank",
             "sameAs": "https://www.linkedin.com/in/maayank-malhotra-a59a55186/"
         },
         "sameAs": [
@@ -398,6 +400,7 @@
                         <li><a href="{{ route('home') }}#why">48-Hour Dispatch Guarantee</a></li>
                         <li><a href="{{ route('home') }}#why">100% Waterproof Guarantee</a></li>
                         <li><a href="{{ route('cart.index') }}">Review Your Cart</a></li>
+                        <li><a href="{{ route('portfolio') }}">Founder &amp; Engineering (Maayank Malhotra)</a></li>
                         <li><a href="{{ route('admin.dashboard') }}">Staff Admin Portal</a></li>
                     </ul>
                 </div>
@@ -431,7 +434,7 @@
             </div>
 
             <div class="footer-bottom">
-                <p>© {{ date('Y') }} TABSTICK. Designed &amp; Crafted with ❤️ in India. All stickers 100% waterproof automotive-grade vinyl.</p>
+                <p>© {{ date('Y') }} TABSTICK. Founded by <a href="{{ route('portfolio') }}" style="color:inherit;font-weight:800;text-decoration:underline;">Maayank Malhotra</a>. Designed &amp; Crafted with ❤️ in India. All stickers 100% waterproof automotive-grade vinyl.</p>
                 <div class="footer-payment-pills">
                     <span class="payment-pill">⚡ UPI / QR</span>
                     <span class="payment-pill">💳 Cards &amp; NetBanking</span>
