@@ -584,6 +584,10 @@
     padding: 0 14px 10px;
 }
 
+.sticker-ai-typing.hidden {
+    display: none !important;
+}
+
 .typing-bubble {
     display: inline-flex;
     align-items: center;
@@ -695,6 +699,14 @@
     let chatHistory = [];
     let isSending = false;
 
+    function showTyping() {
+        typingEl?.classList.remove('hidden');
+    }
+
+    function hideTyping() {
+        typingEl?.classList.add('hidden');
+    }
+
     // Toggle Chat Window
     function toggleChat(open) {
         const isHidden = windowEl.classList.contains('hidden');
@@ -708,6 +720,7 @@
         } else {
             windowEl.classList.add('hidden');
             launcher.classList.remove('hidden');
+            hideTyping();
         }
     }
 
@@ -717,6 +730,8 @@
     // Reset Chat
     resetBtn.addEventListener('click', () => {
         chatHistory = [];
+        hideTyping();
+        isSending = false;
         messagesEl.innerHTML = `
             <div class="ai-msg-row assistant-row">
                 <div class="ai-msg-avatar">⚡</div>
@@ -839,7 +854,7 @@
         chatHistory.push({ role: 'user', content: text });
 
         // Show typing indicator
-        typingEl.classList.remove('hidden');
+        showTyping();
         scrollToBottom();
 
         try {
@@ -858,7 +873,7 @@
             });
 
             const data = await res.json();
-            typingEl.classList.add('hidden');
+            hideTyping();
 
             if (data.success && data.reply) {
                 appendMessage('assistant', data.reply, data.products || []);
@@ -868,9 +883,10 @@
             }
         } catch (err) {
             console.error('StickerAI Chat Error:', err);
-            typingEl.classList.add('hidden');
+            hideTyping();
             appendMessage('assistant', "I'm having trouble reaching the server right now. Feel free to browse our 4,479 stickers above!");
         } finally {
+            hideTyping();
             isSending = false;
             scrollToBottom();
         }
