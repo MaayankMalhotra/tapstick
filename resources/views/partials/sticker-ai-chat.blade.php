@@ -95,8 +95,8 @@
    ========================================================================== */
 .sticker-ai-container {
     position: fixed;
-    bottom: 24px;
-    right: 24px;
+    bottom: 18px;
+    right: 18px;
     z-index: 99999;
     font-family: 'Cabinet Grotesk', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
@@ -113,13 +113,13 @@
     position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 9px;
     background: #FFE600;
     color: #111111;
     border: 2.5px solid #111111;
-    box-shadow: 4px 4px 0px #111111;
+    box-shadow: 3px 3px 0px #111111;
     border-radius: 9999px;
-    padding: 10px 18px;
+    padding: 9px 15px;
     cursor: pointer;
     transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.15s ease;
     user-select: none;
@@ -142,8 +142,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     background: #FFFFFF;
     border: 2px solid #111111;
     border-radius: 50%;
@@ -173,7 +173,7 @@
 }
 
 .launcher-title {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 900;
     letter-spacing: 0.05em;
     color: #111111;
@@ -208,15 +208,15 @@
 /* Chat Window */
 .sticker-ai-window {
     position: fixed;
-    bottom: 92px;
-    right: 24px;
-    width: 380px;
+    bottom: 82px;
+    right: 18px;
+    width: 360px;
     max-width: calc(100vw - 32px);
-    height: 560px;
-    max-height: calc(100vh - 120px);
+    height: 520px;
+    max-height: calc(100vh - 104px);
     background: #FAF8F5;
     border: 2.5px solid #111111;
-    box-shadow: 6px 6px 0px #111111;
+    box-shadow: 5px 5px 0px #111111;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
