@@ -7,6 +7,7 @@ use App\Mail\OrderConfirmationMail;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\StockMovement;
+use App\Services\FulfillmentService;
 use App\Services\RazorpayGateway;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -92,6 +93,7 @@ class CheckoutController extends Controller
         if ($order->payment_method === 'cod') {
             $request->session()->forget('cart');
             $this->sendOrderEmails($order);
+            app(FulfillmentService::class)->createForOrder($order);
             return redirect()->route('orders.success', $order);
         }
         return view('store.payment', compact('order'));
@@ -167,7 +169,13 @@ class CheckoutController extends Controller
         }
         $data = $validator->validated();
         $order = Order::where('razorpay_order_id', $data['razorpay_order_id'])->first();
-        if (! $order || $order->payment_method !== 'razorpay' || $order->payment_status !== 'pending') {
+        if (! $order || $order->payment_method !== 'razorpay') {
+            return response()->json(['message' => 'Payment order mismatch.'], 400);
+        }
+        if ($order->payment_status === 'paid' && $order->razorpay_payment_id === $data['razorpay_payment_id']) {
+            return response()->json(['success' => true, 'redirect_url' => route('orders.success', $order)]);
+        }
+        if ($order->payment_status !== 'pending') {
             return response()->json(['message' => 'Payment order mismatch.'], 400);
         }
         $expected = hash_hmac('sha256', $order->razorpay_order_id.'|'.$data['razorpay_payment_id'], config('services.razorpay.secret'));
@@ -181,6 +189,7 @@ class CheckoutController extends Controller
         ]);
         $request->session()->forget('cart');
         $this->sendOrderEmails($order);
+        app(FulfillmentService::class)->createForOrder($order);
 
         return response()->json(['success' => true, 'redirect_url' => route('orders.success', $order)]);
     }
