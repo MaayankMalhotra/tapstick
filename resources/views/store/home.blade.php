@@ -89,83 +89,41 @@
             </div>
         </div>
 
-        <!-- Right Column: 3D Interactive Sticker Pile & Rotating Sunburst Badge -->
+        <!-- Right Column: Premium Sticker Showcase -->
         <div class="hero-pop-visual-col">
-            <!-- Animated Rotating Sunburst Badge: “STICK WITH IT” -->
-            <div class="hero-sunburst-badge-wrap" data-parallax-depth="1.6" data-base-rotate="0">
-                <div class="sunburst-badge-rotator">
-                    <svg class="sunburst-svg" viewBox="0 0 160 160">
-                        <defs>
-                            <path id="sunburstPath" d="M 80, 80 m -56, 0 a 56,56 0 1,1 112,0 a 56,56 0 1,1 -112,0" />
-                        </defs>
-                        <!-- Sunburst Rays Background -->
-                        <g class="sunburst-rays" fill="#FFE600" stroke="#18181B" stroke-width="2.5">
-                            <circle cx="80" cy="80" r="74" fill="#FFE600" />
-                            <polygon points="80,4 86,16 98,10 100,24 114,22 112,36 126,38 120,52 134,58 124,70 136,80 124,90 134,102 120,108 126,122 112,124 114,138 100,136 98,150 86,144 80,156 74,144 62,150 60,136 46,138 48,124 34,122 40,108 26,102 36,90 24,80 36,70 26,58 40,52 34,38 48,36 46,22 60,24 62,10 74,16" />
-                        </g>
-                        <circle cx="80" cy="80" r="54" fill="#18181B" />
-                        <!-- Rotating Circular Text -->
-                        <text font-family="sans-serif" font-size="11" font-weight="900" fill="#FFFFFF" letter-spacing="2.5">
-                            <textPath href="#sunburstPath" startOffset="0%">
-                                ✦ STICK WITH IT ✦ TABSTICK ✦ POP ✦
-                            </textPath>
-                        </text>
-                        <circle cx="80" cy="80" r="24" fill="#FF334B" stroke="#FFFFFF" stroke-width="2"/>
-                        <text x="80" y="85" text-anchor="middle" font-size="16" font-family="sans-serif">⚡</text>
-                    </svg>
-                </div>
-            </div>
-
-            <!-- 3D Layered Sticker Composition with Tilt & Physics -->
-            <div class="hero-sticker-stage">
-                <!-- Center Stage Collector Base Card -->
-                <div class="stage-base-card" data-parallax-depth="0.4" data-base-rotate="-2">
-                    <div class="base-card-inner">
-                        <div class="base-card-header">
-                            <span class="base-dot red"></span>
-                            <span class="base-dot yellow"></span>
-                            <span class="base-dot green"></span>
-                            <span class="base-card-tag">TABSTICK COLLECTOR PACK • 2026</span>
-                        </div>
-                        <div class="base-card-main-visual">
-                            <img src="{{ asset('images/hero-banner.webp') }}" alt="Tabstick Vinyl Sticker Showcase" class="hero-main-featured-img">
-                            <div class="base-card-gloss-sheen"></div>
-                        </div>
+            <div class="hero-showcase-wrap" data-parallax-depth="0.35" data-base-rotate="-1">
+                <div class="hero-showcase-shell">
+                    <div class="hero-showcase-topline">
+                        <span>Collector Preview</span>
+                        <strong>4.5K+ Designs</strong>
+                    </div>
+                    <div class="hero-showcase-media">
+                        <img src="{{ asset('images/hero-banner.webp') }}" alt="Tabstick stickers on laptop, bottle and desk" class="hero-showcase-img">
+                    </div>
+                    <div class="hero-showcase-stats">
+                        <span><strong>₹10+</strong> starter drops</span>
+                        <span><strong>₹499</strong> free shipping</span>
+                        <span><strong>48h</strong> dispatch</span>
                     </div>
                 </div>
 
-                <!-- Floating Physical Sticker Layers (Authentic Visuals) -->
-                <div class="interactive-sticker-layer sticker-pop-1" data-parallax-depth="1.5" data-base-rotate="-12" title="Wasted Vinyl Decal">
-                    <div class="die-cut-sticker-wrap">
-                        <img src="{{ asset('images/wasted.jpg') }}" alt="Wasted Sticker">
-                        <span class="sticker-tag-badge badge-yellow">⭐ BESTSELLER</span>
-                        <div class="pop-card-peel-corner"></div>
-                    </div>
+                <div class="hero-mini-sticker hero-mini-sticker-one" data-parallax-depth="1.1" data-base-rotate="-10">
+                    <img src="{{ asset('images/wasted.jpg') }}" alt="Wasted sticker">
+                    <span>Bestseller</span>
                 </div>
 
-                <div class="interactive-sticker-layer sticker-pop-2" data-parallax-depth="1.8" data-base-rotate="14" title="Ah Shit Here We Go Again">
-                    <div class="die-cut-sticker-wrap">
-                        <img src="{{ asset('images/ah-shit.jpg') }}" alt="Ah Shit Here We Go Again">
-                        <span class="sticker-tag-badge badge-blue">👑 MEME DROP</span>
-                        <div class="pop-card-peel-corner"></div>
-                    </div>
+                <div class="hero-mini-sticker hero-mini-sticker-two" data-parallax-depth="1.35" data-base-rotate="9">
+                    <img src="{{ asset('images/fizzy-zero.jpg') }}" alt="Fizzy Zero sticker">
+                    <span>Pop Drop</span>
                 </div>
 
-                <div class="interactive-sticker-layer sticker-pop-3" data-parallax-depth="1.2" data-base-rotate="-6" title="Limited Edition Drop">
-                    <div class="die-cut-sticker-wrap">
-                        <img src="{{ asset('images/limited-edition.jpg') }}" alt="Limited Edition Sticker">
-                        <span class="sticker-tag-badge badge-red">🔥 DROP 04</span>
-                        <div class="pop-card-peel-corner"></div>
-                    </div>
+                <div class="hero-quality-stack">
+                    <span>💧 Waterproof</span>
+                    <span>✨ Zero residue</span>
+                    <span>🛡️ UV safe</span>
                 </div>
 
-                <div class="interactive-sticker-layer sticker-pop-4" data-parallax-depth="2.1" data-base-rotate="18" title="Fizzy Zero Pop Sticker">
-                    <div class="die-cut-sticker-wrap">
-                        <img src="{{ asset('images/fizzy-zero.jpg') }}" alt="Fizzy Zero Sticker">
-                        <span class="sticker-tag-badge badge-green">⚡ POP ART</span>
-                        <div class="pop-card-peel-corner"></div>
-                    </div>
-                </div>
+                <div class="hero-showcase-shadow" aria-hidden="true"></div>
             </div>
         </div>
     </div>

@@ -5818,3 +5818,278 @@ button {
     gap: 34px;
   }
 }
+
+/* ==========================================================================
+   16. PREMIUM HERO SHOWCASE
+   Replaces the cluttered sticker pile with a focused product-led visual.
+   ========================================================================== */
+.hero-showcase-wrap {
+  position: relative;
+  width: min(100%, 560px);
+  margin: 0 auto;
+  padding: 42px 38px 44px;
+  isolation: isolate;
+}
+
+.hero-showcase-shell {
+  position: relative;
+  z-index: 2;
+  background: #FFFFFF;
+  border: var(--border-pop-thick);
+  border-radius: 26px;
+  box-shadow: 10px 10px 0 var(--color-ink);
+  overflow: hidden;
+  transform: rotate(-1.5deg);
+}
+
+.hero-showcase-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 13px 18px;
+  background: var(--color-bg-cream-soft);
+  border-bottom: 2.5px solid var(--color-ink);
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-ink-muted);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.hero-showcase-topline strong {
+  color: var(--color-ink);
+  background: var(--color-pop-yellow);
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-pill);
+  padding: 3px 10px;
+  box-shadow: 1.5px 1.5px 0 var(--color-ink);
+  white-space: nowrap;
+}
+
+.hero-showcase-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--color-ink);
+}
+
+.hero-showcase-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 38%),
+    radial-gradient(circle at 20% 15%, rgba(255, 230, 0, 0.2), transparent 30%);
+}
+
+.hero-showcase-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-showcase-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  background: #FFFFFF;
+  border-top: 2.5px solid var(--color-ink);
+}
+
+.hero-showcase-stats span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px;
+  border-right: 2px solid var(--color-ink);
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: var(--color-ink-muted);
+  line-height: 1.2;
+}
+
+.hero-showcase-stats span:last-child {
+  border-right: 0;
+}
+
+.hero-showcase-stats strong {
+  font-family: var(--font-heading);
+  font-size: 1.08rem;
+  color: var(--color-ink);
+  line-height: 1;
+}
+
+.hero-mini-sticker {
+  position: absolute;
+  z-index: 4;
+  background: #FFFFFF;
+  border: var(--border-pop);
+  border-radius: 18px;
+  box-shadow: 5px 5px 0 var(--color-ink);
+  padding: 7px;
+  width: 124px;
+}
+
+.hero-mini-sticker img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+.hero-mini-sticker span {
+  position: absolute;
+  left: 50%;
+  bottom: -12px;
+  transform: translateX(-50%) rotate(-3deg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: max-content;
+  background: var(--color-pop-yellow);
+  color: var(--color-ink);
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-pill);
+  box-shadow: 2px 2px 0 var(--color-ink);
+  padding: 3px 10px;
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.hero-mini-sticker-one {
+  top: 4px;
+  left: 0;
+  transform: rotate(-8deg);
+}
+
+.hero-mini-sticker-two {
+  right: 8px;
+  bottom: 10px;
+  transform: rotate(7deg);
+}
+
+.hero-quality-stack {
+  position: absolute;
+  left: 10px;
+  bottom: 6px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.hero-quality-stack span {
+  width: max-content;
+  background: #FFFFFF;
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-pill);
+  box-shadow: 3px 3px 0 var(--color-ink);
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.hero-showcase-shadow {
+  position: absolute;
+  z-index: 1;
+  inset: 74px 18px 34px 74px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.18), rgba(255, 51, 75, 0.2));
+  border: 2px solid rgba(24, 24, 27, 0.18);
+  transform: rotate(2deg);
+}
+
+@media (min-width: 1025px) {
+  .hero-pop-visual-col {
+    min-height: 500px;
+    padding: 0 6px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero-showcase-wrap {
+    padding: 34px 24px 50px;
+    max-width: 520px;
+  }
+
+  .hero-mini-sticker {
+    width: 102px;
+  }
+
+  .hero-quality-stack {
+    left: 26px;
+    bottom: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-showcase-wrap {
+    padding: 24px 8px 64px;
+  }
+
+  .hero-showcase-shell {
+    border-radius: 18px;
+    box-shadow: 6px 6px 0 var(--color-ink);
+  }
+
+  .hero-showcase-topline {
+    padding: 10px 12px;
+    font-size: 0.62rem;
+  }
+
+  .hero-showcase-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-showcase-stats span {
+    border-right: 0;
+    border-bottom: 1.5px solid var(--color-ink);
+    padding: 9px 12px;
+  }
+
+  .hero-showcase-stats span:last-child {
+    border-bottom: 0;
+  }
+
+  .hero-mini-sticker {
+    width: 78px;
+    padding: 5px;
+    border-radius: 14px;
+  }
+
+  .hero-mini-sticker-one {
+    top: 0;
+    left: 4px;
+  }
+
+  .hero-mini-sticker-two {
+    right: 2px;
+    bottom: 46px;
+  }
+
+  .hero-mini-sticker span {
+    font-size: 0.56rem;
+    padding: 2px 7px;
+  }
+
+  .hero-quality-stack {
+    left: 10px;
+    right: 10px;
+    bottom: 8px;
+    justify-content: center;
+  }
+
+  .hero-quality-stack span {
+    font-size: 0.68rem;
+    padding: 5px 9px;
+  }
+}
