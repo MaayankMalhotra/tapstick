@@ -28,11 +28,13 @@
             $sub = $headerCartSubtotal ?? 0;
             $minOrder = 100;
             $freeShip = 499;
-            $isMinReached = $sub >= $minOrder;
-            $minDiff = max(0, $minOrder - $sub);
-            $freeDiff = max(0, $freeShip - $sub);
-            $freeProgress = $sub > 0 ? min(100, round(($sub / $freeShip) * 100)) : 0;
-            $minProgress = $sub > 0 ? min(100, round(($sub / $minOrder) * 100)) : 0;
+            $drawerItemsForRules = isset($drawerItems) ? $drawerItems : (isset($items) ? $items : ($headerCartItems ?? collect()));
+            $hasTestSticker = collect($drawerItemsForRules)->contains(fn ($item) => isset($item['product']) && $item['product'] instanceof \App\Models\Product && $item['product']->isTestSticker());
+            $isMinReached = $hasTestSticker || $sub >= $minOrder;
+            $minDiff = $hasTestSticker ? 0 : max(0, $minOrder - $sub);
+            $freeDiff = $hasTestSticker ? 0 : max(0, $freeShip - $sub);
+            $freeProgress = $hasTestSticker ? 100 : ($sub > 0 ? min(100, round(($sub / $freeShip) * 100)) : 0);
+            $minProgress = $hasTestSticker ? 100 : ($sub > 0 ? min(100, round(($sub / $minOrder) * 100)) : 0);
         @endphp
         
         <div class="drawer-goal-text-row">
@@ -42,6 +44,8 @@
                     <span>Add stickers to unlock <strong>Free Delivery</strong> &amp; Checkout!</span>
                 @elseif(!$isMinReached)
                     <span>Add <strong>₹{{ number_format($minDiff, 2) }}</strong> more to reach <strong>₹100 min order</strong></span>
+                @elseif($hasTestSticker)
+                    <span>🧪 Test sticker enabled: <strong>₹0 delivery</strong> and checkout unlocked</span>
                 @elseif($sub < $freeShip)
                     <span>🎉 Min order reached! Add <strong>₹{{ number_format($freeDiff, 2) }}</strong> for <strong>FREE Shipping</strong></span>
                 @else

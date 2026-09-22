@@ -31,7 +31,7 @@ class CheckoutController extends Controller
             return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
         }
 
-        if ($summary['subtotal'] < self::MIN_ORDER_AMOUNT) {
+        if (! $summary['hasTestSticker'] && $summary['subtotal'] < self::MIN_ORDER_AMOUNT) {
             $diff = self::MIN_ORDER_AMOUNT - $summary['subtotal'];
             return redirect()->route('cart.index')->with('warning', 'Minimum order amount is ₹'.self::MIN_ORDER_AMOUNT.'. Please add ₹'.number_format($diff, 2).' more stickers to proceed to checkout.');
         }
@@ -54,6 +54,7 @@ class CheckoutController extends Controller
         if ($cart === []) return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
 
         $products = Product::whereIn('id', array_keys($cart))->where('is_active', true)->get()->keyBy('id');
+        $hasTestSticker = Product::collectionContainsTestSticker($products);
         $preSubtotal = 0;
         foreach ($cart as $productId => $quantity) {
             $product = $products->get($productId);
@@ -61,21 +62,22 @@ class CheckoutController extends Controller
                 $preSubtotal += $product->price * $quantity;
             }
         }
-        if ($preSubtotal < self::MIN_ORDER_AMOUNT) {
+        if (! $hasTestSticker && $preSubtotal < self::MIN_ORDER_AMOUNT) {
             $diff = self::MIN_ORDER_AMOUNT - $preSubtotal;
             return redirect()->route('cart.index')->with('error', 'Minimum order amount is ₹'.self::MIN_ORDER_AMOUNT.'. Please add ₹'.number_format($diff, 2).' more stickers before checking out.');
         }
 
         $order = DB::transaction(function () use ($cart, $data, $request) {
             $products = Product::whereIn('id', array_keys($cart))->where('is_active', true)->lockForUpdate()->get()->keyBy('id');
+            $hasTestSticker = Product::collectionContainsTestSticker($products);
             $subtotal = 0;
             foreach ($cart as $productId => $quantity) {
                 $product = $products->get($productId);
                 abort_unless($product && $quantity > 0 && $product->stock >= $quantity, 422, 'A cart item is unavailable or out of stock.');
                 $subtotal += $product->price * $quantity;
             }
-            abort_if($subtotal < self::MIN_ORDER_AMOUNT, 422, 'Minimum order amount is ₹'.self::MIN_ORDER_AMOUNT.'.');
-            $shipping = $subtotal >= 499 ? 0 : 49;
+            abort_if(! $hasTestSticker && $subtotal < self::MIN_ORDER_AMOUNT, 422, 'Minimum order amount is ₹'.self::MIN_ORDER_AMOUNT.'.');
+            $shipping = $hasTestSticker || $subtotal >= 499 ? 0 : 49;
             $order = Order::create([...$data, 'user_id' => $request->user()?->id, 'order_number' => 'TS-'.strtoupper(Str::random(10)),
                 'subtotal' => $subtotal, 'shipping' => $shipping, 'total' => $subtotal + $shipping,
                 'payment_status' => $data['payment_method'] === 'cod' ? 'cod_pending' : 'pending']);
@@ -203,8 +205,9 @@ class CheckoutController extends Controller
         $items = collect($cart)->map(fn ($quantity, $id) => $products->has($id)
             ? ['product' => $products->get($id), 'quantity' => $quantity, 'line_total' => $products->get($id)->price * $quantity] : null)->filter()->values();
         $subtotal = $items->sum('line_total');
-        $shipping = $subtotal >= 499 || $subtotal === 0 ? 0 : 49;
-        return compact('items', 'subtotal', 'shipping') + ['total' => $subtotal + $shipping];
+        $hasTestSticker = Product::collectionContainsTestSticker($products);
+        $shipping = $hasTestSticker || $subtotal >= 499 || $subtotal === 0 ? 0 : 49;
+        return compact('items', 'subtotal', 'shipping', 'hasTestSticker') + ['total' => $subtotal + $shipping];
     }
 
     private function cancelFailedOrder(Order $order): void

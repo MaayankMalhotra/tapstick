@@ -176,8 +176,9 @@ class StoreTest extends TestCase
             'total',
             'count'
         ]);
-        $this->assertSame(1, $response->json('total'));
+        $this->assertSame(2, $response->json('total'));
         $this->assertStringContainsString('Good Vibes', $response->json('html'));
+        $this->assertStringContainsString('Test Sticker', $response->json('html'));
     }
 
     public function test_api_products_can_filter_by_category_and_search(): void

@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class MinimumOrderTest extends TestCase
@@ -136,5 +137,50 @@ class MinimumOrderTest extends TestCase
         ]);
 
         $response->assertRedirect(route('checkout.create'));
+    }
+
+    public function test_one_rupee_test_sticker_can_checkout_with_free_delivery(): void
+    {
+        Mail::fake();
+
+        $testSticker = Product::where('sku', Product::TEST_STICKER_SKU)->firstOrFail();
+
+        $this->post(route('cart.add', $testSticker), ['quantity' => 1])
+            ->assertRedirect(route('cart.index'));
+
+        $cartResponse = $this->get(route('cart.index'));
+        $cartResponse->assertOk();
+        $cartResponse->assertSee('Rs. 1.00');
+        $cartResponse->assertSee('FREE ⚡');
+        $cartResponse->assertSee('Proceed to Checkout →');
+
+        $this->get(route('checkout.create'))
+            ->assertOk()
+            ->assertSee('Place Order · Rs. 1.00')
+            ->assertSee('FREE ⚡');
+
+        $this->post(route('checkout.store'), [
+            'customer_name' => 'Mayank Malhotra',
+            'email' => 'mayank@example.com',
+            'phone' => '9999999999',
+            'address' => '123 Test Street',
+            'city' => 'Delhi',
+            'state' => 'Delhi',
+            'postal_code' => '110001',
+            'payment_method' => 'cod',
+        ])->assertRedirect();
+
+        $this->assertDatabaseHas('orders', [
+            'email' => 'mayank@example.com',
+            'subtotal' => 1.00,
+            'shipping' => 0.00,
+            'total' => 1.00,
+        ]);
+        $this->assertDatabaseHas('order_items', [
+            'product_id' => $testSticker->id,
+            'unit_price' => 1.00,
+            'quantity' => 1,
+            'line_total' => 1.00,
+        ]);
     }
 }

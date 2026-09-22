@@ -149,15 +149,16 @@ class StoreController extends Controller
         }
 
         if ($request->input('redirect') === 'checkout') {
-            $productPrices = Product::whereIn('id', array_keys($cart))->pluck('price', 'id');
+            $cartProducts = Product::whereIn('id', array_keys($cart))->get()->keyBy('id');
+            $hasTestSticker = Product::collectionContainsTestSticker($cartProducts);
             $currentSubtotal = 0;
             foreach ($cart as $id => $qty) {
-                if (isset($productPrices[$id])) {
-                    $currentSubtotal += $productPrices[$id] * $qty;
+                if ($cartProducts->has($id)) {
+                    $currentSubtotal += $cartProducts->get($id)->price * $qty;
                 }
             }
 
-            if ($currentSubtotal < self::MIN_ORDER_AMOUNT) {
+            if (! $hasTestSticker && $currentSubtotal < self::MIN_ORDER_AMOUNT) {
                 $needed = self::MIN_ORDER_AMOUNT - $currentSubtotal;
                 return redirect()->route('cart.index')->with('warning', $product->name.' added! Minimum order is ₹'.self::MIN_ORDER_AMOUNT.'. Add ₹'.number_format($needed, 2).' more to checkout.');
             }
@@ -275,25 +276,26 @@ class StoreController extends Controller
             return $product ? ['product' => $product, 'quantity' => $quantity, 'line_total' => $product->price * $quantity] : null;
         })->filter()->values();
         $subtotal = (float) $items->sum('line_total');
+        $hasTestSticker = Product::collectionContainsTestSticker($products);
 
         $coupon = $request->session()->get('coupon');
         $discount = 0;
-        if ($coupon && isset($coupon['discount_percent'])) {
+        if (! $hasTestSticker && $coupon && isset($coupon['discount_percent'])) {
             $discount = round(($subtotal * $coupon['discount_percent']) / 100, 2);
         }
 
-        $shipping = ($subtotal >= 499 || $subtotal === 0.0) ? 0 : 49;
+        $shipping = ($hasTestSticker || $subtotal >= 499 || $subtotal === 0.0) ? 0 : 49;
         $total = max(0, $subtotal - $discount) + $shipping;
 
         $minOrderAmount = self::MIN_ORDER_AMOUNT;
-        $minOrderReached = $subtotal >= $minOrderAmount;
-        $minOrderDiff = max(0, $minOrderAmount - $subtotal);
-        $minOrderProgress = $subtotal > 0 ? min(100, round(($subtotal / $minOrderAmount) * 100)) : 0;
+        $minOrderReached = $hasTestSticker || $subtotal >= $minOrderAmount;
+        $minOrderDiff = $hasTestSticker ? 0 : max(0, $minOrderAmount - $subtotal);
+        $minOrderProgress = $hasTestSticker ? 100 : ($subtotal > 0 ? min(100, round(($subtotal / $minOrderAmount) * 100)) : 0);
 
         $freeShippingThreshold = 499;
-        $freeShippingReached = $subtotal >= $freeShippingThreshold;
-        $freeShippingDiff = max(0, $freeShippingThreshold - $subtotal);
-        $freeShippingProgress = $subtotal > 0 ? min(100, round(($subtotal / $freeShippingThreshold) * 100)) : 0;
+        $freeShippingReached = $hasTestSticker || $subtotal >= $freeShippingThreshold;
+        $freeShippingDiff = $hasTestSticker ? 0 : max(0, $freeShippingThreshold - $subtotal);
+        $freeShippingProgress = $hasTestSticker ? 100 : ($subtotal > 0 ? min(100, round(($subtotal / $freeShippingThreshold) * 100)) : 0);
 
         // Fetch quick-add recommendations when cart is under min order
         $quickAddStickers = collect();
@@ -323,6 +325,7 @@ class StoreController extends Controller
             'freeShippingReached',
             'freeShippingDiff',
             'freeShippingProgress',
+            'hasTestSticker',
             'quickAddStickers'
         );
     }
@@ -661,4 +664,3 @@ class StoreController extends Controller
         ]);
     }
 }
-
