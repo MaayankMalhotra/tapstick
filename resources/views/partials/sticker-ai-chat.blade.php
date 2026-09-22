@@ -864,7 +864,7 @@
                 appendMessage('assistant', data.reply, data.products || []);
                 chatHistory.push({ role: 'assistant', content: data.reply });
             } else {
-                appendMessage('assistant', "Oops! I hit a temporary hiccup exploring the sticker vault. Try asking again or check out our popular bumper decals!");
+                appendMessage('assistant', data.message || "I couldn't complete that AI reply, but try asking with a category or budget like anime under ₹100, car bumper stickers, or ₹10 stickers.");
             }
         } catch (err) {
             console.error('StickerAI Chat Error:', err);

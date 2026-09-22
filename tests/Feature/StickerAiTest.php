@@ -140,6 +140,35 @@ class StickerAiTest extends TestCase
         $this->assertStringContainsString('/products/gojo-domain-expansion-sticker', $product['url']);
     }
 
+    public function test_sticker_ai_fallback_answers_with_live_products_for_budget_query(): void
+    {
+        config(['services.gemini.key' => '']);
+
+        Product::create([
+            'category_id' => $this->category->id,
+            'name' => 'Tiny Rider Vinyl Sticker',
+            'slug' => 'tiny-rider-vinyl-sticker',
+            'description' => 'Budget car sticker',
+            'price' => 10.00,
+            'stock' => 25,
+            'image' => 'images/tiny-rider.jpg',
+            'is_active' => true,
+        ]);
+
+        $response = $this->postJson('/api/sticker-ai/chat', [
+            'message' => 'i need 10 rupees items',
+        ]);
+
+        $response->assertOk()->assertJson([
+            'success' => true,
+        ]);
+
+        $this->assertStringContainsString('Tiny Rider Vinyl Sticker', $response->json('reply'));
+        $this->assertStringNotContainsString('temporary hiccup', strtolower($response->json('reply')));
+        $this->assertSame('Tiny Rider Vinyl Sticker', $response->json('products.0.name'));
+        $this->assertSame('10.00', $response->json('products.0.price'));
+    }
+
     public function test_storefront_homepage_renders_sticker_ai_widget(): void
     {
         $response = $this->get('/');

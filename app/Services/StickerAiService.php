@@ -29,13 +29,17 @@ class StickerAiService
         $preferred = $this->model;
         $fallbacks = [
             'gemini-flash-lite-latest',
-            'gemini-3.5-flash-lite',
-            'gemini-3.1-flash-lite',
+            'gemini-2.0-flash',
+            'gemini-1.5-flash-8b',
+            'gemini-1.5-flash',
             'gemini-flash-latest',
-            'gemini-3.5-flash',
-            'gemini-3.6-flash',
-            'gemini-3-flash-preview',
         ];
+
+        // Older deploys may still have experimental model names in .env.
+        // Skip them for the storefront chat so failed AI calls do not stall the UX.
+        if (preg_match('/^gemini-3/i', $preferred)) {
+            return $fallbacks;
+        }
 
         return array_values(array_unique(array_merge([$preferred], $fallbacks)));
     }
@@ -58,6 +62,8 @@ class StickerAiService
         // 1. Detect Price Intent (e.g. "under 100", "under 150", "below 200", "cheap")
         $maxPrice = null;
         if (preg_match('/(?:under|below|less than|within|around)\s*(?:rs\.?|inr|₹)?\s*(\d+)/i', $cleanQuery, $m)) {
+            $maxPrice = (float) $m[1];
+        } elseif (preg_match('/(?:rs\.?|inr|₹)?\s*(\d+)\s*(?:rupees?|rs|inr|₹)\s*(?:items?|stickers?|decals?)?/i', $cleanQuery, $m)) {
             $maxPrice = (float) $m[1];
         } elseif (str_contains($cleanQuery, 'cheap') || str_contains($cleanQuery, 'budget') || str_contains($cleanQuery, 'low price')) {
             $maxPrice = 50.0;
@@ -87,7 +93,7 @@ class StickerAiService
             ->get();
 
         $phrase = implode(' ', $searchTerms);
-        $scored = $products->map(function (Product $product) use ($cleanQuery, $phrase, $searchTerms, $targetCategorySlug) {
+        $scored = $products->map(function (Product $product) use ($cleanQuery, $phrase, $searchTerms, $targetCategorySlug, $maxPrice) {
             $categoryName = strtolower((string) $product->category?->name);
             $categorySlug = strtolower((string) $product->category?->slug);
             $name = strtolower($product->name);
@@ -124,6 +130,9 @@ class StickerAiService
             }
             if ($cleanQuery !== '' && str_contains($haystack, $cleanQuery)) {
                 $score += 30;
+            }
+            if ($maxPrice !== null && (float) $product->price <= $maxPrice) {
+                $score += max(0, 25 - abs((float) $product->price - $maxPrice));
             }
 
             return ['product' => $product, 'score' => $score];
@@ -379,14 +388,24 @@ PROMPT;
             'parts' => [['text' => $message]],
         ];
 
-        $systemPrompt = $this->buildSystemPrompt($candidates);
+        try {
+            $systemPrompt = $this->buildSystemPrompt($candidates);
+        } catch (\Throwable $e) {
+            Log::warning('StickerAI: Prompt build failed: ' . $e->getMessage());
+
+            return [
+                'reply' => $this->getHeuristicReply($message, $candidates),
+                'products' => $candidates,
+            ];
+        }
 
         // Attempt Gemini models in order of failover
         foreach ($this->getCandidateModels() as $model) {
             $url = "{$this->baseUrl}/models/{$model}:generateContent?key={$this->apiKey}";
 
             try {
-                $response = Http::timeout(8)
+                $response = Http::connectTimeout(2)
+                    ->timeout(4)
                     ->withHeaders(['Content-Type' => 'application/json'])
                     ->post($url, [
                         'systemInstruction' => [
@@ -395,7 +414,7 @@ PROMPT;
                         'contents' => $contents,
                         'generationConfig' => [
                             'temperature' => 0.5,
-                            'maxOutputTokens' => 1500,
+                            'maxOutputTokens' => 900,
                         ],
                     ]);
 
@@ -440,12 +459,21 @@ PROMPT;
         }
 
         if (empty($products)) {
-            return "Hey! Explore our collection of 4,479 waterproof stickers! Whether you want car & bike bumper decals, anime characters, developer humor, or holographic shine, we've got you covered. What vibe are you looking for today?";
+            return "I checked the live catalog but couldn't find an exact match for this vibe yet. Try a category like **anime**, **car bumper**, **coding**, **aesthetic**, or **₹10 stickers** and I'll pull exact product cards with names, prices, and images.";
         }
 
-        $names = array_map(fn($p) => "**{$p['name']}** ({$p['formatted_price']})", array_slice($products, 0, 3));
-        $namesStr = implode(', ', $names);
+        $q = strtolower($query);
+        $priceIntent = '';
+        if (preg_match('/(?:under|below|less than|within|around)?\s*(?:rs\.?|inr|₹)?\s*(\d+)/i', $q, $m)) {
+            $priceIntent = " around ₹{$m[1]}";
+        } elseif (str_contains($q, 'cheap') || str_contains($q, 'budget')) {
+            $priceIntent = ' budget';
+        }
 
-        return "Here are some of our best matching stickers from the catalog:\n\nCheck out {$namesStr}! All printed on 100% waterproof vinyl. Tap any sticker card below to view details or add directly to your cart!";
+        $lines = collect(array_slice($products, 0, 4))->map(function ($p) {
+            return "- **[{$p['name']}]({$p['url']})** — {$p['formatted_price']} · {$p['category']}";
+        })->implode("\n");
+
+        return "Found live catalog matches{$priceIntent} for you:\n\n{$lines}\n\nThe cards below show the exact sticker images, names, prices, and add-to-cart buttons. All are 100% waterproof vinyl.";
     }
 }
