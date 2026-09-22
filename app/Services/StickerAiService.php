@@ -1,0 +1,384 @@
+<?php
+
+namespace App\Services;
+
+use App\Models\Category;
+use App\Models\Product;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
+
+class StickerAiService
+{
+    protected string $apiKey;
+    protected string $model;
+    protected string $baseUrl = 'https://generativelanguage.googleapis.com/v1beta';
+
+    public function __construct()
+    {
+        $this->apiKey = (string) config('services.gemini.key', env('GEMINI_API_KEY', ''));
+        $this->model = (string) config('services.gemini.model', 'gemini-flash-lite-latest');
+    }
+
+    /**
+     * Models to try in sequence for maximum reliability.
+     */
+    protected function getCandidateModels(): array
+    {
+        $preferred = $this->model;
+        $fallbacks = [
+            'gemini-flash-lite-latest',
+            'gemini-3.5-flash-lite',
+            'gemini-3.1-flash-lite',
+            'gemini-flash-latest',
+            'gemini-3.5-flash',
+            'gemini-3.6-flash',
+            'gemini-3-flash-preview',
+        ];
+
+        return array_values(array_unique(array_merge([$preferred], $fallbacks)));
+    }
+
+    /**
+     * Search and retrieve relevant stickers from the 4,479 catalog.
+     * Uses fuzzy token matching, category intent analysis, and price filtering.
+     *
+     * @return array<int, array>
+     */
+    public function searchCatalog(string $query, int $limit = 8): array
+    {
+        $rawQuery = trim($query);
+        if (empty($rawQuery)) {
+            return $this->getPopularStickers($limit);
+        }
+
+        $cleanQuery = strtolower($rawQuery);
+
+        // 1. Detect Price Intent (e.g. "under 100", "under 150", "below 200", "cheap")
+        $maxPrice = null;
+        if (preg_match('/(?:under|below|less than|within|around)\s*(?:rs\.?|inr|₹)?\s*(\d+)/i', $cleanQuery, $m)) {
+            $maxPrice = (float) $m[1];
+        } elseif (str_contains($cleanQuery, 'cheap') || str_contains($cleanQuery, 'budget') || str_contains($cleanQuery, 'low price')) {
+            $maxPrice = 50.0;
+        }
+
+        // 2. Detect Category Intent
+        $targetCategorySlug = null;
+        $categoryKeywords = [
+            'cars-bikes' => ['car', 'cars', 'bike', 'bikes', 'bumper', 'driving', 'vehicle', 'rider', 'riding', 'motorcycle', 'scooter', 'bullet', 'thar', 'jeep', 'helmet'],
+            'anime' => ['anime', 'manga', 'naruto', 'gojo', 'jujutsu', 'kaisen', 'goku', 'dragon ball', 'one piece', 'luffy', 'demon slayer', 'tanjiro', 'baki', 'death note', 'levi', 'attack on titan', 'zoro', 'sukuna', 'itachi'],
+            'tech-dev' => ['code', 'coding', 'developer', 'programmer', 'python', 'javascript', 'js', 'react', 'node', 'linux', 'github', 'git', 'docker', 'terminal', 'bug', 'geek', 'nerd', 'laptop', 'software'],
+            'memes' => ['meme', 'memes', 'funny', 'desi', 'bollywood', 'humor', 'joke', 'sarcasm', 'lol', 'dank', 'jugaad'],
+            'glitter-holo' => ['holo', 'holographic', 'glitter', 'sparkle', 'shiny', 'rainbow', 'prism', 'iridescent'],
+            'aesthetic' => ['aesthetic', 'cute', 'vibes', 'vibe', 'pastel', 'floral', 'flower', 'coffee', 'minimal', 'chill', 'lofi'],
+        ];
+
+        foreach ($categoryKeywords as $slug => $keywords) {
+            foreach ($keywords as $kw) {
+                if (preg_match('/\b' . preg_quote($kw, '/') . '\b/i', $cleanQuery)) {
+                    $targetCategorySlug = $slug;
+                    break 2;
+                }
+            }
+        }
+
+        // 3. Clean search terms by stripping common conversational stopwords
+        $stopwords = [
+            'i', 'want', 'need', 'show', 'me', 'stickers', 'sticker', 'decals', 'decal',
+            'do', 'you', 'have', 'any', 'looking', 'for', 'please', 'can', 'get', 'buy',
+            'find', 'recommend', 'suggest', 'the', 'best', 'good', 'some', 'what', 'are',
+            'tell', 'about', 'with', 'and', 'or', 'in', 'of', 'a', 'an', 'tabstick'
+        ];
+        $tokens = preg_split('/[\s,\?!]+/', $cleanQuery);
+        $searchTerms = array_values(array_filter($tokens, function ($t) use ($stopwords) {
+            return strlen($t) >= 2 && !in_array($t, $stopwords);
+        }));
+
+        // 4. Build Product Query
+        $dbQuery = Product::with('category:id,name,slug')
+            ->where('is_active', true)
+            ->where('stock', '>', 0);
+
+        if ($maxPrice !== null && $maxPrice > 0) {
+            $dbQuery->where('price', '<=', $maxPrice);
+        }
+
+        if ($targetCategorySlug) {
+            $category = Category::where('slug', $targetCategorySlug)->first();
+            if ($category) {
+                $dbQuery->where('category_id', $category->id);
+            }
+        }
+
+        // Try exact phrase matching first
+        $exactPhraseMatches = collect();
+        if (!empty($searchTerms)) {
+            $phrase = implode(' ', $searchTerms);
+            $exactPhraseMatches = (clone $dbQuery)
+                ->where('name', 'LIKE', "%{$phrase}%")
+                ->orderBy('price', 'desc')
+                ->take($limit)
+                ->get();
+        }
+
+        // Try token matching
+        $tokenMatches = collect();
+        if ($exactPhraseMatches->count() < $limit && !empty($searchTerms)) {
+            $existingIds = $exactPhraseMatches->pluck('id')->toArray();
+            $tokenMatches = (clone $dbQuery)
+                ->whereNotIn('id', $existingIds)
+                ->where(function ($q) use ($searchTerms) {
+                    foreach ($searchTerms as $term) {
+                        $q->orWhere('name', 'LIKE', "%{$term}%")
+                          ->orWhere('slug', 'LIKE', "%{$term}%");
+                    }
+                })
+                ->orderBy('price', 'desc')
+                ->take($limit - $exactPhraseMatches->count())
+                ->get();
+        }
+
+        $combined = $exactPhraseMatches->merge($tokenMatches);
+
+        // Fallback: If still not enough, grab category/popular items
+        if ($combined->count() < 4) {
+            $existingIds = $combined->pluck('id')->toArray();
+            $fallbackQuery = Product::with('category:id,name,slug')
+                ->where('is_active', true)
+                ->where('stock', '>', 0)
+                ->whereNotIn('id', $existingIds);
+
+            if ($targetCategorySlug) {
+                $cat = Category::where('slug', $targetCategorySlug)->first();
+                if ($cat) {
+                    $fallbackQuery->where('category_id', $cat->id);
+                }
+            }
+
+            if ($maxPrice !== null && $maxPrice > 0) {
+                $fallbackQuery->where('price', '<=', $maxPrice);
+            }
+
+            $fillers = $fallbackQuery->inRandomOrder()->take($limit - $combined->count())->get();
+            $combined = $combined->merge($fillers);
+        }
+
+        return $combined->map(function (Product $p) {
+            return $this->formatProductCard($p);
+        })->values()->toArray();
+    }
+
+    /**
+     * Format a product model into a clean card payload for chat UI.
+     */
+    protected function formatProductCard(Product $p): array
+    {
+        $priceNum = (float) $p->price;
+        $originalPrice = round($priceNum * 1.8, 0);
+
+        $imageUrl = $p->image;
+        if ($imageUrl && !Str::startsWith($imageUrl, ['http://', 'https://', '/'])) {
+            $imageUrl = '/' . ltrim($imageUrl, '/');
+        }
+
+        return [
+            'id' => $p->id,
+            'name' => $p->name,
+            'slug' => $p->slug,
+            'price' => number_format($priceNum, 2, '.', ''),
+            'formatted_price' => '₹' . number_format($priceNum, 0),
+            'formatted_original_price' => '₹' . number_format($originalPrice, 0),
+            'category' => $p->category?->name ?? 'Sticker',
+            'category_slug' => $p->category?->slug ?? 'stickers',
+            'image_url' => $imageUrl ?: '/images/hero-banner.webp',
+            'url' => route('products.show', $p->slug),
+            'stock' => $p->stock,
+        ];
+    }
+
+    /**
+     * Get popular fallback stickers when query is empty.
+     */
+    public function getPopularStickers(int $limit = 8): array
+    {
+        return Cache::remember('sticker_ai_popular_' . $limit, 3600, function () use ($limit) {
+            // Pick a rich diverse mix of bumper stickers, anime, tech, and holographic
+            return Product::with('category:id,name,slug')
+                ->where('is_active', true)
+                ->where('stock', '>', 0)
+                ->whereIn('id', [1, 2002, 795, 3055, 3963])
+                ->orWhere('name', 'LIKE', '%Bumper Sticker%')
+                ->take($limit)
+                ->get()
+                ->map(fn(Product $p) => $this->formatProductCard($p))
+                ->values()
+                ->toArray();
+        });
+    }
+
+    /**
+     * Build the detailed knowledge base prompt for Tabstick AI.
+     */
+    protected function buildSystemPrompt(array $candidateProducts): string
+    {
+        $candidatesText = '';
+        foreach ($candidateProducts as $idx => $item) {
+            $candidatesText .= sprintf(
+                "%d. \"%s\" | Category: %s | Price: %s | URL: %s\n",
+                $idx + 1,
+                $item['name'],
+                $item['category'],
+                $item['formatted_price'],
+                $item['url']
+            );
+        }
+
+        return <<<PROMPT
+You are Tabstick AI, the energetic, fun, and knowledgeable AI Shopping Assistant & Sticker Stylist for Tabstick (tabstick.in) — India's premier creative sticker brand founded by Maayank Malhotra.
+
+### YOUR MISSION:
+Your job is to help customers discover the perfect die-cut waterproof vinyl stickers, bumper decals, laptop skins, and custom gifts from our catalog of over 4,479 stickers. Be hype, helpful, conversational, and genuinely passionate about sticker culture!
+
+### STORE IDENTITY & SPECS:
+- **Brand**: Tabstick (tabstick.in)
+- **Catalog Size**: 4,479 unique die-cut stickers & bumper decals across 9 categories.
+- **Categories**:
+  1. *Cars & Bikes*: Heavy-duty outdoor automotive bumper stickers, helmet decals, bike quotes.
+  2. *Anime & Manga*: Naruto, Gojo (JJK), Goku, Demon Slayer, One Piece, Death Note, Baki, Attack on Titan.
+  3. *Tech & Gaming*: Python, Linux, JavaScript, React, Docker, Git, Terminal, Cyberpunk, Gamer setups.
+  4. *Memes & Desi Pop*: Indian pop culture, relatable humor, Bollywood memes, witty punchlines.
+  5. *Glitter & Holographic*: Prismatic light-catching rainbow vinyl, metallic sheen, eye-catching gloss.
+  6. *Aesthetic & Vibes*: Minimalist, floral, cozy coffee, retro vaporwave, pastel art, chill lofi.
+  7. *Stickers & Skins*: All-purpose decals for laptops, phones, iPads, hydroflasks, diaries.
+- **Material & Durability**:
+  - 100% Waterproof & Weatherproof automotive-grade 3M vinyl.
+  - Matte & Gloss UV laminate — resistant to direct sunlight, rain, scratches, car washes.
+  - Bubble-free adhesive with residue-free peel-off (won't leave sticky glue on your MacBook or car paint).
+- **Pricing & Shipping**:
+  - Single decals starting from ₹10–₹49; large bumper decals ₹99–₹399.
+  - Minimum order: ₹100.
+  - **FREE Express Pan-India Shipping** on orders above ₹499 (otherwise flat ₹49).
+  - Dispatched within 24–48 hours; delivery in 3–5 days across India.
+  - Cash on Delivery (COD), UPI (GPay, PhonePe, Paytm), and Cards accepted.
+
+### CURRENT LIVE STICKERS RETRIEVED FROM OUR 4,479 CATALOG FOR THIS QUERY:
+{$candidatesText}
+
+### STRICT RULES FOR RESPONSES:
+1. **Catalog Grounding**: You MUST recommend stickers from the retrieved live list above. Mention exact sticker names and prices in ₹.
+2. **Direct Links**: When mentioning a sticker, format it with its URL so the customer can tap it, e.g. "[Mountain Adventure Bumper Sticker](https://tabstick.in/products/mountain-adventure-bumper-sticker)".
+3. **Tone & Style**: Friendly, enthusiastic, youth-focused (Hinglish/English friendly if the user speaks Hindi/Hinglish). Use relevant emojis (⚡, 🔥, 🚗, 💻, ✨).
+4. **Length**: Keep replies punchy, readable, and structured (typically 2 to 4 engaging paragraphs or bullet points). Never write overly long essays.
+5. **No Hallucinations**: NEVER invent fictional sticker designs not in our catalog. If the user asks for something outside our current stock, recommend our closest matching aesthetic decals and mention custom stickers can be ordered!
+PROMPT;
+    }
+
+    /**
+     * Interactive Chat endpoint integrating Google Gemini with RAG catalog knowledge.
+     *
+     * @return array{reply: string, products: array}
+     */
+    public function chat(string $message, array $history = []): array
+    {
+        $message = trim($message);
+        $candidates = $this->searchCatalog($message, 8);
+
+        if (empty($this->apiKey)) {
+            return [
+                'reply' => $this->getHeuristicReply($message, $candidates),
+                'products' => $candidates,
+            ];
+        }
+
+        $contents = [];
+
+        // Add recent conversation history (last 6 turns)
+        $trimmedHistory = array_slice($history, -6);
+        foreach ($trimmedHistory as $turn) {
+            $role = ($turn['role'] ?? '') === 'assistant' ? 'model' : 'user';
+            $text = trim($turn['content'] ?? '');
+            if (!empty($text)) {
+                $contents[] = [
+                    'role' => $role,
+                    'parts' => [['text' => $text]],
+                ];
+            }
+        }
+
+        // Add current question
+        $contents[] = [
+            'role' => 'user',
+            'parts' => [['text' => $message]],
+        ];
+
+        $systemPrompt = $this->buildSystemPrompt($candidates);
+
+        // Attempt Gemini models in order of failover
+        foreach ($this->getCandidateModels() as $model) {
+            $url = "{$this->baseUrl}/models/{$model}:generateContent?key={$this->apiKey}";
+
+            try {
+                $response = Http::timeout(8)
+                    ->withHeaders(['Content-Type' => 'application/json'])
+                    ->post($url, [
+                        'systemInstruction' => [
+                            'parts' => [['text' => $systemPrompt]],
+                        ],
+                        'contents' => $contents,
+                        'generationConfig' => [
+                            'temperature' => 0.5,
+                            'maxOutputTokens' => 1500,
+                        ],
+                    ]);
+
+                if ($response->successful()) {
+                    $data = $response->json();
+                    $rawText = $data['candidates'][0]['content']['parts'][0]['text'] ?? null;
+                    if (!empty($rawText)) {
+                        $cleaned = preg_replace('/^(?:Thinking Process|Refinement|Draft)[^\n]*:\s*\*?\s*\n*/i', '', $rawText);
+                        return [
+                            'reply' => trim($cleaned),
+                            'products' => $candidates,
+                        ];
+                    }
+                } else {
+                    Log::warning("StickerAI: Model {$model} HTTP " . $response->status());
+                }
+            } catch (\Throwable $e) {
+                Log::warning("StickerAI: Model {$model} error: " . $e->getMessage());
+            }
+        }
+
+        // Context-aware heuristic fallback
+        return [
+            'reply' => $this->getHeuristicReply($message, $candidates),
+            'products' => $candidates,
+        ];
+    }
+
+    /**
+     * Context-aware heuristic reply if Gemini is temporarily unreachable.
+     */
+    protected function getHeuristicReply(string $query, array $products): string
+    {
+        $q = strtolower($query);
+
+        if (str_contains($q, 'ship') || str_contains($q, 'delivery') || str_contains($q, 'cod')) {
+            return "📦 **Shipping & Delivery Info**:\n\n- **FREE Shipping** across India on all orders above ₹499! (Flat ₹49 on smaller orders).\n- We dispatch within **24–48 hours**, and delivery takes **3–5 business days**.\n- We support **Cash on Delivery (COD)**, Instant UPI, and all debit/credit cards!";
+        }
+
+        if (str_contains($q, 'waterproof') || str_contains($q, 'quality') || str_contains($q, 'material')) {
+            return "🛡️ **Automotive-Grade Quality**:\n\nEvery single Tabstick decal is crafted on **100% waterproof 3M vinyl** with scratch-resistant matte/gloss UV laminate. They are weatherproof, car-wash safe, and remove cleanly with **zero sticky residue**!";
+        }
+
+        if (empty($products)) {
+            return "Hey! Explore our collection of 4,479 waterproof stickers! Whether you want car & bike bumper decals, anime characters, developer humor, or holographic shine, we've got you covered. What vibe are you looking for today?";
+        }
+
+        $names = array_map(fn($p) => "**{$p['name']}** ({$p['formatted_price']})", array_slice($products, 0, 3));
+        $namesStr = implode(', ', $names);
+
+        return "Here are some of our best matching stickers from the catalog:\n\nCheck out {$namesStr}! All printed on 100% waterproof vinyl. Tap any sticker card below to view details or add directly to your cart!";
+    }
+}

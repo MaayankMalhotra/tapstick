@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\StickerAiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\InventoryController;
@@ -57,6 +58,8 @@ Route::get('/resume', fn() => redirect()->route('portfolio.resume', [], 301));
 Route::get('/cv', fn() => redirect()->route('portfolio.resume', [], 301));
 Route::post('/maayank/contact', [StoreController::class, 'submitPortfolioContact'])->middleware('throttle:10,1')->name('portfolio.contact');
 Route::post('/maayank/ai-chat', [StoreController::class, 'portfolioAiChat'])->middleware('throttle:30,1')->name('portfolio.ai-chat');
+Route::post('/api/sticker-ai/chat', [StickerAiController::class, 'chat'])->middleware('throttle:30,1')->name('sticker-ai.chat');
+Route::get('/api/sticker-ai/search', [StickerAiController::class, 'search'])->name('sticker-ai.search');
 Route::redirect('/mayank', '/maayank', 301);
 Route::redirect('/lander', '/');
 Route::get('/gaze-n-gifts', [StoreController::class, 'gazeNGifts'])->name('store.gaze-n-gifts');

@@ -501,6 +501,8 @@
     <script src="{{ asset('js/playful-pop.js') }}" defer></script>
     <!-- LANDING PAGE LEAD POPUP MODAL -->
     @include('partials.lead-modal')
+    <!-- STOREFRONT AI STICKER CHATBOT & STYLIST -->
+    @include('partials.sticker-ai-chat')
 
     @stack('scripts')
 </body>
