@@ -19,15 +19,15 @@
         </div>
 
         <svg class="kinetic-scribble scribble-one" viewBox="0 0 460 220" fill="none">
-            <path d="M12 151 C83 39 156 248 223 109 C279 -7 327 211 448 42" />
+            <path d="M15 33 C120 14 115 196 204 166 C292 136 281 38 354 51 C408 61 395 195 447 178" />
         </svg>
         <svg class="kinetic-scribble scribble-two" viewBox="0 0 520 250" fill="none">
-            <path d="M8 38 C102 10 116 231 206 192 C283 159 271 35 351 49 C417 61 423 215 512 144" />
+            <path d="M16 178 C95 88 158 231 234 117 C293 28 343 30 401 70 C452 105 474 77 508 34" />
         </svg>
     </div>
 
     <div class="kinetic-center-badge" aria-hidden="true">
-        <img src="{{ asset('images/logo.png') }}" alt="">
+        <span>TS</span>
     </div>
 
     <div class="container kinetic-shell">
