@@ -28,6 +28,7 @@ class StickerAiTest extends TestCase
             'slug' => 'mountain-adventure-bumper-sticker',
             'price' => 399.00,
             'stock' => 50,
+            'image' => 'images/mountain-adventure.jpg',
             'is_active' => true,
         ]);
 
@@ -103,6 +104,40 @@ class StickerAiTest extends TestCase
         $this->assertGreaterThan(0, $data['count']);
         $this->assertIsArray($data['products']);
         $this->assertEquals('Mountain Adventure Bumper Sticker', $data['products'][0]['name']);
+    }
+
+    public function test_sticker_ai_results_include_live_catalog_metadata(): void
+    {
+        $animeCategory = Category::create([
+            'name' => 'Anime & Manga',
+            'slug' => 'anime',
+        ]);
+
+        Product::create([
+            'category_id' => $animeCategory->id,
+            'name' => 'Gojo Domain Expansion Sticker',
+            'slug' => 'gojo-domain-expansion-sticker',
+            'description' => 'Anime vinyl decal for laptops',
+            'price' => 149.00,
+            'stock' => 20,
+            'image' => 'anime/gojo-domain.jpg',
+            'is_active' => true,
+        ]);
+
+        $response = $this->getJson('/api/sticker-ai/search?q=gojo anime under 200');
+
+        $response->assertOk()->assertJson([
+            'success' => true,
+        ]);
+
+        $product = $response->json('products.0');
+        $this->assertSame('Gojo Domain Expansion Sticker', $product['name']);
+        $this->assertSame('Gojo Domain Expansion Sticker', $product['product_name']);
+        $this->assertSame('Anime & Manga', $product['category']);
+        $this->assertSame('anime', $product['category_slug']);
+        $this->assertSame('149.00', $product['price']);
+        $this->assertStringContainsString('/storage/anime/gojo-domain.jpg', $product['image_url']);
+        $this->assertStringContainsString('/products/gojo-domain-expansion-sticker', $product['url']);
     }
 
     public function test_storefront_homepage_renders_sticker_ai_widget(): void

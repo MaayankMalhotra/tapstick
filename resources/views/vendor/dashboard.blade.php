@@ -1,0 +1,7 @@
+@extends('vendor.layout')
+@section('title', 'Vendor dashboard')
+@section('content')
+<div class="heading"><div><div class="kicker">FULFILMENT PORTAL</div><h1>{{ auth()->user()->vendor?->business_name }}</h1><p>Orders assigned to your pickup location only.</p></div></div>
+<div class="stats-grid">@foreach(['awaiting_vendor_acceptance'=>'New','accepted'=>'Accepted','in_production'=>'Production','packed'=>'Packed','pickup_requested'=>'Pickup','delivered'=>'Delivered','cancelled'=>'Cancelled','return_to_origin'=>'Returns'] as $key => $label)<div class="stat"><span>{{ $label }}</span><strong>{{ $counts[$key] ?? 0 }}</strong></div>@endforeach</div>
+<div class="panel"><div class="table-wrap"><table><thead><tr><th>Fulfilment</th><th>Order</th><th>Items</th><th>Status</th><th>Shipment</th><th></th></tr></thead><tbody>@forelse($fulfillments as $fulfillment)<tr><td><strong>{{ $fulfillment->fulfillment_number }}</strong></td><td>{{ $fulfillment->order->order_number }}<br><small>{{ $fulfillment->order->city }}, {{ $fulfillment->order->state }}</small></td><td>{{ $fulfillment->items->sum('quantity') }}</td><td><span class="badge">{{ str_replace('_', ' ', $fulfillment->status) }}</span></td><td>{{ $fulfillment->shipment?->awb_code ?: 'Not ready' }}</td><td><a href="{{ route('vendor.fulfillments.show', $fulfillment) }}">Open</a></td></tr>@empty<tr><td colspan="6" class="empty">No assigned orders yet.</td></tr>@endforelse</tbody></table></div>{{ $fulfillments->links() }}</div>
+@endsection

@@ -132,7 +132,7 @@ class StoreController extends Controller
         return view('store.cart', $this->cartData($request));
     }
 
-    public function addToCart(Request $request, Product $product): RedirectResponse
+    public function addToCart(Request $request, Product $product): RedirectResponse|JsonResponse
     {
         abort_unless($product->is_active && $product->stock > 0, 404);
         $validated = $request->validate([
@@ -143,6 +143,10 @@ class StoreController extends Controller
         $cart = $request->session()->get('cart', []);
         $cart[$product->id] = min(($cart[$product->id] ?? 0) + $quantity, $product->stock, 20);
         $request->session()->put('cart', $cart);
+
+        if ($request->expectsJson() || $request->ajax()) {
+            return response()->json($this->formatCartDrawerPayload($request, $product->name.' added to your cart!'));
+        }
 
         if ($request->input('redirect') === 'checkout') {
             $productPrices = Product::whereIn('id', array_keys($cart))->pluck('price', 'id');
@@ -168,7 +172,7 @@ class StoreController extends Controller
         return redirect()->route('cart.index')->with('success', $product->name.' added to your cart!');
     }
 
-    public function updateCart(Request $request, Product $product): RedirectResponse
+    public function updateCart(Request $request, Product $product): RedirectResponse|JsonResponse
     {
         $quantity = (int) $request->validate(['quantity' => 'required|integer|min:1|max:20'])['quantity'];
         $cart = $request->session()->get('cart', []);
@@ -176,15 +180,90 @@ class StoreController extends Controller
             $cart[$product->id] = min($quantity, $product->stock);
             $request->session()->put('cart', $cart);
         }
+
+        if ($request->expectsJson() || $request->ajax()) {
+            return response()->json($this->formatCartDrawerPayload($request, 'Cart updated.'));
+        }
+
         return back()->with('success', 'Cart updated.');
     }
 
-    public function removeFromCart(Request $request, Product $product): RedirectResponse
+    public function removeFromCart(Request $request, Product $product): RedirectResponse|JsonResponse
     {
         $cart = $request->session()->get('cart', []);
         unset($cart[$product->id]);
         $request->session()->put('cart', $cart);
+
+        if ($request->expectsJson() || $request->ajax()) {
+            return response()->json($this->formatCartDrawerPayload($request, 'Item removed.'));
+        }
+
         return back()->with('success', 'Item removed.');
+    }
+
+    public function drawerData(Request $request): JsonResponse
+    {
+        return response()->json($this->formatCartDrawerPayload($request));
+    }
+
+    public function applyCoupon(Request $request): JsonResponse
+    {
+        $code = strtoupper(trim((string) $request->input('code', '')));
+        $validCoupons = [
+            'TABSTICK10' => 10,
+            'VIP10' => 10,
+            'STICKER10' => 10,
+            'MAAYANK10' => 10,
+            'SAVE10' => 10,
+            'POP10' => 10,
+        ];
+
+        if (empty($code)) {
+            $request->session()->forget('coupon');
+            return response()->json($this->formatCartDrawerPayload($request, 'Coupon removed.'));
+        }
+
+        if (isset($validCoupons[$code])) {
+            $request->session()->put('coupon', [
+                'code' => $code,
+                'discount_percent' => $validCoupons[$code],
+            ]);
+            return response()->json($this->formatCartDrawerPayload($request, "Coupon '{$code}' applied! 10% OFF"));
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => "Invalid coupon code '{$code}'. Try TABSTICK10",
+        ], 422);
+    }
+
+    private function formatCartDrawerPayload(Request $request, ?string $message = null): array
+    {
+        $data = $this->cartData($request);
+        $itemsHtml = view('partials.cart-drawer-items', $data)->render();
+        $totalQty = collect($data['items'])->sum('quantity');
+
+        return [
+            'success' => true,
+            'message' => $message ?? 'Cart updated.',
+            'count' => $totalQty,
+            'item_count' => count($data['items']),
+            'subtotal' => $data['subtotal'],
+            'subtotal_formatted' => '₹'.number_format($data['subtotal'], 2),
+            'discount' => $data['discount'] ?? 0,
+            'discount_formatted' => '₹'.number_format($data['discount'] ?? 0, 2),
+            'total' => $data['total'],
+            'total_formatted' => '₹'.number_format($data['total'], 2),
+            'min_order_amount' => $data['minOrderAmount'],
+            'min_order_reached' => $data['minOrderReached'],
+            'min_order_diff' => $data['minOrderDiff'],
+            'min_order_diff_formatted' => '₹'.number_format($data['minOrderDiff'], 2),
+            'free_shipping_reached' => $data['freeShippingReached'],
+            'free_shipping_diff' => $data['freeShippingDiff'],
+            'free_shipping_diff_formatted' => '₹'.number_format($data['freeShippingDiff'], 2),
+            'free_shipping_progress' => $data['freeShippingProgress'],
+            'html' => $itemsHtml,
+        ];
     }
 
     private function cartData(Request $request): array
@@ -196,8 +275,15 @@ class StoreController extends Controller
             return $product ? ['product' => $product, 'quantity' => $quantity, 'line_total' => $product->price * $quantity] : null;
         })->filter()->values();
         $subtotal = (float) $items->sum('line_total');
-        $shipping = $subtotal >= 499 || $subtotal === 0.0 ? 0 : 49;
-        $total = $subtotal + $shipping;
+
+        $coupon = $request->session()->get('coupon');
+        $discount = 0;
+        if ($coupon && isset($coupon['discount_percent'])) {
+            $discount = round(($subtotal * $coupon['discount_percent']) / 100, 2);
+        }
+
+        $shipping = ($subtotal >= 499 || $subtotal === 0.0) ? 0 : 49;
+        $total = max(0, $subtotal - $discount) + $shipping;
 
         $minOrderAmount = self::MIN_ORDER_AMOUNT;
         $minOrderReached = $subtotal >= $minOrderAmount;
@@ -225,8 +311,10 @@ class StoreController extends Controller
         return compact(
             'items',
             'subtotal',
+            'discount',
             'shipping',
             'total',
+            'coupon',
             'minOrderAmount',
             'minOrderReached',
             'minOrderDiff',

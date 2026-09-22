@@ -1,0 +1,6 @@
+@extends('admin.layout')
+@section('title', 'Vendors')
+@section('content')
+<div class="heading"><div><div class="kicker">FULFILMENT NETWORK</div><h1>Vendors</h1><p>Manage pickup addresses, portal users and Shiprocket pickup codes.</p></div><a class="button" href="{{ route('admin.vendors.create') }}">Add vendor</a></div>
+<div class="panel"><div class="table-wrap"><table><thead><tr><th>Vendor</th><th>Pickup</th><th>Shiprocket</th><th>Orders</th><th>Status</th><th></th></tr></thead><tbody>@forelse($vendors as $vendor)<tr><td><strong>{{ $vendor->business_name }}</strong><br><small>{{ $vendor->contact_person }} · {{ $vendor->phone }}</small></td><td>{{ $vendor->pickup_city }}, {{ $vendor->pickup_state }} {{ $vendor->pickup_postal_code }}</td><td><span style="font-family:monospace;">{{ $vendor->shiprocket_pickup_location ?: 'Not synced' }}</span></td><td>{{ $vendor->fulfillments_count }}</td><td><span class="badge {{ $vendor->is_active ? '' : 'warn' }}">{{ $vendor->is_active ? 'Active' : 'Inactive' }}</span></td><td><a href="{{ route('admin.vendors.edit', $vendor) }}">Edit</a></td></tr>@empty<tr><td colspan="6" class="empty">No vendors yet.</td></tr>@endforelse</tbody></table></div>{{ $vendors->links() }}</div>
+@endsection

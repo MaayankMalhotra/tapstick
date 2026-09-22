@@ -101,6 +101,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/cart-drawer.css') }}">
 </head>
 <body>
 
@@ -503,7 +504,10 @@
     @include('partials.lead-modal')
     <!-- STOREFRONT AI STICKER CHATBOT & STYLIST -->
     @include('partials.sticker-ai-chat')
+    <!-- SLIDE-OUT CART DRAWER -->
+    @include('partials.cart-drawer')
 
     @stack('scripts')
+    <script src="{{ asset('js/cart-drawer.js') }}" defer></script>
 </body>
 </html>

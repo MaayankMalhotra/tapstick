@@ -851,6 +851,7 @@ button {
   width: 100%;
   max-width: 440px;
   height: 420px;
+  transform: translateY(-34px);
 }
 
 /* Center Stage Base Card */
@@ -2226,6 +2227,9 @@ button {
   }
   .hero-pop-visual-col {
     min-height: 400px;
+  }
+  .hero-sticker-stage {
+    transform: none;
   }
   .products-pop-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -5619,5 +5623,3 @@ button {
     padding: 3px 10px;
   }
 }
-
-

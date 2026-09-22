@@ -27,15 +27,28 @@ class AppServiceProvider extends ServiceProvider
             $cart = session('cart', []);
             $cartCount = array_sum($cart);
             $cartSubtotal = 0;
+            $headerCartItems = collect();
+
             if (!empty($cart)) {
-                $productPrices = \App\Models\Product::whereIn('id', array_keys($cart))->pluck('price', 'id');
+                $products = \App\Models\Product::whereIn('id', array_keys($cart))->get()->keyBy('id');
                 foreach ($cart as $id => $qty) {
-                    if (isset($productPrices[$id])) {
-                        $cartSubtotal += $productPrices[$id] * $qty;
+                    $product = $products->get($id);
+                    if ($product) {
+                        $lineTotal = $product->price * $qty;
+                        $cartSubtotal += $lineTotal;
+                        $headerCartItems->push([
+                            'product' => $product,
+                            'quantity' => $qty,
+                            'line_total' => $lineTotal,
+                        ]);
                     }
                 }
             }
-            $view->with('headerCartCount', $cartCount)->with('headerCartSubtotal', $cartSubtotal);
+
+            $view
+                ->with('headerCartCount', $cartCount)
+                ->with('headerCartSubtotal', $cartSubtotal)
+                ->with('headerCartItems', $headerCartItems);
         });
     }
 }

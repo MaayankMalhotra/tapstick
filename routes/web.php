@@ -36,6 +36,8 @@ Route::get('/', [StoreController::class, 'home'])->name('home');
 Route::get('/api/products', [StoreController::class, 'apiProducts'])->name('api.products');
 Route::get('/products/{product:slug}', [StoreController::class, 'show'])->name('products.show');
 Route::get('/cart', [StoreController::class, 'cart'])->name('cart.index');
+Route::get('/cart/drawer', [StoreController::class, 'drawerData'])->name('cart.drawer');
+Route::post('/cart/coupon', [StoreController::class, 'applyCoupon'])->name('cart.coupon');
 Route::post('/cart/{product}', [StoreController::class, 'addToCart'])->name('cart.add');
 Route::patch('/cart/{product}', [StoreController::class, 'updateCart'])->name('cart.update');
 Route::delete('/cart/{product}', [StoreController::class, 'removeFromCart'])->name('cart.remove');

@@ -63,25 +63,8 @@ class StickerAiService
             $maxPrice = 50.0;
         }
 
-        // 2. Detect Category Intent
-        $targetCategorySlug = null;
-        $categoryKeywords = [
-            'cars-bikes' => ['car', 'cars', 'bike', 'bikes', 'bumper', 'driving', 'vehicle', 'rider', 'riding', 'motorcycle', 'scooter', 'bullet', 'thar', 'jeep', 'helmet'],
-            'anime' => ['anime', 'manga', 'naruto', 'gojo', 'jujutsu', 'kaisen', 'goku', 'dragon ball', 'one piece', 'luffy', 'demon slayer', 'tanjiro', 'baki', 'death note', 'levi', 'attack on titan', 'zoro', 'sukuna', 'itachi'],
-            'tech-dev' => ['code', 'coding', 'developer', 'programmer', 'python', 'javascript', 'js', 'react', 'node', 'linux', 'github', 'git', 'docker', 'terminal', 'bug', 'geek', 'nerd', 'laptop', 'software'],
-            'memes' => ['meme', 'memes', 'funny', 'desi', 'bollywood', 'humor', 'joke', 'sarcasm', 'lol', 'dank', 'jugaad'],
-            'glitter-holo' => ['holo', 'holographic', 'glitter', 'sparkle', 'shiny', 'rainbow', 'prism', 'iridescent'],
-            'aesthetic' => ['aesthetic', 'cute', 'vibes', 'vibe', 'pastel', 'floral', 'flower', 'coffee', 'minimal', 'chill', 'lofi'],
-        ];
-
-        foreach ($categoryKeywords as $slug => $keywords) {
-            foreach ($keywords as $kw) {
-                if (preg_match('/\b' . preg_quote($kw, '/') . '\b/i', $cleanQuery)) {
-                    $targetCategorySlug = $slug;
-                    break 2;
-                }
-            }
-        }
+        // 2. Detect category intent using both curated aliases and live category names/slugs.
+        $targetCategorySlug = $this->detectCategorySlug($cleanQuery);
 
         // 3. Clean search terms by stripping common conversational stopwords
         $stopwords = [
@@ -95,73 +78,70 @@ class StickerAiService
             return strlen($t) >= 2 && !in_array($t, $stopwords);
         }));
 
-        // 4. Build Product Query
-        $dbQuery = Product::with('category:id,name,slug')
+        // 4. Pull the live catalog and score every product. The catalog is small enough
+        // to rank in memory, which gives better results than a random SQL fallback.
+        $products = Product::with('category:id,name,slug')
             ->where('is_active', true)
-            ->where('stock', '>', 0);
+            ->where('stock', '>', 0)
+            ->when($maxPrice !== null && $maxPrice > 0, fn ($q) => $q->where('price', '<=', $maxPrice))
+            ->get();
 
-        if ($maxPrice !== null && $maxPrice > 0) {
-            $dbQuery->where('price', '<=', $maxPrice);
-        }
+        $phrase = implode(' ', $searchTerms);
+        $scored = $products->map(function (Product $product) use ($cleanQuery, $phrase, $searchTerms, $targetCategorySlug) {
+            $categoryName = strtolower((string) $product->category?->name);
+            $categorySlug = strtolower((string) $product->category?->slug);
+            $name = strtolower($product->name);
+            $slug = strtolower($product->slug);
+            $description = strtolower((string) $product->description);
+            $haystack = trim($name.' '.$slug.' '.$description.' '.$categoryName.' '.$categorySlug);
 
-        if ($targetCategorySlug) {
-            $category = Category::where('slug', $targetCategorySlug)->first();
-            if ($category) {
-                $dbQuery->where('category_id', $category->id);
+            $score = 0;
+            if ($targetCategorySlug && $categorySlug === $targetCategorySlug) {
+                $score += 45;
             }
-        }
-
-        // Try exact phrase matching first
-        $exactPhraseMatches = collect();
-        if (!empty($searchTerms)) {
-            $phrase = implode(' ', $searchTerms);
-            $exactPhraseMatches = (clone $dbQuery)
-                ->where('name', 'LIKE', "%{$phrase}%")
-                ->orderBy('price', 'desc')
-                ->take($limit)
-                ->get();
-        }
-
-        // Try token matching
-        $tokenMatches = collect();
-        if ($exactPhraseMatches->count() < $limit && !empty($searchTerms)) {
-            $existingIds = $exactPhraseMatches->pluck('id')->toArray();
-            $tokenMatches = (clone $dbQuery)
-                ->whereNotIn('id', $existingIds)
-                ->where(function ($q) use ($searchTerms) {
-                    foreach ($searchTerms as $term) {
-                        $q->orWhere('name', 'LIKE', "%{$term}%")
-                          ->orWhere('slug', 'LIKE', "%{$term}%");
-                    }
-                })
-                ->orderBy('price', 'desc')
-                ->take($limit - $exactPhraseMatches->count())
-                ->get();
-        }
-
-        $combined = $exactPhraseMatches->merge($tokenMatches);
-
-        // Fallback: If still not enough, grab category/popular items
-        if ($combined->count() < 4) {
-            $existingIds = $combined->pluck('id')->toArray();
-            $fallbackQuery = Product::with('category:id,name,slug')
-                ->where('is_active', true)
-                ->where('stock', '>', 0)
-                ->whereNotIn('id', $existingIds);
-
-            if ($targetCategorySlug) {
-                $cat = Category::where('slug', $targetCategorySlug)->first();
-                if ($cat) {
-                    $fallbackQuery->where('category_id', $cat->id);
+            if ($phrase !== '' && str_contains($name, $phrase)) {
+                $score += 60;
+            }
+            if ($phrase !== '' && str_contains($slug, Str::slug($phrase))) {
+                $score += 45;
+            }
+            foreach ($searchTerms as $term) {
+                if (str_contains($name, $term)) {
+                    $score += 18;
+                }
+                if (str_contains($slug, Str::slug($term))) {
+                    $score += 14;
+                }
+                if (str_contains($categoryName, $term) || str_contains($categorySlug, Str::slug($term))) {
+                    $score += 16;
+                }
+                if (str_contains($description, $term)) {
+                    $score += 6;
+                }
+                if ($term !== '' && str_contains($haystack, $term)) {
+                    $score += 3;
                 }
             }
-
-            if ($maxPrice !== null && $maxPrice > 0) {
-                $fallbackQuery->where('price', '<=', $maxPrice);
+            if ($cleanQuery !== '' && str_contains($haystack, $cleanQuery)) {
+                $score += 30;
             }
 
-            $fillers = $fallbackQuery->inRandomOrder()->take($limit - $combined->count())->get();
-            $combined = $combined->merge($fillers);
+            return ['product' => $product, 'score' => $score];
+        })
+        ->filter(fn ($row) => $row['score'] > 0 || $targetCategorySlug)
+        ->sortByDesc(fn ($row) => [$row['score'], (float) $row['product']->price, $row['product']->id])
+        ->pluck('product')
+        ->values();
+
+        $combined = $scored->take($limit);
+
+        if ($combined->count() < $limit) {
+            $fallbacks = $products
+                ->whereNotIn('id', $combined->pluck('id')->all())
+                ->sortByDesc('stock')
+                ->take($limit - $combined->count());
+
+            $combined = $combined->merge($fallbacks);
         }
 
         return $combined->map(function (Product $p) {
@@ -177,24 +157,67 @@ class StickerAiService
         $priceNum = (float) $p->price;
         $originalPrice = round($priceNum * 1.8, 0);
 
-        $imageUrl = $p->image;
-        if ($imageUrl && !Str::startsWith($imageUrl, ['http://', 'https://', '/'])) {
-            $imageUrl = '/' . ltrim($imageUrl, '/');
-        }
-
         return [
             'id' => $p->id,
             'name' => $p->name,
+            'product_name' => $p->name,
             'slug' => $p->slug,
             'price' => number_format($priceNum, 2, '.', ''),
             'formatted_price' => '₹' . number_format($priceNum, 0),
             'formatted_original_price' => '₹' . number_format($originalPrice, 0),
             'category' => $p->category?->name ?? 'Sticker',
             'category_slug' => $p->category?->slug ?? 'stickers',
-            'image_url' => $imageUrl ?: '/images/hero-banner.webp',
+            'image_url' => $this->normalizeImageUrl($p->image),
             'url' => route('products.show', $p->slug),
             'stock' => $p->stock,
         ];
+    }
+
+    protected function normalizeImageUrl(?string $image): string
+    {
+        if (empty($image)) {
+            return asset('images/hero-banner.webp');
+        }
+
+        if (Str::startsWith($image, ['http://', 'https://', '/'])) {
+            return $image;
+        }
+
+        if (Str::startsWith($image, 'images/')) {
+            return asset($image);
+        }
+
+        return asset('storage/' . ltrim($image, '/'));
+    }
+
+    protected function detectCategorySlug(string $cleanQuery): ?string
+    {
+        $categoryKeywords = [
+            'cars-bikes' => ['car', 'cars', 'bike', 'bikes', 'bumper', 'driving', 'vehicle', 'rider', 'riding', 'motorcycle', 'scooter', 'bullet', 'thar', 'jeep', 'helmet', 'auto'],
+            'anime' => ['anime', 'manga', 'naruto', 'gojo', 'jujutsu', 'kaisen', 'goku', 'dragon ball', 'one piece', 'luffy', 'demon slayer', 'tanjiro', 'baki', 'death note', 'levi', 'attack on titan', 'zoro', 'sukuna', 'itachi'],
+            'tech-dev' => ['tech', 'code', 'coding', 'developer', 'programmer', 'python', 'javascript', 'js', 'react', 'node', 'linux', 'github', 'git', 'docker', 'terminal', 'bug', 'geek', 'nerd', 'laptop', 'software', 'dev'],
+            'memes' => ['meme', 'memes', 'funny', 'desi', 'bollywood', 'humor', 'joke', 'sarcasm', 'lol', 'dank', 'jugaad'],
+            'glitter-holo' => ['holo', 'holographic', 'glitter', 'sparkle', 'shiny', 'rainbow', 'prism', 'iridescent'],
+            'aesthetic' => ['aesthetic', 'cute', 'vibes', 'vibe', 'pastel', 'floral', 'flower', 'coffee', 'minimal', 'chill', 'lofi'],
+        ];
+
+        foreach ($categoryKeywords as $slug => $keywords) {
+            foreach ($keywords as $keyword) {
+                if (preg_match('/\b' . preg_quote($keyword, '/') . '\b/i', $cleanQuery)) {
+                    return $slug;
+                }
+            }
+        }
+
+        foreach (Category::query()->select('name', 'slug')->get() as $category) {
+            $slug = strtolower($category->slug);
+            $name = strtolower($category->name);
+            if (str_contains($cleanQuery, $slug) || str_contains($cleanQuery, $name)) {
+                return $slug;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -207,8 +230,10 @@ class StickerAiService
             return Product::with('category:id,name,slug')
                 ->where('is_active', true)
                 ->where('stock', '>', 0)
-                ->whereIn('id', [1, 2002, 795, 3055, 3963])
-                ->orWhere('name', 'LIKE', '%Bumper Sticker%')
+                ->where(function ($q) {
+                    $q->whereIn('id', [1, 2002, 795, 3055, 3963])
+                        ->orWhere('name', 'LIKE', '%Bumper Sticker%');
+                })
                 ->take($limit)
                 ->get()
                 ->map(fn(Product $p) => $this->formatProductCard($p))
@@ -225,14 +250,18 @@ class StickerAiService
         $candidatesText = '';
         foreach ($candidateProducts as $idx => $item) {
             $candidatesText .= sprintf(
-                "%d. \"%s\" | Category: %s | Price: %s | URL: %s\n",
+                "%d. \"%s\" | Category: %s (%s) | Price: %s | Image: %s | URL: %s\n",
                 $idx + 1,
                 $item['name'],
                 $item['category'],
+                $item['category_slug'],
                 $item['formatted_price'],
+                $item['image_url'],
                 $item['url']
             );
         }
+
+        $catalogSummary = $this->getCatalogSummary();
 
         return <<<PROMPT
 You are Tabstick AI, the energetic, fun, and knowledgeable AI Shopping Assistant & Sticker Stylist for Tabstick (tabstick.in) — India's premier creative sticker brand founded by Maayank Malhotra.
@@ -262,16 +291,54 @@ Your job is to help customers discover the perfect die-cut waterproof vinyl stic
   - Dispatched within 24–48 hours; delivery in 3–5 days across India.
   - Cash on Delivery (COD), UPI (GPay, PhonePe, Paytm), and Cards accepted.
 
+### LIVE CATEGORY MAP FROM THE DATABASE:
+{$catalogSummary}
+
 ### CURRENT LIVE STICKERS RETRIEVED FROM OUR 4,479 CATALOG FOR THIS QUERY:
 {$candidatesText}
 
 ### STRICT RULES FOR RESPONSES:
-1. **Catalog Grounding**: You MUST recommend stickers from the retrieved live list above. Mention exact sticker names and prices in ₹.
+1. **Catalog Grounding**: You MUST recommend stickers from the retrieved live list above. Mention exact product/sticker names, category names, and prices in ₹.
 2. **Direct Links**: When mentioning a sticker, format it with its URL so the customer can tap it, e.g. "[Mountain Adventure Bumper Sticker](https://tabstick.in/products/mountain-adventure-bumper-sticker)".
-3. **Tone & Style**: Friendly, enthusiastic, youth-focused (Hinglish/English friendly if the user speaks Hindi/Hinglish). Use relevant emojis (⚡, 🔥, 🚗, 💻, ✨).
-4. **Length**: Keep replies punchy, readable, and structured (typically 2 to 4 engaging paragraphs or bullet points). Never write overly long essays.
-5. **No Hallucinations**: NEVER invent fictional sticker designs not in our catalog. If the user asks for something outside our current stock, recommend our closest matching aesthetic decals and mention custom stickers can be ordered!
+3. **Images**: Product cards are rendered separately by the site using the Image fields above. You can mention that cards below show images, price, and add-to-cart.
+4. **Tone & Style**: Friendly, enthusiastic, youth-focused (Hinglish/English friendly if the user speaks Hindi/Hinglish). Use relevant emojis (⚡, 🔥, 🚗, 💻, ✨).
+5. **Length**: Keep replies punchy, readable, and structured (typically 2 to 4 engaging paragraphs or bullet points). Never write overly long essays.
+6. **No Hallucinations**: NEVER invent fictional sticker designs not in our catalog. If the user asks for something outside our current stock, recommend the closest matching live products and mention custom stickers can be ordered.
 PROMPT;
+    }
+
+    protected function getCatalogSummary(): string
+    {
+        return Cache::remember('sticker_ai_catalog_summary_v2', 1800, function () {
+            $rows = Category::query()
+                ->withCount(['products as active_products_count' => function ($q) {
+                    $q->where('is_active', true)->where('stock', '>', 0);
+                }])
+                ->orderBy('name')
+                ->get()
+                ->map(function (Category $category) {
+                    $priceRange = Product::where('category_id', $category->id)
+                        ->where('is_active', true)
+                        ->where('stock', '>', 0)
+                        ->selectRaw('MIN(price) as min_price, MAX(price) as max_price')
+                        ->first();
+
+                    $min = $priceRange?->min_price !== null ? '₹' . number_format((float) $priceRange->min_price, 0) : 'N/A';
+                    $max = $priceRange?->max_price !== null ? '₹' . number_format((float) $priceRange->max_price, 0) : 'N/A';
+
+                    return sprintf(
+                        '- %s (%s): %d live stickers, price range %s-%s',
+                        $category->name,
+                        $category->slug,
+                        $category->active_products_count,
+                        $min,
+                        $max
+                    );
+                })
+                ->implode("\n");
+
+            return $rows !== '' ? $rows : '- No active categories found yet.';
+        });
     }
 
     /**
