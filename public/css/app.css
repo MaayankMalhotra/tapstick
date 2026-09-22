@@ -6093,3 +6093,363 @@ button {
     padding: 5px 9px;
   }
 }
+
+/* ==========================================================================
+   17. CASA DI SOLARE INSPIRED EDITORIAL HERO
+   ========================================================================== */
+.solare-landing {
+  position: relative;
+  min-height: calc(100vh - 106px);
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(255, 230, 0, 0.16) 0%, rgba(255, 230, 0, 0.05) 34%, transparent 62%),
+    radial-gradient(circle at 75% 78%, rgba(255, 51, 75, 0.16), transparent 34%),
+    radial-gradient(circle at 54% 70%, rgba(37, 99, 235, 0.17), transparent 30%),
+    #F8F4EC;
+  color: var(--color-ink);
+  border-bottom: var(--border-pop);
+}
+
+.solare-noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(24, 24, 27, 0.13) 1.4px, transparent 1.4px);
+  background-size: 32px 32px;
+  opacity: 0.52;
+}
+
+.solare-shell {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  min-height: calc(100vh - 106px);
+  flex-direction: column;
+  padding-top: clamp(28px, 4vh, 54px);
+  padding-bottom: clamp(28px, 4vh, 54px);
+}
+
+.solare-meta-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  border-top: 2px solid rgba(24, 24, 27, 0.32);
+  border-bottom: 2px solid rgba(24, 24, 27, 0.32);
+  padding: 12px 0;
+  font-family: var(--font-heading);
+  font-size: clamp(0.68rem, 0.9vw, 0.82rem);
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(24, 24, 27, 0.68);
+}
+
+.solare-meta-row span:nth-child(2) {
+  text-align: center;
+}
+
+.solare-meta-row span:nth-child(3) {
+  text-align: right;
+}
+
+.solare-grid {
+  display: grid;
+  grid-template-columns: 70px minmax(0, 1fr) minmax(430px, 0.86fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: center;
+  flex: 1;
+  padding: clamp(34px, 6vh, 82px) 0;
+}
+
+.solare-side-label {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 2px solid rgba(24, 24, 27, 0.32);
+  padding-left: 16px;
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  color: rgba(24, 24, 27, 0.62);
+}
+
+.solare-side-label span {
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.solare-side-label strong {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+}
+
+.solare-copy {
+  max-width: 720px;
+}
+
+.solare-kicker {
+  margin: 0 0 12px;
+  font-family: var(--font-heading);
+  font-size: clamp(0.86rem, 1vw, 1rem);
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-pop-red);
+}
+
+.solare-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(4.7rem, 9vw, 9.4rem);
+  font-weight: 900;
+  line-height: 0.78;
+  letter-spacing: -0.065em;
+  text-transform: uppercase;
+}
+
+.solare-title span {
+  display: block;
+}
+
+.solare-title span:nth-child(3) {
+  color: var(--color-pop-red);
+}
+
+.solare-body {
+  max-width: 660px;
+  margin: clamp(24px, 3vh, 34px) 0 0;
+  font-size: clamp(1rem, 1.22vw, 1.18rem);
+  line-height: 1.62;
+  font-weight: 600;
+  color: rgba(24, 24, 27, 0.66);
+}
+
+.solare-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: clamp(26px, 3.5vh, 42px);
+}
+
+.solare-primary,
+.solare-secondary {
+  display: inline-flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  border: 2.5px solid var(--color-ink);
+  border-radius: var(--radius-pill);
+  padding: 0 28px;
+  font-family: var(--font-heading);
+  font-size: 0.98rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  box-shadow: 4px 4px 0 var(--color-ink);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.solare-primary {
+  background: var(--color-pop-yellow);
+}
+
+.solare-secondary {
+  background: #FFFFFF;
+}
+
+.solare-primary:hover,
+.solare-secondary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--color-ink);
+}
+
+.solare-visual {
+  position: relative;
+  min-height: 520px;
+}
+
+.solare-photo-card {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  background: #FFFFFF;
+  border: 2.5px solid var(--color-ink);
+  border-radius: 28px;
+  box-shadow: 12px 12px 0 var(--color-ink);
+  transform: rotate(-1.5deg);
+}
+
+.solare-photo-card img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+}
+
+.solare-photo-card figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  border-top: 2.5px solid var(--color-ink);
+  background: #FFFFFF;
+  font-family: var(--font-heading);
+  font-weight: 900;
+}
+
+.solare-photo-card figcaption span {
+  color: rgba(24, 24, 27, 0.58);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
+.solare-photo-card figcaption strong {
+  font-size: 0.86rem;
+  text-align: right;
+}
+
+.solare-floating-note {
+  position: absolute;
+  z-index: 4;
+  display: flex;
+  min-width: 132px;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--color-pop-yellow);
+  border: 2.5px solid var(--color-ink);
+  border-radius: 18px;
+  box-shadow: 5px 5px 0 var(--color-ink);
+  padding: 12px 14px;
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+}
+
+.solare-floating-note span {
+  font-size: 1.55rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.solare-floating-note strong {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+}
+
+.note-one {
+  top: 8%;
+  left: -44px;
+  transform: rotate(-5deg);
+}
+
+.note-two {
+  right: -26px;
+  bottom: 18%;
+  transform: rotate(5deg);
+  background: #FFFFFF;
+}
+
+.solare-bottom-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  border-top: 2px solid rgba(24, 24, 27, 0.32);
+  padding-top: 14px;
+  font-family: var(--font-heading);
+  font-size: clamp(0.72rem, 0.92vw, 0.86rem);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(24, 24, 27, 0.68);
+}
+
+.solare-bottom-row span:nth-child(2) {
+  text-align: center;
+}
+
+.solare-bottom-row span:nth-child(3) {
+  text-align: right;
+}
+
+@media (max-width: 1180px) {
+  .solare-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .solare-side-label {
+    display: none;
+  }
+
+  .solare-visual {
+    min-height: auto;
+  }
+
+  .solare-photo-card img {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 768px) {
+  .solare-shell {
+    min-height: auto;
+    padding-top: 28px;
+    padding-bottom: 36px;
+  }
+
+  .solare-meta-row,
+  .solare-bottom-row {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .solare-meta-row span,
+  .solare-bottom-row span,
+  .solare-meta-row span:nth-child(2),
+  .solare-meta-row span:nth-child(3),
+  .solare-bottom-row span:nth-child(2),
+  .solare-bottom-row span:nth-child(3) {
+    text-align: left;
+  }
+
+  .solare-grid {
+    padding: 32px 0;
+  }
+
+  .solare-title {
+    font-size: clamp(3.9rem, 18vw, 6.6rem);
+  }
+
+  .solare-actions a {
+    width: 100%;
+  }
+
+  .solare-photo-card {
+    border-radius: 20px;
+    box-shadow: 7px 7px 0 var(--color-ink);
+  }
+
+  .solare-photo-card figcaption {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .solare-floating-note {
+    min-width: 108px;
+    padding: 9px 11px;
+  }
+
+  .note-one {
+    left: 8px;
+    top: -18px;
+  }
+
+  .note-two {
+    right: 6px;
+    bottom: -22px;
+  }
+}

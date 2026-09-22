@@ -7,124 +7,65 @@
 @section('content')
 
 <!-- ==========================================================================
-     1. FULL-SCREEN ANIMATED PLAYFUL POP HERO SECTION
+     1. EDITORIAL LANDING HERO — CASA DI SOLARE INSPIRED
      ========================================================================== -->
-<section class="hero-pop-section" id="hero">
-    <!-- Moving Organic Gradient / Blob Mesh Background -->
-    <div class="hero-blob-canvas" aria-hidden="true">
-        <div class="blob-mesh blob-mesh-1"></div>
-        <div class="blob-mesh blob-mesh-2"></div>
-        <div class="blob-mesh blob-mesh-3"></div>
-        <div class="hero-halftone-overlay"></div>
-    </div>
+<section class="solare-landing" id="hero">
+    <div class="solare-noise" aria-hidden="true"></div>
 
-    <div class="container hero-pop-container">
-        <!-- Floating Doodles & Stickers Around Headline (Parallax Depth) -->
-        <div class="hero-floating-doodle doodle-star-1" data-parallax-depth="0.9" data-base-rotate="-12" aria-hidden="true">
-            <span class="doodle-sparkle">✦</span>
-        </div>
-        <div class="hero-floating-doodle doodle-star-2" data-parallax-depth="1.4" data-base-rotate="15" aria-hidden="true">
-            <span class="doodle-sparkle color-pink">✴</span>
-        </div>
-        <div class="hero-floating-doodle doodle-arrow" data-parallax-depth="0.6" data-base-rotate="8" aria-hidden="true">
-            <svg width="60" height="40" viewBox="0 0 60 40" fill="none">
-                <path d="M5 30C20 10 38 12 52 18M52 18L44 8M52 18L46 28" stroke="#FF334B" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span class="doodle-arrow-label">STICK EM!</span>
+    <div class="container solare-shell">
+        <div class="solare-meta-row">
+            <span>Tabstick Studio</span>
+            <span>Waterproof Vinyl</span>
+            <span>4,479 Live Decals</span>
         </div>
 
-        <!-- Left Column: Oversized Rounded Headline & Magnetic CTAs -->
-        <div class="hero-pop-text-col">
-            <div class="hero-pop-eyebrow-pill reveal-on-scroll">
-                <span class="eyebrow-spark">⚡</span>
-                <span class="eyebrow-text">TABSTICK DROP • 100% WATERPROOF VINYL</span>
-                <span class="eyebrow-badge">NEW</span>
-            </div>
+        <div class="solare-grid">
+            <aside class="solare-side-label" aria-hidden="true">
+                <span>01</span>
+                <strong>Sticker House</strong>
+            </aside>
 
-            <!-- Independent Word Spans for Staggered Spring Animation -->
-            <h1 class="hero-pop-headline reveal-on-scroll">
-                <span class="headline-line-1">
-                    <span class="pop-word-span word-make">TABSTICK</span>
-                    <span class="pop-word-span word-it">STICKERS</span>
-                </span>
-                <span class="headline-line-2">
-                    <span class="headline-pop-word word-yours">
-                        CREATIVE &amp; DURABLE.
-                        <svg class="pop-wiggle-underline" viewBox="0 0 320 28" fill="none" preserveAspectRatio="none">
-                            <path d="M4 18C45 4 85 24 130 14C175 4 215 24 260 14C285 8 305 16 316 12" stroke="#FFE600" stroke-width="8" stroke-linecap="round"/>
-                        </svg>
-                    </span>
-                    <span class="hero-pill-badge-floating" data-parallax-depth="1.2" data-base-rotate="-8">
-                        FOR LAPTOPS, CARS &amp; MORE 🔥
-                    </span>
-                </span>
-            </h1>
+            <div class="solare-copy">
+                <p class="solare-kicker">Casa di Tabstick</p>
+                <h1 class="solare-title">
+                    <span>Peel</span>
+                    <span>Stick</span>
+                    <span>Stand Out</span>
+                </h1>
+                <p class="solare-body">
+                    Premium waterproof vinyl stickers for laptops, cars, bottles, phones and everyday gear. Built with automotive-grade material, clean peel adhesive and a catalog made for people who like their things to feel personal.
+                </p>
 
-            <p class="hero-pop-subtext reveal-on-scroll">
-                Tabstick is an Indian sticker brand founded by Mayank Malhotra. We create creative and durable stickers for laptops, cars, phones and college students. Crafted with automotive-grade die-cut vinyl built to survive monsoons, road trips, laptops, hydro flasks &amp; daily carry without peeling or leaving gooey residue.
-            </p>
-
-            <div class="hero-pop-cta-row reveal-on-scroll">
-                <a href="#shop" class="btn-pop-primary btn-magnetic trigger-confetti" data-confetti="true">
-                    <span>Shop the drop 🛍️</span>
-                </a>
-                <a href="#why" class="btn-pop-secondary btn-magnetic">
-                    <span>Why we stick ✦</span>
-                </a>
-            </div>
-
-            <div class="hero-pop-perks-bar reveal-on-scroll">
-                <div class="hero-perk-chip">
-                    <span class="chip-emoji">💧</span>
-                    <span>100% Waterproof</span>
-                </div>
-                <div class="hero-perk-chip">
-                    <span class="chip-emoji">⚡</span>
-                    <span>Zero Sticky Residue</span>
-                </div>
-                <div class="hero-perk-chip">
-                    <span class="chip-emoji">🚚</span>
-                    <span>48h Pan-India Dispatch</span>
+                <div class="solare-actions">
+                    <a href="#shop" class="solare-primary trigger-confetti" data-confetti="true">Explore Stickers</a>
+                    <a href="#why" class="solare-secondary">Material Story</a>
                 </div>
             </div>
-        </div>
 
-        <!-- Right Column: Premium Sticker Showcase -->
-        <div class="hero-pop-visual-col">
-            <div class="hero-showcase-wrap" data-parallax-depth="0.35" data-base-rotate="-1">
-                <div class="hero-showcase-shell">
-                    <div class="hero-showcase-topline">
+            <div class="solare-visual">
+                <figure class="solare-photo-card">
+                    <img src="{{ asset('images/hero-banner.webp') }}" alt="Tabstick stickers on laptop, bottle and desk">
+                    <figcaption>
                         <span>Collector Preview</span>
-                        <strong>4.5K+ Designs</strong>
-                    </div>
-                    <div class="hero-showcase-media">
-                        <img src="{{ asset('images/hero-banner.webp') }}" alt="Tabstick stickers on laptop, bottle and desk" class="hero-showcase-img">
-                    </div>
-                    <div class="hero-showcase-stats">
-                        <span><strong>₹10+</strong> starter drops</span>
-                        <span><strong>₹499</strong> free shipping</span>
-                        <span><strong>48h</strong> dispatch</span>
-                    </div>
-                </div>
+                        <strong>₹10+ drops / ₹499 free shipping</strong>
+                    </figcaption>
+                </figure>
 
-                <div class="hero-mini-sticker hero-mini-sticker-one" data-parallax-depth="1.1" data-base-rotate="-10">
-                    <img src="{{ asset('images/wasted.jpg') }}" alt="Wasted sticker">
-                    <span>Bestseller</span>
+                <div class="solare-floating-note note-one">
+                    <span>100%</span>
+                    <strong>Waterproof</strong>
                 </div>
-
-                <div class="hero-mini-sticker hero-mini-sticker-two" data-parallax-depth="1.35" data-base-rotate="9">
-                    <img src="{{ asset('images/fizzy-zero.jpg') }}" alt="Fizzy Zero sticker">
-                    <span>Pop Drop</span>
+                <div class="solare-floating-note note-two">
+                    <span>48h</span>
+                    <strong>Dispatch</strong>
                 </div>
-
-                <div class="hero-quality-stack">
-                    <span>💧 Waterproof</span>
-                    <span>✨ Zero residue</span>
-                    <span>🛡️ UV safe</span>
-                </div>
-
-                <div class="hero-showcase-shadow" aria-hidden="true"></div>
             </div>
+        </div>
+
+        <div class="solare-bottom-row">
+            <span>Zero sticky residue</span>
+            <span>Scratchproof laminate</span>
+            <span>Made for Indian roads, rain and daily carry</span>
         </div>
     </div>
 </section>
