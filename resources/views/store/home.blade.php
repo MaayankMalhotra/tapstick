@@ -7,65 +7,50 @@
 @section('content')
 
 <!-- ==========================================================================
-     1. EDITORIAL LANDING HERO — CASA DI SOLARE INSPIRED
+     1. KINETIC BLACK STUDIO HERO
      ========================================================================== -->
-<section class="solare-landing" id="hero">
-    <div class="solare-noise" aria-hidden="true"></div>
-
-    <div class="container solare-shell">
-        <div class="solare-meta-row">
-            <span>Tabstick Studio</span>
-            <span>Waterproof Vinyl</span>
-            <span>4,479 Live Decals</span>
+<section class="kinetic-landing" id="hero">
+    <div class="kinetic-stage" aria-hidden="true">
+        <div class="kinetic-word-track track-one">
+            <span>TABSTICK</span><span>TABSTICK</span><span>TABSTICK</span><span>TABSTICK</span>
+        </div>
+        <div class="kinetic-word-track track-two">
+            <span>STICKERS</span><span>STICKERS</span><span>STICKERS</span><span>STICKERS</span>
         </div>
 
-        <div class="solare-grid">
-            <aside class="solare-side-label" aria-hidden="true">
-                <span>01</span>
-                <strong>Sticker House</strong>
-            </aside>
+        <svg class="kinetic-scribble scribble-one" viewBox="0 0 460 220" fill="none">
+            <path d="M12 151 C83 39 156 248 223 109 C279 -7 327 211 448 42" />
+        </svg>
+        <svg class="kinetic-scribble scribble-two" viewBox="0 0 520 250" fill="none">
+            <path d="M8 38 C102 10 116 231 206 192 C283 159 271 35 351 49 C417 61 423 215 512 144" />
+        </svg>
+    </div>
 
-            <div class="solare-copy">
-                <p class="solare-kicker">Casa di Tabstick</p>
-                <h1 class="solare-title">
-                    <span>Peel</span>
-                    <span>Stick</span>
-                    <span>Stand Out</span>
-                </h1>
-                <p class="solare-body">
-                    Premium waterproof vinyl stickers for laptops, cars, bottles, phones and everyday gear. Built with automotive-grade material, clean peel adhesive and a catalog made for people who like their things to feel personal.
-                </p>
+    <div class="kinetic-center-badge" aria-hidden="true">
+        <img src="{{ asset('images/logo.png') }}" alt="">
+    </div>
 
-                <div class="solare-actions">
-                    <a href="#shop" class="solare-primary trigger-confetti" data-confetti="true">Explore Stickers</a>
-                    <a href="#why" class="solare-secondary">Material Story</a>
-                </div>
+    <div class="container kinetic-shell">
+        <div class="kinetic-meta-grid">
+            <div>
+                <strong>TABSTICK STUDIO</strong>
+                <span>Vinyl decals for creative daily carry.</span>
             </div>
-
-            <div class="solare-visual">
-                <figure class="solare-photo-card">
-                    <img src="{{ asset('images/hero-banner.webp') }}" alt="Tabstick stickers on laptop, bottle and desk">
-                    <figcaption>
-                        <span>Collector Preview</span>
-                        <strong>₹10+ drops / ₹499 free shipping</strong>
-                    </figcaption>
-                </figure>
-
-                <div class="solare-floating-note note-one">
-                    <span>100%</span>
-                    <strong>Waterproof</strong>
-                </div>
-                <div class="solare-floating-note note-two">
-                    <span>48h</span>
-                    <strong>Dispatch</strong>
-                </div>
+            <div>
+                <strong>4,479 STICKERS TRAINED</strong>
+                <span>Anime, cars, tech, meme drops and custom packs.</span>
             </div>
         </div>
 
-        <div class="solare-bottom-row">
-            <span>Zero sticky residue</span>
-            <span>Scratchproof laminate</span>
-            <span>Made for Indian roads, rain and daily carry</span>
+        <div class="kinetic-panel">
+            <div class="kinetic-panel-tag">Drop 01</div>
+            <div class="kinetic-panel-copy">
+                <p>Waterproof vinyl, clean peel adhesive and loud designs for laptops, cars, bottles and phones.</p>
+            </div>
+            <div class="kinetic-actions">
+                <a href="#shop" class="kinetic-primary trigger-confetti" data-confetti="true">Shop the drop</a>
+                <a href="#why" class="kinetic-secondary">Why we stick</a>
+            </div>
         </div>
     </div>
 </section>
