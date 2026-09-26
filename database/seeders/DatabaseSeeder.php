@@ -64,5 +64,7 @@ class DatabaseSeeder extends Seeder
                 ]
             );
         }
+
+        \Illuminate\Support\Facades\Artisan::call('import:jewelsgalaxy');
     }
 }
