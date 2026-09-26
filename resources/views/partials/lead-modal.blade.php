@@ -38,10 +38,6 @@
                     <span>⚡ Claim 10% Off Now</span>
                 </button>
             </form>
-
-            <div class="lead-modal-footer-tip">
-                🔒 We respect your privacy. No spam ever, only fresh drops &amp; discount alerts.
-            </div>
         </div>
 
         <!-- SUCCESS STATE -->
