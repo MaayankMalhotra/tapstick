@@ -68,6 +68,12 @@ Route::get('/gaze-n-gifts', [StoreController::class, 'gazeNGifts'])->name('store
 Route::get('/graze-n-gifts', [StoreController::class, 'gazeNGifts']);
 Route::get('/graze-and-gifts', [StoreController::class, 'gazeNGifts']);
 
+// Prem Medical Centre (Sector 19, Faridabad)
+Route::get('/prem-medical-center', [StoreController::class, 'premMedicalCenter'])->name('prem-medical-center');
+Route::get('/prem-medical-centre', fn() => redirect()->route('prem-medical-center', [], 301));
+Route::redirect('/pmc', '/prem-medical-center', 301);
+Route::redirect('/prem', '/prem-medical-center', 301);
+
 // Graze & Gift Co. Lead Inquiries API
 Route::post('/api/graze/inquiry', [GrazeInquiryController::class, 'store'])->middleware('throttle:20,1')->name('api.graze.inquiry');
 Route::post('/api/graze-inquiry', [GrazeInquiryController::class, 'store'])->middleware('throttle:20,1');

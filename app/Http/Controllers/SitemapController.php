@@ -85,6 +85,14 @@ class SitemapController extends Controller
         $xml .= "    <priority>0.9</priority>\n";
         $xml .= "  </url>\n";
 
+        // Prem Medical Centre (Sector 19, Faridabad)
+        $xml .= "  <url>\n";
+        $xml .= "    <loc>{$baseUrl}/prem-medical-center</loc>\n";
+        $xml .= "    <lastmod>{$now}</lastmod>\n";
+        $xml .= "    <changefreq>weekly</changefreq>\n";
+        $xml .= "    <priority>0.95</priority>\n";
+        $xml .= "  </url>\n";
+
         // Active Product URLs with Image Sitemap
         foreach ($products as $product) {
             $prodLoc = htmlspecialchars("{$baseUrl}/products/" . $product->slug, ENT_XML1, 'UTF-8');

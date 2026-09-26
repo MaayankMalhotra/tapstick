@@ -663,4 +663,12 @@ class StoreController extends Controller
             'reply' => $reply,
         ]);
     }
+
+    /**
+     * Prem Medical Centre Landing Page (Sector 19, Faridabad)
+     */
+    public function premMedicalCenter(): View
+    {
+        return view('store.prem-medical-center');
+    }
 }
