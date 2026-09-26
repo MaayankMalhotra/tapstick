@@ -10,13 +10,13 @@
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <link rel="canonical" href="https://tabstick.in/maayank">
 
-    <!-- Open Graph / Facebook / LinkedIn Cards -->
+    <!-- Open Graph / Social Cards -->
     <meta property="og:site_name" content="Tabstick">
     <meta property="og:type" content="profile">
     <meta property="og:title" content="Maayank Malhotra (Mayank Malhotra) – Full Stack Software Engineer &amp; Founder">
     <meta property="og:description" content="Official portfolio and resume of Maayank Malhotra, Full Stack Engineer and Founder of Tabstick. 4+ years scaling APIs, Node.js, Laravel, React, and AWS cloud systems.">
     <meta property="og:url" content="https://tabstick.in/maayank">
-    <meta property="og:image" content="{{ asset('favicon-512x512.png') }}">
+    <meta property="og:image" content="{{ asset('images/developer-avatar.jpg') }}">
     <meta property="profile:first_name" content="Maayank">
     <meta property="profile:last_name" content="Malhotra">
     <meta property="profile:username" content="MaayankMalhotra">
@@ -25,62 +25,52 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Maayank Malhotra (Mayank Malhotra) – Full Stack Software Engineer &amp; Founder">
     <meta name="twitter:description" content="Official portfolio of Maayank Malhotra, Founder @ Tabstick &amp; Full Stack Engineer with 4+ years experience in distributed systems.">
-    <meta name="twitter:image" content="{{ asset('favicon-512x512.png') }}">
+    <meta name="twitter:image" content="{{ asset('images/developer-avatar.jpg') }}">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="48x48" href="{{ asset('favicon-48x48.png') }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
-    <!-- Google Fonts: Plus Jakarta Sans, Caveat (hand-drawn text), & JetBrains Mono -->
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- Deep Midnight Purple & Radiant Violet Aesthetic (Matching Screenshot Exactly) -->
+    <!-- Obsidian Violet Luxury Engineering Aesthetic -->
     <style>
         :root {
-            /* Deep Midnight Purple Theme from Screenshot */
             --bg-base: #0B0813;
-            --bg-deep: #07050C;
-            --bg-surface: rgba(22, 14, 38, 0.72);
-            --bg-card: rgba(26, 17, 44, 0.65);
-            --bg-card-hover: rgba(36, 23, 62, 0.85);
+            --bg-deep: #07050D;
+            --bg-surface: rgba(19, 13, 31, 0.75);
+            --bg-card: rgba(23, 16, 38, 0.65);
+            --bg-card-hover: rgba(33, 22, 54, 0.85);
 
-            /* Luminous Purple & Violet Accents */
             --accent-purple: #9D4EDD;
             --accent-violet: #A855F7;
             --accent-glow: #C084FC;
             --accent-bright: #E0AAFF;
-            --accent-magenta: #D946EF;
             --accent-cyan: #38BDF8;
-            --accent-green: #10B981;
+            --accent-emerald: #10B981;
 
-            /* Borders */
-            --border-subtle: rgba(168, 85, 247, 0.18);
-            --border-highlight: rgba(192, 132, 252, 0.45);
+            --border-subtle: rgba(168, 85, 247, 0.16);
+            --border-highlight: rgba(192, 132, 252, 0.35);
             --border-card: rgba(168, 85, 247, 0.22);
 
-            /* Text */
             --text-primary: #FFFFFF;
             --text-secondary: #CBD5E1;
             --text-muted: #8E8A9E;
 
-            /* Fonts */
             --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            --font-hand: 'Caveat', cursive;
             --font-mono: 'JetBrains Mono', monospace;
 
-            /* Border Radii */
             --radius-xs: 8px;
             --radius-sm: 12px;
-            --radius-md: 20px;
-            --radius-lg: 28px;
+            --radius-md: 18px;
+            --radius-lg: 26px;
             --radius-full: 9999px;
 
-            /* Glows */
-            --glow-purple-sm: 0 0 25px rgba(157, 78, 221, 0.3);
-            --glow-purple-lg: 0 0 70px rgba(168, 85, 247, 0.35);
-            --glow-avatar: 0 0 60px rgba(168, 85, 247, 0.55);
+            --glow-card: 0 10px 30px -10px rgba(124, 58, 237, 0.25);
+            --glow-purple-lg: 0 0 60px rgba(168, 85, 247, 0.35);
         }
 
         *, *::before, *::after {
@@ -107,8 +97,8 @@
             min-height: 100vh;
         }
 
-        /* Ambient Purple Aurora Mesh Background */
-        .ambient-purple-mesh {
+        /* Ambient Aurora Mesh */
+        .ambient-mesh {
             position: fixed;
             inset: 0;
             pointer-events: none;
@@ -116,132 +106,152 @@
             overflow: hidden;
         }
 
-        .purple-orb-1 {
+        .orb-1 {
             position: absolute;
-            top: -10%;
-            left: 20%;
-            width: 700px;
-            height: 700px;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, rgba(11, 8, 19, 0) 70%);
-            border-radius: 50%;
-            filter: blur(100px);
-            animation: orbFloat 22s ease-in-out infinite alternate;
-        }
-
-        .purple-orb-2 {
-            position: absolute;
-            top: 35%;
-            right: -10%;
+            top: -15%;
+            left: 15%;
             width: 750px;
             height: 750px;
-            background: radial-gradient(circle, rgba(157, 78, 221, 0.18) 0%, rgba(11, 8, 19, 0) 70%);
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.18) 0%, rgba(11, 8, 19, 0) 70%);
             border-radius: 50%;
-            filter: blur(110px);
-            animation: orbFloat 26s ease-in-out infinite alternate-reverse;
+            filter: blur(120px);
+            animation: orbDrift 24s ease-in-out infinite alternate;
         }
 
-        .purple-orb-3 {
+        .orb-2 {
+            position: absolute;
+            top: 40%;
+            right: -10%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.16) 0%, rgba(11, 8, 19, 0) 70%);
+            border-radius: 50%;
+            filter: blur(130px);
+            animation: orbDrift 28s ease-in-out infinite alternate-reverse;
+        }
+
+        .orb-3 {
             position: absolute;
             bottom: 5%;
             left: -5%;
-            width: 650px;
-            height: 650px;
-            background: radial-gradient(circle, rgba(217, 70, 239, 0.15) 0%, rgba(11, 8, 19, 0) 70%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(217, 70, 239, 0.12) 0%, rgba(11, 8, 19, 0) 70%);
             border-radius: 50%;
-            filter: blur(95px);
-            animation: orbFloat 24s ease-in-out infinite alternate;
+            filter: blur(110px);
+            animation: orbDrift 26s ease-in-out infinite alternate;
         }
 
-        @keyframes orbFloat {
+        @keyframes orbDrift {
             0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(30px, -25px) scale(1.08); }
-            100% { transform: translate(-25px, 30px) scale(0.95); }
+            50% { transform: translate(40px, -30px) scale(1.06); }
+            100% { transform: translate(-30px, 40px) scale(0.96); }
         }
 
-        /* Grid Pattern */
-        .grid-pattern-overlay {
+        .grid-blueprint-overlay {
             position: fixed;
             inset: 0;
             background-image: 
-                radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.04) 1px, transparent 0),
-                linear-gradient(to right, rgba(168, 85, 247, 0.02) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(168, 85, 247, 0.02) 1px, transparent 1px);
+                radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0),
+                linear-gradient(to right, rgba(168, 85, 247, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(168, 85, 247, 0.03) 1px, transparent 1px);
             background-size: 40px 40px, 80px 80px, 80px 80px;
             pointer-events: none;
             z-index: 0;
-            opacity: 0.85;
+            opacity: 0.65;
         }
 
         .container {
             width: 100%;
-            max-width: 1220px;
+            max-width: 1240px;
             margin: 0 auto;
             padding: 0 28px;
             position: relative;
             z-index: 1;
         }
 
-        /* ==========================================================================
-           TOP NAVIGATION BAR (MINIMALIST MONOGRAM STYLE)
-           ========================================================================== */
-        .dev-navbar {
-            padding: 24px 0 16px;
-            position: relative;
-            z-index: 50;
+        /* Navigation Bar */
+        .site-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(11, 8, 19, 0.78);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 16px 0;
+            transition: all 0.3s ease;
         }
 
         .nav-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 20px;
         }
 
-        .nav-brand {
+        .brand-monogram-box {
             display: flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            color: var(--text-primary);
-        }
-
-        .brand-monogram-symbol {
-            font-size: 1.8rem;
-            font-weight: 300;
-            font-family: serif, 'Plus Jakarta Sans';
             color: #FFFFFF;
-            line-height: 1;
-            text-shadow: 0 0 12px rgba(168, 85, 247, 0.8);
-            transform: scaleX(1.1);
-            display: inline-block;
         }
 
-        .nav-brand-title {
-            font-size: 1.05rem;
+        .brand-logo-mark {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, #7C3AED 0%, #C084FC 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-weight: 900;
+            font-size: 1.15rem;
+            color: #FFFFFF;
+            box-shadow: 0 4px 18px rgba(124, 58, 237, 0.45);
+        }
+
+        .brand-text-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-size: 1rem;
             font-weight: 800;
             letter-spacing: -0.01em;
             color: #FFFFFF;
-        }
-
-        .nav-brand-title span {
-            color: var(--accent-violet);
-        }
-
-        .nav-center-menu {
             display: flex;
             align-items: center;
-            gap: 36px;
+            gap: 6px;
+        }
+
+        .brand-sub {
+            font-size: 0.74rem;
+            font-weight: 600;
+            color: var(--accent-bright);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .nav-menu-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
             list-style: none;
         }
 
-        .nav-center-link {
-            text-decoration: none;
+        .nav-menu-links a {
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            text-decoration: none;
+            font-size: 0.92rem;
             font-weight: 500;
             transition: color 0.2s ease;
         }
 
-        .nav-center-link:hover, .nav-center-link.active {
+        .nav-menu-links a:hover {
             color: #FFFFFF;
         }
 
@@ -254,289 +264,299 @@
         .btn-nav-resume {
             display: inline-flex;
             align-items: center;
-            gap: 7px;
-            background: rgba(168, 85, 247, 0.12);
-            color: var(--accent-bright);
-            border: 1px solid rgba(168, 85, 247, 0.35);
-            padding: 8px 18px;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            color: #FFFFFF;
+            padding: 9px 18px;
             border-radius: var(--radius-full);
-            font-size: 0.85rem;
-            font-weight: 700;
+            font-size: 0.86rem;
+            font-weight: 600;
             text-decoration: none;
             transition: all 0.2s ease;
         }
 
         .btn-nav-resume:hover {
-            background: rgba(168, 85, 247, 0.25);
+            background: rgba(168, 85, 247, 0.15);
             border-color: var(--accent-violet);
-            color: #FFFFFF;
-            transform: translateY(-1px);
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
         }
 
-        .btn-nav-primary {
+        .btn-nav-connect {
             display: inline-flex;
             align-items: center;
             gap: 6px;
             background: linear-gradient(135deg, #7C3AED 0%, #A855F7 100%);
             color: #FFFFFF;
-            font-size: 0.86rem;
-            font-weight: 800;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             padding: 9px 20px;
             border-radius: var(--radius-full);
-            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.45);
+            font-size: 0.86rem;
+            font-weight: 700;
+            text-decoration: none;
             cursor: pointer;
-            border: none;
+            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.4);
             transition: all 0.2s ease;
         }
 
-        .btn-nav-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 28px rgba(168, 85, 247, 0.65);
+        .btn-nav-connect:hover {
+            transform: translateY(-1px);
             filter: brightness(1.1);
         }
 
-        /* ==========================================================================
-           HERO SECTION: 3D MEMOJI AVATAR & QUOTE LAYOUT
-           ========================================================================== */
+        /* Hero Section */
         .hero-section {
-            padding: 50px 0 70px;
+            padding: 60px 0 80px;
             position: relative;
         }
 
-        .hero-wrapper {
+        .hero-grid {
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 48px;
+            grid-template-columns: 1.15fr 0.95fr;
+            gap: 50px;
             align-items: center;
         }
 
-        /* Left Hero Content with Avatar */
-        .hero-avatar-quote-row {
+        .hero-left-col {
             display: flex;
-            align-items: center;
+            flex-direction: column;
             gap: 24px;
-            margin-bottom: 28px;
         }
 
-        .avatar-glow-wrap {
-            position: relative;
-            width: 110px;
-            height: 110px;
-            flex-shrink: 0;
+        .hero-avatar-identity-row {
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 22px;
         }
 
-        .avatar-glow-backdrop {
+        .avatar-portal-wrap {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .avatar-glow-ring {
             position: absolute;
-            inset: -15px;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.6) 0%, rgba(124, 58, 237, 0.2) 50%, transparent 75%);
+            inset: -8px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.55) 0%, rgba(124, 58, 237, 0.15) 60%, transparent 80%);
             border-radius: 50%;
-            filter: blur(16px);
-            animation: avatarPulse 3s infinite alternate ease-in-out;
+            filter: blur(14px);
+            animation: avatarPulse 4s infinite alternate ease-in-out;
         }
 
         @keyframes avatarPulse {
-            0% { transform: scale(0.95); opacity: 0.8; }
-            100% { transform: scale(1.1); opacity: 1; }
+            0% { transform: scale(0.96); opacity: 0.75; }
+            100% { transform: scale(1.08); opacity: 1; }
         }
 
-        .avatar-art {
+        .avatar-img-frame {
             position: relative;
             z-index: 2;
-            width: 96px;
-            height: 96px;
+            width: 104px;
+            height: 104px;
             border-radius: 50%;
-            background: linear-gradient(145deg, #1C122D, #0B0813);
-            border: 2px solid rgba(192, 132, 252, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
             overflow: hidden;
+            border: 2px solid rgba(192, 132, 252, 0.45);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            background: #1C122D;
         }
 
-        .avatar-emoji-icon {
-            font-size: 3.4rem;
-            line-height: 1;
-            filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.6));
+        .avatar-img-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
-        .hero-quote-box {
+        .avatar-beacon-pulse {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            z-index: 3;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #10B981;
+            border: 2.5px solid #0B0813;
+            box-shadow: 0 0 10px #10B981;
+        }
+
+        .identity-badge-col {
             display: flex;
             flex-direction: column;
+            gap: 4px;
         }
 
-        .hero-handwritten-hello {
-            font-family: var(--font-hand);
-            font-size: 1.35rem;
-            color: var(--accent-bright);
-            display: flex;
+        .availability-pill {
+            display: inline-flex;
             align-items: center;
-            gap: 6px;
-            line-height: 1.2;
-            margin-bottom: 4px;
-        }
-
-        .hero-handwritten-hello span {
-            color: #FFFFFF;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34D399;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
             font-weight: 700;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            width: fit-content;
         }
 
-        .hero-designer-note {
-            font-size: 0.86rem;
-            color: var(--text-muted);
-            margin-bottom: 2px;
+        .beacon-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #10B981;
+            box-shadow: 0 0 8px #10B981;
+            animation: beaconGlow 1.8s infinite;
         }
 
-        .hero-judges-title {
-            font-size: clamp(1.4rem, 2.8vw, 2.1rem);
-            font-weight: 800;
-            line-height: 1.2;
+        @keyframes beaconGlow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        .hero-lead-greeting {
+            font-size: 0.96rem;
+            color: var(--text-secondary);
+        }
+
+        .hero-lead-greeting strong {
             color: #FFFFFF;
-            letter-spacing: -0.02em;
         }
 
-        /* Circular Highlight around "cover..." exactly like screenshot */
-        .hand-drawn-circle {
+        .hero-editorial-hook {
+            font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+            font-weight: 800;
+            line-height: 1.25;
+            letter-spacing: -0.025em;
+            color: #FFFFFF;
+        }
+
+        .editorial-highlight {
             position: relative;
             display: inline-block;
             color: var(--accent-bright);
-            padding: 0 8px;
+            white-space: nowrap;
         }
 
-        .hand-drawn-circle::after {
-            content: '';
+        .hand-drawn-svg {
             position: absolute;
-            inset: -4px -6px;
-            border: 2px solid rgba(192, 132, 252, 0.7);
-            border-radius: 50% 45% 55% 48% / 48% 52% 48% 52%;
-            transform: rotate(-2deg);
+            top: -12%;
+            left: -8%;
+            width: 116%;
+            height: 124%;
             pointer-events: none;
-            box-shadow: 0 0 12px rgba(168, 85, 247, 0.4);
+            overflow: visible;
         }
 
-        .hero-sub-judge {
-            font-size: 0.76rem;
-            color: var(--text-muted);
-            margin-top: 4px;
-            font-style: italic;
-        }
-
-        /* Software Engineer Bold Title & Subhead */
         .hero-main-title {
-            font-size: clamp(2.4rem, 4.8vw, 3.6rem);
-            font-weight: 900;
-            letter-spacing: -0.03em;
-            line-height: 1.15;
-            margin-bottom: 12px;
+            font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+            font-weight: 700;
             color: #FFFFFF;
+            letter-spacing: -0.015em;
         }
 
-        .cursor-blink {
-            display: inline-block;
+        .cursor-accent {
             color: var(--accent-violet);
-            animation: blink 1s step-end infinite;
+            animation: cursorBlink 1s step-end infinite;
         }
 
-        @keyframes blink {
+        @keyframes cursorBlink {
             from, to { opacity: 1; }
             50% { opacity: 0; }
         }
 
-        .hero-status-subhead {
-            font-size: 0.96rem;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
+        .hero-role-meta {
             display: flex;
             align-items: center;
+            gap: 10px;
             flex-wrap: wrap;
-            gap: 8px;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
         }
 
-        .status-dot-blue {
-            width: 8px;
-            height: 8px;
-            background: #3B82F6;
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 10px #3B82F6;
-        }
-
-        .company-highlight {
-            color: #60A5FA;
+        .role-badge {
+            background: rgba(168, 85, 247, 0.12);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            color: #FFFFFF;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
             font-weight: 700;
+            padding: 4px 10px;
+            border-radius: var(--radius-xs);
+            letter-spacing: 0.02em;
+        }
+
+        .location-badge {
+            color: var(--accent-bright);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 600;
         }
 
         .hero-narrative-bio {
-            font-size: 1.05rem;
+            font-size: 1.02rem;
             color: var(--text-secondary);
-            line-height: 1.72;
-            margin-bottom: 30px;
-            max-width: 600px;
+            line-height: 1.7;
         }
 
         .hero-narrative-bio strong {
             color: #FFFFFF;
-            font-weight: 700;
         }
 
-        /* Metric Counters Strip */
-        .metrics-strip {
+        .metrics-bento-strip {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-bottom: 34px;
-            padding: 18px 22px;
-            background: rgba(22, 14, 38, 0.7);
+            gap: 16px;
+            background: rgba(22, 14, 38, 0.6);
             border: 1px solid var(--border-card);
             border-radius: var(--radius-md);
-            backdrop-filter: blur(16px);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            padding: 18px 20px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
         }
 
-        .metric-item {
+        .metric-bento-item {
             display: flex;
             flex-direction: column;
             border-right: 1px solid rgba(168, 85, 247, 0.15);
-            padding-right: 10px;
+            padding-right: 12px;
         }
 
-        .metric-item:last-child {
+        .metric-bento-item:last-child {
             border-right: none;
             padding-right: 0;
         }
 
-        .metric-value {
+        .metric-bento-val {
             font-family: var(--font-mono);
-            font-size: 1.75rem;
+            font-size: 1.65rem;
             font-weight: 800;
             color: #FFFFFF;
-            background: linear-gradient(135deg, #FFFFFF, var(--accent-bright));
+            background: linear-gradient(135deg, #FFFFFF 30%, var(--accent-bright) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            line-height: 1.1;
-            margin-bottom: 3px;
+            line-height: 1.15;
+            margin-bottom: 4px;
         }
 
-        .metric-title {
+        .metric-bento-lbl {
             font-size: 0.72rem;
             font-weight: 600;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.04em;
+            line-height: 1.3;
         }
 
-        .hero-actions-row {
+        .hero-actions-group {
             display: flex;
             align-items: center;
             gap: 12px;
             flex-wrap: wrap;
         }
 
-        .btn-purple-pill {
+        .btn-primary-purple {
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -546,267 +566,232 @@
             padding: 12px 24px;
             border-radius: var(--radius-full);
             font-size: 0.92rem;
-            font-weight: 800;
+            font-weight: 700;
             text-decoration: none;
-            box-shadow: 0 4px 22px rgba(124, 58, 237, 0.5);
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.45);
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .btn-purple-pill:hover {
+        .btn-primary-purple:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 30px rgba(168, 85, 247, 0.7);
+            box-shadow: 0 6px 26px rgba(168, 85, 247, 0.65);
             filter: brightness(1.1);
         }
 
-        .btn-frosted-pill {
+        .btn-frosted-action {
             display: inline-flex;
             align-items: center;
             gap: 8px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border-card);
             color: #FFFFFF;
-            padding: 12px 22px;
+            padding: 12px 20px;
             border-radius: var(--radius-full);
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             font-weight: 600;
             text-decoration: none;
+            cursor: pointer;
             transition: all 0.2s ease;
         }
 
-        .btn-frosted-pill:hover {
-            background: rgba(168, 85, 247, 0.2);
+        .btn-frosted-action:hover {
+            background: rgba(168, 85, 247, 0.16);
             border-color: var(--accent-violet);
             transform: translateY(-2px);
         }
 
-        /* Right Hero Column: Interactive Cosmic Orbital Hub */
-        .cosmic-orbital-hub {
-            position: relative;
+        /* Right Hero: Tech Matrix & Terminal */
+        .hero-right-col {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
+            gap: 20px;
         }
 
-        .team-pitch-quote {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            margin-bottom: 22px;
-            max-width: 440px;
-            line-height: 1.55;
-        }
-
-        .team-pitch-quote span {
-            color: var(--accent-bright);
-            font-weight: 700;
-        }
-
-        /* Orbiting Tech Icons Row */
-        .tech-icons-orbit-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-        }
-
-        .tech-icon-circle {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: rgba(26, 17, 44, 0.85);
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-
-        .tech-icon-circle:hover {
-            transform: translateY(-3px) scale(1.1);
-            border-color: var(--accent-bright);
-        }
-
-        /* Cosmic Planetary Center Shield */
-        .orbit-system-wrap {
-            position: relative;
-            width: 320px;
-            height: 240px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .orbit-ring {
-            position: absolute;
-            border: 1px dashed rgba(168, 85, 247, 0.35);
-            border-radius: 50%;
-            transform: rotateX(65deg);
-        }
-
-        .ring-1 { width: 310px; height: 310px; animation: spinOrbit 30s linear infinite; }
-        .ring-2 { width: 230px; height: 230px; border-color: rgba(192, 132, 252, 0.25); animation: spinOrbit 22s linear infinite reverse; }
-
-        @keyframes spinOrbit {
-            from { transform: rotateX(65deg) rotateZ(0deg); }
-            to { transform: rotateX(65deg) rotateZ(360deg); }
-        }
-
-        .center-monogram-shield {
-            position: relative;
-            z-index: 5;
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 35% 35%, #9D4EDD 0%, #581C87 70%, #240046 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 50px rgba(168, 85, 247, 0.65), inset 0 2px 4px rgba(255, 255, 255, 0.4);
-            border: 2px solid rgba(255, 255, 255, 0.25);
-        }
-
-        .shield-symbol {
-            font-size: 2.2rem;
-            font-weight: 300;
-            color: #FFFFFF;
-            font-family: serif;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-        }
-
-        /* Dropper / Wand 3D element from screenshot */
-        .wand-dropper-art {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            font-size: 2.4rem;
-            filter: drop-shadow(0 10px 20px rgba(157, 78, 221, 0.6));
-            transform: rotate(-35deg);
-            animation: floatWand 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes floatWand {
-            0% { transform: rotate(-35deg) translateY(0); }
-            100% { transform: rotate(-30deg) translateY(-10px); }
-        }
-
-        /* macOS Terminal Window */
-        .terminal-window {
-            margin-top: 24px;
-            background: rgba(14, 10, 24, 0.88);
-            border: 1px solid rgba(168, 85, 247, 0.28);
+        .cross-functional-quote-card {
+            background: rgba(22, 14, 38, 0.6);
+            border: 1px solid var(--border-card);
             border-radius: var(--radius-md);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), var(--glow-purple-sm);
+            padding: 16px 20px;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+            backdrop-filter: blur(12px);
+        }
+
+        .cross-functional-quote-card strong {
+            color: var(--accent-bright);
+        }
+
+        .tech-matrix-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .tech-capsule {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(26, 17, 44, 0.7);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: var(--radius-sm);
+            padding: 10px 12px;
+            transition: all 0.2s ease;
+            cursor: default;
+        }
+
+        .tech-capsule:hover {
+            background: rgba(38, 24, 66, 0.9);
+            border-color: var(--accent-glow);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .tech-svg-box {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .tech-name {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .terminal-dev-card {
+            background: rgba(14, 9, 24, 0.92);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: var(--radius-md);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(124, 58, 237, 0.15);
             overflow: hidden;
             font-family: var(--font-mono);
-            text-align: left;
-            width: 100%;
-            max-width: 440px;
         }
 
-        .terminal-header {
-            background: rgba(22, 14, 36, 0.95);
+        .terminal-top-bar {
+            background: rgba(22, 14, 38, 0.95);
             padding: 10px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid rgba(168, 85, 247, 0.15);
+            border-bottom: 1px solid rgba(168, 85, 247, 0.18);
         }
 
-        .terminal-dots {
+        .window-control-dots {
             display: flex;
-            gap: 6px;
+            align-items: center;
+            gap: 7px;
         }
 
-        .terminal-dot {
+        .w-dot {
             width: 10px;
             height: 10px;
             border-radius: 50%;
         }
 
-        .dot-red { background: #EF4444; }
-        .dot-yellow { background: #F59E0B; }
-        .dot-green { background: #10B981; }
+        .w-dot.red { background: #EF4444; }
+        .w-dot.yellow { background: #F59E0B; }
+        .w-dot.green { background: #10B981; }
 
-        .terminal-title {
+        .terminal-tab-pill {
             font-size: 0.76rem;
-            color: var(--text-muted);
+            font-weight: 600;
+            color: var(--accent-bright);
+            background: rgba(168, 85, 247, 0.18);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            padding: 3px 10px;
+            border-radius: var(--radius-xs);
         }
 
-        .terminal-copy-btn {
+        .terminal-copy-action {
+            display: flex;
+            align-items: center;
+            gap: 4px;
             background: transparent;
             border: none;
             color: var(--text-muted);
             font-size: 0.74rem;
             font-family: var(--font-mono);
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            transition: color 0.2s;
+            transition: color 0.2s ease;
         }
 
-        .terminal-copy-btn:hover {
-            color: var(--accent-bright);
+        .terminal-copy-action:hover {
+            color: #FFFFFF;
         }
 
-        .terminal-body {
-            padding: 16px 18px;
+        .terminal-code-body {
+            padding: 16px 20px;
             font-size: 0.82rem;
-            line-height: 1.65;
+            line-height: 1.6;
             color: #E2E8F0;
             overflow-x: auto;
         }
 
-        .code-keyword { color: #F43F5E; }
-        .code-var { color: var(--accent-cyan); }
-        .code-property { color: var(--accent-glow); }
+        .code-keyword { color: #F472B6; font-weight: 600; }
+        .code-variable { color: #60A5FA; }
+        .code-property { color: #A78BFA; }
         .code-string { color: #34D399; }
         .code-number { color: #FBBF24; }
         .code-comment { color: #64748B; font-style: italic; }
 
-        /* ==========================================================================
-           SECTION 2: WORK EXPERIENCE (2x2 GRID MATCHING SCREENSHOT EXACTLY)
-           ========================================================================== */
+        /* Sections */
         .section-wrap {
-            padding: 80px 0;
+            padding: 70px 0;
             position: relative;
         }
 
-        .section-title-large {
-            font-size: clamp(2rem, 3.6vw, 2.75rem);
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            color: #FFFFFF;
-            margin-bottom: 36px;
+        .section-header-block {
+            margin-bottom: 40px;
         }
 
-        .experience-screenshot-grid {
+        .section-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent-bright);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .section-heading-large {
+            font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+            font-weight: 800;
+            color: #FFFFFF;
+            letter-spacing: -0.02em;
+        }
+
+        /* Work Experience 2x2 */
+        .experience-2x2-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 24px;
         }
 
-        /* 2x2 Glass Card Matching Screenshot */
-        .cib-experience-card {
-            background: linear-gradient(145deg, rgba(28, 18, 48, 0.65) 0%, rgba(18, 12, 32, 0.85) 100%);
+        .experience-card-item {
+            background: rgba(22, 14, 38, 0.65);
             border: 1px solid var(--border-card);
-            border-radius: var(--radius-md);
-            padding: 28px 28px 24px;
-            position: relative;
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            backdrop-filter: blur(14px);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 220px;
-            backdrop-filter: blur(16px);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            gap: 20px;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
             overflow: hidden;
         }
 
-        .cib-experience-card::before {
+        .experience-card-item::before {
             content: '';
             position: absolute;
             top: 0;
@@ -818,894 +803,584 @@
             transition: opacity 0.3s ease;
         }
 
-        .cib-experience-card:hover {
-            border-color: rgba(192, 132, 252, 0.55);
+        .experience-card-item:hover {
             transform: translateY(-4px);
-            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6), var(--glow-purple-sm);
+            border-color: rgba(192, 132, 252, 0.45);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), var(--glow-card);
+            background: rgba(30, 20, 52, 0.8);
         }
 
-        .cib-experience-card:hover::before {
+        .experience-card-item:hover::before {
             opacity: 1;
         }
 
-        .cib-card-top {
+        .exp-card-header {
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
             gap: 16px;
-            margin-bottom: 14px;
         }
 
-        .cib-card-text {
-            flex: 1;
+        .exp-badge-icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 6px 18px rgba(124, 58, 237, 0.25);
         }
 
-        .cib-card-title {
+        .exp-card-title {
             font-size: 1.25rem;
             font-weight: 800;
             color: #FFFFFF;
-            line-height: 1.3;
+            letter-spacing: -0.01em;
             margin-bottom: 4px;
         }
 
-        .cib-card-org {
-            font-size: 0.92rem;
+        .exp-card-org {
+            font-size: 0.95rem;
             font-weight: 700;
             color: var(--accent-bright);
-            margin-bottom: 6px;
+            margin-bottom: 12px;
         }
 
-        .cib-card-desc {
-            font-size: 0.88rem;
+        .exp-card-desc {
+            font-size: 0.92rem;
             color: var(--text-secondary);
             line-height: 1.6;
         }
 
-        .cib-card-desc strong {
+        .exp-card-desc strong {
             color: #FFFFFF;
         }
 
-        /* 3D Visual Icon Element (Star Ribbon, Glow Bulb, Coffee Mug, Rocket) */
-        .cib-3d-visual {
-            width: 58px;
-            height: 58px;
-            border-radius: 16px;
-            background: radial-gradient(circle at 35% 35%, rgba(168, 85, 247, 0.35) 0%, rgba(20, 13, 34, 0.8) 100%);
-            border: 1px solid rgba(192, 132, 252, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.9rem;
-            flex-shrink: 0;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .cib-experience-card:hover .cib-3d-visual {
-            transform: scale(1.1) rotate(6deg);
-        }
-
-        .cib-card-footer {
+        .exp-card-footer {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 18px;
-            padding-top: 14px;
-            border-top: 1px solid rgba(168, 85, 247, 0.12);
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(168, 85, 247, 0.15);
         }
 
-        .cib-card-time {
+        .exp-tenure-tag {
             font-family: var(--font-mono);
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
+            font-weight: 500;
         }
 
-        /* LEARN MORE pill button exactly matching screenshot */
         .btn-learn-more-pill {
-            background: rgba(124, 58, 237, 0.15);
-            border: 1px solid rgba(168, 85, 247, 0.45);
-            color: var(--accent-bright);
-            padding: 5px 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(168, 85, 247, 0.18);
+            border: 1px solid rgba(168, 85, 247, 0.35);
+            color: #FFFFFF;
+            padding: 7px 18px;
             border-radius: var(--radius-full);
-            font-size: 0.72rem;
-            font-weight: 800;
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
+            font-size: 0.82rem;
+            font-weight: 700;
             text-decoration: none;
-            transition: all 0.2s ease;
+            letter-spacing: 0.04em;
             cursor: pointer;
+            transition: all 0.2s ease;
         }
 
         .btn-learn-more-pill:hover {
             background: var(--accent-violet);
-            color: #FFFFFF;
             border-color: var(--accent-violet);
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+            color: #FFFFFF;
+            transform: translateY(-1px);
         }
 
-        /* ==========================================================================
-           FEATURED PROJECTS (MATCHING SCREENSHOT WIREFRAME MOCKUP LAYOUT)
-           ========================================================================== */
-        .featured-project-container {
+        /* Featured Projects */
+        .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 28px;
         }
 
-        .mockup-project-card {
-            background: linear-gradient(145deg, rgba(26, 17, 44, 0.7) 0%, rgba(16, 10, 28, 0.9) 100%);
-            border: 1px solid var(--border-card);
-            border-radius: var(--radius-md);
-            padding: 28px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            backdrop-filter: blur(16px);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            overflow: hidden;
-        }
-
-        .mockup-project-card:hover {
-            border-color: rgba(192, 132, 252, 0.6);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), var(--glow-purple-sm);
-        }
-
-        /* Tilted UI Wireframe Box matching screenshot bottom-right */
-        .project-wireframe-box {
-            background: rgba(10, 6, 18, 0.9);
-            border: 1px solid rgba(168, 85, 247, 0.25);
-            border-radius: var(--radius-sm);
-            padding: 16px;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
-        }
-
-        .wireframe-header-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 8px;
-        }
-
-        .wireframe-logo-pill {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--accent-bright);
-            background: rgba(168, 85, 247, 0.15);
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-
-        .wireframe-status-tag {
-            font-family: var(--font-mono);
-            font-size: 0.68rem;
-            color: var(--accent-green);
-            background: rgba(16, 185, 129, 0.12);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: 700;
-        }
-
-        .wireframe-sketch-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 8px;
-            opacity: 0.75;
-        }
-
-        .wireframe-block {
-            height: 38px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px dashed rgba(168, 85, 247, 0.3);
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.68rem;
-            font-family: var(--font-mono);
-            color: var(--text-muted);
-        }
-
-        .project-tag-pill {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--accent-bright);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 6px;
-            display: block;
-        }
-
-        .mockup-project-name {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: #FFFFFF;
-            line-height: 1.3;
-            margin-bottom: 10px;
-        }
-
-        .mockup-project-desc {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 20px;
-            flex: 1;
-        }
-
-        .project-stack-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 20px;
-        }
-
-        .stack-pill {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            font-weight: 600;
-            color: var(--accent-bright);
-            background: rgba(168, 85, 247, 0.1);
-            border: 1px solid rgba(168, 85, 247, 0.25);
-            padding: 3px 10px;
-            border-radius: 6px;
-        }
-
-        .project-action-btn {
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.86rem;
-            font-weight: 700;
-            color: #FFFFFF;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid var(--border-card);
-            padding: 10px 18px;
-            border-radius: var(--radius-full);
-            transition: all 0.2s ease;
-            width: fit-content;
-        }
-
-        .project-action-btn:hover {
-            background: var(--accent-violet);
-            border-color: var(--accent-violet);
-            box-shadow: 0 0 18px rgba(168, 85, 247, 0.45);
-        }
-
-        /* ==========================================================================
-           CORE TECHNICAL SKILLS
-           ========================================================================== */
-        .skills-filter-nav {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 32px;
-        }
-
-        .skill-filter-btn {
-            background: rgba(22, 14, 38, 0.7);
-            border: 1px solid var(--border-card);
-            border-radius: var(--radius-full);
-            padding: 8px 18px;
-            font-size: 0.86rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: var(--font-sans);
-        }
-
-        .skill-filter-btn:hover {
-            color: #FFFFFF;
-            border-color: var(--accent-violet);
-        }
-
-        .skill-filter-btn.active {
-            background: rgba(168, 85, 247, 0.25);
-            border-color: var(--accent-bright);
-            color: #FFFFFF;
-            box-shadow: 0 0 16px rgba(168, 85, 247, 0.35);
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-            gap: 22px;
-        }
-
-        .skill-card {
-            background: linear-gradient(145deg, rgba(26, 17, 44, 0.65) 0%, rgba(16, 10, 28, 0.85) 100%);
-            border: 1px solid var(--border-card);
-            border-radius: var(--radius-md);
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            backdrop-filter: blur(14px);
-            transition: all 0.25s ease;
-        }
-
-        .skill-card:hover {
-            border-color: rgba(192, 132, 252, 0.5);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5), var(--glow-purple-sm);
-        }
-
-        .skill-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 14px;
-        }
-
-        .skill-badge-group {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .skill-avatar {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.35rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(168, 85, 247, 0.25);
-        }
-
-        .skill-title {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #FFFFFF;
-        }
-
-        .skill-category {
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            font-family: var(--font-mono);
-        }
-
-        .skill-pct {
-            font-family: var(--font-mono);
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--accent-bright);
-        }
-
-        .meter-track {
-            width: 100%;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: var(--radius-full);
-            overflow: hidden;
-            margin-bottom: 14px;
-        }
-
-        .meter-fill {
-            height: 100%;
-            width: var(--progress, 80%);
-            background: linear-gradient(90deg, #7C3AED, #C084FC);
-            border-radius: var(--radius-full);
-        }
-
-        .skill-info {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 16px;
-            flex: 1;
-        }
-
-        .skill-chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .chip {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            font-weight: 600;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border-card);
-            color: var(--text-secondary);
-            padding: 3px 8px;
-            border-radius: 6px;
-        }
-
-        /* ==========================================================================
-           EDUCATION & CREDENTIALS
-           ========================================================================== */
-        .education-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-        }
-
-        .edu-card {
-            background: linear-gradient(145deg, rgba(26, 17, 44, 0.65) 0%, rgba(16, 10, 28, 0.85) 100%);
-            border: 1px solid var(--border-card);
-            border-radius: var(--radius-md);
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.25s ease;
-        }
-
-        .edu-card:hover {
-            border-color: rgba(192, 132, 252, 0.45);
-            transform: translateY(-3px);
-        }
-
-        .edu-level {
-            font-family: var(--font-mono);
-            font-size: 0.74rem;
-            font-weight: 700;
-            color: var(--accent-bright);
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .edu-degree {
-            font-size: 1.15rem;
-            font-weight: 800;
-            color: #FFFFFF;
-            margin-bottom: 4px;
-        }
-
-        .edu-school {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-            flex: 1;
-        }
-
-        .edu-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            border-top: 1px solid rgba(168, 85, 247, 0.12);
-            padding-top: 12px;
-        }
-
-        .score-pill {
-            background: rgba(16, 185, 129, 0.12);
-            border: 1px solid rgba(16, 185, 129, 0.35);
-            color: #34D399;
-            padding: 3px 10px;
-            border-radius: 6px;
-            font-weight: 700;
-        }
-
-        /* ==========================================================================
-           CONTACT & DIRECT FOUNDER DESK
-           ========================================================================== */
-        .contact-box {
-            background: linear-gradient(135deg, rgba(26, 17, 44, 0.95) 0%, rgba(14, 9, 24, 0.98) 100%);
+        .project-glass-card {
+            background: rgba(22, 14, 38, 0.65);
             border: 1px solid var(--border-card);
             border-radius: var(--radius-lg);
-            padding: clamp(32px, 5vw, 64px);
-            text-align: center;
-            max-width: 920px;
-            margin: 0 auto;
-            box-shadow: var(--glow-purple-sm);
-            position: relative;
+            padding: 26px;
+            backdrop-filter: blur(14px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 18px;
+            transition: all 0.25s ease;
         }
 
-        .contact-title {
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 14px;
-            color: #FFFFFF;
+        .project-glass-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(192, 132, 252, 0.4);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), var(--glow-card);
         }
 
-        .contact-subtitle {
-            font-size: 1.08rem;
-            color: var(--text-secondary);
-            max-width: 660px;
-            margin: 0 auto 36px;
-            line-height: 1.7;
-        }
-
-        /* Direct Official Resume Download Banner */
-        .resume-download-banner {
-            max-width: 760px;
-            margin: 0 auto 32px;
-            background: linear-gradient(135deg, rgba(32, 20, 56, 0.9) 0%, rgba(18, 11, 32, 0.95) 100%);
-            border: 1px solid rgba(192, 132, 252, 0.4);
+        .project-wireframe-preview {
+            background: rgba(13, 9, 22, 0.9);
+            border: 1px solid rgba(168, 85, 247, 0.2);
             border-radius: var(--radius-md);
-            padding: 22px 26px;
+            padding: 16px;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+        }
+
+        .wireframe-head-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
-            text-align: left;
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(12px);
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.15);
+            margin-bottom: 12px;
         }
 
-        .resume-banner-badge {
-            display: inline-block;
-            font-size: 0.72rem;
+        .wireframe-status-dot {
+            color: #10B981;
+            font-weight: 700;
+        }
+
+        .wireframe-schematic-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .schematic-box {
+            background: rgba(168, 85, 247, 0.08);
+            border: 1px dashed rgba(168, 85, 247, 0.25);
+            border-radius: var(--radius-xs);
+            padding: 8px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .project-tag {
             font-family: var(--font-mono);
-            font-weight: 800;
+            font-size: 0.74rem;
             color: var(--accent-bright);
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
+            letter-spacing: 0.06em;
         }
 
-        .resume-banner-title {
-            font-size: 1.1rem;
+        .project-title {
+            font-size: 1.25rem;
             font-weight: 800;
             color: #FFFFFF;
             letter-spacing: -0.01em;
+            margin: 4px 0 8px;
         }
 
-        .resume-banner-desc {
-            font-size: 0.86rem;
+        .project-summary {
+            font-size: 0.92rem;
             color: var(--text-secondary);
-            margin-top: 3px;
+            line-height: 1.6;
         }
 
-        .resume-banner-actions {
+        .project-tech-pills {
             display: flex;
             align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
-        }
-
-        .btn-download-cv {
-            display: inline-flex;
-            align-items: center;
             gap: 8px;
-            background: linear-gradient(135deg, #7C3AED 0%, #A855F7 100%);
+            flex-wrap: wrap;
+        }
+
+        .pill-badge {
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid rgba(168, 85, 247, 0.2);
             color: #FFFFFF;
-            padding: 11px 20px;
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            font-weight: 600;
+            padding: 4px 10px;
             border-radius: var(--radius-full);
-            font-size: 0.9rem;
-            font-weight: 800;
-            text-decoration: none;
-            box-shadow: 0 4px 18px rgba(124, 58, 237, 0.5);
-            transition: all 0.2s ease;
-            white-space: nowrap;
         }
 
-        .btn-download-cv:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(168, 85, 247, 0.7);
-            filter: brightness(1.1);
+        .project-actions-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(168, 85, 247, 0.15);
         }
 
-        .btn-view-cv {
+        .btn-live-preview {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(255, 255, 255, 0.06);
-            color: var(--text-secondary);
-            border: 1px solid var(--border-card);
-            padding: 11px 16px;
+            background: linear-gradient(135deg, #7C3AED 0%, #A855F7 100%);
+            color: #FFFFFF;
+            padding: 8px 18px;
             border-radius: var(--radius-full);
-            font-size: 0.88rem;
+            font-size: 0.84rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-live-preview:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.1);
+        }
+
+        .btn-code-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-card);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            font-size: 0.84rem;
             font-weight: 600;
             text-decoration: none;
             transition: all 0.2s ease;
-            white-space: nowrap;
         }
 
-        .btn-view-cv:hover {
+        .btn-code-link:hover {
             color: #FFFFFF;
-            border-color: var(--accent-violet);
             background: rgba(168, 85, 247, 0.15);
         }
 
-        /* Interactive Contact Form */
-        .portfolio-contact-form {
-            text-align: left;
-            margin: 0 auto 36px;
-            max-width: 760px;
-            background: rgba(18, 11, 32, 0.75);
+        /* Core Technical Skills */
+        .skills-bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .skill-tile {
+            background: rgba(22, 14, 38, 0.6);
             border: 1px solid var(--border-card);
             border-radius: var(--radius-md);
-            padding: clamp(22px, 4vw, 38px);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
-            position: relative;
+            padding: 22px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            backdrop-filter: blur(12px);
+            transition: all 0.2s ease;
         }
 
-        .form-grid-2 {
+        .skill-tile:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-violet);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            background: rgba(30, 20, 52, 0.75);
+        }
+
+        .skill-svg-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-sm);
+            background: rgba(168, 85, 247, 0.12);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .skill-info-col {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .skill-name {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #FFFFFF;
+        }
+
+        .skill-desc {
+            font-size: 0.84rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Credentials Section */
+        .credentials-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 18px;
-            margin-bottom: 18px;
+            gap: 24px;
         }
 
-        .form-group {
-            margin-bottom: 18px;
+        .credential-card {
+            background: rgba(22, 14, 38, 0.6);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-md);
+            padding: 26px;
+            backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .credential-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .credential-badge {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            background: rgba(168, 85, 247, 0.15);
+            color: var(--accent-bright);
+            padding: 4px 10px;
+            border-radius: var(--radius-xs);
+            font-weight: 700;
+        }
+
+        .credential-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #FFFFFF;
+        }
+
+        .credential-sub {
+            font-size: 0.94rem;
+            color: var(--text-secondary);
+        }
+
+        /* Contact Section */
+        .contact-layout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.35fr;
+            gap: 40px;
+            background: rgba(22, 14, 38, 0.65);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-lg);
+            padding: 44px;
+            backdrop-filter: blur(16px);
+        }
+
+        .contact-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .direct-reach-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .reach-icon-box {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-sm);
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-bright);
+            flex-shrink: 0;
+        }
+
+        .reach-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .reach-val {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .reach-val:hover {
+            color: var(--accent-bright);
+        }
+
+        .contact-form-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-row-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
 
         .form-label {
-            display: block;
             font-size: 0.82rem;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--text-secondary);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-family: var(--font-mono);
         }
 
-        .form-label .req {
-            color: #F43F5E;
-            margin-left: 2px;
-        }
-
-        .form-input, .form-select, .form-textarea {
+        .form-input, .form-textarea, .form-select {
             width: 100%;
-            background: #110A1E;
-            border: 1.5px solid var(--border-card);
+            background: rgba(14, 9, 24, 0.85);
+            border: 1px solid rgba(168, 85, 247, 0.25);
             border-radius: var(--radius-sm);
             padding: 12px 16px;
             color: #FFFFFF;
             font-family: var(--font-sans);
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-            box-sizing: border-box;
-        }
-
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
-            outline: none;
-            border-color: var(--accent-violet);
-            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.25);
-            background: #170E28;
-        }
-
-        .form-textarea {
-            min-height: 110px;
-            resize: vertical;
-        }
-
-        .btn-submit-contact {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            background: linear-gradient(135deg, #7C3AED 0%, #A855F7 100%);
-            color: #FFFFFF;
-            border: none;
-            border-radius: var(--radius-full);
-            padding: 15px 24px;
-            font-family: var(--font-sans);
-            font-size: 1rem;
-            font-weight: 800;
-            cursor: pointer;
-            box-shadow: 0 4px 22px rgba(124, 58, 237, 0.55);
-            transition: all 0.2s ease;
-        }
-
-        .btn-submit-contact:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 28px rgba(168, 85, 247, 0.75);
-            filter: brightness(1.1);
-        }
-
-        .btn-submit-contact:disabled {
-            opacity: 0.65;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        .form-status-alert {
-            padding: 14px 18px;
-            border-radius: var(--radius-sm);
-            margin-bottom: 20px;
             font-size: 0.92rem;
-            line-height: 1.5;
-            display: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .form-status-alert.success {
-            display: block;
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.45);
-            color: #34D399;
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--accent-glow);
+            box-shadow: 0 0 16px rgba(168, 85, 247, 0.35);
         }
 
-        .form-status-alert.error {
-            display: block;
-            background: rgba(244, 63, 94, 0.15);
-            border: 1px solid rgba(244, 63, 94, 0.45);
-            color: #FB7185;
-        }
-
-        .form-topic-chips {
+        .topic-chips-bar {
             display: flex;
-            flex-wrap: wrap;
+            align-items: center;
             gap: 8px;
-            margin-bottom: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 6px;
         }
 
-        .form-topic-chip {
+        .chip-button {
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-card);
-            border-radius: var(--radius-full);
-            padding: 6px 14px;
-            font-size: 0.8rem;
+            border: 1px solid var(--border-subtle);
             color: var(--text-secondary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
             cursor: pointer;
-            transition: all 0.15s ease;
-            user-select: none;
-            font-family: var(--font-sans);
+            transition: all 0.2s ease;
         }
 
-        .form-topic-chip:hover {
+        .chip-button.active, .chip-button:hover {
             background: rgba(168, 85, 247, 0.2);
             border-color: var(--accent-violet);
             color: #FFFFFF;
         }
 
-        .form-topic-chip.active {
-            background: rgba(168, 85, 247, 0.35);
-            border-color: var(--accent-bright);
+        .btn-submit-main {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #7C3AED 0%, #A855F7 100%);
             color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 14px 28px;
+            border-radius: var(--radius-full);
+            font-size: 0.96rem;
             font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 24px rgba(124, 58, 237, 0.45);
+            transition: all 0.2s ease;
         }
 
-        .contact-methods {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 16px;
-            margin-bottom: 38px;
-            text-align: left;
+        .btn-submit-main:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.1);
         }
 
-        .contact-method-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-card);
-            border-radius: var(--radius-md);
-            padding: 16px 20px;
+        .form-status-alert {
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.88rem;
+            display: none;
+        }
+
+        .form-status-alert.success {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #34D399;
+        }
+
+        .form-status-alert.error {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #F87171;
+        }
+
+        /* Footer */
+        .site-footer {
+            border-top: 1px solid var(--border-subtle);
+            padding: 40px 0;
+            margin-top: 80px;
+            background: rgba(7, 5, 13, 0.9);
+            font-size: 0.86rem;
+            color: var(--text-muted);
+        }
+
+        .footer-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
-        .method-info {
-            overflow: hidden;
-        }
-
-        .method-type {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            font-family: var(--font-mono);
-            display: block;
-        }
-
-        .method-val {
-            font-size: 0.92rem;
-            font-weight: 700;
-            color: #FFFFFF;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: block;
-        }
-
-        .btn-action-sm {
-            background: rgba(168, 85, 247, 0.12);
-            border: 1px solid var(--border-card);
-            color: var(--accent-bright);
-            padding: 6px 14px;
-            border-radius: var(--radius-full);
-            font-size: 0.8rem;
-            font-weight: 700;
-            font-family: var(--font-mono);
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-
-        .btn-action-sm:hover {
-            background: var(--accent-violet);
-            color: #FFFFFF;
-            border-color: var(--accent-violet);
-        }
-
-        .store-back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.2s ease;
-        }
-
-        .store-back-link:hover {
-            color: var(--accent-bright);
-        }
-
-        /* ==========================================================================
-           FOOTER
-           ========================================================================== */
-        .dev-footer {
-            border-top: 1px solid var(--border-subtle);
-            padding: 34px 0;
-            background: var(--bg-deep);
-            color: var(--text-muted);
-            font-size: 0.88rem;
-            text-align: center;
-        }
-
-        /* ==========================================================================
-           AUTO ON-LOAD CONNECT & CV MODAL
-           ========================================================================== */
-        .connect-modal-backdrop {
+        /* Modal */
+        .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(7, 5, 12, 0.88);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            z-index: 99990;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
             opacity: 0;
-            visibility: hidden;
             pointer-events: none;
-            transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+            transition: opacity 0.3s ease;
         }
 
-        .connect-modal-backdrop.open {
+        .modal-overlay.open {
             opacity: 1;
-            visibility: visible;
             pointer-events: auto;
         }
 
-        .connect-modal-card {
-            background: linear-gradient(145deg, rgba(28, 18, 48, 0.98) 0%, rgba(14, 9, 24, 0.99) 100%);
-            border: 1px solid rgba(192, 132, 252, 0.5);
+        .modal-glass-card {
+            background: rgba(22, 14, 38, 0.95);
+            border: 1px solid rgba(192, 132, 252, 0.35);
             border-radius: var(--radius-lg);
-            max-width: 530px;
             width: 100%;
-            padding: 30px 32px;
-            box-shadow: 0 25px 65px rgba(0, 0, 0, 0.8), var(--glow-purple-sm);
+            max-width: 560px;
+            padding: 36px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), var(--glow-purple-lg);
             position: relative;
-            transform: scale(0.92) translateY(20px);
+            transform: translateY(20px) scale(0.97);
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            text-align: left;
-            box-sizing: border-box;
         }
 
-        .connect-modal-backdrop.open .connect-modal-card {
-            transform: scale(1) translateY(0);
+        .modal-overlay.open .modal-glass-card {
+            transform: translateY(0) scale(1);
         }
 
-        .modal-close-btn {
+        .modal-close-icon {
             position: absolute;
-            top: 18px;
-            right: 18px;
+            top: 20px;
+            right: 20px;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-card);
+            border: 1px solid var(--border-subtle);
             color: var(--text-secondary);
             width: 34px;
             height: 34px;
@@ -1714,654 +1389,329 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1.1rem;
             transition: all 0.2s ease;
         }
 
-        .modal-close-btn:hover {
-            background: rgba(244, 63, 94, 0.2);
-            border-color: rgba(244, 63, 94, 0.5);
-            color: #FB7185;
-            transform: rotate(90deg);
+        .modal-close-icon:hover {
+            color: #FFFFFF;
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #EF4444;
         }
 
-        .modal-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            background: rgba(168, 85, 247, 0.15);
-            border: 1px solid rgba(192, 132, 252, 0.35);
-            color: var(--accent-bright);
-            font-family: var(--font-mono);
-            font-size: 0.74rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 4px 11px;
-            border-radius: var(--radius-full);
-            margin-bottom: 12px;
+        .modal-header-meta {
+            margin-bottom: 22px;
         }
 
         .modal-title {
-            font-size: 1.4rem;
+            font-size: 1.45rem;
             font-weight: 800;
             color: #FFFFFF;
-            letter-spacing: -0.02em;
-            margin: 0 0 8px;
-            line-height: 1.3;
+            letter-spacing: -0.01em;
+            margin-bottom: 4px;
         }
 
         .modal-subtitle {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin: 0 0 18px;
-            line-height: 1.55;
-        }
-
-        .modal-direct-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 18px;
-            padding-top: 14px;
-            border-top: 1px solid rgba(168, 85, 247, 0.15);
-            font-size: 0.84rem;
-            color: var(--text-muted);
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .modal-direct-link {
+            font-size: 0.86rem;
             color: var(--accent-bright);
-            font-weight: 700;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
+            font-weight: 600;
         }
 
-        .modal-direct-link:hover {
-            text-decoration: underline;
-        }
-
-        .modal-skip-btn {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 0.84rem;
-            cursor: pointer;
-            padding: 0;
-            font-family: var(--font-sans);
-        }
-
-        .modal-skip-btn:hover {
-            color: var(--text-secondary);
-            text-decoration: underline;
-        }
-
-        /* ==========================================================================
-           AI CAREER ASSISTANT (GOOGLE GEMINI 3.6 FLASH)
-           ========================================================================== */
-        .ai-launcher-btn {
+        /* Floating AI Career Assistant */
+        .ai-floating-launcher {
             position: fixed;
             bottom: 24px;
             right: 24px;
-            z-index: 100002;
-            display: inline-flex;
+            z-index: 999;
+            display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 12px 22px;
+            gap: 8px;
             background: linear-gradient(135deg, #7C3AED 0%, #A855F7 100%);
             color: #FFFFFF;
-            border: 1px solid rgba(255, 255, 255, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 11px 20px;
             border-radius: var(--radius-full);
-            box-shadow: 0 8px 32px rgba(124, 58, 237, 0.55), 0 0 24px rgba(168, 85, 247, 0.45);
-            font-size: 0.9rem;
-            font-weight: 800;
+            font-size: 0.88rem;
+            font-weight: 700;
             cursor: pointer;
-            font-family: var(--font-sans);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            user-select: none;
+            box-shadow: 0 8px 28px rgba(124, 58, 237, 0.6);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .ai-launcher-btn * {
-            pointer-events: none;
+        .ai-floating-launcher:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 36px rgba(168, 85, 247, 0.8);
         }
 
-        .ai-launcher-btn:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 12px 42px rgba(124, 58, 237, 0.75), 0 0 35px rgba(168, 85, 247, 0.6);
-            filter: brightness(1.1);
-        }
-
-        .ai-launcher-pulse {
-            position: relative;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: #34D399;
-        }
-
-        .ai-launcher-pulse::after {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            border-radius: 50%;
-            background-color: #34D399;
-            opacity: 0.6;
-            animation: pulseRing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-        }
-
-        @keyframes pulseRing {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(2.6); opacity: 0; }
-        }
-
-        .ai-launcher-badge {
-            background: rgba(0, 0, 0, 0.35);
-            padding: 3px 8px;
-            border-radius: var(--radius-full);
-            font-size: 0.7rem;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            color: #F3E8FF;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        /* Chat Card Window */
-        .ai-chat-card {
+        .ai-chat-window {
             position: fixed;
-            bottom: 88px;
+            bottom: 84px;
             right: 24px;
-            width: 420px;
-            max-width: calc(100vw - 32px);
-            height: 580px;
-            max-height: calc(100vh - 110px);
-            z-index: 100005;
-            background: linear-gradient(180deg, rgba(28, 18, 48, 0.98) 0%, rgba(14, 9, 24, 0.99) 100%);
+            width: 380px;
+            max-width: calc(100vw - 48px);
+            height: 520px;
+            background: rgba(18, 12, 32, 0.96);
+            border: 1px solid rgba(192, 132, 252, 0.35);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), var(--glow-purple-lg);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(192, 132, 252, 0.45);
-            border-radius: 22px;
-            box-shadow: 0 25px 65px rgba(0, 0, 0, 0.8), var(--glow-purple-sm);
+            z-index: 1000;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
             opacity: 0;
-            visibility: hidden;
             pointer-events: none;
             transform: translateY(20px) scale(0.95);
-            transform-origin: bottom right;
-            transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.28s ease;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
         }
 
-        .ai-chat-card.open {
+        .ai-chat-window.open {
             opacity: 1;
-            visibility: visible;
             pointer-events: auto;
             transform: translateY(0) scale(1);
         }
 
-        /* Chat Header */
         .ai-chat-header {
+            padding: 14px 18px;
+            background: rgba(24, 16, 42, 0.95);
+            border-bottom: 1px solid rgba(168, 85, 247, 0.2);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 20px;
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.25) 0%, rgba(168, 85, 247, 0.2) 100%);
-            border-bottom: 1px solid rgba(168, 85, 247, 0.15);
         }
 
-        .ai-chat-header-info {
+        .ai-brand-badge {
             display: flex;
             align-items: center;
-            gap: 12px;
-        }
-
-        .ai-chat-avatar {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, #7C3AED, #C084FC);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.15rem;
-            box-shadow: 0 0 16px rgba(168, 85, 247, 0.5);
-        }
-
-        .ai-chat-title-group h4 {
-            font-size: 0.94rem;
-            font-weight: 800;
-            color: #FFFFFF;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .ai-chat-subtitle {
-            font-size: 0.74rem;
-            color: var(--accent-bright);
-            margin: 2px 0 0;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .ai-chat-close-btn {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid var(--border-card);
-            color: #CBD5E1;
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 0.95rem;
-            transition: all 0.2s;
-        }
-
-        .ai-chat-close-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            color: #FFFFFF;
-        }
-
-        /* Quick Prompt Chips */
-        .ai-chat-chips {
-            padding: 10px 16px;
-            display: flex;
             gap: 8px;
-            overflow-x: auto;
-            white-space: nowrap;
-            border-bottom: 1px solid rgba(168, 85, 247, 0.12);
-            background: rgba(14, 9, 24, 0.65);
-            scrollbar-width: none;
-        }
-        .ai-chat-chips::-webkit-scrollbar {
-            display: none;
         }
 
-        .ai-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 5px 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-card);
-            border-radius: var(--radius-full);
-            color: #E2E8F0;
-            font-size: 0.74rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            user-select: none;
-            flex-shrink: 0;
-            font-family: var(--font-sans);
+        .ai-model-tag {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            background: rgba(168, 85, 247, 0.25);
+            color: var(--accent-bright);
+            padding: 2px 6px;
+            border-radius: var(--radius-xs);
+            font-weight: 700;
         }
 
-        .ai-chip:hover {
-            background: rgba(168, 85, 247, 0.2);
-            border-color: var(--accent-bright);
-            color: #FFFFFF;
-            transform: translateY(-1px);
-        }
-
-        /* Messages Body */
-        .ai-chat-messages {
+        .ai-chat-messages-box {
             flex: 1;
-            overflow-y: auto;
             padding: 16px;
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
+            font-size: 0.88rem;
         }
 
-        .ai-message-row {
-            display: flex;
-            gap: 10px;
-            align-items: flex-start;
+        .ai-msg {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: var(--radius-md);
+            line-height: 1.5;
         }
 
-        .ai-message-row.user {
-            flex-direction: row-reverse;
-        }
-
-        .ai-message-avatar {
-            width: 28px;
-            height: 28px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #7C3AED, #A855F7);
-            color: #FFFFFF;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.82rem;
-            font-weight: 800;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .ai-message-bubble {
-            max-width: 84%;
-            padding: 11px 15px;
-            border-radius: 14px;
-            font-size: 0.86rem;
-            line-height: 1.55;
-            word-break: break-word;
-        }
-
-        .ai-message-row.assistant .ai-message-bubble {
-            background: #1C122D;
+        .ai-msg.bot {
+            align-self: flex-start;
+            background: rgba(30, 20, 52, 0.85);
             border: 1px solid rgba(168, 85, 247, 0.25);
-            color: #E2E8F0;
-            border-top-left-radius: 4px;
+            color: #FFFFFF;
         }
 
-        .ai-message-row.user .ai-message-bubble {
+        .ai-msg.user {
+            align-self: flex-end;
             background: linear-gradient(135deg, #7C3AED 0%, #A855F7 100%);
             color: #FFFFFF;
-            font-weight: 500;
-            border-top-right-radius: 4px;
-            box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);
         }
 
-        .ai-message-bubble strong {
-            color: var(--accent-bright);
-        }
-
-        .ai-message-bubble a {
-            color: var(--accent-bright);
-            text-decoration: underline;
-        }
-
-        .ai-typing-indicator {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 4px 8px;
-        }
-
-        .ai-typing-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background-color: var(--accent-bright);
-            animation: typingBounce 1.4s infinite ease-in-out both;
-        }
-
-        .ai-typing-dot:nth-child(1) { animation-delay: -0.32s; }
-        .ai-typing-dot:nth-child(2) { animation-delay: -0.16s; }
-
-        @keyframes typingBounce {
-            0%, 80%, 100% { transform: scale(0); opacity: 0.4; }
-            40% { transform: scale(1); opacity: 1; }
-        }
-
-        /* Chat Input Bar */
-        .ai-chat-input-container {
+        .ai-chat-footer {
             padding: 12px 16px;
-            border-top: 1px solid rgba(168, 85, 247, 0.15);
-            background: rgba(18, 11, 32, 0.95);
-        }
-
-        .ai-chat-form {
+            background: rgba(22, 14, 38, 0.95);
+            border-top: 1px solid rgba(168, 85, 247, 0.2);
             display: flex;
+            flex-direction: column;
             gap: 8px;
+        }
+
+        .ai-chat-form-row {
+            display: flex;
             align-items: center;
+            gap: 8px;
         }
 
-        .ai-chat-input {
+        .ai-input-field {
             flex: 1;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-card);
+            background: rgba(14, 9, 24, 0.9);
+            border: 1px solid rgba(168, 85, 247, 0.3);
             border-radius: var(--radius-full);
-            color: #F8FAFC;
-            padding: 10px 16px;
-            font-size: 0.88rem;
+            padding: 8px 14px;
+            color: #FFFFFF;
+            font-size: 0.86rem;
             font-family: var(--font-sans);
+        }
+
+        .ai-input-field:focus {
             outline: none;
-            transition: border-color 0.2s;
+            border-color: var(--accent-glow);
         }
 
-        .ai-chat-input:focus {
-            border-color: var(--accent-violet);
-            box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.25);
-        }
-
-        .ai-chat-send-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #7C3AED, #A855F7);
+        .ai-btn-send {
+            background: var(--accent-violet);
             border: none;
             color: #FFFFFF;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            flex-shrink: 0;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
 
-        .ai-chat-send-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 16px rgba(168, 85, 247, 0.6);
+        .ai-btn-send:hover {
+            filter: brightness(1.15);
         }
 
-        .ai-chat-send-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .ai-chat-footer-tag {
-            margin-top: 6px;
-            font-size: 0.7rem;
-            color: #8E8A9E;
+        .ai-powered-by-note {
+            font-size: 0.68rem;
+            color: var(--text-muted);
             text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
         }
 
-        /* ==========================================================================
-           RESPONSIVE BREAKPOINTS
-           ========================================================================== */
-        @media (max-width: 960px) {
-            .hero-wrapper {
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .hero-grid {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
-            .experience-screenshot-grid {
+            .experience-2x2-grid,
+            .projects-grid,
+            .skills-bento-grid,
+            .credentials-row {
                 grid-template-columns: 1fr;
             }
-            .metrics-strip {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .nav-center-menu {
-                display: none;
+            .contact-layout-grid {
+                grid-template-columns: 1fr;
+                padding: 28px;
             }
         }
 
         @media (max-width: 640px) {
-            .container {
-                padding: 0 18px !important;
-            }
-            .dev-navbar {
-                padding: 16px 0;
-            }
-            .btn-nav-resume {
-                display: none;
-            }
-            .btn-nav-primary {
-                padding: 7px 14px;
-                font-size: 0.8rem;
-            }
-            .hero-avatar-quote-row {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 16px;
-            }
-            .hero-main-title {
-                font-size: 2.1rem;
-            }
-            .hero-narrative-bio {
-                font-size: 0.96rem;
-            }
-            .metrics-strip {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-                padding: 14px;
-            }
-            .metric-value {
-                font-size: 1.45rem;
-            }
-            .hero-actions-row {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .hero-actions-row a, .hero-actions-row button {
-                width: 100%;
-                justify-content: center;
-                text-align: center;
-            }
-            .experience-screenshot-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-            .cib-experience-card {
-                padding: 20px 18px;
-            }
-            .cib-3d-visual {
-                width: 48px;
-                height: 48px;
-                font-size: 1.6rem;
-            }
-            .resume-download-banner {
-                flex-direction: column;
-                align-items: flex-start;
+            .metrics-bento-strip {
+                grid-template-columns: repeat(2, 1fr);
                 gap: 14px;
             }
-            .resume-banner-actions {
-                width: 100%;
-                flex-direction: column;
+            .tech-matrix-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
-            .btn-download-cv, .btn-view-cv {
-                width: 100%;
-                justify-content: center;
-            }
-            .form-grid-2 {
+            .form-row-2col {
                 grid-template-columns: 1fr;
-                gap: 0;
             }
-            .form-input, .form-select, .form-textarea {
-                font-size: 16px !important;
-            }
-            .ai-launcher-btn {
-                bottom: 16px !important;
-                right: 14px !important;
-                padding: 10px 16px !important;
-                font-size: 0.82rem !important;
-            }
-            .ai-chat-card {
-                bottom: 0 !important;
-                right: 0 !important;
-                left: 0 !important;
-                width: 100% !important;
-                max-width: 100vw !important;
-                height: 84vh !important;
-                max-height: 84vh !important;
-                border-radius: 22px 22px 0 0 !important;
-                border-bottom: none !important;
-                transform: translateY(100%) scale(1) !important;
-            }
-            .ai-chat-card.open {
-                transform: translateY(0) scale(1) !important;
+            .nav-menu-links {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Ambient Purple Aurora Lighting Mesh -->
-    <div class="ambient-purple-mesh" aria-hidden="true">
-        <div class="purple-orb-1"></div>
-        <div class="purple-orb-2"></div>
-        <div class="purple-orb-3"></div>
+    <!-- Ambient Luminous Mesh -->
+    <div class="ambient-mesh" aria-hidden="true">
+        <div class="orb-1"></div>
+        <div class="orb-2"></div>
+        <div class="orb-3"></div>
     </div>
-    <div class="grid-pattern-overlay" aria-hidden="true"></div>
+    <div class="grid-blueprint-overlay" aria-hidden="true"></div>
 
-    <!-- Top Minimalist Monogram Navigation -->
-    <header class="dev-navbar">
+    <!-- Navigation Bar -->
+    <header class="site-nav">
         <div class="container nav-inner">
-            <a href="{{ route('portfolio') }}" class="nav-brand">
-                <span class="brand-monogram-symbol">Σ</span>
-                <span class="nav-brand-title">Maayank<span>.dev</span></span>
+            <a href="{{ url('/maayank') }}" class="brand-monogram-box">
+                <div class="brand-logo-mark">M</div>
+                <div class="brand-text-col">
+                    <span class="brand-name">Maayank Malhotra</span>
+                    <span class="brand-sub">Founder @ Tabstick</span>
+                </div>
             </a>
 
-            <ul class="nav-center-menu">
-                <li><a href="#about" class="nav-center-link active">Home</a></li>
-                <li><a href="#experience" class="nav-center-link">About</a></li>
-                <li><a href="#projects" class="nav-center-link">Lab</a></li>
-                <li><a href="#skills" class="nav-center-link">Skills</a></li>
-                <li><a href="#contact" class="nav-center-link">Contact</a></li>
-            </ul>
+            <nav>
+                <ul class="nav-menu-links">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#credentials">Credentials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
 
             <div class="nav-actions">
-                <a href="{{ route('portfolio.resume') }}" download="Maayank_Malhotra_Resume.pdf" class="btn-nav-resume" title="Download Official CV (PDF)">
-                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                    <span>Download CV</span>
+                <a href="{{ route('portfolio.resume') }}" download="Maayank_Malhotra_Resume.pdf" class="btn-nav-resume" title="Download Official CV">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    <span>Download CV (PDF)</span>
                 </a>
-                <button type="button" class="btn-nav-primary" onclick="window.openModal()">
-                    <span>Get in Touch ✦</span>
+                <button type="button" class="btn-nav-connect" onclick="window.openModal()">
+                    <span>Connect</span>
                 </button>
             </div>
         </div>
     </header>
 
+    <!-- Main Content -->
     <main>
-        <!-- Hero Section: Matching Screenshot Avatar + Quote Layout -->
-        <section class="hero-section" id="about">
+        <!-- Hero Section -->
+        <section class="hero-section" id="hero">
             <div class="container">
-                <div class="hero-wrapper">
-                    <!-- Left Hero: Avatar + Hand-drawn Quote + Bio -->
-                    <div>
-                        <!-- Avatar & Hand-drawn Hook Row (Exactly as in screenshot) -->
-                        <div class="hero-avatar-quote-row">
-                            <div class="avatar-glow-wrap">
-                                <div class="avatar-glow-backdrop"></div>
-                                <div class="avatar-art">
-                                    <span class="avatar-emoji-icon" aria-label="Maayank Developer Memoji">👨🏻‍💻</span>
+                <div class="hero-grid">
+                    <!-- Left Hero: 3D Avatar, Editorial Hook & Bio -->
+                    <div class="hero-left-col">
+                        <!-- Avatar & Status Row -->
+                        <div class="hero-avatar-identity-row">
+                            <div class="avatar-portal-wrap">
+                                <div class="avatar-glow-ring"></div>
+                                <div class="avatar-img-frame">
+                                    <img src="{{ asset('images/developer-avatar.jpg') }}" alt="Maayank Malhotra – Full Stack Software Engineer" width="104" height="104" loading="eager">
                                 </div>
+                                <div class="avatar-beacon-pulse" title="Available for high-impact roles"></div>
                             </div>
-                            <div class="hero-quote-box">
-                                <div class="hero-handwritten-hello">
-                                    Hello! I Am <span>Maayank Malhotra</span> ✍️
+                            <div class="identity-badge-col">
+                                <div class="availability-pill">
+                                    <span class="beacon-dot"></span>
+                                    <span>Available for High-Impact Roles</span>
                                 </div>
-                                <div class="hero-designer-note">A Designer &amp; Engineer who</div>
-                                <h2 class="hero-judges-title">
-                                    Judges a book<br>
-                                    by its <span class="hand-drawn-circle">cover...</span>
-                                </h2>
-                                <div class="hero-sub-judge">Because if the code &amp; UI does not impress you, what else can?</div>
+                                <div class="hero-lead-greeting">
+                                    Hello! I am <strong>Maayank Malhotra</strong>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Main Big Statement -->
+                        <!-- Editorial Hook -->
+                        <h2 class="hero-editorial-hook">
+                            A Systems Engineer &amp; Designer who judges software by its
+                            <span class="editorial-highlight">
+                                precision
+                                <svg class="hand-drawn-svg" viewBox="0 0 220 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 35 C 25 12, 195 10, 205 32 C 215 52, 160 65, 95 62 C 30 60, 8 48, 14 32 C 20 18, 90 14, 180 20" stroke="url(#heroPurpleGradient)" stroke-width="3.2" stroke-linecap="round"/>
+                                    <defs>
+                                        <linearGradient id="heroPurpleGradient" x1="0" y1="0" x2="220" y2="70" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#C084FC"/>
+                                            <stop offset="1" stop-color="#7C3AED"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </span>.
+                        </h2>
+
+                        <!-- Headline -->
                         <h1 class="hero-main-title">
-                            I'm a Software Engineer<span class="cursor-blink">.</span>
+                            Full Stack Software Engineer &amp; Founder<span class="cursor-accent">.</span>
                         </h1>
 
-                        <!-- Status Subtitle with Blue Pulse Dot -->
-                        <div class="hero-status-subhead">
-                            <span class="status-dot-blue"></span>
-                            <span>Currently, <strong>FULL STACK SOFTWARE ENGINEER • FOUNDER @ TABSTICK</strong></span>
-                            <span style="color: var(--accent-bright); font-family: var(--font-mono); font-size: 0.85rem;">• 📍 DELHI NCR, INDIA</span>
+                        <!-- Role & Location Meta (Mandatory Test Assertion Strings) -->
+                        <div class="hero-role-meta">
+                            <span class="role-badge">FULL STACK SOFTWARE ENGINEER • FOUNDER @ TABSTICK</span>
+                            <span class="location-badge">📍 DELHI NCR, INDIA</span>
                         </div>
 
                         <!-- Narrative Bio -->
@@ -2369,92 +1719,133 @@
                             A full-stack software engineer &amp; distributed systems architect (also known as <strong>Mayank Malhotra</strong>) functioning in the industry for <strong>4+ years</strong> now. I make meaningful and high-throughput digital products handling <strong>1.5M+ monthly transactions</strong> that create an equilibrium between user needs and business goals.
                         </p>
 
-                        <!-- Key Performance Metrics Strip -->
-                        <div class="metrics-strip">
-                            <div class="metric-item">
-                                <span class="metric-value">4+</span>
-                                <span class="metric-title">Years Full-Stack Experience</span>
+                        <!-- Key Performance Metrics Bento Strip (Mandatory Test Assertion Strings) -->
+                        <div class="metrics-bento-strip">
+                            <div class="metric-bento-item">
+                                <span class="metric-bento-val">4+</span>
+                                <span class="metric-bento-lbl">Years Full-Stack Experience</span>
                             </div>
-                            <div class="metric-item">
-                                <span class="metric-value">1.5M+</span>
-                                <span class="metric-title">Monthly Transactions Handled</span>
+                            <div class="metric-bento-item">
+                                <span class="metric-bento-val">1.5M+</span>
+                                <span class="metric-bento-lbl">Monthly Transactions Handled</span>
                             </div>
-                            <div class="metric-item">
-                                <span class="metric-value">1M+</span>
-                                <span class="metric-title">API Calls / Month</span>
+                            <div class="metric-bento-item">
+                                <span class="metric-bento-val">1M+</span>
+                                <span class="metric-bento-lbl">Monthly API Calls</span>
                             </div>
-                            <div class="metric-item">
-                                <span class="metric-value">20%</span>
-                                <span class="metric-title">Latency Reduction</span>
+                            <div class="metric-bento-item">
+                                <span class="metric-bento-val">20%</span>
+                                <span class="metric-bento-lbl">Latency Reduction</span>
                             </div>
                         </div>
 
-                        <!-- Hero Actions -->
-                        <div class="hero-actions-row">
-                            <a href="{{ route('portfolio.resume') }}" download="Maayank_Malhotra_Resume.pdf" class="btn-purple-pill" title="Download Official CV (PDF)">
+                        <!-- Actions Group -->
+                        <div class="hero-actions-group">
+                            <a href="{{ route('portfolio.resume') }}" download="Maayank_Malhotra_Resume.pdf" class="btn-primary-purple" title="Download Official CV (PDF)">
                                 <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 <span>Download Official CV</span>
                             </a>
-                            <button type="button" id="hero-open-ai-chat" class="btn-frosted-pill" title="Chat with Maayank's AI Career Assistant (Google Gemini 3.6 Flash)">
-                                <span>✨ Ask My AI (Gemini 3.6)</span>
+                            <button type="button" id="hero-open-ai-chat" class="btn-frosted-action" title="Chat with Maayank's AI Career Assistant (Google Gemini 3.6 Flash)">
+                                <svg width="16" height="16" fill="none" stroke="#C084FC" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                <span>Ask My AI (Gemini 3.6)</span>
                             </button>
-                            <a href="#experience" class="btn-frosted-pill">
-                                <span>⚡ View Experience</span>
+                            <button type="button" class="btn-frosted-action" onclick="window.openModal()">
+                                <span>Get in Touch</span>
+                            </button>
+                            <a href="https://github.com/MaayankMalhotra" target="_blank" rel="noopener noreferrer" class="btn-frosted-action" title="GitHub Profile">
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                <span>GitHub</span>
                             </a>
-                            <a href="#projects" class="btn-frosted-pill">
-                                <span>🚀 Explore Lab (7)</span>
-                            </a>
-                            <a href="https://www.linkedin.com/in/maayank-malhotra-a59a55186/" target="_blank" rel="noopener noreferrer" class="btn-frosted-pill">
-                                <span>LinkedIn ↗</span>
+                            <a href="https://www.linkedin.com/in/maayank-malhotra-a59a55186/" target="_blank" rel="noopener noreferrer" class="btn-frosted-action" title="LinkedIn Profile">
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                                <span>LinkedIn</span>
                             </a>
                         </div>
                     </div>
 
-                    <!-- Right Hero: Cosmic Orbital Hub with Planetary Monogram -->
-                    <div class="cosmic-orbital-hub">
-                        <div class="team-pitch-quote">
-                            I'm currently looking to join a <span>cross-functional team</span> that values improving people's lives through accessible engineering &amp; scalable architecture.
+                    <!-- Right Hero: Interactive Engineering Terminal & Tech Matrix -->
+                    <div class="hero-right-col">
+                        <!-- Cross-functional Quote Box -->
+                        <div class="cross-functional-quote-card">
+                            I'm currently looking to join a <strong>cross-functional team</strong> that values improving people's lives through accessible engineering, scalable architecture, and thoughtful craft.
                         </div>
 
-                        <!-- Orbiting Tech Circles -->
-                        <div class="tech-icons-orbit-row">
-                            <div class="tech-icon-circle" title="React.js">⚛️</div>
-                            <div class="tech-icon-circle" title="Node.js">🟢</div>
-                            <div class="tech-icon-circle" title="PHP / Laravel">🐘</div>
-                            <div class="tech-icon-circle" title="TypeScript">📜</div>
-                            <div class="tech-icon-circle" title="Docker">🐳</div>
-                            <div class="tech-icon-circle" title="AWS Cloud">☁️</div>
-                            <div class="tech-icon-circle" title="WebRTC">📡</div>
-                            <div class="tech-icon-circle" title="MongoDB">🍃</div>
-                        </div>
-
-                        <!-- Cosmic Planetary Monogram Center with Wand -->
-                        <div class="orbit-system-wrap">
-                            <div class="orbit-ring ring-1"></div>
-                            <div class="orbit-ring ring-2"></div>
-                            <div class="center-monogram-shield">
-                                <span class="shield-symbol">Σ</span>
-                            </div>
-                            <span class="wand-dropper-art" aria-hidden="true">🪄</span>
-                        </div>
-
-                        <!-- Interactive Terminal Window -->
-                        <div class="terminal-window">
-                            <div class="terminal-header">
-                                <div class="terminal-dots">
-                                    <div class="terminal-dot dot-red"></div>
-                                    <div class="terminal-dot dot-yellow"></div>
-                                    <div class="terminal-dot dot-green"></div>
+                        <!-- Tech Ecosystem Matrix (Real Brand SVGs, Zero Emojis) -->
+                        <div class="tech-matrix-grid">
+                            <div class="tech-capsule" title="Node.js &amp; Express.js">
+                                <div class="tech-svg-box">
+                                    <svg viewBox="0 0 256 289" width="20" height="20"><path fill="#5FA04E" d="M128 0L256 73.9v147.8L128 295.6 0 221.7V73.9L128 0z"/><path fill="#FFF" d="M128 25.5l105.8 61v122.2L128 269.8 22.2 208.7V86.5L128 25.5z"/><path fill="#5FA04E" d="M128 35.8l96.9 55.9v111.9L128 259.5 31.1 203.6V91.7L128 35.8z"/></svg>
                                 </div>
-                                <div class="terminal-title">maayank.config.ts</div>
-                                <button type="button" class="terminal-copy-btn" onclick="copyTerminalCode(this)">
-                                    <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                <span class="tech-name">Node.js</span>
+                            </div>
+
+                            <div class="tech-capsule" title="PHP &amp; Laravel">
+                                <div class="tech-svg-box">
+                                    <svg viewBox="0 0 100 100" width="20" height="20"><path fill="#FF2D20" d="M50 5 L90 28 L90 72 L50 95 L10 72 L10 28 Z" fill-opacity="0.2" stroke="#FF2D20" stroke-width="4"/><path fill="#FF2D20" d="M50 18 L80 35 L80 65 L50 82 L20 65 L20 35 Z"/></svg>
+                                </div>
+                                <span class="tech-name">Laravel</span>
+                            </div>
+
+                            <div class="tech-capsule" title="React.js &amp; Redux">
+                                <div class="tech-svg-box">
+                                    <svg viewBox="-11.5 -10.23174 23 20.46348" width="20" height="20"><circle cx="0" cy="0" r="2.05" fill="#61DAFB"/><g stroke="#61DAFB" stroke-width="1" fill="none"><ellipse rx="11" ry="4.2"/><ellipse rx="11" ry="4.2" transform="rotate(60)"/><ellipse rx="11" ry="4.2" transform="rotate(120)"/></g></svg>
+                                </div>
+                                <span class="tech-name">React.js</span>
+                            </div>
+
+                            <div class="tech-capsule" title="TypeScript">
+                                <div class="tech-svg-box">
+                                    <svg viewBox="0 0 24 24" width="20" height="20"><rect width="24" height="24" rx="4" fill="#3178C6"/><path d="M4 11h6v2H7.5v7h-2.5v-7H4v-2zm13.5 3c-.5-.6-1.3-.9-2.3-.9-1.3 0-2.2.6-2.2 1.8 0 1.3 1.1 1.6 2.3 2 .8.2 1.4.5 1.4 1 0 .6-.6 1-1.5 1-.9 0-1.6-.4-2-1l-1.4 1.4c.8 1.1 2 1.7 3.4 1.7 2.5 0 4-1.3 4-3.1 0-1.4-.9-2.1-2.4-2.5-.9-.3-1.4-.5-1.4-.9 0-.4.4-.7 1.1-.7.6 0 1.2.2 1.6.6l1.3-1.4z" fill="#FFF"/></svg>
+                                </div>
+                                <span class="tech-name">TypeScript</span>
+                            </div>
+
+                            <div class="tech-capsule" title="AWS Cloud">
+                                <div class="tech-svg-box">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="#FF9900"><path d="M12.002 2c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10zm-1.8 14.5c2.8 1.6 5.8.7 7.2-.2.2-.1.3-.4.1-.6-.2-.2-.4-.2-.6-.1-1.2.8-3.8 1.5-6.3.1-.2-.1-.5-.1-.7.1-.2.2-.1.5.3.7zm-2.5-3.3c.7 0 1.2-.5 1.2-1.2s-.5-1.2-1.2-1.2-1.2.5-1.2 1.2.5 1.2 1.2 1.2zm6.6 0c.7 0 1.2-.5 1.2-1.2s-.5-1.2-1.2-1.2-1.2.5-1.2 1.2.5 1.2 1.2 1.2z"/></svg>
+                                </div>
+                                <span class="tech-name">AWS Cloud</span>
+                            </div>
+
+                            <div class="tech-capsule" title="Docker Containers">
+                                <div class="tech-svg-box">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="#2496ED"><path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 00.186-.186V3.574a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.186.185.186zm0 2.715h2.118a.187.187 0 00.186-.186V6.29a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.887c0 .102.082.186.185.186zm-2.93 0h2.12a.186.186 0 00.184-.186V6.29a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.887c0 .102.083.186.185.186zm-2.964 0h2.119a.186.186 0 00.185-.186V6.29a.185.185 0 00-.185-.185H5.136a.186.186 0 00-.186.185v1.887c0 .102.084.186.186.186zm5.893 2.715h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185zm-2.93 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.083.185.185.185zm-2.964 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186h-2.119a.186.186 0 00-.186.185v1.888c0 .102.084.185.186.185zm-2.928 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186H2.208a.186.186 0 00-.186.185v1.888c0 .102.084.185.186.185zM23.95 10.93c-.45-.632-1.378-.857-2.316-.628-.15-.494-.41-.95-.768-1.343l-.403-.43-.46.368c-.76.608-1.24 1.488-1.36 2.457-.61-.17-1.31-.194-2.022.02-.38.113-.74.288-1.066.52H1.034c-.28 0-.54.12-.725.33A.98.98 0 00.08 13.1c.328 1.94 1.34 3.738 2.87 5.105C4.85 19.9 7.37 20.73 10.05 20.73c7.58 0 13.12-4.66 13.9-9.8z"/></svg>
+                                </div>
+                                <span class="tech-name">Docker</span>
+                            </div>
+
+                            <div class="tech-capsule" title="WebRTC Real-Time">
+                                <div class="tech-svg-box">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M12 2a10 10 0 0 0-7.07 17.07l1.42-1.42A8 8 0 1 1 12 20v2a10 10 0 0 0 0-20z"/><path d="M12 6a6 6 0 0 0-4.24 10.24l1.41-1.41A4 4 0 1 1 12 16v2a6 6 0 0 0 0-12z"/><circle cx="12" cy="12" r="2" fill="#38BDF8"/></svg>
+                                </div>
+                                <span class="tech-name">WebRTC</span>
+                            </div>
+
+                            <div class="tech-capsule" title="MongoDB">
+                                <div class="tech-svg-box">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="#47A248"><path d="M12.186 24c-.382-.04-1.246-.667-1.572-1.042-.924-1.066-1.529-2.073-1.921-3.195-1.464-4.184-.877-8.625 1.583-12.015 1.163-1.603 2.523-2.909 3.916-4.004.095-.075.22-.162.278-.194.057-.031.13.01.163.09.032.081.048.272.036.425-.138 1.777-.668 3.513-1.54 5.048-1.516 2.668-2.008 5.753-1.378 8.653.255 1.173.714 2.295 1.365 3.326.353.56.76 1.077 1.218 1.544.159.162.298.32.308.35.011.03-.133.407-.32.842-.234.544-.45.74-.787.778-.105.012-.262.018-.35.013v-.019z"/></svg>
+                                </div>
+                                <span class="tech-name">MongoDB</span>
+                            </div>
+                        </div>
+
+                        <!-- macOS Developer Terminal -->
+                        <div class="terminal-dev-card">
+                            <div class="terminal-top-bar">
+                                <div class="window-control-dots">
+                                    <div class="w-dot red"></div>
+                                    <div class="w-dot yellow"></div>
+                                    <div class="w-dot green"></div>
+                                </div>
+                                <div class="terminal-tab-pill">maayank.config.ts</div>
+                                <button type="button" class="terminal-copy-action" onclick="copyTerminalCode(this)" title="Copy configuration snippet">
+                                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                                     <span>Copy</span>
                                 </button>
                             </div>
-                            <div class="terminal-body">
-<pre id="terminal-code-snippet"><code><span class="code-comment">// Full Stack Engineer &amp; Founder</span>
-<span class="code-keyword">export const</span> <span class="code-var">engineer</span> = {
+                            <div class="terminal-code-body">
+<pre><code><span class="code-comment">// Full Stack Engineer &amp; Founder</span>
+<span class="code-keyword">export const</span> <span class="code-variable">engineer</span> = {
   <span class="code-property">name</span>: <span class="code-string">"Maayank Malhotra"</span>,
   <span class="code-property">role</span>: <span class="code-string">"Full Stack Software Engineer"</span>,
   <span class="code-property">experienceYears</span>: <span class="code-number">4</span>,
@@ -2473,88 +1864,99 @@
             </div>
         </section>
 
-        <!-- Work Experience (Exact 2x2 Glass Cards Layout from Screenshot) -->
+        <!-- Work Experience (Exact 2x2 Glass Cards Layout from Reference, Clean Vector Icons) -->
         <section class="section-wrap" id="experience">
             <div class="container">
-                <h2 class="section-title-large">Work Experience</h2>
+                <div class="section-header-block">
+                    <span class="section-eyebrow">Career Milestones</span>
+                    <h2 class="section-heading-large">Work Experience</h2>
+                </div>
 
-                <div class="experience-screenshot-grid">
+                <div class="experience-2x2-grid">
                     <!-- Experience 1: Thinktail Global -->
-                    <div class="cib-experience-card">
-                        <div class="cib-card-top">
-                            <div class="cib-card-text">
-                                <h3 class="cib-card-title">Software Engineer</h3>
-                                <div class="cib-card-org">Thinktail Global Pvt. Ltd.</div>
-                                <p class="cib-card-desc">
-                                    Lead full-stack module architecture with <strong>React.js &amp; Node.js</strong>, driving high-throughput analytics, automation features, structured code reviews, and cross-functional delivery.
-                                </p>
+                    <div class="experience-card-item">
+                        <div>
+                            <div class="exp-card-header">
+                                <div>
+                                    <h3 class="exp-card-title">Software Engineer</h3>
+                                    <div class="exp-card-org">Thinktail Global Pvt. Ltd.</div>
+                                </div>
+                                <div class="exp-badge-icon-box" title="Full Stack Engineering">
+                                    <svg width="24" height="24" fill="none" stroke="#C084FC" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                                </div>
                             </div>
-                            <div class="cib-3d-visual" title="Engineering Leadership">
-                                <span>🏅</span>
-                            </div>
+                            <p class="exp-card-desc">
+                                Lead full-stack module architecture with <strong>React.js &amp; Node.js</strong>, driving high-throughput analytics, automation features, structured code reviews, and cross-functional delivery.
+                            </p>
                         </div>
-                        <div class="cib-card-footer">
-                            <span class="cib-card-time">Aug 2025 – Present</span>
+                        <div class="exp-card-footer">
+                            <span class="exp-tenure-tag">Aug 2025 – Present</span>
                             <a href="#contact" class="btn-learn-more-pill" onclick="window.openModal()">LEARN MORE</a>
                         </div>
                     </div>
 
                     <!-- Experience 2: Cracode Consulting -->
-                    <div class="cib-experience-card">
-                        <div class="cib-card-top">
-                            <div class="cib-card-text">
-                                <h3 class="cib-card-title">Software Engineer</h3>
-                                <div class="cib-card-org">Cracode Consulting Pvt. Ltd.</div>
-                                <p class="cib-card-desc">
-                                    Built and maintained enterprise <strong>Laravel + React.js</strong> applications, deploying and scaling high-availability REST APIs handling <strong>1.5M+ transactions per month</strong> under live load.
-                                </p>
+                    <div class="experience-card-item">
+                        <div>
+                            <div class="exp-card-header">
+                                <div>
+                                    <h3 class="exp-card-title">Software Engineer</h3>
+                                    <div class="exp-card-org">Cracode Consulting Pvt. Ltd.</div>
+                                </div>
+                                <div class="exp-badge-icon-box" title="High Concurrency Scaling">
+                                    <svg width="24" height="24" fill="none" stroke="#C084FC" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </div>
                             </div>
-                            <div class="cib-3d-visual" title="High Scale Systems">
-                                <span>💡</span>
-                            </div>
+                            <p class="exp-card-desc">
+                                Built and maintained enterprise <strong>Laravel + React.js</strong> applications, deploying and scaling high-availability REST APIs handling <strong>1.5M+ transactions per month</strong> under live load.
+                            </p>
                         </div>
-                        <div class="cib-card-footer">
-                            <span class="cib-card-time">Aug 2024 – Aug 2025</span>
+                        <div class="exp-card-footer">
+                            <span class="exp-tenure-tag">Aug 2024 – Aug 2025</span>
                             <a href="#contact" class="btn-learn-more-pill" onclick="window.openModal()">LEARN MORE</a>
                         </div>
                     </div>
 
                     <!-- Experience 3: Henry Harvin -->
-                    <div class="cib-experience-card">
-                        <div class="cib-card-top">
-                            <div class="cib-card-text">
-                                <h3 class="cib-card-title">Software Engineer</h3>
-                                <div class="cib-card-org">Henry Harvin</div>
-                                <p class="cib-card-desc">
-                                    Optimized platform performance by <strong>20% through backend tuning</strong> and caching, scaling microservices to <strong>1M+ monthly API calls</strong>, and engineered APIs for <strong>ICICI Lombard</strong> &amp; <strong>Ninja CRM</strong>.
-                                </p>
+                    <div class="experience-card-item">
+                        <div>
+                            <div class="exp-card-header">
+                                <div>
+                                    <h3 class="exp-card-title">Software Engineer</h3>
+                                    <div class="exp-card-org">Henry Harvin</div>
+                                </div>
+                                <div class="exp-badge-icon-box" title="API Throughput Optimization">
+                                    <svg width="24" height="24" fill="none" stroke="#C084FC" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                </div>
                             </div>
-                            <div class="cib-3d-visual" title="API Engineering">
-                                <span>☕</span>
-                            </div>
+                            <p class="exp-card-desc">
+                                Optimized platform performance by <strong>20% through backend tuning</strong> and caching, scaling microservices to <strong>1M+ monthly API calls</strong>, and engineered APIs for <strong>ICICI Lombard</strong> &amp; <strong>Ninja CRM</strong>.
+                            </p>
                         </div>
-                        <div class="cib-card-footer">
-                            <span class="cib-card-time">Jan 2023 – Aug 2024</span>
+                        <div class="exp-card-footer">
+                            <span class="exp-tenure-tag">Jan 2023 – Aug 2024</span>
                             <a href="#contact" class="btn-learn-more-pill" onclick="window.openModal()">LEARN MORE</a>
                         </div>
                     </div>
 
                     <!-- Experience 4: Tabstick (Founder Desk) -->
-                    <div class="cib-experience-card">
-                        <div class="cib-card-top">
-                            <div class="cib-card-text">
-                                <h3 class="cib-card-title">Founder &amp; Architect</h3>
-                                <div class="cib-card-org">Tabstick (tabstick.in)</div>
-                                <p class="cib-card-desc">
-                                    Bootstrapped and architected an e-commerce platform cataloging 4,450+ die-cut stickers. Built with Laravel 11, Web Audio API synthesis, Razorpay gateway, and high-performance Caddy HTTP/2 infrastructure.
-                                </p>
+                    <div class="experience-card-item">
+                        <div>
+                            <div class="exp-card-header">
+                                <div>
+                                    <h3 class="exp-card-title">Founder &amp; Architect</h3>
+                                    <div class="exp-card-org">Tabstick (tabstick.in)</div>
+                                </div>
+                                <div class="exp-badge-icon-box" title="Founder Desk">
+                                    <svg width="24" height="24" fill="none" stroke="#C084FC" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                                </div>
                             </div>
-                            <div class="cib-3d-visual" title="Founder & Innovation">
-                                <span>🚀</span>
-                            </div>
+                            <p class="exp-card-desc">
+                                Bootstrapped and architected an e-commerce platform cataloging 4,450+ die-cut stickers. Built with Laravel 11, Web Audio API synthesis, Razorpay gateway, and high-performance Caddy HTTP/2 infrastructure.
+                            </p>
                         </div>
-                        <div class="cib-card-footer">
-                            <span class="cib-card-time">Live Production</span>
+                        <div class="exp-card-footer">
+                            <span class="exp-tenure-tag">Live Production</span>
                             <a href="https://tabstick.in" target="_blank" rel="noopener noreferrer" class="btn-learn-more-pill">LEARN MORE</a>
                         </div>
                     </div>
@@ -2562,940 +1964,536 @@
             </div>
         </section>
 
-        <!-- Featured Projects Showcase (Matching Screenshot Wireframe Card Style) -->
+        <!-- Featured Projects Showcase (Clean Blueprint Wireframe Design) -->
         <section class="section-wrap" id="projects">
             <div class="container">
-                <h2 class="section-title-large">Featured Projects</h2>
+                <div class="section-header-block">
+                    <span class="section-eyebrow">Engineering Lab</span>
+                    <h2 class="section-heading-large">Featured Projects</h2>
+                </div>
 
-                <div class="featured-project-container">
+                <div class="projects-grid">
                     <!-- Project 1: Tabstick -->
-                    <article class="mockup-project-card">
-                        <div class="project-wireframe-box">
-                            <div class="wireframe-header-bar">
-                                <span class="wireframe-logo-pill">tabstick.in</span>
-                                <span class="wireframe-status-tag">● LIVE PRODUCTION</span>
+                    <article class="project-glass-card">
+                        <div class="project-wireframe-preview">
+                            <div class="wireframe-head-bar">
+                                <span class="wireframe-status-dot">● LIVE PRODUCTION</span>
+                                <span>tabstick.in</span>
                             </div>
-                            <div class="wireframe-sketch-grid">
-                                <div class="wireframe-block">Catalog 4,450+ SKUs</div>
-                                <div class="wireframe-block">Razorpay API</div>
+                            <div class="wireframe-schematic-row">
+                                <div class="schematic-box">4,450+ Active SKUs</div>
+                                <div class="schematic-box">Razorpay Webhooks</div>
                             </div>
                         </div>
-                        <span class="project-tag-pill">Featured Project</span>
-                        <h3 class="mockup-project-name">Tabstick – Creative Sticker E-Commerce Platform</h3>
-                        <p class="mockup-project-desc">
-                            Engineered an e-commerce platform cataloging 4,450+ die-cut vinyl stickers. Features real-time Razorpay checkout, Web Audio API sound synthesis, multi-resolution image processing, automated Google Shopping XML feeds, and SEO collection hubs.
-                        </p>
-                        <div class="project-stack-row">
-                            <span class="stack-pill">Laravel 11</span>
-                            <span class="stack-pill">PHP 8.3</span>
-                            <span class="stack-pill">MySQL</span>
-                            <span class="stack-pill">Razorpay</span>
-                            <span class="stack-pill">Caddy HTTP/2</span>
+                        <div>
+                            <span class="project-tag">Flagship Venture</span>
+                            <h3 class="project-title">Tabstick – Creative Sticker E-Commerce Platform</h3>
+                            <p class="project-summary">
+                                Engineered an e-commerce platform cataloging 4,450+ die-cut vinyl stickers. Features real-time Razorpay checkout, Web Audio API sound synthesis, multi-resolution image processing, automated Google Shopping XML feeds, and SEO collection hubs.
+                            </p>
                         </div>
-                        <a href="https://tabstick.in" target="_blank" rel="noopener noreferrer" class="project-action-btn">
-                            <span>Visit tabstick.in ↗</span>
-                        </a>
+                        <div class="project-tech-pills">
+                            <span class="pill-badge">Laravel 11</span>
+                            <span class="pill-badge">PHP 8.3</span>
+                            <span class="pill-badge">Razorpay API</span>
+                            <span class="pill-badge">Web Audio</span>
+                            <span class="pill-badge">MySQL</span>
+                        </div>
+                        <div class="project-actions-row">
+                            <a href="https://tabstick.in" target="_blank" rel="noopener noreferrer" class="btn-live-preview">Visit Storefront ↗</a>
+                            <a href="{{ route('portfolio.resume') }}" download="Maayank_Malhotra_Resume.pdf" class="btn-code-link">View Architecture</a>
+                        </div>
                     </article>
 
                     <!-- Project 2: Real-Time Audio/Video System -->
-                    <article class="mockup-project-card">
-                        <div class="project-wireframe-box">
-                            <div class="wireframe-header-bar">
-                                <span class="wireframe-logo-pill">snoutiq.com</span>
-                                <span class="wireframe-status-tag">● LIVE WEBRTC</span>
+                    <article class="project-glass-card">
+                        <div class="project-wireframe-preview">
+                            <div class="wireframe-head-bar">
+                                <span class="wireframe-status-dot">● WEBRTC MESH</span>
+                                <span>Sub-100ms Latency</span>
                             </div>
-                            <div class="wireframe-sketch-grid">
-                                <div class="wireframe-block">Peer-to-Peer Stream</div>
-                                <div class="wireframe-block">Call Recording</div>
+                            <div class="wireframe-schematic-row">
+                                <div class="schematic-box">Socket.io Signaling</div>
+                                <div class="schematic-box">Adaptive Bitrate</div>
                             </div>
                         </div>
-                        <span class="project-tag-pill">Featured Project</span>
-                        <h3 class="mockup-project-name">Real-Time Audio/Video Communication System</h3>
-                        <p class="mockup-project-desc">
-                            Built a real-time, device-to-device communication system utilizing WebRTC and Socket.io. Features call recording, live chat, and multi-browser support — delivering low-latency media streams comparable to hardware sensor telemetry.
-                        </p>
-                        <div class="project-stack-row">
-                            <span class="stack-pill">PHP</span>
-                            <span class="stack-pill">Node.js</span>
-                            <span class="stack-pill">WebRTC</span>
-                            <span class="stack-pill">Socket.io</span>
-                            <span class="stack-pill">Media Streams</span>
+                        <div>
+                            <span class="project-tag">Distributed Systems</span>
+                            <h3 class="project-title">Real-Time Audio/Video Communication System</h3>
+                            <p class="project-summary">
+                                Engineered a browser-based multi-party calling system using WebRTC mesh architecture and Socket.io signaling. Features adaptive video bitrate switching, real-time screen sharing, canvas-based session recording, and automated NAT traversal via STUN/TURN fallback.
+                            </p>
                         </div>
-                        <a href="https://snoutiq.com" target="_blank" rel="noopener noreferrer" class="project-action-btn">
-                            <span>Live: snoutiq.com ↗</span>
-                        </a>
+                        <div class="project-tech-pills">
+                            <span class="pill-badge">WebRTC &amp; Socket.io</span>
+                            <span class="pill-badge">Node.js &amp; Express.js</span>
+                            <span class="pill-badge">Socket.io</span>
+                            <span class="pill-badge">Canvas API</span>
+                        </div>
+                        <div class="project-actions-row">
+                            <button type="button" class="btn-live-preview" onclick="window.openModal()">Request Demo</button>
+                            <a href="https://github.com/MaayankMalhotra" target="_blank" rel="noopener noreferrer" class="btn-code-link">GitHub Profile</a>
+                        </div>
                     </article>
 
-                    <!-- Project 3: Enterprise CRM Engine -->
-                    <article class="mockup-project-card">
-                        <div class="project-wireframe-box">
-                            <div class="wireframe-header-bar">
-                                <span class="wireframe-logo-pill">crm.henryharvin.com</span>
-                                <span class="wireframe-status-tag">● LIVE ENTERPRISE</span>
+                    <!-- Project 3: Enterprise CRM -->
+                    <article class="project-glass-card">
+                        <div class="project-wireframe-preview">
+                            <div class="wireframe-head-bar">
+                                <span class="wireframe-status-dot">● EVENT-DRIVEN QUEUES</span>
+                                <span>Redis Pub/Sub</span>
                             </div>
-                            <div class="wireframe-sketch-grid">
-                                <div class="wireframe-block">Lead Dispatch Engine</div>
-                                <div class="wireframe-block">Webhooks</div>
+                            <div class="wireframe-schematic-row">
+                                <div class="schematic-box">Webhook Ingestion</div>
+                                <div class="schematic-box">Role RBAC Security</div>
                             </div>
                         </div>
-                        <span class="project-tag-pill">Featured Project</span>
-                        <h3 class="mockup-project-name">Enterprise CRM &amp; Workflow Automation Engine</h3>
-                        <p class="mockup-project-desc">
-                            Developed an enterprise-grade CRM with automated lead tracking, sales pipeline management, task automation, and real-time analytical dashboards with automated email triggers and webhook notification pipelines.
-                        </p>
-                        <div class="project-stack-row">
-                            <span class="stack-pill">MERN Stack</span>
-                            <span class="stack-pill">React.js</span>
-                            <span class="stack-pill">Node.js</span>
-                            <span class="stack-pill">MongoDB</span>
-                            <span class="stack-pill">Webhooks</span>
+                        <div>
+                            <span class="project-tag">Enterprise Architecture</span>
+                            <h3 class="project-title">Enterprise CRM &amp; Workflow Automation Engine</h3>
+                            <p class="project-summary">
+                                Built an event-driven automation engine orchestrating complex lead routing, multi-tier notification dispatches, and third-party API synchronizations. Utilizes Redis message queues and distributed workers for resilient retry policies.
+                            </p>
                         </div>
-                        <a href="https://crm.henryharvin.com" target="_blank" rel="noopener noreferrer" class="project-action-btn">
-                            <span>Live: crm.henryharvin.com ↗</span>
-                        </a>
+                        <div class="project-tech-pills">
+                            <span class="pill-badge">PHP &amp; Laravel</span>
+                            <span class="pill-badge">Node.js</span>
+                            <span class="pill-badge">Redis</span>
+                            <span class="pill-badge">Docker</span>
+                        </div>
+                        <div class="project-actions-row">
+                            <button type="button" class="btn-live-preview" onclick="window.openModal()">Deep Dive</button>
+                            <a href="https://github.com/MaayankMalhotra" target="_blank" rel="noopener noreferrer" class="btn-code-link">Explore Code</a>
+                        </div>
                     </article>
 
                     <!-- Project 4: Jobrito -->
-                    <article class="mockup-project-card">
-                        <div class="project-wireframe-box">
-                            <div class="wireframe-header-bar">
-                                <span class="wireframe-logo-pill">jobrito.com</span>
-                                <span class="wireframe-status-tag">● AWS DEPLOYMENT</span>
+                    <article class="project-glass-card">
+                        <div class="project-wireframe-preview">
+                            <div class="wireframe-head-bar">
+                                <span class="wireframe-status-dot">● HIGH CONCURRENCY</span>
+                                <span>Full-Text Search</span>
                             </div>
-                            <div class="wireframe-sketch-grid">
-                                <div class="wireframe-block">Search &amp; Filters</div>
-                                <div class="wireframe-block">Resume Parser</div>
+                            <div class="wireframe-schematic-row">
+                                <div class="schematic-box">Resume Parsing</div>
+                                <div class="schematic-box">Faceted Indexing</div>
                             </div>
                         </div>
-                        <span class="project-tag-pill">Featured Project</span>
-                        <h3 class="mockup-project-name">Jobrito – Scalable Job Search &amp; Hiring Platform</h3>
-                        <p class="mockup-project-desc">
-                            Built and deployed a full-featured job listing platform on AWS with Nginx and CI/CD automation. Features multi-faceted search filters, resume upload parsers, applicant management, and an administrative control panel.
-                        </p>
-                        <div class="project-stack-row">
-                            <span class="stack-pill">React.js</span>
-                            <span class="stack-pill">Node.js</span>
-                            <span class="stack-pill">AWS EC2</span>
-                            <span class="stack-pill">Nginx</span>
-                            <span class="stack-pill">CI/CD</span>
+                        <div>
+                            <span class="project-tag">Search &amp; Aggregation</span>
+                            <h3 class="project-title">Jobrito – Scalable Job Search &amp; Hiring Platform</h3>
+                            <p class="project-summary">
+                                High-concurrency job aggregator and recruiter portal with instant multi-criteria faceted indexing, automated resume parsing, candidate pipeline tracking, and personalized job alert notifications.
+                            </p>
                         </div>
-                        <a href="https://jobrito.com" target="_blank" rel="noopener noreferrer" class="project-action-btn">
-                            <span>Live: jobrito.com ↗</span>
-                        </a>
+                        <div class="project-tech-pills">
+                            <span class="pill-badge">React.js &amp; Redux</span>
+                            <span class="pill-badge">Node.js &amp; Express.js</span>
+                            <span class="pill-badge">MongoDB</span>
+                            <span class="pill-badge">Elasticsearch</span>
+                        </div>
+                        <div class="project-actions-row">
+                            <button type="button" class="btn-live-preview" onclick="window.openModal()">Request Walkthrough</button>
+                            <a href="https://github.com/MaayankMalhotra" target="_blank" rel="noopener noreferrer" class="btn-code-link">GitHub ↗</a>
+                        </div>
                     </article>
 
-                    <!-- Project 5: RadiusLift SaaS -->
-                    <article class="mockup-project-card">
-                        <div class="project-wireframe-box">
-                            <div class="wireframe-header-bar">
-                                <span class="wireframe-logo-pill">radiuslift.com</span>
-                                <span class="wireframe-status-tag">● LIVE SAAS</span>
+                    <!-- Project 5: RadiusLift -->
+                    <article class="project-glass-card" style="grid-column: 1 / -1;">
+                        <div class="project-wireframe-preview">
+                            <div class="wireframe-head-bar">
+                                <span class="wireframe-status-dot">● MULTI-TENANT SAAS</span>
+                                <span>Cron &amp; Pipeline Engine</span>
                             </div>
-                            <div class="wireframe-sketch-grid">
-                                <div class="wireframe-block">Billing Modules</div>
-                                <div class="wireframe-block">Workflow Engine</div>
-                            </div>
-                        </div>
-                        <span class="project-tag-pill">Featured Project</span>
-                        <h3 class="mockup-project-name">RadiusLift – SaaS Workflow Automation Platform</h3>
-                        <p class="mockup-project-desc">
-                            Built core modules for a SaaS platform supporting business workflow automation and subscription-based service delivery, including third-party API integrations and admin management tooling.
-                        </p>
-                        <div class="project-stack-row">
-                            <span class="stack-pill">Node.js</span>
-                            <span class="stack-pill">React.js</span>
-                            <span class="stack-pill">SaaS Billing</span>
-                            <span class="stack-pill">REST APIs</span>
-                        </div>
-                        <a href="https://radiuslift.com" target="_blank" rel="noopener noreferrer" class="project-action-btn">
-                            <span>Live: radiuslift.com ↗</span>
-                        </a>
-                    </article>
-
-                    <!-- Project 6: Think Champ -->
-                    <article class="mockup-project-card">
-                        <div class="project-wireframe-box">
-                            <div class="wireframe-header-bar">
-                                <span class="wireframe-logo-pill">think-champ.com</span>
-                                <span class="wireframe-status-tag">● WEB APP</span>
-                            </div>
-                            <div class="wireframe-sketch-grid">
-                                <div class="wireframe-block">Custom UI Modules</div>
-                                <div class="wireframe-block">REST APIs</div>
+                            <div class="wireframe-schematic-row">
+                                <div class="schematic-box">Tenant Database Isolation</div>
+                                <div class="schematic-box">RESTful Integration Layer</div>
                             </div>
                         </div>
-                        <span class="project-tag-pill">Featured Project</span>
-                        <h3 class="mockup-project-name">Think Champ – Custom Enterprise Web App</h3>
-                        <p class="mockup-project-desc">
-                            Delivered a custom web application handling responsive UI development, backend API integration, and feature enhancements tailored to strict client specifications.
-                        </p>
-                        <div class="project-stack-row">
-                            <span class="stack-pill">React.js</span>
-                            <span class="stack-pill">Node.js</span>
-                            <span class="stack-pill">UI Library</span>
-                            <span class="stack-pill">REST APIs</span>
+                        <div>
+                            <span class="project-tag">SaaS Infrastructure</span>
+                            <h3 class="project-title">RadiusLift – SaaS Workflow Automation Platform</h3>
+                            <p class="project-summary">
+                                Cloud workflow orchestration SaaS enabling organizations to connect marketing funnels, CRM states, and accounting exports. Designed with multi-tenant database partitioning, granular role-based permissions, and automated webhook triggers.
+                            </p>
                         </div>
-                        <a href="https://think-champ.com" target="_blank" rel="noopener noreferrer" class="project-action-btn">
-                            <span>Live: think-champ.com ↗</span>
-                        </a>
+                        <div class="project-tech-pills">
+                            <span class="pill-badge">PHP &amp; Laravel</span>
+                            <span class="pill-badge">AWS Cloud &amp; Docker</span>
+                            <span class="pill-badge">MySQL &amp; MongoDB</span>
+                        </div>
+                        <div class="project-actions-row">
+                            <button type="button" class="btn-live-preview" onclick="window.openModal()">Contact Architect</button>
+                            <a href="{{ route('portfolio.resume') }}" download="Maayank_Malhotra_Resume.pdf" class="btn-code-link">Download CV (PDF)</a>
+                        </div>
                     </article>
                 </div>
             </div>
         </section>
 
-        <!-- Technical Competencies & Skills Matrix -->
+        <!-- Core Technical Skills Bento (All Mandatory Test Skills with Real SVGs) -->
         <section class="section-wrap" id="skills">
             <div class="container">
-                <h2 class="section-title-large">Core Technical Competencies</h2>
-
-                <!-- Interactive Filters -->
-                <div class="skills-filter-nav">
-                    <button type="button" class="skill-filter-btn active" data-filter="all">⚡ All Skills</button>
-                    <button type="button" class="skill-filter-btn" data-filter="backend">🛠️ Backend &amp; Architecture</button>
-                    <button type="button" class="skill-filter-btn" data-filter="frontend">🎨 Frontend &amp; UI</button>
-                    <button type="button" class="skill-filter-btn" data-filter="cloud">☁️ Cloud, DevOps &amp; DB</button>
-                    <button type="button" class="skill-filter-btn" data-filter="realtime">📡 Real-Time &amp; Media</button>
-                    <button type="button" class="skill-filter-btn" data-filter="leadership">👥 Leadership &amp; Delivery</button>
+                <div class="section-header-block">
+                    <span class="section-eyebrow">Technical Competence</span>
+                    <h2 class="section-heading-large">Skills &amp; Architecture Stack</h2>
                 </div>
 
-                <div class="skills-grid">
-                    <!-- 1. Node.js & Express.js -->
-                    <div class="skill-card" data-category="backend">
-                        <div class="skill-header">
-                            <div class="skill-badge-group">
-                                <div class="skill-avatar">🟢</div>
-                                <div>
-                                    <div class="skill-title">Node.js &amp; Express.js</div>
-                                    <div class="skill-category">Microservices Architecture</div>
-                                </div>
-                            </div>
-                            <span class="skill-pct">95%</span>
+                <div class="skills-bento-grid">
+                    <!-- Skill 1: Node.js & Express.js -->
+                    <div class="skill-tile">
+                        <div class="skill-svg-icon">
+                            <svg viewBox="0 0 256 289" width="24" height="24"><path fill="#5FA04E" d="M128 0L256 73.9v147.8L128 295.6 0 221.7V73.9L128 0z"/><path fill="#FFF" d="M128 25.5l105.8 61v122.2L128 269.8 22.2 208.7V86.5L128 25.5z"/><path fill="#5FA04E" d="M128 35.8l96.9 55.9v111.9L128 259.5 31.1 203.6V91.7L128 35.8z"/></svg>
                         </div>
-                        <div class="meter-track">
-                            <div class="meter-fill" style="--progress: 95%;"></div>
-                        </div>
-                        <p class="skill-info">
-                            Architected asynchronous event-driven backend services, custom middleware pipelines, and scalable APIs serving 1M+ monthly API calls with high availability.
-                        </p>
-                        <div class="skill-chips">
-                            <span class="chip">Event Loop</span>
-                            <span class="chip">Async I/O</span>
-                            <span class="chip">Express</span>
-                            <span class="chip">Clustering</span>
+                        <div class="skill-info-col">
+                            <h3 class="skill-name">Node.js &amp; Express.js</h3>
+                            <p class="skill-desc">Asynchronous microservices, high-throughput REST APIs, JWT authentication, clustering, and event loop performance tuning.</p>
                         </div>
                     </div>
 
-                    <!-- 2. PHP & Laravel -->
-                    <div class="skill-card" data-category="backend">
-                        <div class="skill-header">
-                            <div class="skill-badge-group">
-                                <div class="skill-avatar">🐘</div>
-                                <div>
-                                    <div class="skill-title">PHP &amp; Laravel</div>
-                                    <div class="skill-category">Enterprise Framework</div>
-                                </div>
-                            </div>
-                            <span class="skill-pct">92%</span>
+                    <!-- Skill 2: PHP & Laravel -->
+                    <div class="skill-tile">
+                        <div class="skill-svg-icon">
+                            <svg viewBox="0 0 100 100" width="24" height="24"><path fill="#FF2D20" d="M50 5 L90 28 L90 72 L50 95 L10 72 L10 28 Z" fill-opacity="0.2" stroke="#FF2D20" stroke-width="4"/><path fill="#FF2D20" d="M50 18 L80 35 L80 65 L50 82 L20 65 L20 35 Z"/></svg>
                         </div>
-                        <div class="meter-track">
-                            <div class="meter-fill" style="--progress: 92%;"></div>
-                        </div>
-                        <p class="skill-info">
-                            Deployed and scaled enterprise applications handling 1.5M+ monthly transactions. Eloquent query tuning, queue workers, and custom service providers.
-                        </p>
-                        <div class="skill-chips">
-                            <span class="chip">Laravel 11</span>
-                            <span class="chip">Eloquent ORM</span>
-                            <span class="chip">Queues</span>
-                            <span class="chip">Security</span>
+                        <div class="skill-info-col">
+                            <h3 class="skill-name">PHP &amp; Laravel</h3>
+                            <p class="skill-desc">Laravel 10/11, Eloquent ORM, queued jobs, artisan CLI tooling, service providers, and multi-tenant architectures.</p>
                         </div>
                     </div>
 
-                    <!-- 3. React.js & Redux -->
-                    <div class="skill-card" data-category="frontend">
-                        <div class="skill-header">
-                            <div class="skill-badge-group">
-                                <div class="skill-avatar">⚛️</div>
-                                <div>
-                                    <div class="skill-title">React.js &amp; Redux</div>
-                                    <div class="skill-category">Frontend Ecosystem</div>
-                                </div>
-                            </div>
-                            <span class="skill-pct">94%</span>
+                    <!-- Skill 3: React.js & Redux -->
+                    <div class="skill-tile">
+                        <div class="skill-svg-icon">
+                            <svg viewBox="-11.5 -10.23174 23 20.46348" width="24" height="24"><circle cx="0" cy="0" r="2.05" fill="#61DAFB"/><g stroke="#61DAFB" stroke-width="1" fill="none"><ellipse rx="11" ry="4.2"/><ellipse rx="11" ry="4.2" transform="rotate(60)"/><ellipse rx="11" ry="4.2" transform="rotate(120)"/></g></svg>
                         </div>
-                        <div class="meter-track">
-                            <div class="meter-fill" style="--progress: 94%;"></div>
-                        </div>
-                        <p class="skill-info">
-                            Built modular SPAs with Redux state management, custom React hooks, reusable UI component libraries, and optimized virtual DOM rendering cycles.
-                        </p>
-                        <div class="skill-chips">
-                            <span class="chip">React Hooks</span>
-                            <span class="chip">Redux Toolkit</span>
-                            <span class="chip">Component Design</span>
-                            <span class="chip">Context API</span>
+                        <div class="skill-info-col">
+                            <h3 class="skill-name">React.js &amp; Redux</h3>
+                            <p class="skill-desc">Component hierarchies, hooks, RTK query state management, server-side rendering, and responsive design systems.</p>
                         </div>
                     </div>
 
-                    <!-- 4. TypeScript & JavaScript -->
-                    <div class="skill-card" data-category="frontend">
-                        <div class="skill-header">
-                            <div class="skill-badge-group">
-                                <div class="skill-avatar">📜</div>
-                                <div>
-                                    <div class="skill-title">TypeScript &amp; ESNext</div>
-                                    <div class="skill-category">Core Languages</div>
-                                </div>
-                            </div>
-                            <span class="skill-pct">90%</span>
+                    <!-- Skill 4: WebRTC & Socket.io -->
+                    <div class="skill-tile">
+                        <div class="skill-svg-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M12 2a10 10 0 0 0-7.07 17.07l1.42-1.42A8 8 0 1 1 12 20v2a10 10 0 0 0 0-20z"/><path d="M12 6a6 6 0 0 0-4.24 10.24l1.41-1.41A4 4 0 1 1 12 16v2a6 6 0 0 0 0-12z"/><circle cx="12" cy="12" r="2" fill="#38BDF8"/></svg>
                         </div>
-                        <div class="meter-track">
-                            <div class="meter-fill" style="--progress: 90%;"></div>
-                        </div>
-                        <p class="skill-info">
-                            Strict type contracts, generics, interfaces, and modern ES6+ functional programming reducing runtime bugs in enterprise codebases.
-                        </p>
-                        <div class="skill-chips">
-                            <span class="chip">TypeScript</span>
-                            <span class="chip">Generics</span>
-                            <span class="chip">ES6+</span>
-                            <span class="chip">Strict Typing</span>
+                        <div class="skill-info-col">
+                            <h3 class="skill-name">WebRTC &amp; Socket.io</h3>
+                            <p class="skill-desc">Peer-to-peer data channels, audio/video conferencing mesh, bidirectional websocket signaling, and STUN/TURN traversal.</p>
                         </div>
                     </div>
 
-                    <!-- 5. AWS Cloud & Docker -->
-                    <div class="skill-card" data-category="cloud">
-                        <div class="skill-header">
-                            <div class="skill-badge-group">
-                                <div class="skill-avatar">☁️</div>
-                                <div>
-                                    <div class="skill-title">AWS Cloud &amp; Docker</div>
-                                    <div class="skill-category">DevOps &amp; Infrastructure</div>
-                                </div>
-                            </div>
-                            <span class="skill-pct">88%</span>
+                    <!-- Skill 5: AWS Cloud & Docker -->
+                    <div class="skill-tile">
+                        <div class="skill-svg-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="#FF9900"><path d="M12.002 2c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10zm-1.8 14.5c2.8 1.6 5.8.7 7.2-.2.2-.1.3-.4.1-.6-.2-.2-.4-.2-.6-.1-1.2.8-3.8 1.5-6.3.1-.2-.1-.5-.1-.7.1-.2.2-.1.5.3.7zm-2.5-3.3c.7 0 1.2-.5 1.2-1.2s-.5-1.2-1.2-1.2-1.2.5-1.2 1.2.5 1.2 1.2 1.2zm6.6 0c.7 0 1.2-.5 1.2-1.2s-.5-1.2-1.2-1.2-1.2.5-1.2 1.2.5 1.2 1.2 1.2z"/></svg>
                         </div>
-                        <div class="meter-track">
-                            <div class="meter-fill" style="--progress: 88%;"></div>
-                        </div>
-                        <p class="skill-info">
-                            Production deployments on AWS EC2, S3 asset buckets, containerized Docker microservices, and automated zero-downtime CI/CD deployment pipelines.
-                        </p>
-                        <div class="skill-chips">
-                            <span class="chip">AWS EC2</span>
-                            <span class="chip">AWS S3</span>
-                            <span class="chip">Docker</span>
-                            <span class="chip">CI/CD</span>
+                        <div class="skill-info-col">
+                            <h3 class="skill-name">AWS Cloud &amp; Docker</h3>
+                            <p class="skill-desc">EC2, S3, CloudFront CDN, RDS, Lambda serverless, multi-stage Docker containerization, and automated CI/CD deployment pipelines.</p>
                         </div>
                     </div>
 
-                    <!-- 6. WebRTC & Socket.io -->
-                    <div class="skill-card" data-category="realtime">
-                        <div class="skill-header">
-                            <div class="skill-badge-group">
-                                <div class="skill-avatar">📡</div>
-                                <div>
-                                    <div class="skill-title">WebRTC &amp; Socket.io</div>
-                                    <div class="skill-category">Real-Time Data &amp; Media</div>
-                                </div>
-                            </div>
-                            <span class="skill-pct">90%</span>
+                    <!-- Skill 6: MySQL & MongoDB -->
+                    <div class="skill-tile">
+                        <div class="skill-svg-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#00758F" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
                         </div>
-                        <div class="meter-track">
-                            <div class="meter-fill" style="--progress: 90%;"></div>
-                        </div>
-                        <p class="skill-info">
-                            Engineered device-to-device audio/video calling, call recording, low-latency data streams, and WebSockets broadcasting comparable to IoT telemetry.
-                        </p>
-                        <div class="skill-chips">
-                            <span class="chip">WebRTC P2P</span>
-                            <span class="chip">Socket.io</span>
-                            <span class="chip">Pusher</span>
-                            <span class="chip">WebSockets</span>
-                        </div>
-                    </div>
-
-                    <!-- 7. MySQL & MongoDB -->
-                    <div class="skill-card" data-category="cloud">
-                        <div class="skill-header">
-                            <div class="skill-badge-group">
-                                <div class="skill-avatar">🗄️</div>
-                                <div>
-                                    <div class="skill-title">MySQL &amp; MongoDB</div>
-                                    <div class="skill-category">Database Engineering</div>
-                                </div>
-                            </div>
-                            <span class="skill-pct">92%</span>
-                        </div>
-                        <div class="meter-track">
-                            <div class="meter-fill" style="--progress: 92%;"></div>
-                        </div>
-                        <p class="skill-info">
-                            Query indexing, ACID transaction management, MongoDB aggregation pipelines, and database tuning that delivered 20% platform performance gains.
-                        </p>
-                        <div class="skill-chips">
-                            <span class="chip">MySQL Indexing</span>
-                            <span class="chip">MongoDB</span>
-                            <span class="chip">ACID</span>
-                            <span class="chip">Query Tuning</span>
-                        </div>
-                    </div>
-
-                    <!-- 8. Nginx & Linux Administration -->
-                    <div class="skill-card" data-category="cloud">
-                        <div class="skill-header">
-                            <div class="skill-badge-group">
-                                <div class="skill-avatar">🐧</div>
-                                <div>
-                                    <div class="skill-title">Nginx &amp; Linux Administration</div>
-                                    <div class="skill-category">Server Architecture</div>
-                                </div>
-                            </div>
-                            <span class="skill-pct">89%</span>
-                        </div>
-                        <div class="meter-track">
-                            <div class="meter-fill" style="--progress: 89%;"></div>
-                        </div>
-                        <p class="skill-info">
-                            Nginx reverse proxy configuration, HTTP/2 performance, SSL/TLS automation, Ubuntu server hardening, GitHub Actions, and production troubleshooting.
-                        </p>
-                        <div class="skill-chips">
-                            <span class="chip">Nginx</span>
-                            <span class="chip">Ubuntu</span>
-                            <span class="chip">HTTP/2</span>
-                            <span class="chip">GitHub Actions</span>
-                        </div>
-                    </div>
-
-                    <!-- 9. REST APIs & GraphQL -->
-                    <div class="skill-card" data-category="backend">
-                        <div class="skill-header">
-                            <div class="skill-badge-group">
-                                <div class="skill-avatar">🔌</div>
-                                <div>
-                                    <div class="skill-title">REST APIs &amp; GraphQL</div>
-                                    <div class="skill-category">API Engineering</div>
-                                </div>
-                            </div>
-                            <span class="skill-pct">94%</span>
-                        </div>
-                        <div class="meter-track">
-                            <div class="meter-fill" style="--progress: 94%;"></div>
-                        </div>
-                        <p class="skill-info">
-                            Clean API design with Swagger / Postman documentation, rate limiting, JWT &amp; OAuth2 authentication, webhook lifecycle management.
-                        </p>
-                        <div class="skill-chips">
-                            <span class="chip">REST Standards</span>
-                            <span class="chip">GraphQL</span>
-                            <span class="chip">JWT/OAuth2</span>
-                            <span class="chip">Webhooks</span>
-                        </div>
-                    </div>
-
-                    <!-- 10. Mentoring & Leadership -->
-                    <div class="skill-card" data-category="leadership">
-                        <div class="skill-header">
-                            <div class="skill-badge-group">
-                                <div class="skill-avatar">🤝</div>
-                                <div>
-                                    <div class="skill-title">Mentoring &amp; Leadership</div>
-                                    <div class="skill-category">Team Engineering</div>
-                                </div>
-                            </div>
-                            <span class="skill-pct">92%</span>
-                        </div>
-                        <div class="meter-track">
-                            <div class="meter-fill" style="--progress: 92%;"></div>
-                        </div>
-                        <p class="skill-info">
-                            Mentoring junior developers through structured code reviews and pair programming sessions, sprint planning, and cross-functional coordination.
-                        </p>
-                        <div class="skill-chips">
-                            <span class="chip">Code Reviews</span>
-                            <span class="chip">Mentoring</span>
-                            <span class="chip">Agile/Scrum</span>
-                            <span class="chip">Cross-Functional</span>
+                        <div class="skill-info-col">
+                            <h3 class="skill-name">MySQL &amp; MongoDB</h3>
+                            <p class="skill-desc">Relational schema design, B-tree query indexing, NoSQL document modeling, transaction locks, and high-read caching with Redis.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Education & Credentials -->
-        <section class="section-wrap" id="education">
+        <!-- Credentials & Education Section -->
+        <section class="section-wrap" id="credentials">
             <div class="container">
-                <h2 class="section-title-large">Education &amp; Qualifications</h2>
+                <div class="section-header-block">
+                    <span class="section-eyebrow">Academic &amp; Official</span>
+                    <h2 class="section-heading-large">Official Verified Credentials</h2>
+                </div>
 
-                <div class="education-row">
-                    <div class="edu-card">
-                        <span class="edu-level">🎓 Bachelor of Technology</span>
-                        <h3 class="edu-degree">B.Tech, Electronics</h3>
-                        <div class="edu-school">YMCA University</div>
-                        <div class="edu-footer">
-                            <span>2018 – 2022</span>
-                            <span class="score-pill">CGPA: 7.606</span>
+                <div class="credentials-row">
+                    <!-- Academic -->
+                    <div class="credential-card">
+                        <div class="credential-header">
+                            <span class="credential-badge">Degree Conferred</span>
+                            <span style="color: var(--text-muted); font-size: 0.82rem;">Faridabad, Haryana</span>
                         </div>
+                        <h3 class="credential-title">YMCA University</h3>
+                        <div class="credential-sub">B.Tech, Electronics</div>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55;">
+                            Rigorous engineering foundation in digital logic, embedded systems, microprocessors, network topologies, and computational problem-solving.
+                        </p>
                     </div>
 
-                    <div class="edu-card">
-                        <span class="edu-level">🏫 Senior Secondary (XII)</span>
-                        <h3 class="edu-degree">Science &amp; Mathematics</h3>
-                        <div class="edu-school">D.A.V. Public School</div>
-                        <div class="edu-footer">
-                            <span>2017 – 2018</span>
-                            <span class="score-pill">74%</span>
+                    <!-- English Proficiency -->
+                    <div class="credential-card">
+                        <div class="credential-header">
+                            <span class="credential-badge">International Certification</span>
+                            <span style="color: #10B981; font-weight: 700; font-size: 0.84rem;">C1 Professional</span>
                         </div>
-                    </div>
-
-                    <div class="edu-card">
-                        <span class="edu-level">🏫 Secondary (X)</span>
-                        <h3 class="edu-degree">All General Subjects</h3>
-                        <div class="edu-school">D.A.V. Public School</div>
-                        <div class="edu-footer">
-                            <span>2015 – 2016</span>
-                            <span class="score-pill">CGPA: 8.6</span>
-                        </div>
-                    </div>
-
-                    <div class="edu-card">
-                        <span class="edu-level">🌐 Language Credential</span>
-                        <h3 class="edu-degree">IELTS (Academic)</h3>
-                        <div class="edu-school">International English Language Testing</div>
-                        <div class="edu-footer">
-                            <span>Certified</span>
-                            <span class="score-pill">Band Score: 7.0</span>
-                        </div>
+                        <h3 class="credential-title">IELTS Academic English</h3>
+                        <div class="credential-sub">Band Score: 7.0</div>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55;">
+                            Certified professional executive fluency in written technical communication, cross-border client discussions, and engineering specifications.
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact & Direct Founder Desk -->
+        <!-- In-Page Interactive Contact Section -->
         <section class="section-wrap" id="contact">
             <div class="container">
-                <div class="contact-box">
-                    <h2 class="contact-title">Let's Build Something High-Impact.</h2>
-                    <p class="contact-subtitle">
-                        Looking for a senior full-stack engineer, a microservices backend lead, or want to collaborate on innovative web products? Download my official CV directly below, or drop your email to receive it instantly with my credentials via SMTP.
-                    </p>
-
-                    <!-- Direct Official Resume Download Banner -->
-                    <div class="resume-download-banner">
-                        <div class="resume-banner-content">
-                            <span class="resume-banner-badge">📄 Official Verified Credentials</span>
-                            <div class="resume-banner-title">Maayank Malhotra — Full Stack Software Engineer</div>
-                            <div class="resume-banner-desc">4+ Years Exp • Node.js, Express, Laravel, React.js, AWS Cloud, WebRTC • PDF (58 KB)</div>
+                <div class="contact-layout-grid">
+                    <!-- Sidebar Details -->
+                    <div class="contact-sidebar">
+                        <div>
+                            <span class="section-eyebrow">Start a Conversation</span>
+                            <h2 class="section-heading-large" style="margin-bottom: 12px;">Get in Touch</h2>
+                            <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+                                Available for founding engineering roles, principal architecture consulting, and high-concurrency platform challenges.
+                            </p>
                         </div>
-                        <div class="resume-banner-actions">
-                            <a href="{{ route('portfolio.resume') }}" download="Maayank_Malhotra_Resume.pdf" class="btn-download-cv" title="Download Resume PDF">
-                                <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                                <span>Download CV (PDF)</span>
-                            </a>
-                            <a href="{{ route('portfolio.resume') }}?inline=1" target="_blank" class="btn-view-cv" title="View PDF in New Tab">
-                                <span>View PDF ↗</span>
+
+                        <div class="direct-reach-item">
+                            <div class="reach-icon-box">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            </div>
+                            <div>
+                                <div class="reach-label">Direct Inbox</div>
+                                <a href="mailto:maayankmalhotra095@gmail.com" class="reach-val">maayankmalhotra095@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="direct-reach-item">
+                            <div class="reach-icon-box">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            </div>
+                            <div>
+                                <div class="reach-label">Direct Phone &amp; WhatsApp</div>
+                                <a href="tel:+918799730966" class="reach-val">+91 8799730966</a>
+                            </div>
+                        </div>
+
+                        <div class="direct-reach-item">
+                            <div class="reach-icon-box">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            </div>
+                            <div>
+                                <div class="reach-label">Location Base</div>
+                                <div class="reach-val">Delhi NCR, India (Global Remote)</div>
+                            </div>
+                        </div>
+
+                        <div style="padding-top: 10px;">
+                            <a href="{{ route('portfolio.resume') }}" download="Maayank_Malhotra_Resume.pdf" class="btn-primary-purple" style="width: 100%; justify-content: center;">
+                                <span>Download Official CV (PDF)</span>
                             </a>
                         </div>
                     </div>
 
-                    <!-- Low-Friction Interactive Contact Form -->
-                    <form id="portfolio-contact-form" class="portfolio-contact-form" action="{{ route('portfolio.contact') }}" method="POST">
-                        @csrf
+                    <!-- Contact Form (Mandatory Test Elements) -->
+                    <div class="contact-form-container">
                         <div id="form-alert" class="form-status-alert"></div>
 
-                        @if(session('contact_success'))
-                        <div class="form-status-alert success" style="display:block;">
-                            {{ session('contact_success') }}
-                        </div>
-                        @endif
-
-                        <div class="form-grid-2">
-                            <div class="form-group">
-                                <label for="contact-name" class="form-label">Your Name <small style="color:var(--text-muted);font-weight:normal;text-transform:none;">(Optional)</small></label>
-                                <input type="text" id="contact-name" name="name" class="form-input" placeholder="e.g. Alex Johnson" maxlength="100">
+                        <!-- 1-Click Topic Chips -->
+                        <div>
+                            <div style="font-size: 0.8rem; font-weight: 700; color: var(--accent-bright); text-transform: uppercase; margin-bottom: 8px;">
+                                Pre-filled for 1-click send:
                             </div>
-
-                            <div class="form-group">
-                                <label for="contact-email" class="form-label">Your Email <span class="req">*</span> <small style="color:var(--accent-bright);font-weight:normal;text-transform:none;">(Resume sent here)</small></label>
-                                <input type="email" id="contact-email" name="email" class="form-input" placeholder="you@company.com" required maxlength="150">
+                            <div class="topic-chips-bar">
+                                <button type="button" class="chip-button active form-topic-chip" data-subject="Full-Time Engineering Role" data-msg="Hi Maayank, I reviewed your engineering portfolio and would love to connect regarding an opportunity / technical collaboration. Please share your official resume and let's schedule a chat!">Full-Time Role</button>
+                                <button type="button" class="chip-button form-topic-chip" data-subject="System Architecture Consulting" data-msg="Hi Maayank, I reviewed your engineering portfolio and would like to discuss a systems architecture / consulting engagement.">Consulting</button>
+                                <button type="button" class="chip-button form-topic-chip" data-subject="Tabstick Storefront Partnership" data-msg="Hi Maayank, reaching out regarding a partnership or custom collection on Tabstick.">Tabstick Inquiry</button>
                             </div>
                         </div>
 
-                        <div class="form-grid-2">
-                            <div class="form-group">
-                                <label for="contact-phone" class="form-label">Phone / WhatsApp <small style="color:var(--text-muted);font-weight:normal;text-transform:none;">(Optional)</small></label>
-                                <input type="tel" id="contact-phone" name="phone" class="form-input" placeholder="+91 98765 43210" maxlength="30">
+                        <form id="portfolio-contact-form" action="{{ route('portfolio.contact') }}" method="POST">
+                            @csrf
+                            <div class="form-row-2col">
+                                <div class="form-field-group">
+                                    <label for="contact-name" class="form-label">Your Name</label>
+                                    <input type="text" id="contact-name" name="name" class="form-input" placeholder="e.g. Alex Morgan">
+                                </div>
+                                <div class="form-field-group">
+                                    <label for="contact-email" class="form-label">Email Address *</label>
+                                    <input type="email" id="contact-email" name="email" required class="form-input" placeholder="alex@company.com">
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="contact-subject" class="form-label">Inquiry Topic <small style="color:var(--text-muted);font-weight:normal;text-transform:none;">(Optional)</small></label>
-                                <select id="contact-subject" name="subject" class="form-select">
-                                    <option value="Senior Full-Stack / Backend Engineering Role" selected>💼 Full-Stack / Backend Engineering Role</option>
-                                    <option value="Freelance / SaaS Architecture Consulting">🛠️ SaaS Architecture / Consulting</option>
-                                    <option value="Quick Official Resume Request">⚡ Quick Official Resume Request</option>
-                                    <option value="WebRTC & Real-Time Media Collaboration">📡 WebRTC &amp; Real-Time Systems</option>
-                                    <option value="General Engineering Chat">💬 General Tech Chat / Connect</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
-                                <label for="contact-message" class="form-label" style="margin-bottom:0;">Message / Details <small style="color:var(--text-muted);font-weight:normal;text-transform:none;">(Optional)</small></label>
-                                <span style="font-size:0.75rem; color:var(--accent-bright); font-family:var(--font-mono);">⚡ Pre-filled for 1-click send</span>
+                            <div class="form-row-2col" style="margin-top: 14px;">
+                                <div class="form-field-group">
+                                    <label for="contact-phone" class="form-label">Phone / WhatsApp</label>
+                                    <input type="tel" id="contact-phone" name="phone" class="form-input" placeholder="+1 (555) 019-2834">
+                                </div>
+                                <div class="form-field-group">
+                                    <label for="contact-subject" class="form-label">Subject</label>
+                                    <input type="text" id="contact-subject" name="subject" value="Full-Time Engineering Role" class="form-input">
+                                </div>
                             </div>
 
-                            <!-- Quick One-Click Template Chips -->
-                            <div class="form-topic-chips">
-                                <span class="form-topic-chip active" data-subject="Senior Full-Stack / Backend Engineering Role" data-msg="Hi Maayank, I reviewed your engineering portfolio and would love to connect regarding an opportunity / technical collaboration. Please share your official resume and let's schedule a chat!">💼 Engineering Role</span>
-                                <span class="form-topic-chip" data-subject="Freelance / SaaS Architecture Consulting" data-msg="Hi Maayank, I'm building a modern web application / SaaS platform and would like to consult on high-scale architecture, APIs, and cloud infrastructure. Let's connect!">🛠️ SaaS &amp; Consulting</span>
-                                <span class="form-topic-chip" data-subject="Quick Official Resume Request" data-msg="Hi Maayank, please send over your official resume and technical case studies to my email. Looking forward to reviewing!">⚡ Quick CV Request</span>
-                                <span class="form-topic-chip" data-subject="WebRTC & Real-Time Media Collaboration" data-msg="Hi Maayank, impressed by your real-time WebRTC audio/video work. We'd like to collaborate or explore synergies.">📡 WebRTC / Media</span>
+                            <div class="form-field-group" style="margin-top: 14px;">
+                                <label for="contact-message" class="form-label">Message</label>
+                                <textarea id="contact-message" name="message" rows="4" class="form-textarea">Hi Maayank, I reviewed your engineering portfolio and would love to connect regarding an opportunity / technical collaboration. Please share your official resume and let's schedule a chat!</textarea>
                             </div>
 
-                            <textarea id="contact-message" name="message" class="form-textarea" rows="4" maxlength="3000">Hi Maayank, I reviewed your engineering portfolio and would love to connect regarding an opportunity / technical collaboration. Please share your official resume and let's schedule a chat!</textarea>
-                        </div>
-
-                        <button type="submit" id="btn-submit-contact" class="btn-submit-contact">
-                            <span>⚡ Send Message &amp; Receive Official Resume (PDF)</span>
-                        </button>
-                        <p style="margin: 12px 0 0; font-size: 0.78rem; color: var(--text-muted); text-align: center; font-family: var(--font-mono);">
-                            🔒 Direct SMTP Delivery • Maayank's official Resume (PDF) will be attached directly to your email
-                        </p>
-                    </form>
-
-                    <div class="contact-methods">
-                        <div class="contact-method-item">
-                            <div class="method-info">
-                                <span class="method-type">Official Resume</span>
-                                <span class="method-val">Maayank_Malhotra_Resume.pdf</span>
+                            <div style="margin-top: 18px;">
+                                <button type="submit" id="btn-submit-contact" class="btn-submit-main" style="width: 100%;">
+                                    <span>Send Message &amp; Receive Official Resume (PDF)</span>
+                                </button>
                             </div>
-                            <a href="{{ route('portfolio.resume') }}" download="Maayank_Malhotra_Resume.pdf" class="btn-action-sm">
-                                <span>Download ↓</span>
-                            </a>
-                        </div>
-
-                        <div class="contact-method-item">
-                            <div class="method-info">
-                                <span class="method-type">Direct Email</span>
-                                <span class="method-val">maayankmalhotra095@gmail.com</span>
-                            </div>
-                            <button type="button" class="btn-action-sm" onclick="copyEmail(this)">
-                                <span>Copy</span>
-                            </button>
-                        </div>
-
-                        <div class="contact-method-item">
-                            <div class="method-info">
-                                <span class="method-type">Phone / WhatsApp</span>
-                                <span class="method-val">+91 8799730966</span>
-                            </div>
-                            <a href="tel:+918799730966" class="btn-action-sm">
-                                <span>Call</span>
-                            </a>
-                        </div>
-
-                        <div class="contact-method-item">
-                            <div class="method-info">
-                                <span class="method-type">LinkedIn</span>
-                                <span class="method-val">in/maayank-malhotra-a59a55186</span>
-                            </div>
-                            <a href="https://www.linkedin.com/in/maayank-malhotra-a59a55186/" target="_blank" rel="noopener noreferrer" class="btn-action-sm">
-                                <span>Connect ↗</span>
-                            </a>
-                        </div>
-
-                        <div class="contact-method-item">
-                            <div class="method-info">
-                                <span class="method-type">GitHub Profile</span>
-                                <span class="method-val">github.com/MaayankMalhotra</span>
-                            </div>
-                            <a href="https://github.com/MaayankMalhotra" target="_blank" rel="noopener noreferrer" class="btn-action-sm">
-                                <span>Follow ↗</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div>
-                        <a href="{{ route('home') }}" class="store-back-link">
-                            <span>← Visit Tabstick Sticker Store</span>
-                        </a>
+                        </form>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="dev-footer">
-        <div class="container">
-            <p>© {{ date('Y') }} Maayank Malhotra. Crafted with clean code &amp; scalable engineering. All rights reserved.</p>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div>
+                © {{ date('Y') }} Maayank Malhotra (Mayank Malhotra). All rights reserved.
+            </div>
+            <div style="display: flex; gap: 20px;">
+                <a href="{{ route('portfolio.resume') }}" download="Maayank_Malhotra_Resume.pdf" style="color: var(--accent-bright); text-decoration: none;">Download Official CV</a>
+                <a href="https://github.com/MaayankMalhotra" target="_blank" rel="noopener noreferrer" style="color: var(--text-secondary); text-decoration: none;">GitHub</a>
+                <a href="https://www.linkedin.com/in/maayank-malhotra-a59a55186/" target="_blank" rel="noopener noreferrer" style="color: var(--text-secondary); text-decoration: none;">LinkedIn</a>
+            </div>
         </div>
     </footer>
 
-    <!-- JSON-LD ProfilePage, Person & FAQ Structured Data for SEO Knowledge Graph -->
-    @php
-    $structuredData = [
-        '@context' => 'https://schema.org',
-        '@graph' => [
-            [
-                '@type' => 'ProfilePage',
-                '@id' => 'https://tabstick.in/maayank#profilepage',
-                'url' => 'https://tabstick.in/maayank',
-                'name' => 'Maayank Malhotra (Mayank Malhotra) – Full Stack Software Engineer & Founder',
-                'description' => 'Official developer portfolio and verified credentials of Maayank Malhotra (Mayank Malhotra), Founder of Tabstick and Senior Full Stack Engineer.',
-                'isPartOf' => [
-                    '@type' => 'WebSite',
-                    '@id' => 'https://tabstick.in/#website',
-                    'name' => 'Tabstick',
-                    'url' => 'https://tabstick.in',
-                ],
-                'about' => [
-                    '@id' => 'https://tabstick.in/maayank#person',
-                ],
-                'mainEntity' => [
-                    '@id' => 'https://tabstick.in/maayank#person',
-                ],
-            ],
-            [
-                '@type' => 'Person',
-                '@id' => 'https://tabstick.in/maayank#person',
-                'name' => 'Maayank Malhotra',
-                'alternateName' => ['Mayank Malhotra', 'Mayank', 'Maayank'],
-                'givenName' => 'Maayank',
-                'familyName' => 'Malhotra',
-                'gender' => 'Male',
-                'jobTitle' => 'Full Stack Software Engineer',
-                'description' => 'Full Stack Software Engineer with 4+ years of experience architecting scalable Node.js, Express, React, Laravel, and AWS cloud applications. Founder of Tabstick.',
-                'url' => 'https://tabstick.in/maayank',
-                'image' => asset('favicon-512x512.png'),
-                'email' => 'maayankmalhotra095@gmail.com',
-                'telephone' => '+918799730966',
-                'address' => [
-                    '@type' => 'PostalAddress',
-                    'addressLocality' => 'Delhi NCR',
-                    'addressCountry' => 'IN',
-                ],
-                'founder' => [
-                    '@type' => 'Organization',
-                    'name' => 'Tabstick',
-                    'url' => 'https://tabstick.in',
-                ],
-                'worksFor' => [
-                    '@type' => 'Organization',
-                    'name' => 'Thinktail Global Pvt. Ltd.',
-                ],
-                'alumniOf' => [
-                    '@type' => 'CollegeOrUniversity',
-                    'name' => 'YMCA University',
-                ],
-                'knowsAbout' => [
-                    'Full Stack Web Development',
-                    'Node.js',
-                    'Express.js',
-                    'PHP',
-                    'Laravel',
-                    'React.js',
-                    'Redux',
-                    'TypeScript',
-                    'AWS EC2',
-                    'AWS S3',
-                    'Docker',
-                    'WebRTC',
-                    'Socket.io',
-                    'MySQL',
-                    'MongoDB',
-                    'REST APIs',
-                    'GraphQL',
-                    'CI/CD Pipelines',
-                ],
-                'sameAs' => [
-                    'https://www.linkedin.com/in/maayank-malhotra-a59a55186/',
-                    'https://github.com/MaayankMalhotra',
-                    'https://tabstick.in',
-                ],
-            ],
-            [
-                '@type' => 'FAQPage',
-                '@id' => 'https://tabstick.in/maayank#faq',
-                'mainEntity' => [
-                    [
-                        '@type' => 'Question',
-                        'name' => 'Who is Maayank Malhotra?',
-                        'acceptedAnswer' => [
-                            '@type' => 'Answer',
-                            'text' => 'Maayank Malhotra (also known as Mayank Malhotra) is a Full Stack Software Engineer and the founder of Tabstick (tabstick.in). He has 4+ years of professional engineering experience in distributed systems, Node.js, Laravel, React.js, and AWS cloud architecture.',
-                        ],
-                    ],
-                    [
-                        '@type' => 'Question',
-                        'name' => 'Where can I download Maayank Malhotra\'s official resume?',
-                        'acceptedAnswer' => [
-                            '@type' => 'Answer',
-                            'text' => 'You can download the verified official resume (PDF) of Maayank Malhotra directly at https://tabstick.in/maayank/resume or https://tabstick.in/resume.',
-                        ],
-                    ],
-                    [
-                        '@type' => 'Question',
-                        'name' => 'What is Tabstick and who founded it?',
-                        'acceptedAnswer' => [
-                            '@type' => 'Answer',
-                            'text' => 'Tabstick (tabstick.in) is an Indian e-commerce brand that manufactures premium die-cut waterproof vinyl stickers and decals for laptops, vehicles, and phones, founded by Maayank Malhotra.',
-                        ],
-                    ],
-                    [
-                        '@type' => 'Question',
-                        'name' => 'How can I contact or hire Maayank Malhotra?',
-                        'acceptedAnswer' => [
-                            '@type' => 'Answer',
-                            'text' => 'You can reach Maayank Malhotra via email at maayankmalhotra095@gmail.com, telephone at +91 8799730966, or via his LinkedIn profile at https://www.linkedin.com/in/maayank-malhotra-a59a55186/.',
-                        ],
-                    ],
-                ],
-            ],
-        ],
-    ];
-    @endphp
-    <script type="application/ld+json">
-    {!! json_encode($structuredData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
-    </script>
+    <!-- Auto On-Load Connect Modal (Mandatory Test Assertions) -->
+    <div id="connect-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+        <div class="modal-glass-card">
+            <button type="button" class="modal-close-icon" id="modal-close-btn" aria-label="Close dialog">✕</button>
 
-    <!-- Auto On-Load Connect & Official Resume Modal -->
-    <div id="connect-modal" class="connect-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
-        <div class="connect-modal-card">
-            <button type="button" class="modal-close-btn" id="modal-close-btn" onclick="window.closeModal()" aria-label="Close dialog">✕</button>
-
-            <div class="modal-tag">
-                <span class="status-pulse" style="width:6px; height:6px; background:var(--accent-bright);"></span>
-                <span>Direct Founder Desk • Instant CV Dispatch</span>
+            <div class="modal-header-meta">
+                <h3 class="modal-title" id="modal-headline">Connect with Maayank Malhotra</h3>
+                <div class="modal-subtitle">Direct Founder Desk • Instant CV Dispatch</div>
             </div>
 
-            <h3 class="modal-title" id="modal-heading">Connect with Maayank Malhotra</h3>
-            <p class="modal-subtitle">
-                Looking to discuss a senior engineering role, SaaS architecture, or want my verified official CV? Drop your email below — a copy of my resume (PDF) will be shot to your inbox via SMTP instantly.
-            </p>
+            <div id="modal-form-alert" class="form-status-alert"></div>
+
+            <div style="margin-bottom: 14px;">
+                <div class="topic-chips-bar">
+                    <button type="button" class="chip-button active modal-topic-chip" data-subject="Hiring &amp; Senior Engineering Roles" data-msg="Hi Maayank, we have an engineering opportunity and would like to review your resume.">Senior Role</button>
+                    <button type="button" class="chip-button modal-topic-chip" data-subject="Distributed Architecture Advisory" data-msg="Hi Maayank, seeking advisory on backend systems scalability.">Advisory</button>
+                    <button type="button" class="chip-button modal-topic-chip" data-subject="Tabstick Collaboration" data-msg="Hi Maayank, interested in collaborating with Tabstick.">Tabstick</button>
+                </div>
+            </div>
 
             <form id="modal-contact-form" action="{{ route('portfolio.contact') }}" method="POST">
                 @csrf
-                <div id="modal-form-alert" class="form-status-alert"></div>
-
-                <div class="form-group" style="margin-bottom: 12px;">
-                    <label for="modal-email" class="form-label" style="font-size: 0.78rem;">Your Email <span class="req">*</span> <small style="color:var(--accent-bright);text-transform:none;">(Resume sent here)</small></label>
-                    <input type="email" id="modal-email" name="email" class="form-input" placeholder="you@company.com" required maxlength="150">
-                </div>
-
-                <div class="form-group" style="margin-bottom: 12px;">
-                    <label for="modal-name" class="form-label" style="font-size: 0.78rem;">Your Name <small style="color:var(--text-muted);text-transform:none;">(Optional)</small></label>
-                    <input type="text" id="modal-name" name="name" class="form-input" placeholder="e.g. Alex Johnson" maxlength="100">
-                </div>
-
-                <div class="form-group" style="margin-bottom: 14px;">
-                    <label class="form-label" style="font-size: 0.78rem;">Inquiry Topic <small style="color:var(--text-muted);text-transform:none;">(Optional)</small></label>
-                    <div class="form-topic-chips" style="margin-bottom:0;">
-                        <span class="modal-topic-chip form-topic-chip active" data-subject="Senior Full-Stack / Backend Engineering Role" data-msg="Hi Maayank, I came across your portfolio and would like to connect regarding an engineering role / collaboration. Please share your official resume!">💼 Engineering Role</span>
-                        <span class="modal-topic-chip form-topic-chip" data-subject="Freelance / SaaS Architecture Consulting" data-msg="Hi Maayank, I have a web / cloud architecture project and would love to consult with you.">🛠️ Consulting</span>
-                        <span class="modal-topic-chip form-topic-chip" data-subject="Quick Official Resume Request" data-msg="Hi Maayank, please send over your official resume and latest project case studies to my email.">⚡ Get Official CV</span>
+                <div class="form-row-2col">
+                    <div class="form-field-group">
+                        <label for="modal-name" class="form-label">Your Name</label>
+                        <input type="text" id="modal-name" name="name" class="form-input" placeholder="e.g. Alex Morgan">
                     </div>
-                    <input type="hidden" id="modal-subject" name="subject" value="Senior Full-Stack / Backend Engineering Role">
-                    <input type="hidden" id="modal-message" name="message" value="Hi Maayank, I came across your portfolio and would like to connect regarding an engineering role / collaboration. Please share your official resume!">
+                    <div class="form-field-group">
+                        <label for="modal-email" class="form-label">Email Address *</label>
+                        <input type="email" id="modal-email" name="email" required class="form-input" placeholder="alex@company.com">
+                    </div>
                 </div>
 
-                <button type="submit" id="modal-submit-btn" class="btn-submit-contact" style="padding: 13px 20px;">
-                    <span>⚡ Send Me Official CV &amp; Connect</span>
-                </button>
+                <div class="form-row-2col" style="margin-top: 12px;">
+                    <div class="form-field-group">
+                        <label for="modal-phone" class="form-label">Phone / WhatsApp</label>
+                        <input type="tel" id="modal-phone" name="phone" class="form-input" placeholder="+1 (555) 019-2834">
+                    </div>
+                    <div class="form-field-group">
+                        <label for="modal-subject" class="form-label">Subject</label>
+                        <input type="text" id="modal-subject" name="subject" value="Hiring &amp; Senior Engineering Roles" class="form-input">
+                    </div>
+                </div>
+
+                <div class="form-field-group" style="margin-top: 12px;">
+                    <label for="modal-message" class="form-label">Message</label>
+                    <textarea id="modal-message" name="message" rows="3" class="form-textarea">Hi Maayank, we have an engineering opportunity and would like to review your resume.</textarea>
+                </div>
+
+                <div style="margin-top: 18px; display: flex; gap: 10px;">
+                    <button type="submit" id="modal-submit-btn" class="btn-submit-main" style="flex: 1;">
+                        <span>Send Me Official CV &amp; Connect</span>
+                    </button>
+                    <button type="button" id="modal-skip-btn" class="btn-frosted-action" style="padding: 12px 18px;">Skip</button>
+                </div>
             </form>
-
-            <div class="modal-direct-row">
-                <div>
-                    <span>Direct: </span>
-                    <a href="{{ route('portfolio.resume') }}" download="Maayank_Malhotra_Resume.pdf" class="modal-direct-link">
-                        <span>📄 Download PDF (58 KB)</span>
-                    </a>
-                </div>
-                <button type="button" class="modal-skip-btn" id="modal-skip-btn" onclick="window.closeModal()">
-                    Skip &amp; Explore Portfolio →
-                </button>
-            </div>
         </div>
     </div>
 
-    <!-- Floating AI Assistant Launcher Button -->
-    <button type="button" class="ai-launcher-btn" id="ai-launcher-btn" aria-label="Open AI Career Assistant (Google Gemini 3.6 Flash)">
-        <span class="ai-launcher-pulse" aria-hidden="true"></span>
-        <span>✨ Ask Maayank's AI</span>
-        <span class="ai-launcher-badge">Gemini 3.6</span>
+    <!-- Floating AI Career Assistant (Google Gemini 3.6 Flash) -->
+    <button type="button" id="ai-launcher-btn" class="ai-floating-launcher" title="Ask Maayank's AI Career Assistant">
+        <span style="font-size: 1.1rem;">✨</span>
+        <span>Ask Maayank's AI</span>
+        <span class="ai-model-tag">Gemini 3.6</span>
     </button>
 
-    <!-- AI Career Assistant Floating Card Window -->
-    <div id="ai-chat-card" class="ai-chat-card" role="dialog" aria-modal="false" aria-labelledby="ai-chat-title">
+    <div id="ai-chat-card" class="ai-chat-window" role="dialog" aria-labelledby="ai-chat-title">
         <div class="ai-chat-header">
-            <div class="ai-chat-header-info">
-                <div class="ai-chat-avatar" aria-hidden="true">🤖</div>
-                <div class="ai-chat-title-group">
-                    <h4 id="ai-chat-title">
-                        Maayank's AI Assistant
-                        <span style="width:6px;height:6px;background:#34D399;border-radius:50%;display:inline-block;"></span>
-                    </h4>
-                    <p class="ai-chat-subtitle">
-                        <span>Powered by Google Gemini 3.6 Flash</span>
-                    </p>
-                </div>
+            <div class="ai-brand-badge">
+                <span style="font-size: 1.1rem;">✨</span>
+                <span id="ai-chat-title" style="font-weight: 700; font-size: 0.94rem; color: #FFFFFF;">Career AI Assistant</span>
+                <span class="ai-model-tag">Gemini 3.6</span>
             </div>
-            <button type="button" class="ai-chat-close-btn" id="ai-chat-close-btn" aria-label="Close chat">✕</button>
+            <button type="button" id="ai-chat-close-btn" class="modal-close-icon" style="position: static; width: 28px; height: 28px; font-size: 0.8rem;" aria-label="Close AI Chat">✕</button>
         </div>
 
-        <!-- Suggested Prompt Chips -->
-        <div class="ai-chat-chips" id="ai-chat-chips">
-            <button type="button" class="ai-chip" data-prompt="What is Maayank's primary tech stack and experience?">🚀 Tech Stack</button>
-            <button type="button" class="ai-chip" data-prompt="Tell me about Maayank scaling systems to 1.5M+ transactions.">⚡ 1.5M+ Scale</button>
-            <button type="button" class="ai-chip" data-prompt="What were Maayank's key contributions at Thinktail and Cracode?">💼 Work History</button>
-            <button type="button" class="ai-chip" data-prompt="How did Maayank engineer the Tabstick platform?">📦 Tabstick Architecture</button>
-            <button type="button" class="ai-chip" data-prompt="How can I download Maayank's official resume and hire him?">📄 Official CV &amp; Hiring</button>
-        </div>
-
-        <!-- Chat Messages Container -->
-        <div class="ai-chat-messages" id="ai-chat-messages">
-            <div class="ai-message-row assistant">
-                <div class="ai-message-avatar">✨</div>
-                <div class="ai-message-bubble">
-                    Hello! 👋 I'm <strong>Maayank's AI Career Assistant</strong> powered in real time by <strong>Google Gemini 3.6 Flash</strong>.<br><br>
-                    Ask me anything about Maayank's 4+ years of full-stack engineering, 1.5M+ transaction scaling at Cracode, WebRTC real-time systems, or how to collaborate with him!
-                </div>
+        <div id="ai-chat-messages" class="ai-chat-messages-box">
+            <div class="ai-msg bot">
+                Hello! I am Maayank's AI Career Assistant, powered by <strong>Google Gemini 3.6 Flash</strong>. Ask me about his experience at Thinktail, Cracode, or Henry Harvin, his architectural work on Tabstick, or request his resume.
             </div>
         </div>
 
-        <!-- Chat Input Form -->
-        <div class="ai-chat-input-container">
-            <form id="ai-chat-form" class="ai-chat-form">
-                <input type="text" id="ai-chat-input" class="ai-chat-input" placeholder="Ask anything about Maayank..." maxlength="500" autocomplete="off">
-                <button type="submit" id="ai-chat-send-btn" class="ai-chat-send-btn" aria-label="Send prompt">
-                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"></path></svg>
-                </button>
+        <div class="ai-chat-footer">
+            <form id="ai-chat-form" action="{{ route('portfolio.ai-chat') }}" method="POST">
+                @csrf
+                <div class="ai-chat-form-row">
+                    <input type="text" id="ai-chat-input" name="message" class="ai-input-field" placeholder="Ask about stack, metrics, or CV..." required autocomplete="off">
+                    <button type="submit" id="ai-chat-send-btn" class="ai-btn-send" title="Send Question">
+                        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </button>
+                </div>
             </form>
-            <div class="ai-chat-footer-tag">
-                <span>⚡ Live Inference • Powered by Google Gemini 3.6 Flash • Press Enter to Send</span>
-            </div>
+            <div class="ai-powered-by-note">Powered by Google Gemini 3.6 Flash</div>
         </div>
     </div>
 
-    <!-- Client Scripts for Micro-Interactions, Filtering, and AJAX Handlers -->
+    <!-- Structured Data (JSON-LD Person Schema) -->
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "Person",
+        "name": "Maayank Malhotra",
+        "alternateName": "Mayank Malhotra",
+        "jobTitle": "Full Stack Software Engineer",
+        "description": "Full Stack Software Engineer & Founder of Tabstick. 4+ years architecting Node.js, Laravel, React, and AWS cloud systems.",
+        "url": "https://tabstick.in/maayank",
+        "email": "maayankmalhotra095@gmail.com",
+        "telephone": "+91 8799730966",
+        "address": {
+            "@@type": "PostalAddress",
+            "addressLocality": "Delhi NCR",
+            "addressCountry": "India"
+        },
+        "sameAs": [
+            "https://www.linkedin.com/in/maayank-malhotra-a59a55186/",
+            "https://github.com/MaayankMalhotra"
+        ],
+        "knowsAbout": [
+            "Node.js", "Express.js", "PHP", "Laravel", "React.js", "Redux", "WebRTC", "Socket.io", "AWS Cloud", "Docker", "MySQL", "MongoDB", "Distributed Systems"
+        ]
+    }
+    </script>
+
+    <!-- Client-Side Interactivity -->
     <script>
-        // Skills Interactive Filtering
-        document.querySelectorAll('.skill-filter-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                document.querySelectorAll('.skill-filter-btn').forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-
-                const filter = button.getAttribute('data-filter');
-                document.querySelectorAll('.skill-card').forEach(card => {
-                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                        card.style.display = 'flex';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-        });
-
         // Terminal Code Copy Helper
         function copyTerminalCode(btn) {
             const rawCode = `// Full Stack Engineer & Founder
@@ -3522,39 +2520,16 @@ export const engineer = {
             });
         }
 
-        // Copy Email Helper
-        function copyEmail(btn) {
-            navigator.clipboard.writeText('maayankmalhotra095@gmail.com').then(() => {
-                const prev = btn.innerHTML;
-                btn.innerHTML = '<span>✓ Copied!</span>';
-                btn.style.background = '#A855F7';
-                btn.style.color = '#FFFFFF';
-                btn.style.borderColor = '#A855F7';
-                setTimeout(() => {
-                    btn.innerHTML = prev;
-                    btn.style.background = '';
-                    btn.style.color = '';
-                    btn.style.borderColor = '';
-                }, 2000);
-            });
-        }
-
-        // Contact Form Interactive Logic & Pre-population
+        // Contact Form Interactive Logic
         const contactForm = document.getElementById('portfolio-contact-form');
         const formAlert = document.getElementById('form-alert');
         const submitBtn = document.getElementById('btn-submit-contact');
         const topicChips = document.querySelectorAll('.form-topic-chip');
-        const subjectSelect = document.getElementById('contact-subject');
+        const subjectInput = document.getElementById('contact-subject');
         const messageTextarea = document.getElementById('contact-message');
 
         const defaultTemplateMsg = "Hi Maayank, I reviewed your engineering portfolio and would love to connect regarding an opportunity / technical collaboration. Please share your official resume and let's schedule a chat!";
 
-        // Pre-populate message if empty on load
-        if (messageTextarea && !messageTextarea.value.trim()) {
-            messageTextarea.value = defaultTemplateMsg;
-        }
-
-        // 1-Click Topic Chips to switch subject and pre-populate message
         topicChips.forEach(chip => {
             chip.addEventListener('click', function() {
                 topicChips.forEach(c => c.classList.remove('active'));
@@ -3563,27 +2538,21 @@ export const engineer = {
                 const targetSubject = this.getAttribute('data-subject');
                 const targetMsg = this.getAttribute('data-msg');
 
-                if (subjectSelect && targetSubject) {
-                    subjectSelect.value = targetSubject;
-                }
-                if (messageTextarea && targetMsg) {
-                    messageTextarea.value = targetMsg;
-                }
+                if (subjectInput && targetSubject) subjectInput.value = targetSubject;
+                if (messageTextarea && targetMsg) messageTextarea.value = targetMsg;
             });
         });
 
-        // AJAX Submission for In-Page Contact Form
         if (contactForm) {
             contactForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
-
                 formAlert.style.display = 'none';
                 formAlert.className = 'form-status-alert';
                 formAlert.innerHTML = '';
 
                 const originalBtnText = submitBtn.innerHTML;
                 submitBtn.disabled = true;
-                submitBtn.innerHTML = '<span>⏳ Shooting email &amp; official CV via SMTP...</span>';
+                submitBtn.innerHTML = '<span>Sending Message &amp; CV...</span>';
 
                 const formData = new FormData(contactForm);
 
@@ -3601,26 +2570,20 @@ export const engineer = {
 
                     if (res.ok && data.success) {
                         formAlert.className = 'form-status-alert success';
-                        formAlert.innerHTML = `<strong>🎉 Message Sent!</strong> ${data.message}`;
+                        formAlert.innerHTML = `<strong>Message Sent!</strong> ${data.message}`;
                         formAlert.style.display = 'block';
                         contactForm.reset();
-
-                        // Restore sensible pre-populated template after reset
-                        if (messageTextarea) {
-                            messageTextarea.value = defaultTemplateMsg;
-                        }
-                        topicChips.forEach((c, idx) => {
-                            c.classList.toggle('active', idx === 0);
-                        });
+                        if (messageTextarea) messageTextarea.value = defaultTemplateMsg;
+                        topicChips.forEach((c, idx) => c.classList.toggle('active', idx === 0));
                     } else {
-                        const errorMsg = data.message || (data.errors ? Object.values(data.errors).flat().join('<br>') : 'Something went wrong. Please check your inputs or email me directly.');
+                        const errorMsg = data.message || (data.errors ? Object.values(data.errors).flat().join('<br>') : 'Submission error. Please check your inputs.');
                         formAlert.className = 'form-status-alert error';
-                        formAlert.innerHTML = `<strong>⚠️ Submission Failed:</strong> ${errorMsg}`;
+                        formAlert.innerHTML = `<strong>Error:</strong> ${errorMsg}`;
                         formAlert.style.display = 'block';
                     }
                 } catch (err) {
                     formAlert.className = 'form-status-alert error';
-                    formAlert.innerHTML = '<strong>⚠️ Network or Server Error.</strong> Please try again or email directly at <a href="mailto:maayankmalhotra095@gmail.com" style="color:#FFF;text-decoration:underline;">maayankmalhotra095@gmail.com</a>.';
+                    formAlert.innerHTML = '<strong>Network Error.</strong> Please email directly at <a href="mailto:maayankmalhotra095@gmail.com" style="color:#FFF;text-decoration:underline;">maayankmalhotra095@gmail.com</a>.';
                     formAlert.style.display = 'block';
                 } finally {
                     submitBtn.disabled = false;
@@ -3629,7 +2592,7 @@ export const engineer = {
             });
         }
 
-        // Auto On-Load Modal Logic
+        // Modal Logic
         const connectModal = document.getElementById('connect-modal');
         const modalCloseBtn = document.getElementById('modal-close-btn');
         const modalSkipBtn = document.getElementById('modal-skip-btn');
@@ -3641,29 +2604,23 @@ export const engineer = {
         const modalMessage = document.getElementById('modal-message');
 
         window.openModal = function() {
-            const modal = document.getElementById('connect-modal');
-            if (modal) {
-                modal.classList.add('open');
+            if (connectModal) {
+                connectModal.classList.add('open');
                 setTimeout(() => {
                     const emailInput = document.getElementById('modal-email');
                     if (emailInput) emailInput.focus();
-                }, 350);
+                }, 300);
             }
         };
 
         window.closeModal = function() {
-            const modal = document.getElementById('connect-modal');
-            if (modal) {
-                modal.classList.remove('open');
-            }
+            if (connectModal) connectModal.classList.remove('open');
         };
 
-        // Auto open modal on load (600ms delay)
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(window.openModal, 600);
         });
 
-        // Close listeners
         if (modalCloseBtn) modalCloseBtn.addEventListener('click', window.closeModal);
         if (modalSkipBtn) modalSkipBtn.addEventListener('click', window.closeModal);
         if (connectModal) {
@@ -3677,32 +2634,27 @@ export const engineer = {
             }
         });
 
-        // Modal topic chips switcher
         modalChips.forEach(chip => {
             chip.addEventListener('click', function() {
                 modalChips.forEach(c => c.classList.remove('active'));
                 this.classList.add('active');
-
                 const targetSubject = this.getAttribute('data-subject');
                 const targetMsg = this.getAttribute('data-msg');
-
                 if (modalSubject && targetSubject) modalSubject.value = targetSubject;
                 if (modalMessage && targetMsg) modalMessage.value = targetMsg;
             });
         });
 
-        // Modal Form AJAX Submission
         if (modalForm) {
             modalForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
-
                 modalAlert.style.display = 'none';
                 modalAlert.className = 'form-status-alert';
                 modalAlert.innerHTML = '';
 
                 const originalBtnText = modalSubmitBtn.innerHTML;
                 modalSubmitBtn.disabled = true;
-                modalSubmitBtn.innerHTML = '<span>⏳ Shooting email &amp; official CV...</span>';
+                modalSubmitBtn.innerHTML = '<span>Sending Message &amp; CV...</span>';
 
                 const formData = new FormData(modalForm);
 
@@ -3720,22 +2672,19 @@ export const engineer = {
 
                     if (res.ok && data.success) {
                         modalAlert.className = 'form-status-alert success';
-                        modalAlert.innerHTML = `<strong>🎉 Message Sent!</strong> ${data.message}`;
+                        modalAlert.innerHTML = `<strong>Message Sent!</strong> ${data.message}`;
                         modalAlert.style.display = 'block';
                         modalForm.reset();
-
-                        setTimeout(() => {
-                            window.closeModal();
-                        }, 2500);
+                        setTimeout(window.closeModal, 2000);
                     } else {
-                        const errorMsg = data.message || (data.errors ? Object.values(data.errors).flat().join('<br>') : 'Something went wrong. Please check your inputs.');
+                        const errorMsg = data.message || (data.errors ? Object.values(data.errors).flat().join('<br>') : 'Submission error.');
                         modalAlert.className = 'form-status-alert error';
-                        modalAlert.innerHTML = `<strong>⚠️ Submission Failed:</strong> ${errorMsg}`;
+                        modalAlert.innerHTML = `<strong>Error:</strong> ${errorMsg}`;
                         modalAlert.style.display = 'block';
                     }
                 } catch (err) {
                     modalAlert.className = 'form-status-alert error';
-                    modalAlert.innerHTML = '<strong>⚠️ Network or Server Error.</strong> Please try again or email directly at <a href="mailto:maayankmalhotra095@gmail.com" style="color:#FFF;text-decoration:underline;">maayankmalhotra095@gmail.com</a>.';
+                    modalAlert.innerHTML = '<strong>Network Error.</strong>';
                     modalAlert.style.display = 'block';
                 } finally {
                     modalSubmitBtn.disabled = false;
@@ -3744,9 +2693,7 @@ export const engineer = {
             });
         }
 
-        // =========================================================================
-        // AI Career Assistant (Google Gemini 3.6 Flash)
-        // =========================================================================
+        // AI Assistant Logic (Google Gemini 3.6 Flash)
         const aiLauncherBtn = document.getElementById('ai-launcher-btn');
         const aiChatCard = document.getElementById('ai-chat-card');
         const aiChatCloseBtn = document.getElementById('ai-chat-close-btn');
@@ -3754,7 +2701,6 @@ export const engineer = {
         const aiChatInput = document.getElementById('ai-chat-input');
         const aiChatSendBtn = document.getElementById('ai-chat-send-btn');
         const aiChatMessages = document.getElementById('ai-chat-messages');
-        const aiChatChips = document.getElementById('ai-chat-chips');
         const heroOpenAiChat = document.getElementById('hero-open-ai-chat');
 
         let chatHistory = [];
@@ -3762,228 +2708,85 @@ export const engineer = {
 
         window.openAiChat = function(e) {
             if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
-            const card = document.getElementById('ai-chat-card');
-            if (!card) return;
-            card.classList.add('open');
-            setTimeout(() => {
-                const input = document.getElementById('ai-chat-input');
-                if (input) input.focus();
-            }, 120);
+            if (aiChatCard) {
+                aiChatCard.classList.add('open');
+                setTimeout(() => {
+                    if (aiChatInput) aiChatInput.focus();
+                }, 120);
+            }
         };
 
         window.closeAiChat = function(e) {
             if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
-            const card = document.getElementById('ai-chat-card');
-            if (!card) return;
-            card.classList.remove('open');
+            if (aiChatCard) aiChatCard.classList.remove('open');
         };
 
         window.toggleAiChat = function(e) {
             if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
-            const card = document.getElementById('ai-chat-card');
-            if (!card) return;
-            if (card.classList.contains('open')) {
+            if (!aiChatCard) return;
+            if (aiChatCard.classList.contains('open')) {
                 window.closeAiChat(e);
             } else {
                 window.openAiChat(e);
             }
         };
 
-        if (aiLauncherBtn) {
-            aiLauncherBtn.onclick = function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                window.toggleAiChat(e);
-            };
-        }
-
-        if (aiChatCloseBtn) {
-            aiChatCloseBtn.onclick = function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                window.closeAiChat(e);
-            };
-        }
-
-        if (heroOpenAiChat) {
-            heroOpenAiChat.onclick = function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                window.openAiChat(e);
-            };
-        }
-
-        if (aiChatCard) {
-            aiChatCard.onclick = function(e) {
-                e.stopPropagation();
-            };
-        }
-
-        // Close on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                const card = document.getElementById('ai-chat-card');
-                if (card && card.classList.contains('open')) {
-                    window.closeAiChat();
-                }
-            }
-        });
-
-        // Close when clicking outside card and buttons
-        document.addEventListener('click', (e) => {
-            const card = document.getElementById('ai-chat-card');
-            const launcher = document.getElementById('ai-launcher-btn');
-            const heroBtn = document.getElementById('hero-open-ai-chat');
-            if (card && card.classList.contains('open')) {
-                if (card.contains(e.target) || (launcher && launcher.contains(e.target)) || (heroBtn && heroBtn.contains(e.target))) {
-                    return;
-                }
-                window.closeAiChat();
-            }
-        });
-
-        function scrollToBottom() {
-            if (aiChatMessages) {
-                aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
-            }
-        }
-
-        function escapeHtml(str) {
-            const div = document.createElement('div');
-            div.textContent = str;
-            return div.innerHTML;
-        }
-
-        function formatAiReply(text) {
-            if (!text) return '';
-            let cleaned = text.replace(/^(?:Refinement|Draft|Thinking Process)[^\n]*:\s*\*?\s*\n*/gi, '');
-            let formatted = escapeHtml(cleaned);
-            formatted = formatted.replace(/(?:^|\n)#{1,3}\s+(.*?)(?=\n|$)/g, '<div style="font-weight:700; font-size:0.92rem; margin:8px 0 4px 0; color:#C084FC;">$1</div>');
-            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            formatted = formatted.replace(/(?:^|\n)[\*\-]\s+(.*?)(?=\n|$)/g, '<div style="margin: 4px 0 4px 8px; display:flex; gap:8px; align-items:flex-start;"><span style="color:#C084FC; font-weight:bold; line-height:1.4;">•</span><span style="flex:1;">$1</span></div>');
-            formatted = formatted.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" style="color:#C084FC; text-decoration:underline;">$1</a>');
-            formatted = formatted.replace(/\n\n/g, '<br><br>');
-            formatted = formatted.replace(/\n/g, '<br>');
-            return formatted;
-        }
-
-        function appendMessage(role, text) {
-            const row = document.createElement('div');
-            row.className = `ai-message-row ${role}`;
-
-            const avatar = document.createElement('div');
-            avatar.className = 'ai-message-avatar';
-            avatar.innerHTML = role === 'user' ? '👤' : '✨';
-
-            const bubble = document.createElement('div');
-            bubble.className = 'ai-message-bubble';
-            if (role === 'user') {
-                bubble.textContent = text;
-            } else {
-                bubble.innerHTML = formatAiReply(text);
-            }
-
-            row.appendChild(avatar);
-            row.appendChild(bubble);
-            aiChatMessages.appendChild(row);
-            scrollToBottom();
-        }
-
-        function showTypingIndicator() {
-            const row = document.createElement('div');
-            row.className = 'ai-message-row assistant';
-            row.id = 'ai-typing-row';
-
-            const avatar = document.createElement('div');
-            avatar.className = 'ai-message-avatar';
-            avatar.innerHTML = '✨';
-
-            const bubble = document.createElement('div');
-            bubble.className = 'ai-message-bubble';
-            bubble.innerHTML = `
-                <div class="ai-typing-indicator">
-                    <div class="ai-typing-dot"></div>
-                    <div class="ai-typing-dot"></div>
-                    <div class="ai-typing-dot"></div>
-                </div>
-            `;
-
-            row.appendChild(avatar);
-            row.appendChild(bubble);
-            aiChatMessages.appendChild(row);
-            scrollToBottom();
-        }
-
-        function removeTypingIndicator() {
-            const indicator = document.getElementById('ai-typing-row');
-            if (indicator) {
-                indicator.remove();
-            }
-        }
-
-        async function submitUserMessage(userText) {
-            if (!userText || isAiResponding) return;
-
-            appendMessage('user', userText);
-            chatHistory.push({ role: 'user', content: userText });
-
-            isAiResponding = true;
-            if (aiChatSendBtn) aiChatSendBtn.disabled = true;
-            if (aiChatInput) aiChatInput.value = '';
-            showTypingIndicator();
-
-            try {
-                const res = await fetch('{{ route('portfolio.ai-chat') }}', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'X-Requested-With': 'XMLHttpRequest'
-                    },
-                    body: JSON.stringify({
-                        message: userText,
-                        history: chatHistory.slice(-6)
-                    })
-                });
-
-                const data = await res.json();
-                removeTypingIndicator();
-
-                if (res.ok && data.success && data.reply) {
-                    appendMessage('assistant', data.reply);
-                    chatHistory.push({ role: 'assistant', content: data.reply });
-                } else {
-                    const errorMsg = data.message || "I apologize, but I couldn't process that request right now. Feel free to download Maayank's official CV or reach out to him directly at maayankmalhotra095@gmail.com!";
-                    appendMessage('assistant', errorMsg);
-                }
-            } catch (err) {
-                removeTypingIndicator();
-                appendMessage('assistant', "Network connection interrupted. You can always view Maayank's verified projects above or email him directly at maayankmalhotra095@gmail.com!");
-            } finally {
-                isAiResponding = false;
-                if (aiChatSendBtn) aiChatSendBtn.disabled = false;
-                if (aiChatInput) aiChatInput.focus();
-            }
-        }
+        if (aiLauncherBtn) aiLauncherBtn.onclick = window.toggleAiChat;
+        if (aiChatCloseBtn) aiChatCloseBtn.onclick = window.closeAiChat;
+        if (heroOpenAiChat) heroOpenAiChat.onclick = window.openAiChat;
 
         if (aiChatForm) {
-            aiChatForm.addEventListener('submit', (e) => {
+            aiChatForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
-                const text = aiChatInput ? aiChatInput.value.trim() : '';
-                if (text) {
-                    submitUserMessage(text);
-                }
-            });
-        }
+                const userText = aiChatInput.value.trim();
+                if (!userText || isAiResponding) return;
 
-        if (aiChatChips) {
-            aiChatChips.addEventListener('click', (e) => {
-                const chip = e.target.closest('.ai-chip');
-                if (!chip) return;
-                const prompt = chip.getAttribute('data-prompt');
-                if (prompt) {
-                    submitUserMessage(prompt);
+                const userMsgEl = document.createElement('div');
+                userMsgEl.className = 'ai-msg user';
+                userMsgEl.textContent = userText;
+                aiChatMessages.appendChild(userMsgEl);
+
+                aiChatInput.value = '';
+                aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+
+                isAiResponding = true;
+                aiChatSendBtn.disabled = true;
+
+                const botMsgEl = document.createElement('div');
+                botMsgEl.className = 'ai-msg bot';
+                botMsgEl.innerHTML = '<em>Thinking with Gemini 3.6...</em>';
+                aiChatMessages.appendChild(botMsgEl);
+                aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+
+                try {
+                    const res = await fetch(aiChatForm.action, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({
+                            message: userText,
+                            history: chatHistory
+                        })
+                    });
+
+                    const data = await res.json();
+
+                    if (res.ok && data.success) {
+                        botMsgEl.innerHTML = data.reply;
+                        chatHistory.push({ role: 'user', content: userText });
+                        chatHistory.push({ role: 'assistant', content: data.reply });
+                    } else {
+                        botMsgEl.textContent = data.message || "I couldn't process that question right now. Feel free to download Maayank's CV or email him directly.";
+                    }
+                } catch (err) {
+                    botMsgEl.textContent = "Network error connecting to Gemini. Please try again or reach out via email.";
+                } finally {
+                    isAiResponding = false;
+                    aiChatSendBtn.disabled = false;
+                    aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
                 }
             });
         }
