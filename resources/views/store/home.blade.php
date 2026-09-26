@@ -7,105 +7,150 @@
 @section('content')
 
 <!-- ==========================================================================
-     1. KINETIC BLACK STUDIO HERO
+     1. JEWELS GALAXY LUXURY HERO BANNER
      ========================================================================== -->
-<section class="kinetic-landing" id="hero">
-    <div class="kinetic-stage" aria-hidden="true">
-        <div class="kinetic-word-track track-one">
-            <span>TABSTICK</span><span>TABSTICK</span><span>TABSTICK</span><span>TABSTICK</span>
-        </div>
-        <div class="kinetic-word-track track-two">
-            <span>STICKERS</span><span>STICKERS</span><span>STICKERS</span><span>STICKERS</span>
-        </div>
-
-        <svg class="kinetic-scribble scribble-one" viewBox="0 0 460 220" fill="none">
-            <path d="M15 33 C120 14 115 196 204 166 C292 136 281 38 354 51 C408 61 395 195 447 178" />
-        </svg>
-        <svg class="kinetic-scribble scribble-two" viewBox="0 0 520 250" fill="none">
-            <path d="M16 178 C95 88 158 231 234 117 C293 28 343 30 401 70 C452 105 474 77 508 34" />
-        </svg>
-    </div>
-
-    <div class="kinetic-center-badge" aria-hidden="true">
-        <span>TS</span>
-    </div>
-
-    <div class="container kinetic-shell">
-        <div class="kinetic-meta-grid">
-            <div>
-                <strong>TABSTICK STUDIO</strong>
-                <span>Vinyl decals for creative daily carry.</span>
+<section class="jg-hero-section" id="hero">
+    <div class="container jg-hero-container">
+        <div class="jg-hero-content reveal-on-scroll">
+            <div class="jg-hero-badge">
+                <span class="jg-spark">✦</span>
+                <span>THE TIMELESS EDIT • 18K GOLD COLLECTION</span>
+                <span class="jg-spark">✦</span>
             </div>
-            <div>
-                <strong>4,479 STICKERS TRAINED</strong>
-                <span>Anime, cars, tech, meme drops and custom packs.</span>
+            <h1 class="jg-hero-title">
+                Everyday Luxury Crafted to <span class="jg-gold-highlight">Shine Forever</span>.
+            </h1>
+            <p class="jg-hero-subtitle">
+                Explore 599+ anti-tarnish, water-resistant fine jewelry pieces designed for modern everyday elegance. From solitaire rings to statement pendants.
+            </p>
+            <div class="jg-hero-actions">
+                <a href="#shop" class="jg-btn-primary">
+                    <span>EXPLORE ALL JEWELRY</span>
+                    <span class="jg-arrow">→</span>
+                </a>
+                <a href="?category=rings#shop" class="jg-btn-secondary">
+                    <span>SHOP RINGS (173)</span>
+                </a>
+            </div>
+            
+            <div class="jg-hero-trust-row">
+                <div class="jg-trust-item">
+                    <span class="jg-trust-icon">✨</span>
+                    <span>18K Real Gold Plated</span>
+                </div>
+                <div class="jg-trust-item">
+                    <span class="jg-trust-icon">💧</span>
+                    <span>Water &amp; Sweatproof</span>
+                </div>
+                <div class="jg-trust-item">
+                    <span class="jg-trust-icon">🛡️</span>
+                    <span>6-Month Warranty</span>
+                </div>
             </div>
         </div>
 
-        <div class="kinetic-panel">
-            <div class="kinetic-panel-tag">Drop 01</div>
-            <div class="kinetic-panel-copy">
-                <p>Waterproof vinyl, clean peel adhesive and loud designs for laptops, cars, bottles and phones.</p>
-            </div>
-            <div class="kinetic-actions">
-                <a href="#shop" class="kinetic-primary trigger-confetti" data-confetti="true">Shop the drop</a>
-                <a href="#why" class="kinetic-secondary">Why we stick</a>
+        <div class="jg-hero-visual reveal-on-scroll">
+            <div class="jg-hero-card-main">
+                <img src="https://cdn.shopify.com/s/files/1/0692/8800/1725/files/SMNJG-RNG-5565-M-1-2x.jpg" alt="Jewels Galaxy Luxury Ring" class="jg-hero-img-main">
+                <div class="jg-hero-float-tag">
+                    <span class="tag-title">BEST SELLER</span>
+                    <span class="tag-sub">Aura Solitaire Ring • ₹499</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 <!-- ==========================================================================
-     2. SCROLLING TICKER: “WATERPROOF ✦ UV RESISTANT ✦ EASY PEEL ✦ MADE TO LAST”
+     2. CIRCULAR CATEGORY SHOWCASE (JEWELS GALAXY SIGNATURE DESIGN)
      ========================================================================== -->
-<div class="ticker-pop-strip">
+<section class="jg-categories-showcase" id="categories-showcase">
+    <div class="container">
+        <div class="jg-section-header text-center reveal-on-scroll">
+            <span class="jg-subheading-badge">CURATED CATEGORIES</span>
+            <h2 class="jg-section-heading">SHOP BY CATEGORY</h2>
+            <p class="jg-section-subtext">Discover handcrafted jewelry designed to elevate every occasion.</p>
+        </div>
+
+        <div class="jg-category-circles-grid">
+            @php
+                $categoryData = [
+                    ['slug' => 'rings', 'name' => 'Rings', 'count' => '173 Items', 'img' => 'https://cdn.shopify.com/s/files/1/0692/8800/1725/files/SMNJG-RNG-5565-M-1-2x.jpg'],
+                    ['slug' => 'charms-pendants', 'name' => 'Charms & Pendants', 'count' => '139 Items', 'img' => 'https://cdn.shopify.com/s/files/1/0692/8800/1725/files/MYN-PS-26419-A-M-4-2x_d216ff26-4967-4b3d-ac29-35c9fa45ac15.jpg'],
+                    ['slug' => 'bracelets', 'name' => 'Bracelets', 'count' => '128 Items', 'img' => 'https://cdn.shopify.com/s/files/1/0692/8800/1725/files/SMNJG-BNG-3337-M-F1-2x.jpg'],
+                    ['slug' => 'earrings', 'name' => 'Earrings', 'count' => '95 Items', 'img' => 'https://cdn.shopify.com/s/files/1/0692/8800/1725/files/SMNJG-ERG-2690-M-F1-2x.jpg'],
+                    ['slug' => 'necklaces', 'name' => 'Necklaces', 'count' => '41 Items', 'img' => 'https://cdn.shopify.com/s/files/1/0692/8800/1725/files/MYN-NCK-67053-M-1-2x.png'],
+                    ['slug' => 'jewelry-sets', 'name' => 'Jewelry Sets', 'count' => '23 Items', 'img' => 'https://cdn.shopify.com/s/files/1/0692/8800/1725/files/CT-CB-MIX-49645-M-1-2x.jpg'],
+                ];
+            @endphp
+
+            @foreach($categoryData as $cat)
+                <a href="?category={{ $cat['slug'] }}#shop" class="jg-cat-circle-card" data-slug="{{ $cat['slug'] }}">
+                    <div class="jg-cat-img-wrapper">
+                        <div class="jg-gold-ring-border"></div>
+                        <img src="{{ $cat['img'] }}" alt="{{ $cat['name'] }} – Jewels Galaxy" loading="lazy" class="jg-cat-circle-img">
+                    </div>
+                    <h3 class="jg-cat-circle-title">{{ $cat['name'] }}</h3>
+                    <span class="jg-cat-circle-count">{{ $cat['count'] }}</span>
+                </a>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     3. SCROLLING TICKER: JEWELS GALAXY LUXURY PROMISES
+     ========================================================================== -->
+<div class="ticker-pop-strip jg-ticker-strip">
     <div class="ticker-pop-track">
-        <span class="ticker-unit"><span class="ticker-star">✦</span> WATERPROOF VINYL</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> UV RESISTANT INKS</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> EASY PEEL BACKING</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> MADE TO LAST</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> ZERO STICKY RESIDUE</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> 5000+ ORIGINAL DESIGNS</span>
+        <span class="ticker-unit"><span class="ticker-star">✦</span> 18K GOLD PLATED</span>
+        <span class="ticker-unit"><span class="ticker-star">✦</span> WATER &amp; SWEAT PROOF</span>
+        <span class="ticker-unit"><span class="ticker-star">✦</span> ANTI-TARNISH FINISH</span>
+        <span class="ticker-unit"><span class="ticker-star">✦</span> 6-MONTH WARRANTY</span>
+        <span class="ticker-unit"><span class="ticker-star">✦</span> HYPOALLERGENIC &amp; SKIN SAFE</span>
+        <span class="ticker-unit"><span class="ticker-star">✦</span> 599+ FINE DESIGNS</span>
         <span class="ticker-unit"><span class="ticker-star">✦</span> 48H PAN-INDIA DISPATCH</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> AUTOMOTIVE GRADE</span>
-        <!-- Duplicated for seamless infinite continuous CSS loop -->
-        <span class="ticker-unit"><span class="ticker-star">✦</span> WATERPROOF VINYL</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> UV RESISTANT INKS</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> EASY PEEL BACKING</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> MADE TO LAST</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> ZERO STICKY RESIDUE</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> 5000+ ORIGINAL DESIGNS</span>
+        <span class="ticker-unit"><span class="ticker-star">✦</span> LUXURY GIFT PACKAGING</span>
+        <!-- Duplicated for seamless infinite continuous loop -->
+        <span class="ticker-unit"><span class="ticker-star">✦</span> 18K GOLD PLATED</span>
+        <span class="ticker-unit"><span class="ticker-star">✦</span> WATER &amp; SWEAT PROOF</span>
+        <span class="ticker-unit"><span class="ticker-star">✦</span> ANTI-TARNISH FINISH</span>
+        <span class="ticker-unit"><span class="ticker-star">✦</span> 6-MONTH WARRANTY</span>
+        <span class="ticker-unit"><span class="ticker-star">✦</span> HYPOALLERGENIC &amp; SKIN SAFE</span>
+        <span class="ticker-unit"><span class="ticker-star">✦</span> 599+ FINE DESIGNS</span>
         <span class="ticker-unit"><span class="ticker-star">✦</span> 48H PAN-INDIA DISPATCH</span>
-        <span class="ticker-unit"><span class="ticker-star">✦</span> AUTOMOTIVE GRADE</span>
+        <span class="ticker-unit"><span class="ticker-star">✦</span> LUXURY GIFT PACKAGING</span>
     </div>
 </div>
 
 <!-- ==========================================================================
-     3. PRODUCT SECTION: “PICK YOUR PERSONALITY”
+     4. PRODUCT SECTION: “CURATED FINE JEWELRY”
      ========================================================================== -->
-<section id="shop" class="products-pop-section">
+<section id="shop" class="products-pop-section jg-shop-section">
     <div class="container">
         <div class="section-pop-header reveal-on-scroll">
             <div class="section-pop-badge">
                 <span class="badge-spark">✦</span>
-                <span>CURATED COLLECTIBLE PACKS</span>
+                <span>JEWELS GALAXY FINE JEWELRY</span>
                 <span class="badge-spark">✦</span>
             </div>
-            <h2 class="section-pop-title">PICK YOUR PERSONALITY</h2>
+            <h2 class="section-pop-title">DISCOVER THE COLLECTION</h2>
             <p class="section-pop-subtitle">
-                Die-cut vinyl stickers built to take a beating on MacBooks, hydro flasks, skate decks, cars &amp; bikes.
+                Anti-tarnish, waterproof, hypoallergenic luxury jewelry engineered for daily wear and special moments.
             </p>
 
             <!-- Dynamic Category Filter Tabs -->
             <div class="pop-filter-tabs" id="pop-category-tabs">
                 <button type="button" class="pop-filter-pill active" data-category="all">
-                    <span>⚡ ALL DROPS ({{ number_format($totalProductsCount ?? 4400) }})</span>
+                    <span>⚡ ALL JEWELRY ({{ number_format($totalProductsCount ?? 599) }})</span>
                 </button>
                 @if(isset($categories))
                     @foreach($categories as $cat)
-                        <button type="button" class="pop-filter-pill" data-category="{{ $cat->slug }}">
-                            <span>{{ $cat->name }} ({{ number_format($cat->products_count) }})</span>
-                        </button>
+                        @if($cat->slug !== 'test-stickers')
+                            <button type="button" class="pop-filter-pill" data-category="{{ $cat->slug }}">
+                                <span>{{ $cat->icon_emoji ?? '✨' }} {{ $cat->name }} ({{ number_format($cat->products_count) }})</span>
+                            </button>
+                        @endif
                     @endforeach
                 @endif
             </div>
@@ -114,24 +159,24 @@
             <div class="products-search-wrap">
                 <div class="products-search-bar">
                     <span class="search-icon">🔍</span>
-                    <input type="search" id="products-search-input" placeholder="Search 4,400+ vinyl decals (e.g. Naruto, Chai, Cat, Coding, Enfield...)" autocomplete="off">
+                    <input type="search" id="products-search-input" placeholder="Search 599+ jewelry pieces (e.g. Solitaire Ring, Evil Eye, Tennis Bracelet, Pearl...)" autocomplete="off">
                     <button type="button" id="products-search-clear" style="display:none;" aria-label="Clear search">✕</button>
                 </div>
                 <div class="products-live-counter">
-                    <span id="products-count-label">Showing <strong id="current-shown-count">{{ $products->count() }}</strong> of <strong id="total-matching-count">{{ number_format($totalProductsCount ?? 4400) }}</strong> stickers</span>
+                    <span id="products-count-label">Showing <strong id="current-shown-count">{{ $products->count() }}</strong> of <strong id="total-matching-count">{{ number_format($totalProductsCount ?? 599) }}</strong> designs</span>
                 </div>
             </div>
         </div>
 
-        <!-- Product Cards Grid: Collectible Pack Styling with Alternating Color Accents -->
-        <div class="products-pop-grid" id="products-pop-grid">
+        <!-- Product Cards Grid: Jewels Galaxy Luxury Card Grid -->
+        <div class="jg-products-grid" id="products-pop-grid">
             @forelse($products as $index => $product)
                 @include('partials.product-card', ['product' => $product, 'index' => $index])
             @empty
                 <div class="products-empty-state" id="products-empty-message">
-                    <span style="font-size:3rem;">📦</span>
-                    <h3>No matching stickers found!</h3>
-                    <p>Try searching for something else or pick a different category.</p>
+                    <span style="font-size:3rem;">💎</span>
+                    <h3>No matching jewelry found!</h3>
+                    <p>Try searching for something else or select a different category above.</p>
                 </div>
             @endforelse
         </div>

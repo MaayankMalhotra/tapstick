@@ -626,14 +626,14 @@
                 if (data.html && data.html.trim() !== '') {
                     productsGrid.insertAdjacentHTML('beforeend', data.html);
                     if (window.initCardInteractions) {
-                        productsGrid.querySelectorAll('.product-pop-card').forEach(window.initCardInteractions);
+                        productsGrid.querySelectorAll('.product-pop-card, .jg-product-card').forEach(window.initCardInteractions);
                     }
                 } else if (!append) {
                     productsGrid.innerHTML = `
                         <div class="products-empty-state" id="products-empty-message">
-                            <span style="font-size:3rem;">🔍</span>
-                            <h3>No matching stickers found!</h3>
-                            <p>Try searching for a different keyword or explore another category.</p>
+                            <span style="font-size:3rem;">💎</span>
+                            <h3>No matching jewelry found!</h3>
+                            <p>Try searching for a different keyword or explore another category above.</p>
                         </div>
                     `;
                 }
@@ -641,7 +641,7 @@
                 currentPage = data.current_page;
                 hasNextPage = data.has_more;
 
-                const currentCards = productsGrid.querySelectorAll('.product-pop-card').length;
+                const currentCards = productsGrid.querySelectorAll('.product-pop-card, .jg-product-card').length;
                 updateCounts(currentCards, data.total);
 
                 if (loadMoreWrap) {
@@ -679,6 +679,26 @@
             scrollObserver.observe(sentinel);
         }
 
+        // Global category select function
+        window.selectCategoryTab = function(slug) {
+            if (!slug) slug = 'all';
+            let matched = false;
+            categoryTabs.forEach(b => {
+                if (b.getAttribute('data-category') === slug) {
+                    b.classList.add('active');
+                    matched = true;
+                } else {
+                    b.classList.remove('active');
+                }
+            });
+            if (!matched && slug !== 'all') {
+                // Keep slug even if tab not found
+            }
+            currentCategory = slug;
+            currentPage = 1;
+            fetchProducts(1, false);
+        };
+
         // Category Tab Buttons
         categoryTabs.forEach(btn => {
             btn.addEventListener('click', function () {
@@ -694,6 +714,38 @@
                 fetchProducts(1, false);
             });
         });
+
+        // Circular Category Cards Click Handlers
+        document.querySelectorAll('.jg-cat-circle-card').forEach(card => {
+            card.addEventListener('click', function (e) {
+                const slug = this.getAttribute('data-slug');
+                if (slug) {
+                    e.preventDefault();
+                    window.selectCategoryTab(slug);
+                    const shopEl = document.getElementById('shop');
+                    if (shopEl) {
+                        shopEl.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Check for ?category= or ?search= in URL on page load
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('category')) {
+            const initialCat = urlParams.get('category');
+            if (initialCat) {
+                window.selectCategoryTab(initialCat);
+            }
+        }
+        if (urlParams.has('search')) {
+            const initialSearch = urlParams.get('search');
+            if (initialSearch && searchInput) {
+                searchInput.value = initialSearch;
+                currentSearch = initialSearch;
+                fetchProducts(1, false);
+            }
+        }
 
         // Search Input with 300ms Debounce
         if (searchInput) {

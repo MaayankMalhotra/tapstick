@@ -1,0 +1,721 @@
+/* ==========================================================================
+   JEWELS GALAXY × TABSTICK LUXURY THEME & CATEGORY DESIGN SYSTEM
+   Art Direction: Modern Luxury Jewelry • Warm Silk Cream / Deep Espresso / 18K Gold
+   Typography: Playfair Display (Serif) & Plus Jakarta Sans
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  /* Jewels Galaxy Luxury Color Palette */
+  --jg-espresso: #412E1B;
+  --jg-espresso-dark: #2A1D11;
+  --jg-bronze: #795A3A;
+  --jg-bronze-light: #9B7853;
+  --jg-gold: #C5A059;
+  --jg-gold-hover: #D8B56F;
+  --jg-gold-light: #F7EFE3;
+  --jg-cream: #FAF4ED;
+  --jg-cream-soft: #F5EFEB;
+  --jg-cream-card: #FFFFFF;
+  --jg-ticker-bg: #DECFC6;
+  --jg-ticker-text: #412E1B;
+  --jg-border: #E8E0D5;
+  --jg-border-light: #F0E9DF;
+  --jg-red-discount: #8C302F;
+  --jg-text-main: #412E1B;
+  --jg-text-muted: #726253;
+  --jg-text-faint: #A89B8E;
+
+  /* Overrides for Existing Elements */
+  --color-bg-cream: var(--jg-cream);
+  --color-bg-cream-soft: var(--jg-cream-soft);
+  --color-bg-card: #FFFFFF;
+  --color-ink: var(--jg-espresso);
+  --color-ink-muted: var(--jg-text-muted);
+  --color-pop-yellow: var(--jg-gold);
+  --color-pop-red: var(--jg-red-discount);
+
+  --border-pop: 1px solid var(--jg-border);
+  --border-pop-thin: 1px solid var(--jg-border-light);
+  --shadow-pop: 0 8px 24px rgba(65, 46, 27, 0.06);
+  --shadow-pop-sm: 0 4px 12px rgba(65, 46, 27, 0.04);
+  --shadow-pop-lg: 0 16px 36px rgba(65, 46, 27, 0.10);
+
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --radius-card: 16px;
+  --radius-pill: 50px;
+}
+
+body {
+  background-color: var(--jg-cream);
+  color: var(--jg-espresso);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--jg-espresso);
+  letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   1. TOP ANNOUNCEMENT BAR
+   ========================================================================== */
+.top-announcement-bar {
+  background: var(--jg-bronze) !important;
+  color: #FFFFFF !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.03em !important;
+  border-bottom: none !important;
+  padding: 8px 0 !important;
+}
+
+.top-announcement-bar a,
+.top-announcement-bar span {
+  color: #FFFFFF !important;
+}
+
+.top-founder-btn {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: var(--radius-pill) !important;
+  padding: 3px 10px !important;
+  font-size: 0.75rem !important;
+  transition: background 0.2s ease !important;
+}
+
+.top-founder-btn:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* ==========================================================================
+   2. LUXURY SITE HEADER & LOGO
+   ========================================================================== */
+.site-header {
+  background: #FAF7F2 !important;
+  border-bottom: 1px solid var(--jg-border) !important;
+  box-shadow: 0 2px 10px rgba(65, 46, 27, 0.04) !important;
+}
+
+.brand-main {
+  font-family: var(--font-heading) !important;
+  font-size: 1.45rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  color: var(--jg-espresso) !important;
+  text-transform: uppercase !important;
+}
+
+.brand-accent {
+  color: var(--jg-gold) !important;
+  font-weight: 900 !important;
+}
+
+.brand-sub {
+  color: var(--jg-bronze) !important;
+  font-size: 0.65rem !important;
+  letter-spacing: 0.14em !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
+
+.brand-logo-badge {
+  background: var(--jg-gold-light) !important;
+  border: 1px solid var(--jg-gold) !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+}
+
+.main-nav .nav-item {
+  color: var(--jg-espresso) !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  text-transform: uppercase !important;
+  transition: color 0.2s ease, transform 0.2s ease !important;
+}
+
+.main-nav .nav-item:hover {
+  color: var(--jg-gold) !important;
+}
+
+.main-nav .club-pill {
+  background: var(--jg-gold-light) !important;
+  color: var(--jg-espresso) !important;
+  border: 1px solid var(--jg-gold) !important;
+  border-radius: var(--radius-pill) !important;
+}
+
+.action-icon-btn {
+  background: #FFFFFF !important;
+  border: 1px solid var(--jg-border) !important;
+  color: var(--jg-espresso) !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 6px rgba(65, 46, 27, 0.05) !important;
+}
+
+.header-cart-pill {
+  background: var(--jg-espresso) !important;
+  color: #FFFFFF !important;
+  border: 1px solid var(--jg-espresso) !important;
+  border-radius: var(--radius-pill) !important;
+  box-shadow: 0 4px 12px rgba(65, 46, 27, 0.15) !important;
+  transition: transform 0.2s ease, background 0.2s ease !important;
+}
+
+.header-cart-pill:hover {
+  background: var(--jg-bronze) !important;
+  transform: translateY(-1px) !important;
+}
+
+.header-cart-pill .cart-subtotal-text {
+  color: #FFFFFF !important;
+}
+
+.cart-badge-count {
+  background: var(--jg-gold) !important;
+  color: var(--jg-espresso-dark) !important;
+  font-weight: 800 !important;
+}
+
+/* ==========================================================================
+   3. LUXURY HERO BANNER SECTION
+   ========================================================================== */
+.jg-hero-section {
+  position: relative;
+  background: radial-gradient(circle at 50% 30%, #FFFDF9 0%, #FAF4ED 70%, #F5EFEB 100%);
+  border-bottom: 1px solid var(--jg-border);
+  padding: 60px 0 50px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.jg-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--jg-gold-light);
+  color: var(--jg-espresso);
+  border: 1px solid var(--jg-gold);
+  border-radius: var(--radius-pill);
+  padding: 6px 18px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.jg-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-weight: 900;
+  color: var(--jg-espresso);
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.jg-hero-title span {
+  color: var(--jg-bronze);
+  font-style: italic;
+}
+
+.jg-hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--jg-text-muted);
+  max-width: 680px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+}
+
+.jg-hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.jg-btn-primary {
+  background: var(--jg-espresso);
+  color: #FFFFFF !important;
+  padding: 14px 34px;
+  border-radius: var(--radius-pill);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1px solid var(--jg-espresso);
+  box-shadow: 0 6px 20px rgba(65, 46, 27, 0.18);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.jg-btn-primary:hover {
+  background: var(--jg-bronze);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(65, 46, 27, 0.25);
+}
+
+.jg-btn-outline {
+  background: transparent;
+  color: var(--jg-espresso) !important;
+  padding: 14px 34px;
+  border-radius: var(--radius-pill);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1.5px solid var(--jg-bronze);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.jg-btn-outline:hover {
+  background: var(--jg-gold-light);
+  border-color: var(--jg-gold);
+  transform: translateY(-2px);
+}
+
+.jg-hero-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding-top: 24px;
+  border-top: 1px solid rgba(121, 90, 58, 0.15);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.jg-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--jg-espresso);
+}
+
+.jg-stat-icon {
+  font-size: 1.25rem;
+  color: var(--jg-gold);
+}
+
+/* ==========================================================================
+   4. JEWELS GALAXY CIRCULAR CATEGORY SHOWCASE
+   ========================================================================== */
+.jg-categories-section {
+  padding: 50px 0 35px;
+  background: #FAF7F2;
+  border-bottom: 1px solid var(--jg-border);
+}
+
+.jg-section-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.jg-section-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--jg-bronze);
+  margin-bottom: 8px;
+}
+
+.jg-section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  color: var(--jg-espresso);
+  margin-bottom: 8px;
+}
+
+.jg-section-subtitle {
+  font-size: 0.95rem;
+  color: var(--jg-text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.jg-category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+@media (min-width: 768px) {
+  .jg-category-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 24px;
+  }
+}
+
+.jg-category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  group: true;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.jg-category-card:hover {
+  transform: translateY(-4px);
+}
+
+.jg-category-circle {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2px solid var(--jg-gold);
+  box-shadow: 0 6px 16px rgba(121, 90, 58, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 12px;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.jg-category-card:hover .jg-category-circle {
+  border-color: var(--jg-bronze);
+  box-shadow: 0 10px 24px rgba(121, 90, 58, 0.22);
+}
+
+.jg-category-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.jg-category-card:hover .jg-category-circle img {
+  transform: scale(1.08);
+}
+
+.jg-category-emoji {
+  font-size: 2.8rem;
+}
+
+.jg-category-name {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--jg-espresso);
+  text-align: center;
+  margin-bottom: 3px;
+  transition: color 0.2s ease;
+}
+
+.jg-category-card:hover .jg-category-name {
+  color: var(--jg-gold);
+}
+
+.jg-category-count {
+  font-size: 0.75rem;
+  color: var(--jg-text-muted);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   5. SCROLLING TICKER
+   ========================================================================== */
+.ticker-pop-strip {
+  background: var(--jg-ticker-bg) !important;
+  border-top: 1px solid var(--jg-border) !important;
+  border-bottom: 1px solid var(--jg-border) !important;
+  padding: 12px 0 !important;
+}
+
+.ticker-pop-track .ticker-unit {
+  color: var(--jg-espresso) !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.85rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+}
+
+.ticker-pop-track .ticker-star {
+  color: var(--jg-bronze) !important;
+}
+
+/* ==========================================================================
+   6. PRODUCT CARD DESIGN (JEWELS GALAXY REFINED LOOK)
+   ========================================================================== */
+.products-pop-section {
+  background: var(--jg-cream) !important;
+  padding: 60px 0 80px !important;
+}
+
+.pop-filter-tabs {
+  display: flex !important;
+  gap: 10px !important;
+  overflow-x: auto !important;
+  padding: 8px 0 !important;
+  justify-content: center !important;
+}
+
+.pop-filter-pill {
+  background: #FFFFFF !important;
+  color: var(--jg-espresso) !important;
+  border: 1px solid var(--jg-border) !important;
+  border-radius: var(--radius-pill) !important;
+  padding: 9px 20px !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+  box-shadow: 0 2px 6px rgba(65, 46, 27, 0.04) !important;
+  transition: all 0.2s ease !important;
+}
+
+.pop-filter-pill:hover,
+.pop-filter-pill.active {
+  background: var(--jg-espresso) !important;
+  color: #FFFFFF !important;
+  border-color: var(--jg-espresso) !important;
+  box-shadow: 0 4px 14px rgba(65, 46, 27, 0.18) !important;
+}
+
+.product-pop-card {
+  background: #FFFFFF !important;
+  border: 1px solid var(--jg-border) !important;
+  border-radius: var(--radius-card) !important;
+  box-shadow: 0 4px 16px rgba(65, 46, 27, 0.05) !important;
+  overflow: hidden !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.product-pop-card:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 12px 30px rgba(65, 46, 27, 0.12) !important;
+  border-color: var(--jg-gold) !important;
+}
+
+.pop-card-top-bar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 10px 14px 4px !important;
+}
+
+.pop-category-tag {
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  color: var(--jg-bronze) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+}
+
+.pop-stock-pill {
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+  padding: 2px 8px !important;
+  border-radius: 4px !important;
+}
+
+.pop-card-image-stage {
+  position: relative !important;
+  background: #FAF7F2 !important;
+  padding: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  aspect-ratio: 1 !important;
+  overflow: hidden !important;
+}
+
+.pop-card-sticker-img {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+  border-radius: 8px !important;
+  transition: transform 0.35s ease !important;
+}
+
+.product-pop-card:hover .pop-card-sticker-img {
+  transform: scale(1.06) !important;
+}
+
+.jg-discount-badge {
+  position: absolute !important;
+  top: 12px !important;
+  left: 12px !important;
+  background: #FFFFFF !important;
+  color: var(--jg-red-discount) !important;
+  border: 1px solid var(--jg-red-discount) !important;
+  border-radius: 4px !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  padding: 3px 7px !important;
+  letter-spacing: 0.02em !important;
+  z-index: 2 !important;
+  box-shadow: 0 2px 6px rgba(140, 48, 47, 0.15) !important;
+}
+
+.pop-card-body {
+  padding: 16px 18px 20px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+}
+
+.pop-product-name {
+  font-family: var(--font-heading) !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  color: var(--jg-espresso) !important;
+  line-height: 1.35 !important;
+  margin: 6px 0 10px !important;
+  height: 2.7em !important;
+  overflow: hidden !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+}
+
+.pop-product-name a {
+  color: var(--jg-espresso) !important;
+  transition: color 0.2s ease !important;
+}
+
+.pop-product-name a:hover {
+  color: var(--jg-gold) !important;
+}
+
+.pop-price-block {
+  display: flex !important;
+  align-items: baseline !important;
+  gap: 10px !important;
+  margin-bottom: 14px !important;
+}
+
+.pop-current-price {
+  font-size: 1.25rem !important;
+  font-weight: 800 !important;
+  color: var(--jg-espresso) !important;
+}
+
+.pop-original-price {
+  font-size: 0.92rem !important;
+  color: var(--jg-text-muted) !important;
+  text-decoration: line-through !important;
+}
+
+.btn-add-pop-cart {
+  width: 100% !important;
+  background: var(--jg-espresso) !important;
+  color: #FFFFFF !important;
+  border: 1px solid var(--jg-espresso) !important;
+  border-radius: var(--radius-pill) !important;
+  padding: 11px 16px !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  box-shadow: 0 4px 12px rgba(65, 46, 27, 0.12) !important;
+  transition: all 0.2s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+.btn-add-pop-cart:hover {
+  background: var(--jg-bronze) !important;
+  border-color: var(--jg-bronze) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(65, 46, 27, 0.2) !important;
+}
+
+/* ==========================================================================
+   7. VALUE PROPOSITIONS & TRUST STRIP (JEWELS GALAXY STYLE)
+   ========================================================================== */
+.jg-trust-section {
+  background: #F5EFEB;
+  border-top: 1px solid var(--jg-border);
+  border-bottom: 1px solid var(--jg-border);
+  padding: 40px 0;
+}
+
+.jg-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.jg-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #FFFFFF;
+  padding: 18px 22px;
+  border-radius: 12px;
+  border: 1px solid var(--jg-border-light);
+  box-shadow: 0 2px 8px rgba(65, 46, 27, 0.04);
+}
+
+.jg-trust-icon {
+  font-size: 2rem;
+  color: var(--jg-gold);
+  flex-shrink: 0;
+}
+
+.jg-trust-text strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--jg-espresso);
+  margin-bottom: 2px;
+}
+
+.jg-trust-text span {
+  font-size: 0.8rem;
+  color: var(--jg-text-muted);
+}
+
+/* ==========================================================================
+   8. FOOTER REFINEMENT
+   ========================================================================== */
+.site-footer {
+  background: #2A1D11 !important;
+  color: #F5EFEB !important;
+  border-top: 1px solid rgba(197, 160, 89, 0.2) !important;
+}
+
+.site-footer h3,
+.site-footer h4 {
+  color: #FFFFFF !important;
+  font-family: var(--font-heading) !important;
+}
+
+.site-footer a {
+  color: #DECFC6 !important;
+  transition: color 0.2s ease !important;
+}
+
+.site-footer a:hover {
+  color: var(--jg-gold) !important;
+}

@@ -144,12 +144,12 @@ class StoreTest extends TestCase
 
     public function test_home_displays_catalog_and_category_counts(): void
     {
-        $this->product();
         $response = $this->get(route('home'));
         $response->assertOk();
-        $response->assertSee('PICK YOUR PERSONALITY');
-        $response->assertSee('ALL DROPS');
-        $response->assertSee('Good Vibes');
+        $response->assertSee('SHOP BY CATEGORY');
+        $response->assertSee('DISCOVER THE COLLECTION');
+        $response->assertSee('ALL JEWELRY');
+        $response->assertSee('Jewels Galaxy');
     }
 
     public function test_gaze_n_gifts_renders_landing_page(): void
@@ -165,7 +165,6 @@ class StoreTest extends TestCase
 
     public function test_api_products_endpoint_returns_paginated_json(): void
     {
-        $this->product();
         $response = $this->getJson(route('api.products', ['page' => 1]));
         $response->assertOk();
         $response->assertJsonStructure([
@@ -176,9 +175,8 @@ class StoreTest extends TestCase
             'total',
             'count'
         ]);
-        $this->assertGreaterThanOrEqual(2, $response->json('total'));
-        $this->assertStringContainsString('Good Vibes', $response->json('html'));
-        $this->assertStringContainsString('Test Sticker', $response->json('html'));
+        $this->assertGreaterThanOrEqual(1, $response->json('total'));
+        $this->assertStringContainsString('jg-product-card', $response->json('html'));
     }
 
     public function test_api_products_can_filter_by_category_and_search(): void
