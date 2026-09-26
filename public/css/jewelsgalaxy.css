@@ -1,33 +1,33 @@
 /* ==========================================================================
-   JEWELS GALAXY × TABSTICK LUXURY THEME & CATEGORY DESIGN SYSTEM
-   Art Direction: Modern Luxury Jewelry • Warm Silk Cream / Deep Espresso / 18K Gold
+   JEWELS GALAXY × TABSTICK LUXURY THEME & DESIGN SYSTEM
+   Art Direction: High-End Fine Jewelry • Warm Silk Cream / Deep Espresso / 18K Champagne Gold
    Typography: Playfair Display (Serif) & Plus Jakarta Sans
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  /* Jewels Galaxy Luxury Color Palette */
-  --jg-espresso: #412E1B;
-  --jg-espresso-dark: #2A1D11;
+  /* Jewels Galaxy Luxury Palette */
+  --jg-espresso: #2A1D11;
+  --jg-espresso-mid: #412E1B;
   --jg-bronze: #795A3A;
   --jg-bronze-light: #9B7853;
   --jg-gold: #C5A059;
   --jg-gold-hover: #D8B56F;
   --jg-gold-light: #F7EFE3;
-  --jg-cream: #FAF4ED;
+  --jg-gold-soft: #FCF8F2;
+  --jg-cream: #FAF5EE;
   --jg-cream-soft: #F5EFEB;
-  --jg-cream-card: #FFFFFF;
+  --jg-card-bg: #FFFFFF;
   --jg-ticker-bg: #DECFC6;
-  --jg-ticker-text: #412E1B;
-  --jg-border: #E8E0D5;
-  --jg-border-light: #F0E9DF;
+  --jg-border: #E8DFD3;
+  --jg-border-light: #F0E8DD;
   --jg-red-discount: #8C302F;
-  --jg-text-main: #412E1B;
+  --jg-text-main: #2A1D11;
   --jg-text-muted: #726253;
   --jg-text-faint: #A89B8E;
 
-  /* Overrides for Existing Elements */
+  /* Overrides for Universal Framework */
   --color-bg-cream: var(--jg-cream);
   --color-bg-cream-soft: var(--jg-cream-soft);
   --color-bg-card: #FFFFFF;
@@ -38,9 +38,9 @@
 
   --border-pop: 1px solid var(--jg-border);
   --border-pop-thin: 1px solid var(--jg-border-light);
-  --shadow-pop: 0 8px 24px rgba(65, 46, 27, 0.06);
-  --shadow-pop-sm: 0 4px 12px rgba(65, 46, 27, 0.04);
-  --shadow-pop-lg: 0 16px 36px rgba(65, 46, 27, 0.10);
+  --shadow-pop: 0 10px 30px rgba(42, 29, 17, 0.07);
+  --shadow-pop-sm: 0 4px 14px rgba(42, 29, 17, 0.04);
+  --shadow-pop-lg: 0 20px 45px rgba(42, 29, 17, 0.12);
 
   --font-heading: 'Playfair Display', Georgia, serif;
   --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -49,13 +49,14 @@
 }
 
 body {
-  background-color: var(--jg-cream);
-  color: var(--jg-espresso);
-  font-family: var(--font-body);
+  background-color: var(--jg-cream) !important;
+  color: var(--jg-espresso) !important;
+  font-family: var(--font-body) !important;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
+  font-family: var(--font-heading) !important;
   color: var(--jg-espresso);
   letter-spacing: -0.01em;
 }
@@ -64,11 +65,11 @@ h1, h2, h3, h4, h5, h6 {
    1. TOP ANNOUNCEMENT BAR
    ========================================================================== */
 .top-announcement-bar {
-  background: var(--jg-bronze) !important;
+  background: var(--jg-espresso) !important;
   color: #FFFFFF !important;
   font-size: 0.82rem !important;
   letter-spacing: 0.03em !important;
-  border-bottom: none !important;
+  border-bottom: 1px solid rgba(197, 160, 89, 0.25) !important;
   padding: 8px 0 !important;
 }
 
@@ -78,26 +79,31 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .top-founder-btn {
-  background: rgba(255, 255, 255, 0.15) !important;
-  color: #FFFFFF !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  background: rgba(197, 160, 89, 0.2) !important;
+  color: #FFE6B3 !important;
+  border: 1px solid var(--jg-gold) !important;
   border-radius: var(--radius-pill) !important;
-  padding: 3px 10px !important;
+  padding: 3px 12px !important;
   font-size: 0.75rem !important;
-  transition: background 0.2s ease !important;
+  font-weight: 700 !important;
+  transition: all 0.2s ease !important;
 }
 
 .top-founder-btn:hover {
-  background: rgba(255, 255, 255, 0.3) !important;
+  background: var(--jg-gold) !important;
+  color: var(--jg-espresso) !important;
 }
 
 /* ==========================================================================
-   2. LUXURY SITE HEADER & LOGO
+   2. LUXURY SITE HEADER
    ========================================================================== */
 .site-header {
   background: #FAF7F2 !important;
   border-bottom: 1px solid var(--jg-border) !important;
-  box-shadow: 0 2px 10px rgba(65, 46, 27, 0.04) !important;
+  box-shadow: 0 4px 18px rgba(42, 29, 17, 0.04) !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
 }
 
 .brand-main {
@@ -131,9 +137,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .main-nav .nav-item {
   color: var(--jg-espresso) !important;
-  font-size: 0.88rem !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.02em !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
   text-transform: uppercase !important;
   transition: color 0.2s ease, transform 0.2s ease !important;
 }
@@ -154,7 +160,7 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid var(--jg-border) !important;
   color: var(--jg-espresso) !important;
   border-radius: 50% !important;
-  box-shadow: 0 2px 6px rgba(65, 46, 27, 0.05) !important;
+  box-shadow: 0 2px 6px rgba(42, 29, 17, 0.05) !important;
 }
 
 .header-cart-pill {
@@ -162,7 +168,7 @@ h1, h2, h3, h4, h5, h6 {
   color: #FFFFFF !important;
   border: 1px solid var(--jg-espresso) !important;
   border-radius: var(--radius-pill) !important;
-  box-shadow: 0 4px 12px rgba(65, 46, 27, 0.15) !important;
+  box-shadow: 0 4px 12px rgba(42, 29, 17, 0.15) !important;
   transition: transform 0.2s ease, background 0.2s ease !important;
 }
 
@@ -177,20 +183,49 @@ h1, h2, h3, h4, h5, h6 {
 
 .cart-badge-count {
   background: var(--jg-gold) !important;
-  color: var(--jg-espresso-dark) !important;
+  color: var(--jg-espresso) !important;
   font-weight: 800 !important;
 }
 
 /* ==========================================================================
-   3. LUXURY HERO BANNER SECTION
+   3. HERO SECTION (2-COLUMN EDITORIAL LUXURY)
    ========================================================================== */
 .jg-hero-section {
   position: relative;
-  background: radial-gradient(circle at 50% 30%, #FFFDF9 0%, #FAF4ED 70%, #F5EFEB 100%);
+  background: radial-gradient(circle at 50% 20%, #FFFDF9 0%, #FAF4ED 65%, #F5EFEB 100%);
   border-bottom: 1px solid var(--jg-border);
-  padding: 60px 0 50px;
+  padding: 60px 0 70px;
   overflow: hidden;
-  text-align: center;
+}
+
+.jg-hero-container {
+  display: grid !important;
+  grid-template-columns: 1.15fr 0.85fr !important;
+  gap: 48px !important;
+  align-items: center !important;
+  max-width: 1240px !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+}
+
+@media (max-width: 991px) {
+  .jg-hero-container {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+    text-align: center !important;
+  }
+}
+
+.jg-hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+@media (max-width: 991px) {
+  .jg-hero-content {
+    align-items: center;
+  }
 }
 
 .jg-hero-badge {
@@ -201,506 +236,933 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--jg-espresso);
   border: 1px solid var(--jg-gold);
   border-radius: var(--radius-pill);
-  padding: 6px 18px;
-  font-size: 0.8rem;
-  font-weight: 700;
+  padding: 7px 20px;
+  font-size: 0.78rem;
+  font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-bottom: 20px;
 }
 
-.jg-hero-title {
-  font-family: var(--font-heading);
-  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
-  font-weight: 900;
-  color: var(--jg-espresso);
-  line-height: 1.15;
-  margin-bottom: 16px;
+.jg-spark {
+  color: var(--jg-gold);
 }
 
-.jg-hero-title span {
-  color: var(--jg-bronze);
-  font-style: italic;
+.jg-hero-title {
+  font-family: var(--font-heading) !important;
+  font-size: clamp(2.4rem, 4.5vw, 4rem) !important;
+  font-weight: 800 !important;
+  color: var(--jg-espresso) !important;
+  line-height: 1.16 !important;
+  margin-bottom: 18px !important;
+}
+
+.jg-gold-highlight {
+  color: var(--jg-gold) !important;
+  font-style: italic !important;
+  font-family: var(--font-heading) !important;
 }
 
 .jg-hero-subtitle {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  color: var(--jg-text-muted);
-  max-width: 680px;
-  margin: 0 auto 30px;
-  line-height: 1.6;
+  font-size: clamp(1rem, 1.8vw, 1.18rem) !important;
+  color: var(--jg-text-muted) !important;
+  line-height: 1.65 !important;
+  margin: 0 0 28px 0 !important;
+  max-width: 580px !important;
 }
 
 .jg-hero-actions {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 16px;
+  gap: 14px;
   flex-wrap: wrap;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 }
 
 .jg-btn-primary {
-  background: var(--jg-espresso);
+  background: var(--jg-espresso) !important;
   color: #FFFFFF !important;
-  padding: 14px 34px;
+  padding: 14px 32px;
   border-radius: var(--radius-pill);
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  border: 1px solid var(--jg-espresso);
-  box-shadow: 0 6px 20px rgba(65, 46, 27, 0.18);
+  border: 1.5px solid var(--jg-espresso);
+  box-shadow: 0 8px 24px rgba(42, 29, 17, 0.2);
   transition: all 0.25s ease;
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  text-decoration: none;
 }
 
 .jg-btn-primary:hover {
-  background: var(--jg-bronze);
+  background: var(--jg-bronze) !important;
+  border-color: var(--jg-bronze) !important;
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(65, 46, 27, 0.25);
+  box-shadow: 0 12px 30px rgba(42, 29, 17, 0.28);
 }
 
-.jg-btn-outline {
-  background: transparent;
+.jg-btn-secondary {
+  background: transparent !important;
   color: var(--jg-espresso) !important;
-  padding: 14px 34px;
+  padding: 13px 28px;
   border-radius: var(--radius-pill);
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   border: 1.5px solid var(--jg-bronze);
   transition: all 0.25s ease;
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  text-decoration: none;
 }
 
-.jg-btn-outline:hover {
-  background: var(--jg-gold-light);
-  border-color: var(--jg-gold);
+.jg-btn-secondary:hover {
+  background: var(--jg-gold-light) !important;
+  border-color: var(--jg-gold) !important;
   transform: translateY(-2px);
 }
 
-.jg-hero-stats {
+/* Sleek Horizontal Trust Badges Row */
+.jg-hero-trust-row {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  align-items: center !important;
+  margin-top: 10px !important;
+  width: auto !important;
+}
+
+@media (max-width: 991px) {
+  .jg-hero-trust-row {
+    justify-content: center !important;
+  }
+}
+
+.jg-trust-pill,
+.jg-trust-item {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: #FFFFFF !important;
+  padding: 8px 16px !important;
+  border-radius: 50px !important;
+  border: 1px solid var(--jg-border) !important;
+  box-shadow: 0 2px 8px rgba(42, 29, 17, 0.04) !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  color: var(--jg-espresso) !important;
+  white-space: nowrap !important;
+  width: auto !important;
+}
+
+.jg-trust-pill .jg-trust-icon,
+.jg-trust-item .jg-trust-icon {
+  font-size: 1.1rem;
+}
+
+/* Hero Right Visual Stage */
+.jg-hero-visual {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-  padding-top: 24px;
-  border-top: 1px solid rgba(121, 90, 58, 0.15);
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.jg-stat-item {
-  display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--jg-espresso);
+  position: relative;
 }
 
-.jg-stat-icon {
-  font-size: 1.25rem;
+.jg-hero-card-main {
+  position: relative;
+  border-radius: 24px;
+  padding: 12px;
+  background: #FFFFFF;
+  box-shadow: 0 20px 50px rgba(42, 29, 17, 0.12);
+  border: 1.5px solid var(--jg-border);
+  max-width: 440px;
+  width: 100%;
+}
+
+.jg-hero-img-main {
+  width: 100%;
+  height: 440px;
+  object-fit: cover;
+  border-radius: 18px;
+  display: block;
+}
+
+@media (max-width: 576px) {
+  .jg-hero-img-main {
+    height: 320px;
+  }
+}
+
+.jg-hero-float-tag {
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--jg-espresso);
+  color: #FFFFFF;
+  padding: 10px 24px;
+  border-radius: 50px;
+  box-shadow: 0 8px 24px rgba(42, 29, 17, 0.25);
+  border: 1.5px solid var(--jg-gold);
+  white-space: nowrap;
+  text-align: center;
+}
+
+.jg-hero-float-tag .tag-title {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
   color: var(--jg-gold);
 }
 
+.jg-hero-float-tag .tag-sub {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
 /* ==========================================================================
-   4. JEWELS GALAXY CIRCULAR CATEGORY SHOWCASE
+   4. CIRCULAR CATEGORY SHOWCASE
    ========================================================================== */
-.jg-categories-section {
-  padding: 50px 0 35px;
+.jg-categories-showcase {
+  padding: 60px 0 45px;
   background: #FAF7F2;
   border-bottom: 1px solid var(--jg-border);
 }
 
 .jg-section-header {
   text-align: center;
-  margin-bottom: 35px;
+  margin-bottom: 40px;
 }
 
-.jg-section-badge {
+.jg-subheading-badge {
   display: inline-block;
   font-size: 0.75rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--jg-bronze);
   margin-bottom: 8px;
 }
 
-.jg-section-title {
-  font-family: var(--font-heading);
-  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-  font-weight: 800;
-  color: var(--jg-espresso);
-  margin-bottom: 8px;
+.jg-section-heading {
+  font-family: var(--font-heading) !important;
+  font-size: clamp(1.8rem, 3.5vw, 2.7rem) !important;
+  font-weight: 800 !important;
+  color: var(--jg-espresso) !important;
+  margin-bottom: 10px !important;
 }
 
-.jg-section-subtitle {
-  font-size: 0.95rem;
+.jg-section-subtext {
+  font-size: 0.98rem;
   color: var(--jg-text-muted);
-  max-width: 600px;
+  max-width: 620px;
   margin: 0 auto;
+  line-height: 1.6;
 }
 
-.jg-category-grid {
+.jg-category-circles-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  max-width: 1100px;
+  max-width: 1160px;
   margin: 0 auto;
   padding: 0 16px;
 }
 
-@media (min-width: 768px) {
-  .jg-category-grid {
+@media (min-width: 640px) {
+  .jg-category-circles-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (min-width: 992px) {
+  .jg-category-circles-grid {
     grid-template-columns: repeat(6, 1fr);
     gap: 24px;
   }
 }
 
-.jg-category-card {
+.jg-cat-circle-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  group: true;
   cursor: pointer;
   transition: transform 0.25s ease;
 }
 
-.jg-category-card:hover {
-  transform: translateY(-4px);
+.jg-cat-circle-card:hover {
+  transform: translateY(-5px);
 }
 
-.jg-category-circle {
-  width: 110px;
-  height: 110px;
+.jg-cat-img-wrapper {
+  width: 118px;
+  height: 118px;
   border-radius: 50%;
   background: #FFFFFF;
-  border: 2px solid var(--jg-gold);
-  box-shadow: 0 6px 16px rgba(121, 90, 58, 0.12);
+  border: 2.5px solid var(--jg-gold);
+  box-shadow: 0 8px 20px rgba(121, 90, 58, 0.14);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   position: relative;
-  transition: all 0.25s ease;
+  transition: all 0.3s ease;
 }
 
-.jg-category-card:hover .jg-category-circle {
+.jg-cat-circle-card:hover .jg-cat-img-wrapper {
   border-color: var(--jg-bronze);
-  box-shadow: 0 10px 24px rgba(121, 90, 58, 0.22);
+  box-shadow: 0 12px 28px rgba(121, 90, 58, 0.25);
 }
 
-.jg-category-circle img {
+.jg-cat-circle-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.35s ease;
 }
 
-.jg-category-card:hover .jg-category-circle img {
-  transform: scale(1.08);
+.jg-cat-circle-card:hover .jg-cat-circle-img {
+  transform: scale(1.1);
 }
 
-.jg-category-emoji {
-  font-size: 2.8rem;
-}
-
-.jg-category-name {
-  font-family: var(--font-heading);
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--jg-espresso);
+.jg-cat-circle-title {
+  font-family: var(--font-heading) !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  color: var(--jg-espresso) !important;
   text-align: center;
-  margin-bottom: 3px;
+  margin-bottom: 3px !important;
   transition: color 0.2s ease;
 }
 
-.jg-category-card:hover .jg-category-name {
+.jg-cat-circle-card:hover .jg-cat-circle-title {
   color: var(--jg-gold);
 }
 
-.jg-category-count {
-  font-size: 0.75rem;
+.jg-cat-circle-count {
+  font-size: 0.78rem;
   color: var(--jg-text-muted);
   font-weight: 600;
 }
 
 /* ==========================================================================
-   5. SCROLLING TICKER
+   5. LUXURY TICKER STRIP
    ========================================================================== */
-.ticker-pop-strip {
+.jg-ticker-strip {
   background: var(--jg-ticker-bg) !important;
   border-top: 1px solid var(--jg-border) !important;
   border-bottom: 1px solid var(--jg-border) !important;
-  padding: 12px 0 !important;
+  padding: 14px 0 !important;
 }
 
-.ticker-pop-track .ticker-unit {
+.jg-ticker-strip .ticker-pop-track .ticker-unit {
   color: var(--jg-espresso) !important;
-  font-family: var(--font-body) !important;
   font-size: 0.85rem !important;
   font-weight: 800 !important;
   letter-spacing: 0.08em !important;
 }
 
-.ticker-pop-track .ticker-star {
+.jg-ticker-strip .ticker-star {
   color: var(--jg-bronze) !important;
 }
 
 /* ==========================================================================
-   6. PRODUCT CARD DESIGN (JEWELS GALAXY REFINED LOOK)
+   6. PRODUCT SECTION & CARDS GRID
    ========================================================================== */
+.jg-shop-section,
 .products-pop-section {
   background: var(--jg-cream) !important;
-  padding: 60px 0 80px !important;
+  padding: 70px 0 90px !important;
 }
 
+.jg-filter-tabs,
 .pop-filter-tabs {
   display: flex !important;
   gap: 10px !important;
   overflow-x: auto !important;
-  padding: 8px 0 !important;
+  padding: 10px 0 16px !important;
   justify-content: center !important;
+  flex-wrap: wrap;
 }
 
+.jg-filter-pill,
 .pop-filter-pill {
   background: #FFFFFF !important;
   color: var(--jg-espresso) !important;
   border: 1px solid var(--jg-border) !important;
   border-radius: var(--radius-pill) !important;
-  padding: 9px 20px !important;
+  padding: 10px 22px !important;
   font-size: 0.85rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.02em !important;
-  box-shadow: 0 2px 6px rgba(65, 46, 27, 0.04) !important;
+  box-shadow: 0 2px 6px rgba(42, 29, 17, 0.04) !important;
   transition: all 0.2s ease !important;
+  cursor: pointer;
 }
 
+.jg-filter-pill:hover,
+.jg-filter-pill.active,
 .pop-filter-pill:hover,
 .pop-filter-pill.active {
   background: var(--jg-espresso) !important;
   color: #FFFFFF !important;
   border-color: var(--jg-espresso) !important;
-  box-shadow: 0 4px 14px rgba(65, 46, 27, 0.18) !important;
+  box-shadow: 0 6px 18px rgba(42, 29, 17, 0.2) !important;
 }
 
-.product-pop-card {
-  background: #FFFFFF !important;
-  border: 1px solid var(--jg-border) !important;
-  border-radius: var(--radius-card) !important;
-  box-shadow: 0 4px 16px rgba(65, 46, 27, 0.05) !important;
-  overflow: hidden !important;
-  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
-  display: flex !important;
-  flex-direction: column !important;
+.jg-search-wrap,
+.products-search-wrap {
+  max-width: 680px;
+  margin: 18px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.product-pop-card:hover {
-  transform: translateY(-5px) !important;
-  box-shadow: 0 12px 30px rgba(65, 46, 27, 0.12) !important;
-  border-color: var(--jg-gold) !important;
+.jg-search-bar,
+.products-search-bar {
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+  border: 1.5px solid var(--jg-border);
+  border-radius: var(--radius-pill);
+  padding: 6px 18px;
+  box-shadow: 0 4px 14px rgba(42, 29, 17, 0.05);
 }
 
-.pop-card-top-bar {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  padding: 10px 14px 4px !important;
+.jg-search-bar input,
+.products-search-bar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 8px 12px;
+  font-size: 0.92rem;
+  color: var(--jg-espresso);
+  font-family: var(--font-body);
 }
 
-.pop-category-tag {
-  font-size: 0.72rem !important;
-  font-weight: 700 !important;
-  color: var(--jg-bronze) !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.06em !important;
+.jg-search-icon,
+.products-search-bar .search-icon {
+  font-size: 1.1rem;
+  color: var(--jg-bronze);
 }
 
-.pop-stock-pill {
-  font-size: 0.7rem !important;
-  font-weight: 700 !important;
-  padding: 2px 8px !important;
-  border-radius: 4px !important;
+.jg-live-counter,
+.products-live-counter {
+  font-size: 0.85rem;
+  color: var(--jg-text-muted);
+  font-weight: 600;
+  text-align: center;
 }
 
-.pop-card-image-stage {
-  position: relative !important;
-  background: #FAF7F2 !important;
-  padding: 14px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  aspect-ratio: 1 !important;
-  overflow: hidden !important;
+/* Product Cards Grid */
+.jg-products-grid,
+.products-pop-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 20px !important;
+  margin-top: 36px !important;
 }
 
-.pop-card-sticker-img {
-  max-width: 100% !important;
-  max-height: 100% !important;
-  object-fit: contain !important;
-  border-radius: 8px !important;
-  transition: transform 0.35s ease !important;
+@media (min-width: 768px) {
+  .jg-products-grid,
+  .products-pop-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 24px !important;
+  }
 }
 
-.product-pop-card:hover .pop-card-sticker-img {
-  transform: scale(1.06) !important;
+@media (min-width: 1100px) {
+  .jg-products-grid,
+  .products-pop-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 26px !important;
+  }
 }
 
-.jg-discount-badge {
-  position: absolute !important;
-  top: 12px !important;
-  left: 12px !important;
-  background: #FFFFFF !important;
-  color: var(--jg-red-discount) !important;
-  border: 1px solid var(--jg-red-discount) !important;
-  border-radius: 4px !important;
-  font-size: 0.72rem !important;
-  font-weight: 800 !important;
-  padding: 3px 7px !important;
-  letter-spacing: 0.02em !important;
-  z-index: 2 !important;
-  box-shadow: 0 2px 6px rgba(140, 48, 47, 0.15) !important;
+/* Individual Product Card */
+.jg-product-card {
+  background: #FFFFFF;
+  border: 1px solid var(--jg-border);
+  border-radius: var(--radius-card);
+  box-shadow: 0 4px 16px rgba(42, 29, 17, 0.05);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  display: flex;
+  flex-direction: column;
 }
 
-.pop-card-body {
-  padding: 16px 18px 20px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  flex: 1 !important;
+.jg-product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(42, 29, 17, 0.12);
+  border-color: var(--jg-gold);
 }
 
-.pop-product-name {
+.jg-card-media-wrapper {
+  position: relative;
+  background: #FAF7F2;
+  aspect-ratio: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jg-card-img-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.jg-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  display: block;
+}
+
+.jg-product-card:hover .jg-card-img {
+  transform: scale(1.08);
+}
+
+.jg-discount-pill {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #FFFFFF;
+  color: var(--jg-red-discount);
+  border: 1px solid var(--jg-red-discount);
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  letter-spacing: 0.02em;
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(140, 48, 47, 0.12);
+}
+
+.jg-tag-pill {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--jg-gold-light);
+  color: var(--jg-espresso);
+  border: 1px solid var(--jg-gold);
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  letter-spacing: 0.06em;
+  z-index: 2;
+}
+
+.jg-card-details {
+  padding: 16px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.jg-card-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 0.75rem;
+}
+
+.jg-category-name {
+  color: var(--jg-bronze);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.jg-rating {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.jg-stars {
+  color: var(--jg-gold);
+  font-size: 0.8rem;
+}
+
+.jg-review-count {
+  color: var(--jg-text-faint);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.jg-product-title {
   font-family: var(--font-heading) !important;
-  font-size: 1.05rem !important;
+  font-size: 1rem !important;
   font-weight: 700 !important;
   color: var(--jg-espresso) !important;
   line-height: 1.35 !important;
-  margin: 6px 0 10px !important;
-  height: 2.7em !important;
-  overflow: hidden !important;
-  display: -webkit-box !important;
-  -webkit-line-clamp: 2 !important;
-  -webkit-box-orient: vertical !important;
+  margin: 0 0 10px 0 !important;
+  height: 2.7em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
-.pop-product-name a {
+.jg-product-title a {
+  color: var(--jg-espresso);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.jg-product-title a:hover {
+  color: var(--jg-gold);
+}
+
+.jg-pricing-block {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.jg-sale-price {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--jg-espresso);
+}
+
+.jg-regular-price {
+  font-size: 0.92rem;
+  color: var(--jg-text-muted);
+  text-decoration: line-through;
+}
+
+.jg-cart-action-form {
+  margin-top: auto;
+}
+
+.jg-btn-add-cart {
+  width: 100%;
+  background: var(--jg-espresso);
+  color: #FFFFFF;
+  border: 1px solid var(--jg-espresso);
+  border-radius: var(--radius-pill);
+  padding: 11px 16px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(42, 29, 17, 0.12);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.jg-btn-add-cart:hover {
+  background: var(--jg-bronze);
+  border-color: var(--jg-bronze);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(42, 29, 17, 0.2);
+}
+
+.jg-btn-load-more {
+  background: #FFFFFF !important;
   color: var(--jg-espresso) !important;
-  transition: color 0.2s ease !important;
+  border: 1.5px solid var(--jg-border) !important;
+  box-shadow: 0 4px 14px rgba(42, 29, 17, 0.06) !important;
 }
 
-.pop-product-name a:hover {
-  color: var(--jg-gold) !important;
-}
-
-.pop-price-block {
-  display: flex !important;
-  align-items: baseline !important;
-  gap: 10px !important;
-  margin-bottom: 14px !important;
-}
-
-.pop-current-price {
-  font-size: 1.25rem !important;
-  font-weight: 800 !important;
-  color: var(--jg-espresso) !important;
-}
-
-.pop-original-price {
-  font-size: 0.92rem !important;
-  color: var(--jg-text-muted) !important;
-  text-decoration: line-through !important;
-}
-
-.btn-add-pop-cart {
-  width: 100% !important;
+.jg-btn-load-more:hover {
   background: var(--jg-espresso) !important;
   color: #FFFFFF !important;
-  border: 1px solid var(--jg-espresso) !important;
-  border-radius: var(--radius-pill) !important;
-  padding: 11px 16px !important;
-  font-size: 0.85rem !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.05em !important;
-  text-transform: uppercase !important;
-  box-shadow: 0 4px 12px rgba(65, 46, 27, 0.12) !important;
-  transition: all 0.2s ease !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
+  border-color: var(--jg-espresso) !important;
 }
 
-.btn-add-pop-cart:hover {
-  background: var(--jg-bronze) !important;
-  border-color: var(--jg-bronze) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 6px 16px rgba(65, 46, 27, 0.2) !important;
+.jg-products-empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  background: #FFFFFF;
+  border-radius: var(--radius-card);
+  border: 1px dashed var(--jg-border);
 }
 
 /* ==========================================================================
-   7. VALUE PROPOSITIONS & TRUST STRIP (JEWELS GALAXY STYLE)
+   7. CRAFTSMANSHIP & TRUST VALUE PROPOSITION (WHY CHOOSE JEWELS GALAXY)
    ========================================================================== */
-.jg-trust-section {
-  background: #F5EFEB;
+.jg-why-section {
+  padding: 80px 0;
+  background: #FAF7F2;
   border-top: 1px solid var(--jg-border);
   border-bottom: 1px solid var(--jg-border);
-  padding: 40px 0;
 }
 
-.jg-trust-grid {
+.jg-why-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
 }
 
-.jg-trust-item {
+.jg-why-card {
+  background: #FFFFFF;
+  border: 1px solid var(--jg-border);
+  border-radius: var(--radius-card);
+  padding: 32px 26px;
+  box-shadow: 0 4px 16px rgba(42, 29, 17, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.jg-why-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(42, 29, 17, 0.08);
+  border-color: var(--jg-gold);
+}
+
+.jg-why-icon-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  background: var(--jg-gold-light);
+  border: 1px solid var(--jg-gold);
   display: flex;
   align-items: center;
-  gap: 16px;
-  background: #FFFFFF;
-  padding: 18px 22px;
-  border-radius: 12px;
-  border: 1px solid var(--jg-border-light);
-  box-shadow: 0 2px 8px rgba(65, 46, 27, 0.04);
+  justify-content: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
 }
 
-.jg-trust-icon {
-  font-size: 2rem;
-  color: var(--jg-gold);
-  flex-shrink: 0;
+.jg-why-card-title {
+  font-family: var(--font-heading) !important;
+  font-size: 1.3rem !important;
+  font-weight: 800 !important;
+  color: var(--jg-espresso) !important;
+  margin-bottom: 12px !important;
 }
 
-.jg-trust-text strong {
-  display: block;
-  font-size: 0.95rem;
+.jg-why-card-desc {
+  font-size: 0.92rem;
+  color: var(--jg-text-muted);
+  line-height: 1.65;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.jg-why-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.jg-why-chip {
+  background: var(--jg-cream);
+  border: 1px solid var(--jg-border);
+  padding: 5px 12px;
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 700;
   color: var(--jg-espresso);
-  margin-bottom: 2px;
 }
 
-.jg-trust-text span {
-  font-size: 0.8rem;
+/* ==========================================================================
+   8. REVIEWS & TESTIMONIALS (LUXURY STYLE)
+   ========================================================================== */
+.jg-reviews-section {
+  padding: 80px 0;
+  background: var(--jg-cream);
+}
+
+.jg-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.jg-review-card {
+  background: #FFFFFF;
+  border: 1px solid var(--jg-border);
+  border-radius: var(--radius-card);
+  padding: 30px;
+  box-shadow: 0 6px 20px rgba(42, 29, 17, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.jg-review-stars {
+  color: var(--jg-gold);
+  font-size: 1.15rem;
+  margin-bottom: 14px;
+}
+
+.jg-review-quote {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--jg-espresso);
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.jg-review-author {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--jg-border-light);
+  padding-top: 14px;
+}
+
+.jg-author-name {
+  font-weight: 800;
+  font-size: 0.92rem;
+  color: var(--jg-espresso);
+}
+
+.jg-author-location {
+  display: block;
+  font-size: 0.78rem;
   color: var(--jg-text-muted);
 }
 
+.jg-verified-badge {
+  background: #DCFCE7;
+  color: #15803D;
+  border: 1px solid #86EFAC;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
 /* ==========================================================================
-   8. FOOTER REFINEMENT
+   9. FAQ ACCORDION (LUXURY STYLING)
+   ========================================================================== */
+.jg-faq-section {
+  padding: 80px 0;
+  background: #FAF7F2;
+  border-top: 1px solid var(--jg-border);
+}
+
+.jg-faq-wrap {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.jg-faq-item {
+  background: #FFFFFF;
+  border: 1px solid var(--jg-border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(42, 29, 17, 0.03);
+}
+
+.jg-faq-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  background: #FFFFFF;
+  border: none;
+  font-family: var(--font-heading) !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  color: var(--jg-espresso) !important;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.jg-faq-header:hover {
+  background: var(--jg-gold-soft);
+}
+
+.jg-faq-body {
+  padding: 0 24px 20px;
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: var(--jg-text-muted);
+  border-top: 1px solid var(--jg-border-light);
+  padding-top: 14px;
+}
+
+/* ==========================================================================
+   10. FLOATING WIDGET FIX (NO OVERLAPPING!)
+   ========================================================================== */
+.floating-lead-trigger {
+  position: fixed !important;
+  bottom: 24px !important;
+  left: 24px !important;
+  right: auto !important;
+  z-index: 99 !important;
+  background: var(--jg-espresso) !important;
+  color: #FFFFFF !important;
+  border: 1.5px solid var(--jg-gold) !important;
+  box-shadow: 0 8px 24px rgba(42, 29, 17, 0.3) !important;
+  border-radius: var(--radius-pill) !important;
+  padding: 10px 18px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 0.85rem !important;
+  font-weight: 800 !important;
+  cursor: pointer;
+}
+
+.floating-lead-trigger:hover {
+  background: var(--jg-bronze) !important;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .floating-lead-trigger {
+    display: none !important;
+  }
+}
+
+.sticker-ai-container {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  z-index: 99 !important;
+}
+
+@media (max-width: 768px) {
+  .sticker-ai-container {
+    bottom: 74px !important;
+    right: 16px !important;
+  }
+}
+
+/* ==========================================================================
+   11. LUXURY SITE FOOTER
    ========================================================================== */
 .site-footer {
-  background: #2A1D11 !important;
+  background: var(--jg-espresso) !important;
   color: #F5EFEB !important;
   border-top: 1px solid rgba(197, 160, 89, 0.2) !important;
 }
