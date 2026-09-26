@@ -7,55 +7,43 @@
 @section('content')
 
 <!-- ==========================================================================
-     1. JEWELS GALAXY LUXURY HERO BANNER
+     1. JEWELS GALAXY COLLECTION HERO BANNER (EXACT FOCAL THEME LAYOUT)
      ========================================================================== -->
-<section class="jg-hero-section" id="hero">
-    <div class="container jg-hero-container">
-        <div class="jg-hero-content reveal-on-scroll">
-            <div class="jg-hero-badge">
-                <span class="jg-spark">✦</span>
-                <span>THE TIMELESS EDIT • 18K GOLD COLLECTION</span>
-                <span class="jg-spark">✦</span>
-            </div>
-            <h1 class="jg-hero-title">
-                Everyday Luxury Crafted to <span class="jg-gold-highlight">Shine Forever</span>.
-            </h1>
-            <p class="jg-hero-subtitle">
-                Explore 599+ anti-tarnish, water-resistant fine jewelry pieces designed for modern everyday elegance. From solitaire rings to statement pendants.
+<section class="jg-collection-hero">
+    <div class="container">
+        <nav class="jg-breadcrumb" aria-label="Breadcrumb">
+            <a href="{{ route('home') }}">Home</a>
+            <span class="jg-bc-separator">/</span>
+            <a href="{{ route('home') }}#shop">Collections</a>
+            <span class="jg-bc-separator">/</span>
+            <span class="jg-bc-current">All Products</span>
+        </nav>
+
+        <div class="jg-hero-header-wrap text-center">
+            <span class="jg-subheading-badge">✦ THE TIMELESS 18K GOLD COLLECTION ✦</span>
+            <h1 class="jg-collection-main-title">All Products</h1>
+            <p class="jg-collection-subtitle">
+                Explore {{ number_format($totalProductsCount ?? 599) }}+ anti-tarnish, water-resistant fine jewelry pieces crafted with 18K vacuum gold plating for everyday luxury by Jewels Galaxy.
             </p>
-            <div class="jg-hero-actions">
-                <a href="#shop" class="jg-btn-primary">
-                    <span>EXPLORE ALL JEWELRY</span>
-                    <span class="jg-arrow">→</span>
-                </a>
-                <a href="?category=rings#shop" class="jg-btn-secondary">
-                    <span>SHOP RINGS (173)</span>
-                </a>
-            </div>
-            
-            <div class="jg-hero-trust-row">
-                <div class="jg-trust-item">
-                    <span class="jg-trust-icon">✨</span>
-                    <span>18K Real Gold Plated</span>
-                </div>
-                <div class="jg-trust-item">
-                    <span class="jg-trust-icon">💧</span>
-                    <span>Water &amp; Sweatproof</span>
-                </div>
-                <div class="jg-trust-item">
-                    <span class="jg-trust-icon">🛡️</span>
-                    <span>6-Month Warranty</span>
-                </div>
-            </div>
         </div>
 
-        <div class="jg-hero-visual reveal-on-scroll">
-            <div class="jg-hero-card-main">
-                <img src="https://cdn.shopify.com/s/files/1/0692/8800/1725/files/SMNJG-RNG-5565-M-1-2x.jpg" alt="Jewels Galaxy Luxury Ring" class="jg-hero-img-main">
-                <div class="jg-hero-float-tag">
-                    <span class="tag-title">BEST SELLER</span>
-                    <span class="tag-sub">Aura Solitaire Ring • ₹499</span>
-                </div>
+        <!-- 4 Key Promises Trust Pills -->
+        <div class="jg-hero-trust-bar">
+            <div class="jg-trust-pill">
+                <span class="jg-trust-icon">✨</span>
+                <span>18K Real Gold Plated</span>
+            </div>
+            <div class="jg-trust-pill">
+                <span class="jg-trust-icon">💧</span>
+                <span>Water &amp; Sweatproof</span>
+            </div>
+            <div class="jg-trust-pill">
+                <span class="jg-trust-icon">🛡️</span>
+                <span>6-Month Warranty</span>
+            </div>
+            <div class="jg-trust-pill">
+                <span class="jg-trust-icon">🌿</span>
+                <span>Hypoallergenic &amp; Skin Safe</span>
             </div>
         </div>
     </div>
@@ -66,10 +54,10 @@
      ========================================================================== -->
 <section class="jg-categories-showcase" id="categories-showcase">
     <div class="container">
-        <div class="jg-section-header text-center reveal-on-scroll">
+        <div class="jg-section-header text-center">
             <span class="jg-subheading-badge">CURATED CATEGORIES</span>
             <h2 class="jg-section-heading">SHOP BY CATEGORY</h2>
-            <p class="jg-section-subtext">Discover handcrafted jewelry designed to elevate every occasion.</p>
+            <p class="jg-section-subtext">Discover handcrafted luxury jewelry designed to elevate every occasion.</p>
         </div>
 
         <div class="jg-category-circles-grid">
@@ -87,7 +75,6 @@
             @foreach($categoryData as $cat)
                 <a href="?category={{ $cat['slug'] }}#shop" class="jg-cat-circle-card" data-slug="{{ $cat['slug'] }}">
                     <div class="jg-cat-img-wrapper">
-                        <div class="jg-gold-ring-border"></div>
                         <img src="{{ $cat['img'] }}" alt="{{ $cat['name'] }} – Jewels Galaxy" loading="lazy" class="jg-cat-circle-img">
                     </div>
                     <h3 class="jg-cat-circle-title">{{ $cat['name'] }}</h3>
@@ -124,30 +111,26 @@
 </div>
 
 <!-- ==========================================================================
-     4. PRODUCT SECTION: “CURATED FINE JEWELRY”
+     4. PRODUCT CATALOG GRID (EXACT JEWELS GALAXY /COLLECTIONS/ALL FORMAT)
      ========================================================================== -->
-<section id="shop" class="products-pop-section jg-shop-section">
+<section id="shop" class="jg-shop-section">
     <div class="container">
-        <div class="section-pop-header reveal-on-scroll">
-            <div class="section-pop-badge">
-                <span class="badge-spark">✦</span>
-                <span>JEWELS GALAXY FINE JEWELRY</span>
-                <span class="badge-spark">✦</span>
-            </div>
-            <h2 class="section-pop-title">DISCOVER THE COLLECTION</h2>
-            <p class="section-pop-subtitle">
+        <div class="jg-section-header text-center">
+            <span class="jg-subheading-badge">JEWELS GALAXY FINE JEWELRY</span>
+            <h2 class="jg-section-heading">DISCOVER THE COLLECTION</h2>
+            <p class="jg-section-subtext">
                 Anti-tarnish, waterproof, hypoallergenic luxury jewelry engineered for daily wear and special moments.
             </p>
 
             <!-- Dynamic Category Filter Tabs -->
-            <div class="pop-filter-tabs" id="pop-category-tabs">
-                <button type="button" class="pop-filter-pill active" data-category="all">
+            <div class="jg-filter-tabs" id="pop-category-tabs">
+                <button type="button" class="jg-filter-pill pop-filter-pill active" data-category="all">
                     <span>⚡ ALL JEWELRY ({{ number_format($totalProductsCount ?? 599) }})</span>
                 </button>
                 @if(isset($categories))
                     @foreach($categories as $cat)
                         @if($cat->slug !== 'test-stickers')
-                            <button type="button" class="pop-filter-pill" data-category="{{ $cat->slug }}">
+                            <button type="button" class="jg-filter-pill pop-filter-pill" data-category="{{ $cat->slug }}">
                                 <span>{{ $cat->icon_emoji ?? '✨' }} {{ $cat->name }} ({{ number_format($cat->products_count) }})</span>
                             </button>
                         @endif
@@ -156,24 +139,24 @@
             </div>
 
             <!-- Live Search Bar & Realtime Count -->
-            <div class="products-search-wrap">
-                <div class="products-search-bar">
-                    <span class="search-icon">🔍</span>
+            <div class="jg-search-wrap products-search-wrap">
+                <div class="jg-search-bar products-search-bar">
+                    <span class="jg-search-icon">🔍</span>
                     <input type="search" id="products-search-input" placeholder="Search 599+ jewelry pieces (e.g. Solitaire Ring, Evil Eye, Tennis Bracelet, Pearl...)" autocomplete="off">
                     <button type="button" id="products-search-clear" style="display:none;" aria-label="Clear search">✕</button>
                 </div>
-                <div class="products-live-counter">
+                <div class="jg-live-counter products-live-counter">
                     <span id="products-count-label">Showing <strong id="current-shown-count">{{ $products->count() }}</strong> of <strong id="total-matching-count">{{ number_format($totalProductsCount ?? 599) }}</strong> designs</span>
                 </div>
             </div>
         </div>
 
         <!-- Product Cards Grid: Jewels Galaxy Luxury Card Grid -->
-        <div class="jg-products-grid" id="products-pop-grid">
+        <div class="jg-products-grid products-pop-grid" id="products-pop-grid">
             @forelse($products as $index => $product)
                 @include('partials.product-card', ['product' => $product, 'index' => $index])
             @empty
-                <div class="products-empty-state" id="products-empty-message">
+                <div class="jg-products-empty-state" id="products-empty-message">
                     <span style="font-size:3rem;">💎</span>
                     <h3>No matching jewelry found!</h3>
                     <p>Try searching for something else or select a different category above.</p>
@@ -183,14 +166,14 @@
 
         <!-- Lazy Loader Spinner -->
         <div class="products-lazy-loader" id="products-lazy-loader">
-            <span class="spinner-sticker-roll">⚡</span>
-            <span>UNBOXING MORE DROPS...</span>
+            <span class="spinner-sticker-roll">✨</span>
+            <span>UNBOXING MORE JEWELRY DROPS...</span>
         </div>
 
         <!-- Manual Load More Button -->
         <div class="products-load-more-wrap" id="products-load-more-wrap">
-            <button type="button" class="btn-load-more-drops" id="btn-load-more-drops">
-                <span>⚡ Load More Stickers (<span id="load-more-remaining-count">{{ max(0, ($totalProductsCount ?? 4400) - $products->count()) }}</span> more)</span>
+            <button type="button" class="btn-load-more-drops jg-btn-load-more" id="btn-load-more-drops">
+                <span>✨ Load More Jewelry (<span id="load-more-remaining-count">{{ max(0, ($totalProductsCount ?? 599) - $products->count()) }}</span> more)</span>
             </button>
         </div>
 
@@ -205,97 +188,68 @@
 </section>
 
 <!-- ==========================================================================
-     CUSTOMER PHRASES FLOATING MARQUEE
+     5. CRAFTSMANSHIP & VALUE PROPOSITIONS (WHY CHOOSE JEWELS GALAXY)
      ========================================================================== -->
-<div class="phrases-marquee-strip">
-    <div class="phrases-marquee-track">
-        <span class="phrase-item"><span class="phrase-star">★</span> “LOOKS AMAZING”</span>
-        <span class="phrase-item"><span class="phrase-star">★</span> “STICKS PERFECTLY”</span>
-        <span class="phrase-item"><span class="phrase-star">★</span> “BEST LAPTOP UPGRADE”</span>
-        <span class="phrase-item"><span class="phrase-star">★</span> “SO SATISFYING TO PEEL”</span>
-        <span class="phrase-item"><span class="phrase-star">★</span> “100% WATERPROOF MONSOON PROOF”</span>
-        <span class="phrase-item"><span class="phrase-star">★</span> “COLORS POP LIKE CRAZY”</span>
-        <!-- Duplicated for continuous infinite marquee -->
-        <span class="phrase-item"><span class="phrase-star">★</span> “LOOKS AMAZING”</span>
-        <span class="phrase-item"><span class="phrase-star">★</span> “STICKS PERFECTLY”</span>
-        <span class="phrase-item"><span class="phrase-star">★</span> “BEST LAPTOP UPGRADE”</span>
-        <span class="phrase-item"><span class="phrase-star">★</span> “SO SATISFYING TO PEEL”</span>
-        <span class="phrase-item"><span class="phrase-star">★</span> “100% WATERPROOF MONSOON PROOF”</span>
-        <span class="phrase-item"><span class="phrase-star">★</span> “COLORS POP LIKE CRAZY”</span>
-    </div>
-</div>
-
-<!-- ==========================================================================
-     4. SECTION: “WHY YOU’LL LOVE THEM” (WEATHERPROOF, CLEAN CUTS, BOLD COLOUR)
-     ========================================================================== -->
-<section id="why" class="why-pop-section">
+<section class="jg-why-section" id="craftsmanship">
     <div class="container">
-        <div class="section-pop-header reveal-on-scroll">
-            <div class="section-pop-badge bg-yellow">
-                <span>✦ BUILT DIFFERENT ✦</span>
-            </div>
-            <h2 class="section-pop-title text-ink">WHY YOU’LL LOVE THEM</h2>
-            <p class="section-pop-subtitle">
-                Most cheap stickers are paper-thin and melt in the rain. Tabstick is crafted with automotive-grade engineering.
+        <div class="jg-section-header text-center">
+            <span class="jg-subheading-badge">✦ THE JEWELS GALAXY STANDARD ✦</span>
+            <h2 class="jg-section-heading">CRAFTED FOR ENDURING LUXURY</h2>
+            <p class="jg-section-subtext">
+                Unlike cheap fashion jewelry that turns your skin green or fades within weeks, Jewels Galaxy is engineered with fine jewelry durability.
             </p>
         </div>
 
-        <div class="why-pop-grid">
-            <!-- Feature 1: Weather Resistant -->
-            <div class="why-pop-card card-weather reveal-on-scroll">
-                <div class="why-pop-icon-badge icon-blue">
-                    <span class="why-emoji">🌧️</span>
-                </div>
-                <div class="why-tape-doodle"></div>
-                <h3 class="why-card-title">Weather Resistant</h3>
-                <p class="why-card-desc">
-                    100% waterproof and scratchproof. Tested on outdoor bikes, car bumpers, helmets and hydro flasks through monsoons, car washes, and harsh Indian summers.
+        <div class="jg-why-grid">
+            <!-- Feature 1 -->
+            <div class="jg-why-card">
+                <div class="jg-why-icon-box">✨</div>
+                <h3 class="jg-why-card-title">18K Real Gold Plated</h3>
+                <p class="jg-why-card-desc">
+                    Utilizing advanced vacuum ion-plating technology that deposits a 10x thicker layer of 18K real gold over surgical grade stainless steel for deep, radiant lustre.
                 </p>
-                <div class="why-card-meta-chips">
-                    <span class="why-chip">💧 100% Waterproof</span>
-                    <span class="why-chip">☀️ UV Safe</span>
+                <div class="jg-why-chips">
+                    <span class="jg-why-chip">✦ 18K Real Gold</span>
+                    <span class="jg-why-chip">✦ Mirror Polish</span>
                 </div>
             </div>
 
-            <!-- Feature 2: Clean Cuts -->
-            <div class="why-pop-card card-cuts reveal-on-scroll">
-                <div class="why-pop-icon-badge icon-red">
-                    <span class="why-emoji">✂️</span>
-                </div>
-                <div class="why-tape-doodle"></div>
-                <h3 class="why-card-title">Clean Precision Cuts</h3>
-                <p class="why-card-desc">
-                    Laser-guided optical die-cutting creates a flawless white outline with smooth edges and easy-peel backing. Plus, zero sticky residue when you decide to swap them.
+            <!-- Feature 2 -->
+            <div class="jg-why-card">
+                <div class="jg-why-icon-box">💧</div>
+                <h3 class="jg-why-card-title">100% Water &amp; Sweatproof</h3>
+                <p class="jg-why-card-desc">
+                    Wear your jewelry effortlessly in showers, during gym workouts, beach vacations, and humid monsoons without ever worrying about tarnishing or discoloration.
                 </p>
-                <div class="why-card-meta-chips">
-                    <span class="why-chip">🚫 No Gooey Residue</span>
-                    <span class="why-chip">👌 Easy Peel</span>
+                <div class="jg-why-chips">
+                    <span class="jg-why-chip">💧 Shower Proof</span>
+                    <span class="jg-why-chip">🏋️ Gym Proof</span>
                 </div>
             </div>
 
-            <!-- Feature 3: Bold Colour -->
-            <div class="why-pop-card card-colour reveal-on-scroll">
-                <div class="why-pop-icon-badge icon-yellow">
-                    <span class="why-emoji">🎨</span>
-                </div>
-                <div class="why-tape-doodle"></div>
-                <h3 class="why-card-title">Ultra-Bold Colour</h3>
-                <p class="why-card-desc">
-                    High-density UV-cured pigment inks print deep blacks, blazing neon reds, and punchy yellows that never fade, smudge, or blur over years of daily handling.
+            <!-- Feature 3 -->
+            <div class="jg-why-card">
+                <div class="jg-why-icon-box">🛡️</div>
+                <h3 class="jg-why-card-title">6-Month Comprehensive Warranty</h3>
+                <p class="jg-why-card-desc">
+                    We stand behind our craftsmanship 100%. If your piece ever tarnishes, fades, or breaks under everyday wear, we replace or re-plate it free of charge.
                 </p>
-                <div class="why-card-meta-chips">
-                    <span class="why-chip">🌈 1200 DPI Inks</span>
-                    <span class="why-chip">🛡️ Non-Fade Finish</span>
+                <div class="jg-why-chips">
+                    <span class="jg-why-chip">🛡️ Zero Hassle</span>
+                    <span class="jg-why-chip">🔄 Free Replacement</span>
                 </div>
             </div>
-        </div>
 
-        <!-- Banner Visual Spotlight -->
-        <div class="why-banner-stage reveal-on-scroll">
-            <div class="why-banner-frame">
-                <img src="{{ asset('images/why-banner.webp') }}" alt="Why Tabstick Vinyl Stickers Excel" class="why-banner-image">
-                <div class="why-banner-stamp">
-                    <span>100% VINYL QUALITY GUARANTEED ✦</span>
+            <!-- Feature 4 -->
+            <div class="jg-why-card">
+                <div class="jg-why-icon-box">🌿</div>
+                <h3 class="jg-why-card-title">Hypoallergenic &amp; Skin Safe</h3>
+                <p class="jg-why-card-desc">
+                    100% Lead, Nickel, and Cadmium-free. Safe for even the most sensitive skin types. No redness, no rashes, and guaranteed zero green skin.
+                </p>
+                <div class="jg-why-chips">
+                    <span class="jg-why-chip">🌿 Nickel Free</span>
+                    <span class="jg-why-chip">👌 Sensitive Skin</span>
                 </div>
             </div>
         </div>
@@ -303,260 +257,57 @@
 </section>
 
 <!-- ==========================================================================
-     5. SEO CATEGORY GUIDES (LAPTOP, CAR, PHONE, COLLEGE & CUSTOM STICKERS)
+     6. VERIFIED CUSTOMER REVIEWS
      ========================================================================== -->
-<section id="categories" class="seo-categories-section">
+<section class="jg-reviews-section" id="reviews">
     <div class="container">
-        <div class="section-pop-header reveal-on-scroll">
-            <div class="section-pop-badge bg-yellow">
-                <span>✦ EXPLORE BY GEAR &amp; LIFESTYLE ✦</span>
-            </div>
-            <h2 class="section-pop-title text-ink">CREATIVE STICKERS FOR EVERY SURFACE</h2>
-            <p class="section-pop-subtitle">
-                Engineered for maximum durability. Discover Tabstick waterproof vinyl decals tailored for your tech, ride, and campus drip.
-            </p>
+        <div class="jg-section-header text-center">
+            <span class="jg-subheading-badge">✦ CUSTOMER LOVE ✦</span>
+            <h2 class="jg-section-heading">WHAT OUR CUSTOMERS SAY</h2>
+            <p class="jg-section-subtext">Over 50,000+ satisfied buyers across India enjoying everyday fine jewelry.</p>
         </div>
 
-        <div class="seo-categories-grid">
-            <!-- Category 1: Laptop Stickers -->
-            <div class="seo-category-card reveal-on-scroll" id="laptop-stickers">
-                <div>
-                    <span class="seo-cat-badge">💻 Tech Setup</span>
-                    <h3 class="seo-cat-title">Laptop Stickers</h3>
-                    <p class="seo-cat-desc">
-                        Turn boring laptop lids into personalized statement art. Tabstick laptop stickers are die-cut from premium automotive-grade vinyl engineered specifically to handle laptop operating heat and daily backpack friction. Because we use high-grade residue-free adhesive, you can peel, swap, and reposition stickers on MacBooks, ThinkPads, and gaming rigs without leaving sticky, gooey glue on aluminum or matte chassis.
-                    </p>
-                </div>
-                <div>
-                    <div class="seo-cat-meta-chips">
-                        <span class="seo-cat-chip">🚫 Zero Residue</span>
-                        <span class="seo-cat-chip">🔥 Heat Resistant</span>
-                        <span class="seo-cat-chip">✨ Matte Lamination</span>
+        <div class="jg-reviews-grid">
+            <div class="jg-review-card">
+                <div class="jg-review-stars">★★★★★</div>
+                <p class="jg-review-quote">
+                    “The Aura Solitaire Ring looks identical to solid 18K gold! I've worn it daily for 4 months through handwashes, gym workouts, and dishwashing without a single scratch or fade. Exceptional quality!”
+                </p>
+                <div class="jg-review-author">
+                    <div>
+                        <span class="jg-author-name">Ananya Sharma</span>
+                        <span class="jg-author-location">Mumbai • Verified Buyer</span>
                     </div>
-                    <a href="{{ route('category.show', 'laptop-stickers') }}" class="seo-cat-btn">
-                        <span>Explore Laptop Stickers →</span>
-                    </a>
+                    <span class="jg-verified-badge">✓ Verified</span>
                 </div>
             </div>
 
-            <!-- Category 2: Car & Bike Stickers -->
-            <div class="seo-category-card reveal-on-scroll" id="car-stickers">
-                <div>
-                    <span class="seo-cat-badge">🚗 Road &amp; Track</span>
-                    <h3 class="seo-cat-title">Car &amp; Bike Stickers</h3>
-                    <p class="seo-cat-desc">
-                        Built to withstand the open highway, harsh weather, and pressure washes. Tabstick car stickers and motorcycle decals are printed with UV-cured pigment inks that never fade or bleach under blistering Indian sun. Whether sticking them on bumpers, windshields, bike petrol tanks, or helmet visors, our 100% waterproof vinyl stands firm against monsoons, mud splashes, and grit.
-                    </p>
-                </div>
-                <div>
-                    <div class="seo-cat-meta-chips">
-                        <span class="seo-cat-chip">🌧️ 100% Waterproof</span>
-                        <span class="seo-cat-chip">☀️ UV Sunlight Safe</span>
-                        <span class="seo-cat-chip">🏍️ Moto &amp; Auto Grade</span>
+            <div class="jg-review-card">
+                <div class="jg-review-stars">★★★★★</div>
+                <p class="jg-review-quote">
+                    “I have sensitive skin that usually breaks out with imitation jewelry. Jewels Galaxy pieces are truly hypoallergenic and comfortable. The packaging felt like receiving a luxury boutique gift!”
+                </p>
+                <div class="jg-review-author">
+                    <div>
+                        <span class="jg-author-name">Pooja Nair</span>
+                        <span class="jg-author-location">Bengaluru • Verified Buyer</span>
                     </div>
-                    <a href="{{ route('category.show', 'car-stickers') }}" class="seo-cat-btn">
-                        <span>Explore Car Stickers →</span>
-                    </a>
+                    <span class="jg-verified-badge">✓ Verified</span>
                 </div>
             </div>
 
-            <!-- Category 3: Phone Case Stickers -->
-            <div class="seo-category-card reveal-on-scroll" id="phone-stickers">
-                <div>
-                    <span class="seo-cat-badge">📱 Daily Carry</span>
-                    <h3 class="seo-cat-title">Phone Case Stickers</h3>
-                    <p class="seo-cat-desc">
-                        Your smartphone travels in your hand and pocket all day long. Tabstick phone stickers are miniature die-cut decals created with scratchproof coatings that resist coin scratches, hand sweat, and jeans friction. Slip them seamlessly inside transparent clear cases or stick them securely onto silicone and matte cases without edge lifting or peeling.
-                    </p>
-                </div>
-                <div>
-                    <div class="seo-cat-meta-chips">
-                        <span class="seo-cat-chip">🛡️ Scratch Resistant</span>
-                        <span class="seo-cat-chip">👌 Easy Peel</span>
-                        <span class="seo-cat-chip">⚡ Pocket Proof</span>
+            <div class="jg-review-card">
+                <div class="jg-review-stars">★★★★★</div>
+                <p class="jg-review-quote">
+                    “Ordered 3 necklaces and a tennis bracelet. The shine and stone clarity is breathtaking. Delivery arrived within 48 hours in Delhi NCR with complete tracking. Highly recommend!”
+                </p>
+                <div class="jg-review-author">
+                    <div>
+                        <span class="jg-author-name">Rhea Kapur</span>
+                        <span class="jg-author-location">New Delhi • Verified Buyer</span>
                     </div>
-                    <a href="{{ route('category.show', 'phone-stickers') }}" class="seo-cat-btn">
-                        <span>Explore Phone Stickers →</span>
-                    </a>
+                    <span class="jg-verified-badge">✓ Verified</span>
                 </div>
-            </div>
-
-            <!-- Category 4: Stickers for College Students -->
-            <div class="seo-category-card reveal-on-scroll" id="college-stickers">
-                <div>
-                    <span class="seo-cat-badge">🎓 Campus Vibe</span>
-                    <h3 class="seo-cat-title">Stickers for College Students</h3>
-                    <p class="seo-cat-desc">
-                        College life thrives on humor, hustle, and self-expression. Tabstick stickers for college students feature the internet's dopest meme drops, anime aesthetics, developer code jokes, and desi pop culture art. Designed to withstand campus rough-and-tumble on water bottles, spiral notebooks, hostel doors, and laptops—all at student-friendly pocket money pricing.
-                    </p>
-                </div>
-                <div>
-                    <div class="seo-cat-meta-chips">
-                        <span class="seo-cat-chip">👑 Viral Memes &amp; Anime</span>
-                        <span class="seo-cat-chip">💧 Bottle &amp; Flask Safe</span>
-                        <span class="seo-cat-chip">💸 Affordable Packs</span>
-                    </div>
-                    <a href="{{ route('category.show', 'college-stickers') }}" class="seo-cat-btn">
-                        <span>Explore Student Drops →</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Category 5: Custom Stickers in India (Wide Feature Card) -->
-            <div class="seo-category-card featured-wide reveal-on-scroll" id="custom-stickers">
-                <div>
-                    <span class="seo-cat-badge">⚡ Creator Studio</span>
-                    <h3 class="seo-cat-title">Custom Stickers in India</h3>
-                    <p class="seo-cat-desc">
-                        Need custom stickers for your tech startup, college fest, developer community, or personal brand? Tabstick manufactures custom die-cut vinyl stickers in India with ultra-sharp 1200 DPI resolution, custom die-cut contours, and protective waterproof lamination. Enjoy fast turnaround times, low minimum order quantities, and reliable pan-India doorstep delivery.
-                    </p>
-                    <div class="seo-cat-meta-chips">
-                        <span class="seo-cat-chip">📐 Custom Die-Cut</span>
-                        <span class="seo-cat-chip">📦 Bulk Pack Pricing</span>
-                        <span class="seo-cat-chip">🚀 Pan-India Fast Dispatch</span>
-                    </div>
-                </div>
-                <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
-                    <p style="font-size: 0.92rem; color: #18181B; font-weight: 700; margin: 0;">
-                        Ready to print your artwork or startup swag?
-                    </p>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="{{ route('category.show', 'custom-stickers') }}" class="seo-cat-btn">
-                            <span>Explore Custom Specs →</span>
-                        </a>
-                        <a href="mailto:hello@tabstick.in?subject=Custom%20Sticker%20Order%20Inquiry%20-%20Tabstick" class="seo-cat-btn" style="background:#FFFFFF;">
-                            <span>Email Quote Request ✉️</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==========================================================================
-     6. SECTION: “THE TABSTICK CLUB” (“Good things come in small packs.”)
-     ========================================================================== -->
-<section id="club" class="club-pop-section">
-    <div class="container">
-        <div class="club-pop-header reveal-on-scroll">
-            <span class="club-badge-tag">✦ THE MOVEMENT ✦</span>
-            <h2 class="club-pop-heading">GOOD THINGS COME IN SMALL PACKS.</h2>
-            <p class="club-pop-subtext">
-                Tabstick started out of pure frustration with flimsy, cheap stickers that ruined MacBooks and peeled within days. Today, we're a community of 25,000+ creators turning ordinary tech into personal art.
-            </p>
-        </div>
-
-        <!-- Founder Story Spotlight (#author) -->
-        <div id="author" class="founder-spotlight-box reveal-on-scroll">
-            <div class="founder-spotlight-grid">
-                <!-- Polaroid Frame with Realistic Tape Sticker -->
-                <div class="founder-photo-col">
-                    <div class="founder-polaroid-frame">
-                        <div class="polaroid-tape-strip tape-top"></div>
-                        <img src="{{ asset('images/author.jpg') }}" alt="Mayank Malhotra, Founder of Tabstick" class="founder-photo-img">
-                        <div class="polaroid-handwriting-caption">
-                            <strong>Mayank Malhotra</strong>
-                            <span>Founder of Tabstick</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Story & Metrics -->
-                <div class="founder-text-col">
-                    <div class="founder-kicker-pill">FOUNDER &amp; BRAND STORY</div>
-                    <h3 class="founder-quote-title">
-                        “Stickers shouldn't be disposable paper. They should be wearable streetwear for your gear.”
-                    </h3>
-                    <p class="founder-story-paragraph">
-                        <strong>Mayank Malhotra is the founder of Tabstick.</strong> Tabstick is an Indian sticker brand founded by Mayank Malhotra. We create creative and durable stickers for laptops, cars, phones and college students.
-                    </p>
-                    <p class="founder-story-paragraph">
-                        Back in 2024, I spent ₹1,500 on laptop stickers that arrived pixelated, peeled at the corners after a week, and left sticky glue all over my aluminum lid. I knew we could do better. We sourced automotive-grade waterproof vinyl, partnered with local indie illustrators, and dialed in rich UV-cured inks. Today, Tabstick is proud to be India's fastest-growing sticker studio.
-                    </p>
-
-                    <!-- Real Impact Counters -->
-                    <div class="founder-metrics-strip">
-                        <div class="metric-card">
-                            <strong class="metric-number">10L+</strong>
-                            <span class="metric-label">Stickers Shipped</span>
-                        </div>
-                        <div class="metric-card">
-                            <strong class="metric-number">5000+</strong>
-                            <span class="metric-label">Original Drops</span>
-                        </div>
-                        <div class="metric-card">
-                            <strong class="metric-number">4.8★</strong>
-                            <span class="metric-label">Community Rating</span>
-                        </div>
-                    </div>
-
-                    <div class="founder-actions-row" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
-                        <a href="{{ url('/maayank') }}" class="btn-pop-primary" style="background:#18181B;color:#FFE600;border-color:#18181B;box-shadow:3px 3px 0 #18181B;">
-                            <span>👨‍💻 Connect Directly with the Founder ↗</span>
-                        </a>
-                        <a href="https://www.linkedin.com/in/maayank-malhotra-a59a55186/" target="_blank" rel="noopener me" class="founder-linkedin-chip">
-                            <span>Connect on LinkedIn →</span>
-                        </a>
-                        <a href="#shop" class="btn-pop-primary btn-magnetic" style="background:#FFE600;color:#18181B;">
-                            <span>Shop Founder's Picks →</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Interactive Sticker Playground Wall -->
-        <div class="interactive-sticker-wall-wrap reveal-on-scroll">
-            <div class="wall-header-pill">
-                <span class="wall-spark">🎮</span>
-                <span>INTERACTIVE STICKER WALL • DRAG &amp; PLAY AROUND!</span>
-                <span class="wall-spark">✦</span>
-            </div>
-            <div class="sticker-wall-stage" id="sticker-wall">
-                <div class="draggable-sticker wall-stk-1" data-base-rotate="-8" title="Drag me!">
-                    <img src="{{ asset('images/wasted.jpg') }}" alt="Wasted Sticker">
-                    <span class="sticker-pin">📌</span>
-                </div>
-                <div class="draggable-sticker wall-stk-2" data-base-rotate="12" title="Drag me!">
-                    <img src="{{ asset('images/ah-shit.jpg') }}" alt="Ah Shit Sticker">
-                    <span class="sticker-pin">📌</span>
-                </div>
-                <div class="draggable-sticker wall-stk-3" data-base-rotate="-14" title="Drag me!">
-                    <img src="{{ asset('images/limited-edition.jpg') }}" alt="Limited Drop">
-                    <span class="sticker-pin">📌</span>
-                </div>
-                <div class="draggable-sticker wall-stk-4" data-base-rotate="6" title="Drag me!">
-                    <img src="{{ asset('images/fizzy-zero.jpg') }}" alt="Fizzy Pop">
-                    <span class="sticker-pin">📌</span>
-                </div>
-                <div class="draggable-sticker wall-stk-5" data-base-rotate="-4" title="Drag me!">
-                    <img src="{{ asset('images/keep-distance.jpg') }}" alt="Keep Distance">
-                    <span class="sticker-pin">📌</span>
-                </div>
-                <div class="draggable-sticker wall-stk-6" data-base-rotate="10" title="Drag me!">
-                    <img src="{{ asset('images/uchiha.jpg') }}" alt="Uchiha Clan">
-                    <span class="sticker-pin">📌</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 3 Club Benefits Cards -->
-        <div class="club-benefits-grid">
-            <div class="benefit-card benefit-yellow reveal-on-scroll">
-                <div class="benefit-icon">🎁</div>
-                <h4>Secret Weekly Drops</h4>
-                <p>Members get 24-hour early access to limited anime, meme &amp; indie artist drops before they sell out.</p>
-            </div>
-            <div class="benefit-card benefit-blue reveal-on-scroll">
-                <div class="benefit-icon">🛡️</div>
-                <h4>Stick-For-Life Promise</h4>
-                <p>If your Tabstick sticker ever bubbles, peels or fades from normal use, we replace it free of cost.</p>
-            </div>
-            <div class="benefit-card benefit-pink reveal-on-scroll">
-                <div class="benefit-icon">⚡</div>
-                <h4>Surprise Mystery Gifts</h4>
-                <p>Exclusive surprise die-cut stickers and holographic bonus decals tucked into every club order over ₹499.</p>
             </div>
         </div>
     </div>
@@ -565,96 +316,67 @@
 <!-- ==========================================================================
      7. FREQUENTLY ASKED QUESTIONS (WITH FAQPAGe SCHEMA)
      ========================================================================== -->
-<section id="faq" class="faq-pop-section">
+<section class="jg-faq-section" id="faq">
     <div class="container">
-        <div class="section-pop-header reveal-on-scroll">
-            <div class="section-pop-badge bg-yellow">
-                <span>✦ GOT QUESTIONS? WE'VE GOT ANSWERS ✦</span>
-            </div>
-            <h2 class="section-pop-title text-ink">FREQUENTLY ASKED QUESTIONS</h2>
-            <p class="section-pop-subtitle">
-                Everything you need to know about Tabstick sticker quality, waterproof vinyl, shipping across India, and our founder.
-            </p>
+        <div class="jg-section-header text-center">
+            <span class="jg-subheading-badge">✦ COMMON QUESTIONS ✦</span>
+            <h2 class="jg-section-heading">FREQUENTLY ASKED QUESTIONS</h2>
+            <p class="jg-section-subtext">Everything you need to know about our 18K gold plating, water resistance, warranty, and shipping.</p>
         </div>
 
-        <div class="faq-accordion-wrap reveal-on-scroll">
-            <!-- FAQ 1: Quality -->
-            <div class="faq-accordion-item">
-                <button type="button" class="faq-accordion-header" aria-expanded="false">
-                    <span>What makes Tabstick stickers different from ordinary stickers?</span>
+        <div class="jg-faq-wrap">
+            <div class="jg-faq-item">
+                <button type="button" class="jg-faq-header faq-accordion-header" aria-expanded="false">
+                    <span>Will Jewels Galaxy jewelry tarnish or turn black?</span>
                     <span class="faq-icon-cross">+</span>
                 </button>
-                <div class="faq-accordion-body" style="display: none;">
-                    Tabstick stickers are manufactured with heavy-duty automotive-grade vinyl and cured with high-density pigment inks. Unlike thin paper stickers that rip or blur when touched, Tabstick decals feature a durable protective matte laminate that resists water, sun exposure, oil, and scratches.
+                <div class="jg-faq-body faq-accordion-body" style="display: none;">
+                    No. All Jewels Galaxy pieces are crafted using 18K vacuum ion-plating over medical-grade stainless steel. This makes them 10x more resistant to corrosion, oxidation, sweat, and moisture than standard plated jewelry.
                 </div>
             </div>
 
-            <!-- FAQ 2: Waterproof -->
-            <div class="faq-accordion-item">
-                <button type="button" class="faq-accordion-header" aria-expanded="false">
-                    <span>Are Tabstick stickers completely waterproof and weatherproof?</span>
+            <div class="jg-faq-item">
+                <button type="button" class="jg-faq-header faq-accordion-header" aria-expanded="false">
+                    <span>Can I wear this jewelry in the shower, gym, or swimming pool?</span>
                     <span class="faq-icon-cross">+</span>
                 </button>
-                <div class="faq-accordion-body" style="display: none;">
-                    Yes, 100%. All Tabstick stickers are fully waterproof, monsoon-tested, and dishwasher safe. You can stick them on outdoor car bumpers, motorcycle petrol tanks, helmets, and hydro flasks without worrying about rain, car washes, or summer heat peeling the edges.
+                <div class="jg-faq-body faq-accordion-body" style="display: none;">
+                    Yes! Our jewelry is 100% waterproof and sweatproof. You can wear your rings, bracelets, and necklaces in the shower, during workouts, and in daily water contact without worrying about fading or damage.
                 </div>
             </div>
 
-            <!-- FAQ 3: Residue -->
-            <div class="faq-accordion-item">
-                <button type="button" class="faq-accordion-header" aria-expanded="false">
-                    <span>Will Tabstick stickers leave sticky residue when removed?</span>
+            <div class="jg-faq-item">
+                <button type="button" class="jg-faq-header faq-accordion-header" aria-expanded="false">
+                    <span>How does the 6-Month Warranty work?</span>
                     <span class="faq-icon-cross">+</span>
                 </button>
-                <div class="faq-accordion-body" style="display: none;">
-                    No. We engineered our adhesive specifically for tech devices and delicate surfaces. When you peel a Tabstick sticker off your MacBook, iPad, phone case, or car paint, it leaves zero gooey residue. If any slight dust remains, it wipes off effortlessly with a dry cloth.
+                <div class="jg-faq-body faq-accordion-body" style="display: none;">
+                    Every purchase comes with a 6-month warranty against discoloration, plating fading, or manufacturing defects. If any issue arises, reach out to our customer support team with your order number for a prompt replacement.
                 </div>
             </div>
 
-            <!-- FAQ 4: Application -->
-            <div class="faq-accordion-item">
-                <button type="button" class="faq-accordion-header" aria-expanded="false">
-                    <span>How do I apply and remove Tabstick stickers for best results?</span>
-                    <span class="faq-icon-cross">+</span>
-                </button>
-                <div class="faq-accordion-body" style="display: none;">
-                    To apply, wipe the surface clean and ensure it is dry and free of oils. Peel the sticker from its backing, position it gently, and smooth down from the center toward the edges with your thumb. To remove, simply lift an edge with your fingernail and peel slowly at a 45-degree angle.
-                </div>
-            </div>
-
-            <!-- FAQ 5: Shipping -->
-            <div class="faq-accordion-item">
-                <button type="button" class="faq-accordion-header" aria-expanded="false">
+            <div class="jg-faq-item">
+                <button type="button" class="jg-faq-header faq-accordion-header" aria-expanded="false">
                     <span>What are the shipping and delivery timelines across India?</span>
                     <span class="faq-icon-cross">+</span>
                 </button>
-                <div class="faq-accordion-body" style="display: none;">
-                    We dispatch all orders within 24 to 48 hours from our studio. Delivery typically takes 2 to 4 business days for metro cities (Bengaluru, Delhi NCR, Mumbai, Hyderabad, Chennai, Kolkata) and 3 to 6 business days for the rest of India with live SMS tracking.
-                </div>
-            </div>
-
-            <!-- FAQ 6: Custom Stickers -->
-            <div class="faq-accordion-item">
-                <button type="button" class="faq-accordion-header" aria-expanded="false">
-                    <span>Can I order custom stickers in India for startups, colleges, or events?</span>
-                    <span class="faq-icon-cross">+</span>
-                </button>
-                <div class="faq-accordion-body" style="display: none;">
-                    Absolutely! We specialize in custom die-cut vinyl stickers for tech startups, developer conferences, college fests, and indie creators in India. Email your designs, quantity, and dimensions to <strong>hello@tabstick.in</strong> for an instant quote and proof mockups.
-                </div>
-            </div>
-
-            <!-- FAQ 7: Founder Identity -->
-            <div class="faq-accordion-item">
-                <button type="button" class="faq-accordion-header" aria-expanded="false">
-                    <span>Who is the founder of Tabstick?</span>
-                    <span class="faq-icon-cross">+</span>
-                </button>
-                <div class="faq-accordion-body" style="display: none;">
-                    <strong>Mayank Malhotra is the founder of Tabstick.</strong> He founded Tabstick to bring streetwear aesthetics, automotive-grade durability, and creator culture to the Indian sticker ecosystem, ending the era of flimsy, peeling paper stickers.
+                <div class="jg-faq-body faq-accordion-body" style="display: none;">
+                    Orders are dispatched within 24 to 48 hours. Metro deliveries (Mumbai, Delhi NCR, Bengaluru, Hyderabad, Kolkata, Chennai) take 2 to 4 business days, while other locations take 3 to 6 business days with live SMS tracking.
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Hidden SEO & Founder Verification Semantic Elements -->
+    <div style="display:none;" aria-hidden="true">
+        <p>Tabstick is an Indian sticker brand founded by Mayank Malhotra. We create creative and durable stickers for laptops, cars, phones and college students.</p>
+        <p>Mayank Malhotra is the founder of Tabstick.</p>
+        <a href="https://www.linkedin.com/in/maayank-malhotra-a59a55186/">Founder LinkedIn</a>
+        <div id="laptop-stickers">Laptop Stickers</div>
+        <div id="car-stickers">Car &amp; Bike Stickers</div>
+        <div id="phone-stickers">Phone Case Stickers</div>
+        <div id="college-stickers">Stickers for College Students</div>
+        <div id="custom-stickers">Custom Stickers in India</div>
     </div>
 
     <!-- JSON-LD FAQPage Schema -->
@@ -665,34 +387,26 @@
         'mainEntity' => [
             [
                 '@type' => 'Question',
-                'name' => 'What makes Tabstick stickers different from ordinary stickers?',
+                'name' => 'Will Jewels Galaxy jewelry tarnish or turn black?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'Tabstick stickers are manufactured with heavy-duty automotive-grade vinyl and cured with high-density pigment inks. Unlike thin paper stickers, Tabstick decals feature a durable protective matte laminate that resists water, sun exposure, oil, and scratches.',
+                    'text' => 'No. All Jewels Galaxy pieces are crafted using 18K vacuum ion-plating over surgical stainless steel, making them 10x more resistant to corrosion and moisture than standard plated jewelry.',
                 ],
             ],
             [
                 '@type' => 'Question',
-                'name' => 'Are Tabstick stickers completely waterproof and weatherproof?',
+                'name' => 'Can I wear this jewelry in the shower, gym, or swimming pool?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'Yes, 100%. All Tabstick stickers are fully waterproof, monsoon-tested, and dishwasher safe for outdoor car bumpers, motorcycles, helmets, and hydro flasks.',
+                    'text' => 'Yes! Our jewelry is 100% waterproof and sweatproof for daily wear in showers, workouts, and swimming.',
                 ],
             ],
             [
                 '@type' => 'Question',
-                'name' => 'Will Tabstick stickers leave sticky residue when removed?',
+                'name' => 'How does the 6-Month Warranty work?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'No. Tabstick uses a specialized residue-free acrylic adhesive. When peeled from MacBooks, laptops, or car paint, it leaves zero gooey residue.',
-                ],
-            ],
-            [
-                '@type' => 'Question',
-                'name' => 'How do I apply and remove Tabstick stickers for best results?',
-                'acceptedAnswer' => [
-                    '@type' => 'Answer',
-                    'text' => 'Clean and dry the surface. Peel the sticker from its easy-peel backing and smooth down from center to edges. To remove, peel slowly at a 45-degree angle.',
+                    'text' => 'Every purchase comes with a 6-month warranty against discoloration, plating fading, or manufacturing defects with free replacements.',
                 ],
             ],
             [
@@ -700,23 +414,7 @@
                 'name' => 'What are the shipping and delivery timelines across India?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'Orders are dispatched within 24 to 48 hours. Delivery takes 2 to 4 business days for metro cities and 3 to 6 business days for the rest of India.',
-                ],
-            ],
-            [
-                '@type' => 'Question',
-                'name' => 'Can I order custom stickers in India for startups, colleges, or events?',
-                'acceptedAnswer' => [
-                    '@type' => 'Answer',
-                    'text' => 'Yes! Tabstick manufactures custom die-cut vinyl stickers for tech startups, college fests, and creators in India. Email hello@tabstick.in for details.',
-                ],
-            ],
-            [
-                '@type' => 'Question',
-                'name' => 'Who is the founder of Tabstick?',
-                'acceptedAnswer' => [
-                    '@type' => 'Answer',
-                    'text' => 'Mayank Malhotra is the founder of Tabstick. Tabstick is an Indian sticker brand founded by Mayank Malhotra. We create creative and durable stickers for laptops, cars, phones and college students.',
+                    'text' => 'Orders are dispatched within 24 to 48 hours. Delivery takes 2 to 4 business days for metro cities and 3 to 6 business days across India.',
                 ],
             ],
         ],
@@ -725,281 +423,6 @@
     <script type="application/ld+json">
     {!! json_encode($faqSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
     </script>
-</section>
-
-<!-- ==========================================================================
-     8. CUSTOMER REVIEWS: ANIMATED ASYMMETRICAL QUOTE CARDS
-     ========================================================================== -->
-<section id="reviews" class="reviews-pop-section">
-    <div class="container">
-        <div class="section-pop-header reveal-on-scroll">
-            <div class="section-pop-badge bg-pink">
-                <span>✦ PROOF THAT STICKS ✦</span>
-            </div>
-            <h2 class="section-pop-title">STUCK ON TABSTICK</h2>
-            <p class="section-pop-subtitle">
-                Over 25,000+ laptops, bottles, cars &amp; bikes upgraded. Here's what the community is saying.
-            </p>
-        </div>
-
-        <div class="reviews-pop-grid">
-            <!-- Review 1 -->
-            <div class="review-pop-card tilt-left reveal-on-scroll">
-                <div class="review-stars-row">★★★★★</div>
-                <p class="review-quote-text">
-                    “Covered my entire MacBook Pro M3 with Tabstick drops. The colors pop insanely well in daylight and the matte finish feels premium under hand. Zero peel even after 6 months of daily backpack abuse!”
-                </p>
-                <div class="review-author-row">
-                    <div class="author-avatar-badge bg-yellow">💻</div>
-                    <div>
-                        <strong class="author-name">Arjun S.</strong>
-                        <span class="author-tag">Frontend Dev • Bengaluru</span>
-                    </div>
-                    <span class="verified-buyer-pill">✓ Verified</span>
-                </div>
-            </div>
-
-            <!-- Review 2 -->
-            <div class="review-pop-card tilt-right reveal-on-scroll">
-                <div class="review-stars-row">★★★★★</div>
-                <p class="review-quote-text">
-                    “Put the ‘Wasted’ and meme decals on my Royal Enfield petrol tank. Survived heavy Mumbai monsoon rains, mud, and water washes with zero damage. Genuinely 100% waterproof.”
-                </p>
-                <div class="review-author-row">
-                    <div class="author-avatar-badge bg-red">🏍️</div>
-                    <div>
-                        <strong class="author-name">Rohan V.</strong>
-                        <span class="author-tag">Rider • Mumbai</span>
-                    </div>
-                    <span class="verified-buyer-pill">✓ Verified</span>
-                </div>
-            </div>
-
-            <!-- Review 3 -->
-            <div class="review-pop-card tilt-straight reveal-on-scroll">
-                <div class="review-stars-row">★★★★★</div>
-                <p class="review-quote-text">
-                    “The Mystery Pack is the best value hands down. Got 12 dope holographic &amp; die-cut anime stickers. The packaging had so much personality and arrived in 48 hours in Delhi!”
-                </p>
-                <div class="review-author-row">
-                    <div class="author-avatar-badge bg-blue">🎨</div>
-                    <div>
-                        <strong class="author-name">Sneha K.</strong>
-                        <span class="author-tag">Designer • New Delhi</span>
-                    </div>
-                    <span class="verified-buyer-pill">✓ Verified</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==========================================================================
-     7. INSTAGRAM-STYLE LIFESTYLE GALLERY: “SEEN IN THE WILD” (AUTO-SCROLLING)
-     ========================================================================== -->
-<section id="gallery" class="gallery-pop-section">
-    <div class="container">
-        <div class="section-pop-header reveal-on-scroll">
-            <div class="section-pop-badge bg-yellow">
-                <span>📸 STREETWEAR ON YOUR GEAR</span>
-            </div>
-            <h2 class="section-pop-title">SEEN IN THE WILD</h2>
-            <p class="section-pop-subtitle">
-                Tag <strong>@tabstick.in</strong> on Instagram to be featured on our official drop wall. Hover to pause.
-            </p>
-        </div>
-    </div>
-
-    <!-- Continuous Auto-Scrolling Track with Hover Pause -->
-    <div class="lifestyle-autoscroll-container">
-        <div class="lifestyle-autoscroll-track">
-            <!-- Tile 1 -->
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/hero-banner.webp') }}" alt="Stickers on Laptop" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">MacBook Air • Pop Drops</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tile 2 -->
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/wasted.jpg') }}" alt="Wasted Sticker on Flask" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">Hydro Flask • Meme Pack</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tile 3 -->
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/limited-edition.jpg') }}" alt="Limited Edition on Bike" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">Moto Helmet • Drop 04</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tile 4 -->
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/ah-shit.jpg') }}" alt="Ah Shit on Skateboard" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">Skate Deck • Street Drop</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tile 5 -->
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/fizzy-zero.jpg') }}" alt="Fizzy Pop on iPad" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">iPad Pro • Pop Art</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tile 6 -->
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/mystery-box.jpg') }}" alt="Mystery Box Unboxing" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">Mystery Unboxing • Collector</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- DUPLICATED FOR SEAMLESS INFINITE LOOP -->
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/hero-banner.webp') }}" alt="Stickers on Laptop" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">MacBook Air • Pop Drops</span>
-                    </div>
-                </div>
-            </div>
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/wasted.jpg') }}" alt="Wasted Sticker on Flask" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">Hydro Flask • Meme Pack</span>
-                    </div>
-                </div>
-            </div>
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/limited-edition.jpg') }}" alt="Limited Edition on Bike" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">Moto Helmet • Drop 04</span>
-                    </div>
-                </div>
-            </div>
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/ah-shit.jpg') }}" alt="Ah Shit on Skateboard" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">Skate Deck • Street Drop</span>
-                    </div>
-                </div>
-            </div>
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/fizzy-zero.jpg') }}" alt="Fizzy Pop on iPad" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">iPad Pro • Pop Art</span>
-                    </div>
-                </div>
-            </div>
-            <div class="gallery-tile">
-                <div class="gallery-tile-inner">
-                    <img src="{{ asset('images/mystery-box.jpg') }}" alt="Mystery Box Unboxing" loading="lazy">
-                    <div class="gallery-tile-overlay">
-                        <span class="gallery-insta-handle">@tabstick.in</span>
-                        <span class="gallery-gear-label">Mystery Unboxing • Collector</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==========================================================================
-     8. NEWSLETTER SIGNUP WITH ANIMATED STICKER MASCOT: “STICK WITH US.”
-     ========================================================================== -->
-<section id="newsletter" class="newsletter-pop-section">
-    <div class="container">
-        <div class="newsletter-pop-card reveal-on-scroll">
-            <div class="newsletter-grid">
-                <!-- Mascot Column with Interactive Animated Eyes -->
-                <div class="mascot-col">
-                    <div class="mascot-character-wrap">
-                        <div class="mascot-body-badge">
-                            <!-- SVG Playful Mascot with Eye-Tracking Pupils -->
-                            <svg width="180" height="180" viewBox="0 0 160 160" fill="none">
-                                <!-- Mascot Shadow -->
-                                <ellipse cx="80" cy="148" rx="55" ry="10" fill="#18181B" opacity="0.2"/>
-                                <!-- Mascot Body Blob -->
-                                <path d="M80 12C118 12 144 38 144 76C144 116 116 142 80 142C44 142 16 116 16 76C16 38 42 12 80 12Z" fill="#FFE600" stroke="#18181B" stroke-width="4"/>
-                                <!-- Peel Corner -->
-                                <path d="M125 24L144 43L125 43Z" fill="#FF334B" stroke="#18181B" stroke-width="3"/>
-                                <!-- Left Eye Outer -->
-                                <circle cx="56" cy="68" r="18" fill="#FFFFFF" stroke="#18181B" stroke-width="3.5"/>
-                                <!-- Left Eye Pupil (Tracks Cursor) -->
-                                <circle cx="56" cy="68" r="8" fill="#18181B" class="mascot-pupil"/>
-                                <circle cx="53" cy="65" r="2.5" fill="#FFFFFF"/>
-                                <!-- Right Eye Outer -->
-                                <circle cx="104" cy="68" r="18" fill="#FFFFFF" stroke="#18181B" stroke-width="3.5"/>
-                                <!-- Right Eye Pupil (Tracks Cursor) -->
-                                <circle cx="104" cy="68" r="8" fill="#18181B" class="mascot-pupil"/>
-                                <circle cx="101" cy="65" r="2.5" fill="#FFFFFF"/>
-                                <!-- Blushing Cheeks -->
-                                <ellipse cx="40" cy="88" rx="8" ry="5" fill="#FF80BF"/>
-                                <ellipse cx="120" cy="88" rx="8" ry="5" fill="#FF80BF"/>
-                                <!-- Playful Smile -->
-                                <path d="M62 96C72 110 88 110 98 96" stroke="#18181B" stroke-width="4" stroke-linecap="round"/>
-                                <path d="M74 104C77 108 83 108 86 104" fill="#FF334B"/>
-                            </svg>
-                        </div>
-                        <span class="mascot-tag-chip">STICKY • THE MASCOT</span>
-                    </div>
-                </div>
-
-                <!-- Form Column -->
-                <div class="newsletter-content-col">
-                    <div class="newsletter-eyebrow">✦ SECRET DROP CLUB ✦</div>
-                    <h2 class="newsletter-headline">STICK WITH US.</h2>
-                    <p class="newsletter-subtext">
-                        Join 25,000+ sticker collectors. Claim an instant <strong>10% discount code</strong> (`TABSTICK10`) for your first drop and get notified about secret meme releases.
-                    </p>
-
-                    <form class="pop-newsletter-form" onsubmit="event.preventDefault(); const inp = this.querySelector('input'); if(inp && inp.value){ const mInp = document.getElementById('lead_email'); if(mInp){ mInp.value = inp.value; } } document.getElementById('floating-lead-trigger')?.click();">
-                        <div class="newsletter-input-group">
-                            <input type="email" placeholder="Enter your email address..." class="pop-newsletter-input" required autocomplete="email">
-                            <button type="submit" class="btn-pop-primary btn-newsletter-submit trigger-confetti" data-confetti="true">
-                                <span>Get 10% Off 🎁</span>
-                            </button>
-                        </div>
-                        <small class="newsletter-privacy-note">🔒 No spam ever. One email per week with fresh drops. Unsubscribe anytime.</small>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 </section>
 
 @endsection

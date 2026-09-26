@@ -141,77 +141,71 @@
     </script>
     @endif
 
-    <!-- TOP ANNOUNCEMENT BAR: MINIMUM ORDER, SHIPPING & FOUNDER CONNECT -->
+    <!-- TOP ANNOUNCEMENT BAR: JEWELS GALAXY LUXURY PROMISES -->
     <div class="top-announcement-bar">
         <div class="top-announcement-inner">
-            <span class="top-announcement-item">⚡ <strong>MINIMUM ORDER ₹100</strong> (Mix &amp; match any vinyl decals)</span>
+            <span class="top-announcement-item">✨ <strong>18K REAL GOLD PLATED</strong></span>
             <span class="top-announcement-bullet">•</span>
-            <span class="top-announcement-item">🚚 <strong>FREE SHIPPING</strong> on orders ₹499+</span>
+            <span class="top-announcement-item">💧 <strong>WATER &amp; SWEATPROOF</strong></span>
+            <span class="top-announcement-bullet">•</span>
+            <span class="top-announcement-item">🛡️ <strong>6-MONTH WARRANTY</strong></span>
             <span class="top-announcement-bullet hide-on-mobile">•</span>
-            <span class="top-announcement-item hide-on-mobile">🔥 100% Waterproof Vinyl</span>
+            <span class="top-announcement-item hide-on-mobile">🚚 <strong>FREE SHIPPING</strong> ON ₹499+</span>
             <span class="top-announcement-bullet">•</span>
-            <a href="{{ url('/maayank') }}" class="top-founder-btn" aria-label="Connect directly with the founder">
+            <a href="{{ url('/maayank') }}" class="top-founder-btn" aria-label="Connect with Founder">
                 <span class="top-founder-pulse"></span>
-                <span>Connect directly with the founder</span>
+                <span>Founder's Desk</span>
                 <span class="top-founder-arrow">↗</span>
             </a>
         </div>
     </div>
 
-    <!-- 2. TABSTICK PLAYFUL POP HEADER -->
+    <!-- 2. JEWELS GALAXY LUXURY HEADER -->
     <header class="site-header">
         <div class="container header-inner">
             <div class="brand-wrap">
-                <a href="{{ route('home') }}" class="brand-link" aria-label="Tabstick Home">
-                    <div class="brand-logo-badge">
-                        <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-                            <rect x="2" y="2" width="28" height="28" rx="8" fill="#FFE600" stroke="#18181B" stroke-width="2"/>
-                            <path d="M7 10H25M7 16H21M7 22H15" stroke="#18181B" stroke-width="3" stroke-linecap="round"/>
-                            <circle cx="23" cy="21" r="3.5" fill="#FF334B" stroke="#18181B" stroke-width="1.5"/>
-                            <path d="M23 19V23M21 21H25" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round"/>
-                        </svg>
+                <a href="{{ route('home') }}" class="brand-link" aria-label="Jewels Galaxy Home">
+                    <div class="brand-logo-badge" style="background:#F7EFE3;border:1px solid #C5A059;">
+                        <span style="font-size:1.4rem;">💎</span>
                     </div>
                     <div class="brand-text-lockup">
-                        <span class="brand-main">TAB<span class="brand-accent">STICK</span></span>
-                        <span class="brand-sub">STUDIO ✦</span>
+                        <span class="brand-main">JEWELS <span class="brand-accent">GALAXY</span></span>
+                        <span class="brand-sub">FINE JEWELRY ✦ 18K GOLD</span>
                     </div>
                 </a>
             </div>
 
             <nav class="main-nav">
-                <a href="{{ route('category.index') }}" class="nav-item">Collections ⚡</a>
-                <a href="{{ route('home') }}#shop" class="nav-item">All Stickers</a>
-                <a href="{{ route('home') }}#why" class="nav-item">Why We Stick</a>
-                <a href="{{ route('home') }}#club" class="nav-item club-pill">The Club ✦</a>
-                <a href="{{ route('home') }}#reviews" class="nav-item">Reviews</a>
-                <a href="{{ route('home') }}#author" class="nav-item">Our Story</a>
-                <a href="{{ url('/maayank') }}" class="founder-nav-item" title="Connect directly with the founder Maayank Malhotra">
-                    <span class="top-founder-pulse" style="width:6px;height:6px;"></span>
-                    <span>Founder ↗</span>
-                </a>
+                <a href="{{ route('home') }}#shop" class="nav-item">All Products</a>
+                <a href="{{ url('/?category=rings#shop') }}" class="nav-item">Rings</a>
+                <a href="{{ url('/?category=charms-pendants#shop') }}" class="nav-item">Charms &amp; Pendants</a>
+                <a href="{{ url('/?category=bracelets#shop') }}" class="nav-item">Bracelets</a>
+                <a href="{{ url('/?category=earrings#shop') }}" class="nav-item">Earrings</a>
+                <a href="{{ url('/?category=necklaces#shop') }}" class="nav-item">Necklaces</a>
+                <a href="{{ url('/?category=jewelry-sets#shop') }}" class="nav-item">Sets</a>
             </nav>
 
             <div class="header-actions">
-                <a href="{{ route('home') }}#shop" class="action-icon-btn" aria-label="Search Catalog" title="Search Stickers">
+                <a href="{{ route('home') }}#shop" class="action-icon-btn" aria-label="Search Catalog" title="Search Fine Jewelry">
                     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </a>
 
                 <a href="{{ route('admin.dashboard') }}" class="action-icon-btn" aria-label="Account / Admin" title="Staff Dashboard">
                     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                 </a>
 
                 <a href="{{ route('cart.index') }}" class="header-cart-pill" aria-label="View Cart">
                     <div class="cart-icon-wrap">
-                        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                         </svg>
                         <span class="cart-badge-count">{{ $headerCartCount ?? 0 }}</span>
                     </div>
-                    <span class="cart-pill-text">Cart: <strong class="cart-subtotal-text">Rs. {{ number_format($headerCartSubtotal ?? 0, 2) }}</strong></span>
+                    <span class="cart-pill-text">Bag: <strong class="cart-subtotal-text">Rs. {{ number_format($headerCartSubtotal ?? 0, 2) }}</strong></span>
                 </a>
 
                 <!-- Mobile Menu Button -->
@@ -226,12 +220,12 @@
         <!-- Mobile Horizontal Navigation Bar -->
         <div class="mobile-nav-scroller">
             <div class="mobile-nav-inner">
-                <a href="{{ route('home') }}#shop" class="mobile-nav-chip active">All Drops</a>
-                <a href="{{ route('home') }}#why" class="mobile-nav-chip">Why Us</a>
-                <a href="{{ route('home') }}#club" class="mobile-nav-chip highlight">Tabstick Club ✦</a>
-                <a href="{{ route('home') }}#reviews" class="mobile-nav-chip">Reviews</a>
-                <a href="{{ route('home') }}#author" class="mobile-nav-chip">Our Story</a>
-                <a href="{{ url('/maayank') }}" class="mobile-nav-chip" style="background:var(--color-ink);color:#FFE600;font-weight:900;">👨‍💻 Founder ↗</a>
+                <a href="{{ route('home') }}#shop" class="mobile-nav-chip active">All Products</a>
+                <a href="{{ url('/?category=rings#shop') }}" class="mobile-nav-chip">Rings</a>
+                <a href="{{ url('/?category=charms-pendants#shop') }}" class="mobile-nav-chip">Charms</a>
+                <a href="{{ url('/?category=bracelets#shop') }}" class="mobile-nav-chip">Bracelets</a>
+                <a href="{{ url('/?category=earrings#shop') }}" class="mobile-nav-chip">Earrings</a>
+                <a href="{{ url('/?category=necklaces#shop') }}" class="mobile-nav-chip">Necklaces</a>
             </div>
         </div>
     </header>
