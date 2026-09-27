@@ -17,24 +17,24 @@ class SeoTest extends TestCase
         $response->assertOk();
 
         // Homepage SEO Title & Meta Description
-        $response->assertSee('<title>Tabstick – Creative Laptop, Car &amp; Custom Stickers</title>', false);
-        $response->assertSee('Tabstick creates creative, durable stickers for laptops, cars, phones and college students. Explore unique sticker designs and shop online in India.', false);
+        $response->assertSee('<title>Tabstick – Anti-Tarnish 18K Gold Plated Fine Jewelry</title>', false);
+        $response->assertSee('Discover anti-tarnish, water-resistant, hypoallergenic 18K gold-plated fine jewelry by Tabstick. Shop rings, necklaces, bracelets, earrings &amp; charms online in India.', false);
 
         // Canonical & Robots tags
         $response->assertSee('<link rel="canonical" href="https://tabstick.in">', false);
         $response->assertSee('<meta name="robots" content="index, follow">', false);
 
         // Required Brand & Founder identity statements
-        $response->assertSee('Tabstick is an Indian sticker brand founded by Mayank Malhotra. We create creative and durable stickers for laptops, cars, phones and college students.', false);
+        $response->assertSee('Tabstick is an Indian fine jewelry brand founded by Mayank Malhotra. We create anti-tarnish, water-resistant and hypoallergenic 18K gold-plated jewelry for everyday luxury.', false);
         $response->assertSee('Mayank Malhotra is the founder of Tabstick.', false);
         $response->assertSee('https://www.linkedin.com/in/maayank-malhotra-a59a55186/', false);
 
         // 5 Dedicated SEO Category sections
-        $response->assertSee('id="laptop-stickers"', false);
-        $response->assertSee('id="car-stickers"', false);
-        $response->assertSee('id="phone-stickers"', false);
-        $response->assertSee('id="college-stickers"', false);
-        $response->assertSee('id="custom-stickers"', false);
+        $response->assertSee('id="rings-collection"', false);
+        $response->assertSee('id="charms-pendants"', false);
+        $response->assertSee('id="bracelets-collection"', false);
+        $response->assertSee('id="earrings-collection"', false);
+        $response->assertSee('id="necklaces-collection"', false);
 
         // Schemas
         $response->assertSee('"@type": "Organization"', false);
@@ -66,8 +66,8 @@ class SeoTest extends TestCase
         $response = $this->get(route('products.show', $product));
         $response->assertOk();
 
-        $response->assertSee('Naruto Decal Sticker | Tabstick');
-        $response->assertSee('Naruto Decal Vinyl Sticker - Tabstick');
+        $response->assertSee('Naruto Decal | Tabstick Jewelry');
+        $response->assertSee('Naruto Decal - Tabstick Fine Jewelry');
         $response->assertSee('"@type": "Product"', false);
         $response->assertSee('"@type": "BreadcrumbList"', false);
         $response->assertSee('"name": "Tabstick"', false);

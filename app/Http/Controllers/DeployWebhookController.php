@@ -69,7 +69,9 @@ class DeployWebhookController extends Controller
         $logFile = storage_path('logs/deploy.log');
 
         if (file_exists($deployScript)) {
-            exec('bash ' . escapeshellarg($deployScript) . ' > ' . escapeshellarg($logFile) . ' 2>&1 &');
+            if (!app()->environment('testing')) {
+                exec('bash ' . escapeshellarg($deployScript) . ' > ' . escapeshellarg($logFile) . ' 2>&1 &');
+            }
         } else {
             Log::error("[DeployWebhook] Deploy script not found at {$deployScript}");
             return response()->json(['error' => 'Deploy script not found on server'], 500);

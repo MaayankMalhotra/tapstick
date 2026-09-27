@@ -33,7 +33,7 @@ class CheckoutController extends Controller
 
         if (! $summary['hasTestSticker'] && $summary['subtotal'] < self::MIN_ORDER_AMOUNT) {
             $diff = self::MIN_ORDER_AMOUNT - $summary['subtotal'];
-            return redirect()->route('cart.index')->with('warning', 'Minimum order amount is ₹'.self::MIN_ORDER_AMOUNT.'. Please add ₹'.number_format($diff, 2).' more stickers to proceed to checkout.');
+            return redirect()->route('cart.index')->with('warning', 'Minimum order amount is ₹'.self::MIN_ORDER_AMOUNT.'. Please add ₹'.number_format($diff, 2).' more to proceed to checkout.');
         }
 
         return view('store.checkout', $summary);
@@ -64,7 +64,7 @@ class CheckoutController extends Controller
         }
         if (! $hasTestSticker && $preSubtotal < self::MIN_ORDER_AMOUNT) {
             $diff = self::MIN_ORDER_AMOUNT - $preSubtotal;
-            return redirect()->route('cart.index')->with('error', 'Minimum order amount is ₹'.self::MIN_ORDER_AMOUNT.'. Please add ₹'.number_format($diff, 2).' more stickers before checking out.');
+            return redirect()->route('cart.index')->with('error', 'Minimum order amount is ₹'.self::MIN_ORDER_AMOUNT.'. Please add ₹'.number_format($diff, 2).' more before checking out.');
         }
 
         $order = DB::transaction(function () use ($cart, $data, $request) {

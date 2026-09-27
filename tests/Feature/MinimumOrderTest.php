@@ -76,7 +76,7 @@ class MinimumOrderTest extends TestCase
 
         $response = $this->get(route('checkout.create'));
         $response->assertRedirect(route('cart.index'));
-        $response->assertSessionHas('warning', 'Minimum order amount is ₹100. Please add ₹41.00 more stickers to proceed to checkout.');
+        $response->assertSessionHas('warning', 'Minimum order amount is ₹100. Please add ₹41.00 more to proceed to checkout.');
     }
 
     public function test_checkout_post_fails_if_under_minimum_order(): void

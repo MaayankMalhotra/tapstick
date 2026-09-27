@@ -49,4 +49,13 @@ return [
         'model' => env('GEMINI_MODEL', 'gemini-3-flash-preview'),
     ],
 
+    'shiprocket' => [
+        'base_url' => env('SHIPROCKET_BASE_URL', 'https://apiv2.shiprocket.in'),
+        'email' => env('SHIPROCKET_EMAIL'),
+        'password' => env('SHIPROCKET_PASSWORD'),
+        'webhook_secret' => env('SHIPROCKET_WEBHOOK_SECRET'),
+        'automatic_shipping' => env('SHIPROCKET_AUTOMATIC_SHIPPING', true),
+        'timeout' => env('SHIPROCKET_TIMEOUT', 20),
+    ],
+
 ];

@@ -8,7 +8,7 @@
             <div class="lead-modal-badge">✦ Tabstick Club Perks</div>
             <h3 class="lead-modal-title">Get 10% Off Your First Drop</h3>
             <p class="lead-modal-subtitle">
-                Join 25,000+ sticker heads. Enter your mobile &amp; email below to claim your instant 10% coupon code.
+                Join 25,000+ fine jewelry lovers. Enter your mobile &amp; email below to claim your instant 10% coupon code.
             </p>
 
             <!-- NORMAL FORM -->
@@ -59,7 +59,7 @@
             </p>
 
             <button type="button" class="btn btn-primary" id="btn-lead-start-shopping" style="width: 100%; border-radius: var(--radius-pill); padding: 13px;">
-                🚀 Start Exploring Stickers
+                ✨ Start Exploring Fine Jewelry
             </button>
         </div>
     </div>

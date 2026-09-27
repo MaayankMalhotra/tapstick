@@ -4,9 +4,9 @@
             <span class="empty-icon">🛍️</span>
         </div>
         <h3 class="empty-title">Your cart is empty</h3>
-        <p class="empty-desc">Discover 4,500+ waterproof, scratchproof vinyl stickers built to stick for years.</p>
+        <p class="empty-desc">Discover 599+ anti-tarnish, water-resistant 18K gold-plated fine jewelry pieces.</p>
         <button type="button" class="btn-drawer-explore" onclick="closeCartDrawer(); window.location.href='{{ route('home') }}#shop';">
-            <span>Explore Drops ⚡</span>
+            <span>Explore Jewelry ✨</span>
         </button>
     </div>
 @else
@@ -21,7 +21,7 @@
             <div class="drawer-item-row" id="drawer-item-{{ $p->id }}">
                 <div class="drawer-item-thumb">
                     @if($imgSrc)
-                        <img src="{{ $imgSrc }}" alt="{{ $p->name }} Sticker" loading="lazy">
+                        <img src="{{ $imgSrc }}" alt="{{ $p->name }} - Tabstick Jewelry" loading="lazy">
                     @else
                         <span class="drawer-item-emoji">{{ $p->emoji ?: '✨' }}</span>
                     @endif
@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="drawer-item-specs">
-                        <span class="drawer-item-tag">3x3 Inch • Waterproof Vinyl</span>
+                        <span class="drawer-item-tag">18K Gold Plated • Anti-Tarnish</span>
                     </div>
 
                     <div class="drawer-item-bottom">

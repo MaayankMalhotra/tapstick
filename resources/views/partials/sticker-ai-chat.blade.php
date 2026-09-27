@@ -1,17 +1,17 @@
 <!-- ==========================================================================
-     TABSTICK AI STICKER CHATBOT & STYLIST WIDGET
-     Trained & grounded on all 4,479 live waterproof stickers
+     TABSTICK AI FINE JEWELRY CHATBOT & STYLIST WIDGET
+     Trained & grounded on 599+ 18K gold plated pieces
      ========================================================================== -->
 <div id="sticker-ai-widget" class="sticker-ai-container">
     <!-- Floating Launcher Button -->
-    <button type="button" id="sticker-ai-launcher" class="sticker-ai-launcher" aria-label="Chat with Tabstick AI Sticker Stylist">
+    <button type="button" id="sticker-ai-launcher" class="sticker-ai-launcher" aria-label="Chat with Tabstick AI Fine Jewelry Stylist">
         <span class="launcher-icon-wrap">
-            <span class="launcher-emoji">🤖</span>
-            <span class="launcher-sparkle">⚡</span>
+            <span class="launcher-emoji">✨</span>
+            <span class="launcher-sparkle">💎</span>
         </span>
         <span class="launcher-label">
-            <span class="launcher-title">STICKER AI</span>
-            <span class="launcher-badge">4.5K+ DECALS</span>
+            <span class="launcher-title">JEWELRY AI</span>
+            <span class="launcher-badge">599+ PIECES</span>
         </span>
         <span class="launcher-ping"></span>
     </button>
@@ -22,13 +22,13 @@
         <div class="sticker-ai-header">
             <div class="sticker-ai-header-brand">
                 <div class="header-avatar-box">
-                    <span class="header-avatar-emoji">🤖</span>
+                    <span class="header-avatar-emoji">✨</span>
                 </div>
                 <div>
-                    <h3 id="sticker-ai-title" class="header-title">Tabstick AI Stylist</h3>
+                    <h3 id="sticker-ai-title" class="header-title">Tabstick AI Stylist ✦ Jewelry</h3>
                     <div class="header-status">
                         <span class="status-dot"></span>
-                        <span class="status-text">Online • 4,479 Stickers Trained</span>
+                        <span class="status-text">Online • 599+ Fine Jewelry Pieces</span>
                     </div>
                 </div>
             </div>
@@ -44,29 +44,29 @@
 
         <!-- Quick Prompt Chips -->
         <div class="sticker-ai-chips-bar" id="sticker-ai-chips">
-            <button type="button" class="sticker-chip" data-prompt="Show me the best car and bike bumper stickers">🚗 Bumper Decals</button>
-            <button type="button" class="sticker-chip" data-prompt="What are your most popular Anime stickers? Naruto, Gojo, One Piece">⚡ Anime &amp; Manga</button>
-            <button type="button" class="sticker-chip" data-prompt="Show me coding and developer stickers for my laptop (Python, Linux, Git)">💻 Dev &amp; Tech</button>
-            <button type="button" class="sticker-chip" data-prompt="Do you have holographic and glitter stickers?">✨ Holographic</button>
-            <button type="button" class="sticker-chip" data-prompt="Show me cool stickers under ₹150">💰 Under ₹150</button>
-            <button type="button" class="sticker-chip" data-prompt="Show me mountain adventure and travel stickers">🏔️ Mountain &amp; Travel</button>
+            <button type="button" class="sticker-chip" data-prompt="Show me 18K gold plated rings and solitaires">💍 Gold Rings</button>
+            <button type="button" class="sticker-chip" data-prompt="What are your most popular charms and pendants?">✨ Charms &amp; Pendants</button>
+            <button type="button" class="sticker-chip" data-prompt="Show me waterproof bracelets and cuffs">💫 Bracelets &amp; Cuffs</button>
+            <button type="button" class="sticker-chip" data-prompt="Do you have hypoallergenic earrings and hoops?">💎 Earrings &amp; Hoops</button>
+            <button type="button" class="sticker-chip" data-prompt="Show me everyday layering necklaces and chains">🌟 Necklaces &amp; Chains</button>
+            <button type="button" class="sticker-chip" data-prompt="Show me coordinated jewelry gift sets under ₹300">🎁 Gift Sets Under ₹300</button>
         </div>
 
         <!-- Messages Thread -->
         <div class="sticker-ai-messages" id="sticker-ai-messages">
             <!-- Initial Welcome Message -->
             <div class="ai-msg-row assistant-row">
-                <div class="ai-msg-avatar">⚡</div>
+                <div class="ai-msg-avatar">✨</div>
                 <div class="ai-msg-bubble">
-                    <p class="mb-1"><strong>Yo! 👋 I'm Tabstick AI, your sticker stylist.</strong></p>
-                    <p class="text-xs leading-relaxed">I know all <strong>4,479 waterproof decals</strong> in our vault! Tell me your vibe, your ride, your laptop setup, or tap any topic above to explore.</p>
+                    <p class="mb-1"><strong>Hello! ✨ I'm Tabstick AI, your personal jewelry stylist.</strong></p>
+                    <p class="text-xs leading-relaxed">I know all <strong>599+ 18K gold-plated, anti-tarnish jewelry pieces</strong> in our vault! Tell me what you're shopping for, your style vibe, or tap any topic above to explore.</p>
                 </div>
             </div>
         </div>
 
         <!-- Typing Indicator -->
         <div id="sticker-ai-typing" class="sticker-ai-typing hidden">
-            <div class="ai-msg-avatar">⚡</div>
+            <div class="ai-msg-avatar">✨</div>
             <div class="typing-bubble">
                 <span class="typing-dot"></span>
                 <span class="typing-dot"></span>
@@ -77,13 +77,13 @@
         <!-- Chat Input Footer -->
         <div class="sticker-ai-footer">
             <form id="sticker-ai-form" class="sticker-ai-form">
-                <input type="text" id="sticker-ai-input" class="sticker-ai-input" placeholder="Ask for anime, car decals, coder vibe, price..." maxlength="300" autocomplete="off" required>
+                <input type="text" id="sticker-ai-input" class="sticker-ai-input" placeholder="Ask for gold rings, pendants, bracelets, earrings, gift sets..." maxlength="300" autocomplete="off" required>
                 <button type="submit" id="sticker-ai-send-btn" class="sticker-ai-send-btn" aria-label="Send message">
                     <span>➤</span>
                 </button>
             </form>
             <div class="sticker-ai-disclaimer">
-                <span>⚡ Powered by Google Gemini • 100% Waterproof Vinyl</span>
+                <span>✨ Powered by Google Gemini • 18K Real Gold Plated • Anti-Tarnish</span>
             </div>
         </div>
     </div>
@@ -734,10 +734,10 @@
         isSending = false;
         messagesEl.innerHTML = `
             <div class="ai-msg-row assistant-row">
-                <div class="ai-msg-avatar">⚡</div>
+                <div class="ai-msg-avatar">✨</div>
                 <div class="ai-msg-bubble">
-                    <p class="mb-1"><strong>Chat reset! 🔄 Ready for round two!</strong></p>
-                    <p class="text-xs leading-relaxed">Ask me about any of our 4,479 waterproof stickers, bumper designs, laptop decals, or anime favorites.</p>
+                    <p class="mb-1"><strong>Chat reset! 🔄 Ready for styling recommendations!</strong></p>
+                    <p class="text-xs leading-relaxed">Ask me about any of our 599+ 18K gold-plated rings, charms & pendants, waterproof bracelets, or earrings.</p>
                 </div>
             </div>
         `;
@@ -879,12 +879,12 @@
                 appendMessage('assistant', data.reply, data.products || []);
                 chatHistory.push({ role: 'assistant', content: data.reply });
             } else {
-                appendMessage('assistant', data.message || "I couldn't complete that AI reply, but try asking with a category or budget like anime under ₹100, car bumper stickers, or ₹10 stickers.");
+                appendMessage('assistant', data.message || "I couldn't complete that AI reply, but try asking with a category or budget like rings under ₹200, gold bracelets, or pendants.");
             }
         } catch (err) {
             console.error('StickerAI Chat Error:', err);
             hideTyping();
-            appendMessage('assistant', "I'm having trouble reaching the server right now. Feel free to browse our 4,479 stickers above!");
+            appendMessage('assistant', "I'm having trouble reaching the server right now. Feel free to browse our fine jewelry collection above!");
         } finally {
             hideTyping();
             isSending = false;

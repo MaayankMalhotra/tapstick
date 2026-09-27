@@ -32,6 +32,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 });
 
+Route::prefix('vendor')->name('vendor.')->group(function () {
+    Route::get('/login', [\App\Http\Controllers\Vendor\AuthController::class, 'form'])->name('login');
+    Route::post('/login', [\App\Http\Controllers\Vendor\AuthController::class, 'login'])->middleware('throttle:5,1')->name('login.submit');
+    Route::middleware(\App\Http\Middleware\RequireVendor::class)->group(function () {
+        Route::post('/logout', [\App\Http\Controllers\Vendor\AuthController::class, 'logout'])->name('logout');
+        Route::get('/', [\App\Http\Controllers\Vendor\FulfillmentController::class, 'dashboard'])->name('dashboard');
+        Route::get('/fulfillments/{fulfillment}', [\App\Http\Controllers\Vendor\FulfillmentController::class, 'show'])->name('fulfillments.show');
+        Route::post('/fulfillments/{fulfillment}/transition', [\App\Http\Controllers\Vendor\FulfillmentController::class, 'transition'])->name('fulfillments.transition');
+    });
+});
+
 Route::get('/', [StoreController::class, 'home'])->name('home');
 Route::get('/api/products', [StoreController::class, 'apiProducts'])->name('api.products');
 Route::get('/products/{product:slug}', [StoreController::class, 'show'])->name('products.show');

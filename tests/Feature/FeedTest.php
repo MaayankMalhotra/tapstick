@@ -28,7 +28,7 @@ class FeedTest extends TestCase
         $response->assertOk();
         $this->assertStringContainsString('application/xml', $response->headers->get('Content-Type'));
         $this->assertStringContainsString('xmlns:g="http://base.google.com/ns/1.0"', $response->getContent());
-        $this->assertStringContainsString('<g:title>Naruto Decal Vinyl Sticker - Tabstick</g:title>', $response->getContent());
+        $this->assertStringContainsString('<g:title>Naruto Decal – Tabstick Fine Jewelry</g:title>', $response->getContent());
         $this->assertStringContainsString('<g:price>79.00 INR</g:price>', $response->getContent());
         $this->assertStringContainsString('<g:availability>in_stock</g:availability>', $response->getContent());
         $this->assertStringContainsString('https://tabstick.in/products/naruto-decal', $response->getContent());

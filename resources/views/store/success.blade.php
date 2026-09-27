@@ -79,7 +79,7 @@
             <span class="dispatch-icon">🚚</span>
             <div class="dispatch-text">
                 <strong>Dispatches within 48 Hours</strong>
-                <p>Your waterproof vinyl stickers are being prepped. Order tracking updates will be sent to <strong>{{ $order->email }}</strong>.</p>
+                <p>Your 18K gold-plated fine jewelry is being carefully packed in luxury gift packaging. Order tracking updates will be sent to <strong>{{ $order->email }}</strong>.</p>
             </div>
         </div>
 

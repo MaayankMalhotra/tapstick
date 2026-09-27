@@ -11,7 +11,7 @@
         </div>
         <div class="cart-drawer-header-right">
             <span id="cart-drawer-count-label" class="cart-drawer-count-label">
-                {{ ($headerCartCount ?? 0) === 1 ? '1 STICKER' : ($headerCartCount ?? 0).' STICKERS' }}
+                {{ ($headerCartCount ?? 0) === 1 ? '1 ITEM' : ($headerCartCount ?? 0).' ITEMS' }}
             </span>
             <button type="button" class="cart-drawer-close-btn" onclick="closeCartDrawer()" aria-label="Close cart drawer">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -41,11 +41,11 @@
             <span class="drawer-goal-icon">🚚</span>
             <div class="drawer-goal-message" id="drawer-goal-message">
                 @if($sub == 0)
-                    <span>Add stickers to unlock <strong>Free Delivery</strong> &amp; Checkout!</span>
+                    <span>Add jewelry pieces to unlock <strong>Free Delivery</strong> &amp; Checkout!</span>
                 @elseif(!$isMinReached)
                     <span>Add <strong>₹{{ number_format($minDiff, 2) }}</strong> more to reach <strong>₹100 min order</strong></span>
                 @elseif($hasTestSticker)
-                    <span>🧪 Test sticker enabled: <strong>₹0 delivery</strong> and checkout unlocked</span>
+                    <span>🧪 Test product enabled: <strong>₹0 delivery</strong> and checkout unlocked</span>
                 @elseif($sub < $freeShip)
                     <span>🎉 Min order reached! Add <strong>₹{{ number_format($freeDiff, 2) }}</strong> for <strong>FREE Shipping</strong></span>
                 @else
@@ -115,9 +115,9 @@
         <div class="drawer-trust-row">
             <span>🔒 Secure Razorpay Checkout</span>
             <span>•</span>
-            <span>💧 100% Waterproof</span>
+            <span>💧 Anti-Tarnish &amp; Waterproof</span>
             <span>•</span>
-            <span>⚡ Fast Dispatch</span>
+            <span>✨ 18K Real Gold</span>
         </div>
     </div>
 </aside>

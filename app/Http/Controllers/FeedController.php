@@ -58,15 +58,15 @@ class FeedController extends Controller
         $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
         $xml .= '<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">' . "\n";
         $xml .= "  <channel>\n";
-        $xml .= "    <title>Tabstick – Creative Laptop, Car &amp; Custom Stickers</title>\n";
+        $xml .= "    <title>Tabstick – 18K Gold Plated Fine Jewelry</title>\n";
         $xml .= "    <link>{$baseUrl}</link>\n";
-        $xml .= "    <description>Tabstick creates creative, durable stickers for laptops, cars, phones and college students. Explore unique sticker designs and shop online in India.</description>\n";
+        $xml .= "    <description>Discover anti-tarnish, water-resistant, hypoallergenic 18K gold-plated fine jewelry by Tabstick. Shop rings, necklaces, bracelets, earrings &amp; charms online in India.</description>\n";
 
         foreach ($products as $product) {
             $id = $product->id;
             $cleanTitle = str_ireplace(['Stick It Up', 'STICK IT UP', 'StickItUp', 'Tapstick'], 'Tabstick', trim($product->name));
-            $title = htmlspecialchars($cleanTitle . ' Vinyl Sticker - Tabstick', ENT_XML1, 'UTF-8');
-            $rawDesc = $product->description ? trim($product->description) : "Premium automotive-grade waterproof vinyl sticker by Tabstick. Perfect for laptops, cars, bikes, phone cases, and water bottles. Residue-free removal, scratch-resistant, and UV weatherproof.";
+            $title = htmlspecialchars($cleanTitle . ' – Tabstick Fine Jewelry', ENT_XML1, 'UTF-8');
+            $rawDesc = $product->description ? trim($product->description) : "18K real gold plated anti-tarnish fine jewelry piece by Tabstick. Hypoallergenic, waterproof, and sweatproof for everyday luxury.";
             $descText = str_ireplace(['Stick It Up', 'STICK IT UP', 'StickItUp', 'Tapstick'], 'Tabstick', $rawDesc);
             $description = htmlspecialchars($descText, ENT_XML1, 'UTF-8');
             $link = htmlspecialchars("{$baseUrl}/products/{$product->slug}", ENT_XML1, 'UTF-8');
@@ -86,7 +86,7 @@ class FeedController extends Controller
             $imgUrl = htmlspecialchars($imgUrl, ENT_XML1, 'UTF-8');
 
             $price = number_format((float) $product->price, 2, '.', '') . ' INR';
-            $categoryName = $product->category ? htmlspecialchars($product->category->name, ENT_XML1, 'UTF-8') : 'Stickers &amp; Decals';
+            $categoryName = $product->category ? htmlspecialchars($product->category->name, ENT_XML1, 'UTF-8') : 'Fine Jewelry';
 
             $xml .= "    <item>\n";
             $xml .= "      <g:id>{$id}</g:id>\n";
@@ -100,7 +100,7 @@ class FeedController extends Controller
             $xml .= "      <g:brand>Tabstick</g:brand>\n";
             $xml .= "      <g:identifier_exists>no</g:identifier_exists>\n";
             $xml .= "      <g:product_type>{$categoryName}</g:product_type>\n";
-            $xml .= "      <g:google_product_category>1088</g:google_product_category>\n";
+            $xml .= "      <g:google_product_category>188</g:google_product_category>\n";
             $xml .= "    </item>\n";
         }
 

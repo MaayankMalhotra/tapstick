@@ -21,17 +21,22 @@ class StoreController extends Controller
 
     public function home(): View
     {
-        $categories = Category::whereHas('products', function ($q) {
-            $q->where('is_active', true)->where('stock', '>', 0);
-        })->withCount(['products' => function ($q) {
-            $q->where('is_active', true)->where('stock', '>', 0);
-        }])->orderBy('name')->get();
+        $categories = Category::where('slug', '!=', 'test-stickers')
+            ->whereHas('products', function ($q) {
+                $q->where('is_active', true)->where('stock', '>', 0);
+            })->withCount(['products' => function ($q) {
+                $q->where('is_active', true)->where('stock', '>', 0);
+            }])->orderBy('name')->get();
 
-        $totalProductsCount = Product::where('is_active', true)->where('stock', '>', 0)->count();
-
-        $products = Product::with('category:id,name,slug')
-            ->where('is_active', true)
+        $prodQuery = Product::where('is_active', true)
             ->where('stock', '>', 0)
+            ->where(function ($q) {
+                $q->whereNull('sku')->orWhere('sku', '!=', Product::TEST_STICKER_SKU);
+            });
+
+        $totalProductsCount = (clone $prodQuery)->count();
+
+        $products = (clone $prodQuery)->with('category:id,name,slug')
             ->latest()
             ->take(24)
             ->get();
@@ -89,7 +94,10 @@ class StoreController extends Controller
 
         $query = Product::with('category:id,name,slug')
             ->where('is_active', true)
-            ->where('stock', '>', 0);
+            ->where('stock', '>', 0)
+            ->where(function ($q) {
+                $q->whereNull('sku')->orWhere('sku', '!=', Product::TEST_STICKER_SKU);
+            });
 
         if ($categorySlug && $categorySlug !== 'all') {
             $query->whereHas('category', function ($q) use ($categorySlug) {
@@ -332,47 +340,72 @@ class StoreController extends Controller
 
     public function categories(): View
     {
-        $categories = Category::whereHas('products', function ($q) {
+        $jewelrySlugs = [
+            'rings',
+            'charms-pendants',
+            'bracelets',
+            'earrings',
+            'necklaces',
+            'jewelry-sets',
+        ];
+        $hasJewelry = Category::whereIn('slug', $jewelrySlugs)->exists();
+
+        $catQuery = Category::whereHas('products', function ($q) {
             $q->where('is_active', true)->where('stock', '>', 0);
         })->withCount(['products' => function ($q) {
             $q->where('is_active', true)->where('stock', '>', 0);
-        }])->orderBy('name')->get();
+        }]);
+
+        if ($hasJewelry) {
+            $catQuery->whereIn('slug', $jewelrySlugs);
+        } else {
+            $catQuery->where('slug', '!=', 'test-stickers');
+        }
+
+        $categories = $catQuery->orderBy('name')->get();
 
         $curatedCollections = [
             [
-                'slug' => 'laptop-stickers',
-                'name' => 'Laptop Stickers',
-                'description' => 'Residue-free, heat-resistant vinyl decals designed for MacBooks, ThinkPads & gaming laptops.',
-                'badge' => '💻 Tech & Coding',
-                'icon' => '💻',
+                'slug' => 'rings',
+                'name' => '18K Gold Plated Rings',
+                'description' => 'Minimalist bands, crystal statement rings, and stackable designs with anti-tarnish finish.',
+                'badge' => '💍 Rings Collection',
+                'icon' => '💍',
             ],
             [
-                'slug' => 'car-stickers',
-                'name' => 'Car & Bike Stickers',
-                'description' => 'Automotive-grade, UV-sunlight safe & 100% waterproof outdoor decals for bumpers, windshields & bikes.',
-                'badge' => '🚗 Moto & Auto',
-                'icon' => '🚗',
-            ],
-            [
-                'slug' => 'phone-stickers',
-                'name' => 'Phone Case Stickers',
-                'description' => 'Compact aesthetic mini decals with matte finish that slip perfectly under clear phone cases.',
-                'badge' => '📱 Everyday Carry',
-                'icon' => '📱',
-            ],
-            [
-                'slug' => 'college-stickers',
-                'name' => 'Stickers for College Students',
-                'description' => 'Desi pop, meme culture, hustle quotes & campus vibes for binders, notebooks & laptops.',
-                'badge' => '🎓 Campus Drip',
-                'icon' => '🎓',
-            ],
-            [
-                'slug' => 'custom-stickers',
-                'name' => 'Custom Stickers in India',
-                'description' => 'Custom die-cut stickers for your startup, college club, brand, or creative art project.',
-                'badge' => '✨ Custom Drops',
+                'slug' => 'charms-pendants',
+                'name' => 'Charms & Pendants',
+                'description' => 'Aesthetic daily luxury pendants and charms styled for effortless layering.',
+                'badge' => '✨ Charms & Drops',
                 'icon' => '✨',
+            ],
+            [
+                'slug' => 'bracelets',
+                'name' => 'Bracelets & Cuffs',
+                'description' => 'Waterproof gold bracelets, tennis chains, and sleek cuffs finished in 18K real gold plating.',
+                'badge' => '💎 Wrist Luxury',
+                'icon' => '💎',
+            ],
+            [
+                'slug' => 'earrings',
+                'name' => 'Earrings & Hoops',
+                'description' => 'Hypoallergenic, skin-friendly, featherlight studs, huggies, and drop earrings.',
+                'badge' => '✨ Daily Hoops',
+                'icon' => '✨',
+            ],
+            [
+                'slug' => 'necklaces',
+                'name' => 'Necklaces & Chains',
+                'description' => 'Effortless luxury necklaces and choker chains plated with genuine 18K gold.',
+                'badge' => '📿 Layering Chains',
+                'icon' => '📿',
+            ],
+            [
+                'slug' => 'jewelry-sets',
+                'name' => 'Coordinated Jewelry Sets',
+                'description' => 'Exquisite matching jewelry sets for gifting and celebrations packed in luxury gift boxes.',
+                'badge' => '🎁 Gift Sets',
+                'icon' => '🎁',
             ],
         ];
 
@@ -388,45 +421,61 @@ class StoreController extends Controller
         }])->orderBy('name')->get();
 
         $curatedMap = [
+            'rings' => [
+                'name' => '18K Gold Plated Rings',
+                'title' => '18K Gold Plated Rings – Anti-Tarnish Daily Wear | Tabstick Jewelry',
+                'meta_description' => 'Shop luxury 18K gold-plated rings for women. Minimalist bands, crystal statement rings, and stackable designs. Water & sweatproof with free pan-India shipping.',
+                'h1' => '18K GOLD PLATED RINGS',
+                'description' => 'Handcrafted 18K real gold plated rings engineered with anti-tarnish protective coating. Everyday luxury designed for timeless elegance.',
+                'category_slug' => 'rings',
+            ],
+            'charms-pendants' => [
+                'name' => 'Charms & Pendants',
+                'title' => 'Gold Charms & Pendants – Aesthetic Daily Luxury | Tabstick Jewelry',
+                'meta_description' => 'Discover elegant 18K gold-plated charms and pendants. Hypoallergenic, tarnish-resistant, and styled for everyday layering. Free shipping across India.',
+                'h1' => 'CHARMS & PENDANTS',
+                'description' => 'Curated charms and pendants in 18K gold finish. Elevate your everyday styling with modern celestial, floral, and minimalist motifs.',
+                'category_slug' => 'charms-pendants',
+            ],
+            'bracelets' => [
+                'name' => 'Bracelets & Cuffs',
+                'title' => 'Gold Plated Bracelets & Cuffs – Anti-Tarnish Jewelry | Tabstick Jewelry',
+                'meta_description' => 'Buy waterproof gold bracelets, tennis chains, and sleek cuffs online at Tabstick Jewelry. Hypoallergenic everyday fine jewelry with fast delivery.',
+                'h1' => 'BRACELETS & CUFFS',
+                'description' => 'From delicate chain bracelets to bold gold cuffs, each piece is finished in 18K real gold plating and built to resist tarnishing and water exposure.',
+                'category_slug' => 'bracelets',
+            ],
+            'earrings' => [
+                'name' => 'Earrings & Hoops',
+                'title' => 'Gold Plated Earrings, Studs & Hoops | Tabstick Jewelry',
+                'meta_description' => 'Shop hypoallergenic 18K gold plated earrings, huggies, studs, and drop earrings. Skin-friendly, featherlight, and anti-tarnish at Tabstick Jewelry.',
+                'h1' => 'EARRINGS & HOOPS',
+                'description' => 'Lightweight everyday hoops, studs, and drop earrings plated in 18K gold. Hypoallergenic, nickel-free, and sweatproof for all-day comfort.',
+                'category_slug' => 'earrings',
+            ],
+            'necklaces' => [
+                'name' => 'Necklaces & Chains',
+                'title' => 'Gold Necklaces & Layering Chains | Tabstick Jewelry',
+                'meta_description' => 'Explore 18K gold plated necklaces, choker chains, and layered pendants. Anti-tarnish, water-resistant luxury jewelry with free shipping in India.',
+                'h1' => 'NECKLACES & CHAINS',
+                'description' => 'Effortless luxury necklaces plated with genuine 18K gold. Designed for daily layering with waterproof and tarnish-resistant coating.',
+                'category_slug' => 'necklaces',
+            ],
+            'jewelry-sets' => [
+                'name' => 'Coordinated Jewelry Sets',
+                'title' => 'Fine Jewelry Sets – Coordinated Gold Collections | Tabstick Jewelry',
+                'meta_description' => 'Shop curated 18K gold plated jewelry sets including matching necklaces, earrings, and rings. Perfect luxury gifts with premium packaging.',
+                'h1' => 'COORDINATED JEWELRY SETS',
+                'description' => 'Exquisite matching jewelry sets for gifting and celebrations. 18K gold plated, anti-tarnish, and packed in luxury gift boxes.',
+                'category_slug' => 'jewelry-sets',
+            ],
             'laptop-stickers' => [
-                'name' => 'Laptop Stickers',
-                'title' => 'Laptop Stickers – Creative & Waterproof Laptop Decals | Tabstick',
-                'meta_description' => 'Explore creative waterproof laptop stickers in India. High-grade vinyl, zero residue removal, heat-resistant decals for MacBooks and Windows laptops.',
-                'h1' => 'LAPTOP STICKERS – VINYL DECALS FOR MACBOOKS & RIGS',
-                'description' => 'Upgrade your workstation with premium automotive-grade vinyl stickers. Engineered to withstand daily bag friction, laptop heat, and coffee spills with 100% residue-free peel off.',
-                'category_slug' => 'tech-dev',
-            ],
-            'car-stickers' => [
-                'name' => 'Car & Bike Stickers',
-                'title' => 'Car & Bike Stickers – Waterproof & UV-Safe Vinyl Decals | Tabstick',
-                'meta_description' => 'Buy waterproof car & bike stickers online in India. Automotive-grade, UV-protected vinyl decals that survive monsoons, car washes, and highway heat.',
-                'h1' => 'CAR & BIKE STICKERS – AUTOMOTIVE GRADE VINYL',
-                'description' => 'Built for high-pressure washes, monsoons, and extreme Indian weather. Stick them on rear windshields, bumpers, motorcycle tanks, and helmet visors.',
-                'category_slug' => 'cars-bikes',
-            ],
-            'phone-stickers' => [
-                'name' => 'Phone Case Stickers',
-                'title' => 'Aesthetic Phone Stickers & Mini Decals | Tabstick',
-                'meta_description' => 'Aesthetic, compact vinyl stickers for phone cases and chargers. Precision die-cut mini stickers that fit perfectly under clear iPhone and Android cases.',
-                'h1' => 'PHONE CASE STICKERS – AESTHETIC MINI VINYL DECALS',
-                'description' => 'Give your phone a fresh aesthetic vibe. Ultra-slim vinyl stickers that fit comfortably on cases and wireless chargers without peeling at the corners.',
-                'category_slug' => 'aesthetic',
-            ],
-            'college-stickers' => [
-                'name' => 'Stickers for College Students',
-                'title' => 'Stickers for College Students – Memes, Pop Culture & Drip | Tabstick',
-                'meta_description' => 'Shop viral meme stickers, engineering humour, anime, and pop culture decals for college students in India. Pocket-friendly prices and pan-India COD delivery.',
-                'h1' => 'COLLEGE STUDENT STICKERS – CAMPUS DRIP & MEMES',
-                'description' => 'From viral Bollywood dialogues to engineering memes and midnight coding humor. Deck out your hostel laptops, notebooks, water bottles, and campus wheels.',
-                'category_slug' => 'memes',
-            ],
-            'custom-stickers' => [
-                'name' => 'Custom Stickers in India',
-                'title' => 'Custom Stickers India – High Quality Die-Cut Vinyl Decals | Tabstick',
-                'meta_description' => 'Order custom stickers in India from Tabstick. Custom die-cut vinyl stickers for startups, communities, college fests, and creators with fast turnaround.',
-                'h1' => 'CUSTOM STICKERS IN INDIA – PREMIUM DIE-CUT VINYL',
-                'description' => 'Turn your logos, artwork, and creative designs into durable die-cut vinyl stickers. Minimum order friendly, vivid colors, and pan-India shipping.',
-                'category_slug' => null,
+                'name' => '18K Gold Plated Rings',
+                'title' => '18K Gold Plated Rings – Anti-Tarnish Daily Wear | Tabstick Jewelry',
+                'meta_description' => 'Shop luxury 18K gold-plated rings for women. Minimalist bands, crystal statement rings, and stackable designs.',
+                'h1' => '18K GOLD PLATED RINGS',
+                'description' => 'Handcrafted 18K real gold plated rings engineered with anti-tarnish protective coating. Everyday luxury designed for timeless elegance.',
+                'category_slug' => 'rings',
             ],
         ];
 
@@ -491,47 +540,41 @@ class StoreController extends Controller
     private function getCategoryMetadata(Category $category): array
     {
         $metaMap = [
-            'anime' => [
-                'title' => 'Anime Stickers – Waterproof Anime & Manga Vinyl Decals | Tabstick',
-                'meta_description' => 'Explore 500+ anime vinyl stickers at Tabstick. 100% waterproof, scratch-proof anime decals for laptops, cars, and phone cases. Free shipping across India.',
-                'h1' => 'ANIME & MANGA STICKERS – VINYL DECALS',
-                'description' => 'High-definition anime decals featuring Naruto, Jujutsu Kaisen, Demon Slayer, One Piece, and classic manga moments. Printed on weatherproof automotive-grade vinyl with vibrant UV inks.',
+            'rings' => [
+                'title' => '18K Gold Plated Rings – Anti-Tarnish Daily Wear | Tabstick Jewelry',
+                'meta_description' => 'Shop luxury 18K gold-plated rings for women. Minimalist bands, crystal statement rings, and stackable designs. Water & sweatproof with free pan-India shipping.',
+                'h1' => '18K GOLD PLATED RINGS',
+                'description' => 'Handcrafted 18K real gold plated rings engineered with anti-tarnish protective coating. Everyday luxury designed for timeless elegance.',
             ],
-            'cars-bikes' => [
-                'title' => 'Car & Bike Stickers – Waterproof Automotive Decals | Tabstick',
-                'meta_description' => 'Buy waterproof car and bike stickers online in India. Automotive-grade vinyl decals that survive monsoons, car washes, and highway speeds. Shop Tabstick.',
-                'h1' => 'CAR & BIKE STICKERS – ROAD TESTED VINYL',
-                'description' => 'Designed specifically for vehicles. UV-resistant, waterproof vinyl stickers for rear windshields, car bumpers, motorcycle fuel tanks, and helmets.',
+            'charms-pendants' => [
+                'title' => 'Gold Charms & Pendants – Aesthetic Daily Luxury | Tabstick Jewelry',
+                'meta_description' => 'Discover elegant 18K gold-plated charms and pendants. Hypoallergenic, tarnish-resistant, and styled for everyday layering. Free shipping across India.',
+                'h1' => 'CHARMS & PENDANTS',
+                'description' => 'Curated charms and pendants in 18K gold finish. Elevate your everyday styling with modern celestial, floral, and minimalist motifs.',
             ],
-            'memes' => [
-                'title' => 'Desi Pop & Meme Stickers for Laptops & Bikes | Tabstick',
-                'meta_description' => 'Shop trending desi meme stickers, Bollywood humor, and pop culture decals for laptops, bikes, and water bottles at Tabstick. High quality die-cut vinyl.',
-                'h1' => 'MEMES & DESI POP STICKERS – VIRAL HUMOR',
-                'description' => 'The funkiest Indian meme stickers and streetwear pop culture designs. From iconic Bollywood dialogues to viral internet trends with residue-free easy peel.',
+            'bracelets' => [
+                'title' => 'Gold Plated Bracelets & Cuffs – Anti-Tarnish Jewelry | Tabstick Jewelry',
+                'meta_description' => 'Buy waterproof gold bracelets, tennis chains, and sleek cuffs online at Tabstick Jewelry. Hypoallergenic everyday fine jewelry with fast delivery.',
+                'h1' => 'BRACELETS & CUFFS',
+                'description' => 'From delicate chain bracelets to bold gold cuffs, each piece is finished in 18K real gold plating and built to resist tarnishing and water exposure.',
             ],
-            'glitter-holo' => [
-                'title' => 'Holographic & Glitter Stickers – Die-Cut Vinyl Decals | Tabstick',
-                'meta_description' => 'Shop holographic and glitter vinyl stickers online in India. Mesmerizing prism rainbow effect, waterproof, and durable decals for laptops and journals.',
-                'h1' => 'GLITTER & HOLOGRAPHIC STICKERS – SHINE BRIGHT',
-                'description' => 'Eye-catching rainbow holographic and glitter vinyl stickers that change color with the light. Perfect for customizing MacBooks, skate decks, and scrapbooks.',
+            'earrings' => [
+                'title' => 'Gold Plated Earrings, Studs & Hoops | Tabstick Jewelry',
+                'meta_description' => 'Shop hypoallergenic 18K gold plated earrings, huggies, studs, and drop earrings. Skin-friendly, featherlight, and anti-tarnish at Tabstick Jewelry.',
+                'h1' => 'EARRINGS & HOOPS',
+                'description' => 'Lightweight everyday hoops, studs, and drop earrings plated in 18K gold. Hypoallergenic, nickel-free, and sweatproof for all-day comfort.',
             ],
-            'aesthetic' => [
-                'title' => 'Aesthetic & Vibe Stickers – Cute Vinyl Decals | Tabstick',
-                'meta_description' => 'Discover aesthetic stickers for laptops, phone cases, and journals at Tabstick. Minimalist, pastel, and retro indie vinyl decals with free shipping across India.',
-                'h1' => 'AESTHETIC & VIBES STICKERS – MINIMAL & RETRO',
-                'description' => 'Curated aesthetic sticker packs for creators, students, and dreamers. Soft pastels, vaporwave, retro typography, and nature-inspired waterproof vinyl.',
+            'necklaces' => [
+                'title' => 'Gold Necklaces & Layering Chains | Tabstick Jewelry',
+                'meta_description' => 'Explore 18K gold plated necklaces, choker chains, and layered pendants. Anti-tarnish, water-resistant luxury jewelry with free shipping in India.',
+                'h1' => 'NECKLACES & CHAINS',
+                'description' => 'Effortless luxury necklaces plated with genuine 18K gold. Designed for daily layering with waterproof and tarnish-resistant coating.',
             ],
-            'tech-dev' => [
-                'title' => 'Tech & Developer Stickers – Linux, Code & Dev Decals | Tabstick',
-                'meta_description' => 'Shop developer and programmer stickers for laptops. Linux, Python, JavaScript, Docker, AI, and developer humor stickers on premium residue-free vinyl.',
-                'h1' => 'TECH & DEVELOPER STICKERS – FOR CODERS & BUILDERS',
-                'description' => 'Show off your tech stack on your MacBook lid. High-grade heat-resistant vinyl decals for software engineers, designers, cybersecurity pros, and tech geeks.',
-            ],
-            'stickers' => [
-                'title' => 'Vinyl Stickers & Decals – Creative Sticker Packs | Tabstick',
-                'meta_description' => 'Buy creative vinyl stickers online in India. 100% waterproof, die-cut, residue-free stickers for laptops, cars, phones, and college gear. Shop Tabstick.',
-                'h1' => 'PREMIUM VINYL STICKERS – DIE-CUT DECALS',
-                'description' => 'Explore Tabstick\'s massive catalog of die-cut vinyl stickers. Crafted with automotive-grade durability, vibrant inks, and easy-peel adhesive.',
+            'jewelry-sets' => [
+                'title' => 'Fine Jewelry Sets – Coordinated Gold Collections | Tabstick Jewelry',
+                'meta_description' => 'Shop curated 18K gold plated jewelry sets including matching necklaces, earrings, and rings. Perfect luxury gifts with premium packaging.',
+                'h1' => 'COORDINATED JEWELRY SETS',
+                'description' => 'Exquisite matching jewelry sets for gifting and celebrations. 18K gold plated, anti-tarnish, and packed in luxury gift boxes.',
             ],
         ];
 
@@ -540,10 +583,10 @@ class StoreController extends Controller
         }
 
         return [
-            'title' => "{$category->name} Stickers – Waterproof Vinyl Decals | Tabstick",
-            'meta_description' => "Shop {$category->name} stickers online in India at Tabstick. 100% waterproof, durable, residue-free vinyl decals for laptops, cars, and phones.",
-            'h1' => strtoupper($category->name) . ' STICKERS',
-            'description' => "Explore {$category->name} stickers crafted with automotive-grade vinyl and vibrant inks. Perfect for laptops, bikes, and personal gear.",
+            'title' => "{$category->name} – 18K Gold Plated Fine Jewelry | Tabstick",
+            'meta_description' => "Shop {$category->name} online in India at Tabstick. 18K real gold plated, waterproof, anti-tarnish, and hypoallergenic everyday luxury.",
+            'h1' => strtoupper($category->name),
+            'description' => "Explore {$category->name} crafted with 18K vacuum gold plating and anti-tarnish protection.",
         ];
     }
 

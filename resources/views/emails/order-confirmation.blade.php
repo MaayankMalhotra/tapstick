@@ -17,7 +17,7 @@
                                 TAB<span style="color:#fafe21;">STICK</span>
                             </span>
                             <span style="display:block; font-size:11px; font-weight:800; color:#94a3b8; letter-spacing:2px; margin-top:4px;">
-                                CREATIVE DIE-CUT STICKER STUDIO
+                                18K GOLD PLATED FINE JEWELRY
                             </span>
                         </td>
                     </tr>
@@ -32,7 +32,7 @@
                                 Thank you, {{ explode(' ', $order->customer_name)[0] }}!
                             </h1>
                             <p style="margin:0 0 20px; color:#475569; font-size:15px;">
-                                We've received your order and our team is already prepping your fresh die-cut stickers. Here is your order summary:
+                                We've received your order and our team is already carefully preparing your fine jewelry pieces. Here is your order summary:
                             </p>
 
                             <!-- Order Meta Box -->
@@ -66,7 +66,7 @@
                             <table role="presentation" width="100%" cellspacing="0" cellpadding="10" style="border-collapse:collapse; margin-bottom:20px; font-size:14px;">
                                 <thead>
                                     <tr style="background-color:#f1f5f9; text-align:left; font-size:12px; color:#475569; text-transform:uppercase;">
-                                        <th style="padding:10px 12px; border-radius:6px 0 0 6px;">Sticker</th>
+                                        <th style="padding:10px 12px; border-radius:6px 0 0 6px;">Jewelry Item</th>
                                         <th style="padding:10px 12px; text-align:center;">Qty</th>
                                         <th style="padding:10px 12px; text-align:right; border-radius:0 6px 6px 0;">Total</th>
                                     </tr>
@@ -122,7 +122,7 @@
                             <div style="background-color:#fefce8; border:1px solid #fef08a; border-radius:10px; padding:16px; margin-bottom:10px;">
                                 <strong style="display:block; color:#854d0e; font-size:14px; margin-bottom:4px;">🚚 Pan-India 48-Hour Dispatch Guarantee:</strong>
                                 <p style="margin:0; font-size:13px; color:#a16207; line-height:1.5;">
-                                    Every Tabstick sticker is printed on 100% waterproof vinyl with durable UV-resistant inks. We will dispatch your order within 48 hours and email you tracking updates as soon as it's on the road!
+                                    Every Tabstick jewelry piece is crafted with 18K real gold vacuum ion plating over premium stainless steel. Anti-tarnish, hypoallergenic, and water-resistant. We will dispatch your order within 48 hours and email you tracking updates as soon as it's on the road!
                                 </p>
                             </div>
                         </td>

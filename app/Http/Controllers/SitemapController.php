@@ -60,7 +60,7 @@ class SitemapController extends Controller
         }
 
         // Curated High-Intent Collections
-        $curatedSlugs = ['laptop-stickers', 'car-stickers', 'phone-stickers', 'college-stickers', 'custom-stickers'];
+        $curatedSlugs = ['rings', 'charms-pendants', 'bracelets', 'earrings', 'necklaces', 'jewelry-sets'];
         foreach ($curatedSlugs as $cSlug) {
             $curLoc = htmlspecialchars("{$baseUrl}/category/{$cSlug}", ENT_XML1, 'UTF-8');
             $xml .= "  <url>\n";
@@ -110,7 +110,7 @@ class SitemapController extends Controller
                     : (str_starts_with($product->image, 'images/') ? "{$baseUrl}/{$product->image}" : "{$baseUrl}/storage/{$product->image}");
                 
                 $escapedImgUrl = htmlspecialchars($imgUrl, ENT_XML1, 'UTF-8');
-                $escapedImgTitle = htmlspecialchars($product->name . ' Vinyl Sticker - Tabstick', ENT_XML1, 'UTF-8');
+                $escapedImgTitle = htmlspecialchars($product->name . ' - Tabstick Fine Jewelry', ENT_XML1, 'UTF-8');
 
                 $xml .= "    <image:image>\n";
                 $xml .= "      <image:loc>{$escapedImgUrl}</image:loc>\n";

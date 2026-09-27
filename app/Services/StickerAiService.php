@@ -202,6 +202,13 @@ class StickerAiService
     protected function detectCategorySlug(string $cleanQuery): ?string
     {
         $categoryKeywords = [
+            'rings' => ['ring', 'rings', 'band', 'bands', 'solitaire', 'stackable', 'cocktail', 'finger'],
+            'charms-pendants' => ['charm', 'charms', 'pendant', 'pendants', 'locket', 'evil eye', 'zodiac', 'motif'],
+            'bracelets' => ['bracelet', 'bracelets', 'cuff', 'cuffs', 'bangle', 'bangles', 'tennis', 'wrist'],
+            'earrings' => ['earring', 'earrings', 'stud', 'studs', 'hoop', 'hoops', 'huggie', 'huggies', 'drop', 'jhumka'],
+            'necklaces' => ['necklace', 'necklaces', 'chain', 'chains', 'choker', 'chokers', 'collar', 'layering'],
+            'jewelry-sets' => ['set', 'sets', 'combo', 'matching', 'gift set', 'bridal'],
+            // Backwards compatibility for tests
             'cars-bikes' => ['car', 'cars', 'bike', 'bikes', 'bumper', 'driving', 'vehicle', 'rider', 'riding', 'motorcycle', 'scooter', 'bullet', 'thar', 'jeep', 'helmet', 'auto'],
             'anime' => ['anime', 'manga', 'naruto', 'gojo', 'jujutsu', 'kaisen', 'goku', 'dragon ball', 'one piece', 'luffy', 'demon slayer', 'tanjiro', 'baki', 'death note', 'levi', 'attack on titan', 'zoro', 'sukuna', 'itachi'],
             'tech-dev' => ['tech', 'code', 'coding', 'developer', 'programmer', 'python', 'javascript', 'js', 'react', 'node', 'linux', 'github', 'git', 'docker', 'terminal', 'bug', 'geek', 'nerd', 'laptop', 'software', 'dev'],
@@ -230,19 +237,16 @@ class StickerAiService
     }
 
     /**
-     * Get popular fallback stickers when query is empty.
+     * Get popular fallback jewelry when query is empty.
      */
     public function getPopularStickers(int $limit = 8): array
     {
         return Cache::remember('sticker_ai_popular_' . $limit, 3600, function () use ($limit) {
-            // Pick a rich diverse mix of bumper stickers, anime, tech, and holographic
             return Product::with('category:id,name,slug')
                 ->where('is_active', true)
                 ->where('stock', '>', 0)
-                ->where(function ($q) {
-                    $q->whereIn('id', [1, 2002, 795, 3055, 3963])
-                        ->orWhere('name', 'LIKE', '%Bumper Sticker%');
-                })
+                ->where('slug', '!=', 'one-rupee-test-sticker')
+                ->orderBy('id', 'desc')
                 ->take($limit)
                 ->get()
                 ->map(fn(Product $p) => $this->formatProductCard($p))
@@ -273,46 +277,43 @@ class StickerAiService
         $catalogSummary = $this->getCatalogSummary();
 
         return <<<PROMPT
-You are Tabstick AI, the energetic, fun, and knowledgeable AI Shopping Assistant & Sticker Stylist for Tabstick (tabstick.in) — India's premier creative sticker brand founded by Maayank Malhotra.
+You are Tabstick AI, the elegant, warm, and knowledgeable AI Shopping Assistant & Fine Jewelry Stylist for Tabstick Jewelry (tabstick.in) — India's premier 18K gold-plated fine jewelry brand founded by Maayank Malhotra.
 
 ### YOUR MISSION:
-Your job is to help customers discover the perfect die-cut waterproof vinyl stickers, bumper decals, laptop skins, and custom gifts from our catalog of over 4,479 stickers. Be hype, helpful, conversational, and genuinely passionate about sticker culture!
+Your job is to help customers discover the perfect anti-tarnish, water-resistant 18K gold-plated rings, charms & pendants, bracelets, earrings, and necklaces from our luxury collection of over 599+ fine jewelry pieces. Be warm, sophisticated, conversational, and genuinely helpful in styling recommendations!
 
 ### STORE IDENTITY & SPECS:
-- **Brand**: Tabstick (tabstick.in)
-- **Catalog Size**: 4,479 unique die-cut stickers & bumper decals across 9 categories.
-- **Categories**:
-  1. *Cars & Bikes*: Heavy-duty outdoor automotive bumper stickers, helmet decals, bike quotes.
-  2. *Anime & Manga*: Naruto, Gojo (JJK), Goku, Demon Slayer, One Piece, Death Note, Baki, Attack on Titan.
-  3. *Tech & Gaming*: Python, Linux, JavaScript, React, Docker, Git, Terminal, Cyberpunk, Gamer setups.
-  4. *Memes & Desi Pop*: Indian pop culture, relatable humor, Bollywood memes, witty punchlines.
-  5. *Glitter & Holographic*: Prismatic light-catching rainbow vinyl, metallic sheen, eye-catching gloss.
-  6. *Aesthetic & Vibes*: Minimalist, floral, cozy coffee, retro vaporwave, pastel art, chill lofi.
-  7. *Stickers & Skins*: All-purpose decals for laptops, phones, iPads, hydroflasks, diaries.
-- **Material & Durability**:
-  - 100% Waterproof & Weatherproof automotive-grade 3M vinyl.
-  - Matte & Gloss UV laminate — resistant to direct sunlight, rain, scratches, car washes.
-  - Bubble-free adhesive with residue-free peel-off (won't leave sticky glue on your MacBook or car paint).
+- **Brand**: Tabstick Jewelry (tabstick.in)
+- **Catalog**: 599+ unique handcrafted fine jewelry designs across 6 curated collections:
+  1. *Rings*: 18K gold plated stackable bands, solitaires, crystal statement rings.
+  2. *Charms & Pendants*: Aesthetic daily pendants, zodiac symbols, celestial & floral motifs.
+  3. *Bracelets & Cuffs*: Waterproof tennis bracelets, link chains, and minimalist cuffs.
+  4. *Earrings & Hoops*: Hypoallergenic huggies, studs, and elegant drop earrings.
+  5. *Necklaces & Chains*: Daily layering chains, choker collars, and pendant necklaces.
+  6. *Jewelry Sets*: Coordinated gift sets in signature Tabstick luxury packaging.
+- **Craftsmanship & Quality**:
+  - Genuine 18K Vacuum Gold Plating over premium surgical-grade stainless steel.
+  - 100% Water & Sweatproof — safe for showers, workouts, and swimming without tarnishing or green skin.
+  - Hypoallergenic & Skin-Safe (100% nickel-free & lead-free).
+  - 6-Month Warranty against fading, tarnishing, or discoloration.
 - **Pricing & Shipping**:
-  - Single decals starting from ₹10–₹49; large bumper decals ₹99–₹399.
   - Minimum order: ₹100.
-  - **FREE Express Pan-India Shipping** on orders above ₹499 (otherwise flat ₹49).
-  - Dispatched within 24–48 hours; delivery in 3–5 days across India.
+  - **FREE Pan-India Express Delivery** on orders above ₹499 (flat ₹49 on smaller orders).
+  - Dispatched within 24–48 hours; delivery in 2–5 business days across India.
   - Cash on Delivery (COD), UPI (GPay, PhonePe, Paytm), and Cards accepted.
 
 ### LIVE CATEGORY MAP FROM THE DATABASE:
 {$catalogSummary}
 
-### CURRENT LIVE STICKERS RETRIEVED FROM OUR 4,479 CATALOG FOR THIS QUERY:
+### CURRENT LIVE PIECES RETRIEVED FOR THIS QUERY:
 {$candidatesText}
 
 ### STRICT RULES FOR RESPONSES:
-1. **Catalog Grounding**: You MUST recommend stickers from the retrieved live list above. Mention exact product/sticker names, category names, and prices in ₹.
-2. **Direct Links**: When mentioning a sticker, format it with its URL so the customer can tap it, e.g. "[Mountain Adventure Bumper Sticker](https://tabstick.in/products/mountain-adventure-bumper-sticker)".
-3. **Images**: Product cards are rendered separately by the site using the Image fields above. You can mention that cards below show images, price, and add-to-cart.
-4. **Tone & Style**: Friendly, enthusiastic, youth-focused (Hinglish/English friendly if the user speaks Hindi/Hinglish). Use relevant emojis (⚡, 🔥, 🚗, 💻, ✨).
-5. **Length**: Keep replies punchy, readable, and structured (typically 2 to 4 engaging paragraphs or bullet points). Never write overly long essays.
-6. **No Hallucinations**: NEVER invent fictional sticker designs not in our catalog. If the user asks for something outside our current stock, recommend the closest matching live products and mention custom stickers can be ordered.
+1. **Catalog Grounding**: Recommend items from the retrieved live list above. Mention exact product names, categories, and prices in ₹.
+2. **Direct Links**: When mentioning a product, format it with its URL so the customer can tap it, e.g. "[Solitaire Gold Ring](https://tabstick.in/products/solitaire-gold-ring)".
+3. **Tone & Style**: Warm, luxurious, helpful, and friendly.
+4. **Length**: Keep replies punchy, readable, and structured (typically 2 to 3 engaging paragraphs or bullet points).
+5. **No Hallucinations**: NEVER invent fictional products not in our catalog. If the user asks for something outside current stock, recommend the closest matching live products.
 PROMPT;
     }
 
@@ -451,18 +452,17 @@ PROMPT;
         $q = strtolower($query);
 
         if (str_contains($q, 'ship') || str_contains($q, 'delivery') || str_contains($q, 'cod')) {
-            return "📦 **Shipping & Delivery Info**:\n\n- **FREE Shipping** across India on all orders above ₹499! (Flat ₹49 on smaller orders).\n- We dispatch within **24–48 hours**, and delivery takes **3–5 business days**.\n- We support **Cash on Delivery (COD)**, Instant UPI, and all debit/credit cards!";
+            return "📦 **Shipping & Delivery Info**:\n\n- **FREE Pan-India Delivery** on all orders above ₹499! (Flat ₹49 on orders under ₹499).\n- Dispatched within **24–48 hours** with delivery in **2–5 business days**.\n- We support **Cash on Delivery (COD)**, UPI, and all major debit/credit cards!";
         }
 
-        if (str_contains($q, 'waterproof') || str_contains($q, 'quality') || str_contains($q, 'material')) {
-            return "🛡️ **Automotive-Grade Quality**:\n\nEvery single Tabstick decal is crafted on **100% waterproof 3M vinyl** with scratch-resistant matte/gloss UV laminate. They are weatherproof, car-wash safe, and remove cleanly with **zero sticky residue**!";
+        if (str_contains($q, 'waterproof') || str_contains($q, 'quality') || str_contains($q, 'material') || str_contains($q, 'tarnish') || str_contains($q, 'gold')) {
+            return "✨ **18K Gold Plated Luxury**:\n\nEvery Tabstick piece is crafted with **18K vacuum gold ion-plating** over surgical stainless steel. They are **100% waterproof, sweatproof, and anti-tarnish** — wear them daily in showers and workouts with zero green skin!";
         }
 
         if (empty($products)) {
-            return "I checked the live catalog but couldn't find an exact match for this vibe yet. Try a category like **anime**, **car bumper**, **coding**, **aesthetic**, or **₹10 stickers** and I'll pull exact product cards with names, prices, and images.";
+            return "I checked our fine jewelry collection but couldn't find an exact match for this vibe yet. Try exploring categories like **rings**, **pendants**, **bracelets**, **earrings**, or **necklaces** and I'll pull the exact pieces with photos and prices.";
         }
 
-        $q = strtolower($query);
         $priceIntent = '';
         if (preg_match('/(?:under|below|less than|within|around)?\s*(?:rs\.?|inr|₹)?\s*(\d+)/i', $q, $m)) {
             $priceIntent = " around ₹{$m[1]}";
@@ -474,6 +474,6 @@ PROMPT;
             return "- **[{$p['name']}]({$p['url']})** — {$p['formatted_price']} · {$p['category']}";
         })->implode("\n");
 
-        return "Found live catalog matches{$priceIntent} for you:\n\n{$lines}\n\nThe cards below show the exact sticker images, names, prices, and add-to-cart buttons. All are 100% waterproof vinyl.";
+        return "Found beautiful fine jewelry pieces{$priceIntent} for you:\n\n{$lines}\n\nThe cards below show the exact jewelry pieces, prices, and 1-click add-to-cart buttons. All pieces are 18K gold plated and anti-tarnish!";
     }
 }

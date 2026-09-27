@@ -169,14 +169,21 @@ class StickerAiTest extends TestCase
         $this->assertSame('10.00', $response->json('products.0.price'));
     }
 
-    public function test_storefront_homepage_renders_sticker_ai_widget(): void
+    public function test_storefront_homepage_does_not_render_sticker_ai_widget(): void
     {
         $response = $this->get('/');
 
         $response->assertStatus(200);
+        $response->assertDontSee('id="sticker-ai-widget"', false);
+        $response->assertDontSee('id="sticker-ai-launcher"', false);
+    }
+
+    public function test_storefront_inner_page_renders_sticker_ai_widget(): void
+    {
+        $response = $this->get(route('category.index'));
+
+        $response->assertStatus(200);
         $response->assertSee('id="sticker-ai-widget"', false);
         $response->assertSee('id="sticker-ai-launcher"', false);
-        $response->assertSee('id="sticker-ai-window"', false);
-        $response->assertSee('Tabstick AI Stylist');
     }
 }

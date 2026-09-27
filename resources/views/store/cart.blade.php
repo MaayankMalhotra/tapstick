@@ -10,8 +10,8 @@
         <div style="background:#FFFFFF;border:var(--border-pop);border-radius:var(--radius-card);box-shadow:var(--shadow-pop);padding:60px 20px;text-align:center;">
             <div style="font-size:3.5rem;margin-bottom:12px;">🛒</div>
             <h3 style="font-family:var(--font-heading);font-size:1.6rem;font-weight:900;margin-bottom:8px;color:var(--color-ink);">Your cart is empty</h3>
-            <p style="color:var(--color-ink-muted);margin-bottom:24px;font-size:1rem;">Find stickers that speak your vibe!</p>
-            <a href="{{ route('home') }}#shop" class="btn-pop-primary" style="display:inline-block;padding:12px 32px;">Explore Stickers</a>
+            <p style="color:var(--color-ink-muted);margin-bottom:24px;font-size:1rem;">Find timeless fine jewelry pieces to elevate your daily style!</p>
+            <a href="{{ route('home') }}#shop" class="btn-pop-primary" style="display:inline-block;padding:12px 32px;">Explore Fine Jewelry</a>
         </div>
     @else
         <!-- INTERACTIVE MINIMUM ORDER & SHIPPING GOAL TRACKER -->
@@ -25,7 +25,7 @@
                                 Add <span style="color:var(--color-pop-red);">Rs. {{ number_format($minOrderDiff, 2) }}</span> more to unlock Checkout!
                             </div>
                             <div style="font-size:0.86rem;color:var(--color-ink-muted);font-weight:700;margin-top:2px;">
-                                Minimum order requirement is <strong>Rs. {{ number_format($minOrderAmount, 2) }}</strong>. Bump quantities or add stickers below.
+                                Minimum order requirement is <strong>Rs. {{ number_format($minOrderAmount, 2) }}</strong>. Bump quantities or add jewelry pieces below.
                             </div>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                         <div class="cart-item-row" style="border-bottom:1.5px solid var(--color-border-subtle);padding:18px 0;display:flex;align-items:center;gap:18px;">
                             <div class="cart-thumb" style="width:72px;height:72px;border-radius:14px;background:var(--color-bg-page);border:1.5px solid var(--color-ink);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">
                                 @if($imgSrc)
-                                    <img src="{{ $imgSrc }}" alt="{{ $p->name }} Vinyl Sticker - Tabstick" style="max-width:100%;max-height:100%;object-fit:contain;">
+                                    <img src="{{ $imgSrc }}" alt="{{ $p->name }} - Tabstick Fine Jewelry" style="max-width:100%;max-height:100%;object-fit:contain;">
                                 @else
                                     <span style="font-size:2rem;">{{ $p->emoji ?: '✨' }}</span>
                                 @endif
@@ -124,7 +124,7 @@
                                 </h4>
                                 <span style="font-size:0.75rem;background:var(--color-pop-yellow);border:1.5px solid var(--color-ink);padding:2px 8px;border-radius:10px;font-weight:800;">1-Click Add</span>
                             </div>
-                            <a href="{{ route('home') }}#shop" style="font-size:0.82rem;font-weight:800;color:var(--color-pop-blue);text-decoration:none;">Browse All Stickers →</a>
+                            <a href="{{ route('home') }}#shop" style="font-size:0.82rem;font-weight:800;color:var(--color-pop-blue);text-decoration:none;">Browse All Jewelry →</a>
                         </div>
 
                         <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));gap:14px;">
@@ -192,7 +192,7 @@
                         <span>🔒 Add Rs. {{ number_format($minOrderDiff, 0) }} more to Checkout</span>
                     </button>
                     <div id="locked-tooltip-msg" style="display:none;color:var(--color-pop-red);font-size:0.82rem;font-weight:900;text-align:center;margin-top:8px;">
-                        ⚠️ Please add Rs. {{ number_format($minOrderDiff, 2) }} more stickers to checkout!
+                        ⚠️ Please add Rs. {{ number_format($minOrderDiff, 2) }} more to checkout!
                     </div>
                 @else
                     <a href="{{ route('checkout.create') }}" class="btn-pop-primary" style="display:flex;justify-content:center;width:100%;margin-top:24px;font-size:1.05rem;">
@@ -201,7 +201,7 @@
                 @endif
 
                 <a href="{{ route('home') }}#shop" style="display:block; text-align:center; margin-top:16px; font-size:0.88rem; font-weight:800; color:var(--color-pop-blue); text-decoration:none;">
-                    ← Add More Stickers
+                    ← Add More Jewelry
                 </a>
 
                 <div style="margin-top:18px;text-align:center;font-size:0.78rem;font-weight:700;color:var(--color-ink-muted);">

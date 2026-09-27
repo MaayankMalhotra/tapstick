@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Tabstick – Creative Laptop, Car & Custom Stickers')</title>
-    <meta name="description" content="@yield('meta_description', 'Tabstick creates creative, durable stickers for laptops, cars, phones and college students. Explore unique sticker designs and shop online in India.')">
-    <meta name="keywords" content="@yield('meta_keywords', 'Tabstick, Tabstick stickers, Tabstick laptop stickers, Tabstick car stickers, stickers for college students, custom stickers in India, waterproof vinyl decals, aesthetic phone stickers')">
+    <title>@yield('title', 'Tabstick – Anti-Tarnish 18K Gold Plated Fine Jewelry')</title>
+    <meta name="description" content="@yield('meta_description', 'Discover anti-tarnish, water-resistant, hypoallergenic 18K gold-plated fine jewelry by Tabstick. Shop rings, necklaces, bracelets, earrings & charms online in India.')">
+    <meta name="keywords" content="@yield('meta_keywords', 'Tabstick, Tabstick fine jewelry, 18K gold plated jewelry, anti-tarnish jewelry India, waterproof jewelry, gold rings, everyday luxury jewelry')">
     <meta name="robots" content="@yield('robots', 'index, follow')">
     <link rel="canonical" href="@yield('canonical', url()->current())">
     @if(config('services.google.site_verification'))
@@ -25,16 +25,16 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:site_name" content="Tabstick">
     <meta property="og:type" content="@yield('og_type', 'website')">
-    <meta property="og:title" content="@yield('title', 'Tabstick – Creative Laptop, Car & Custom Stickers')">
-    <meta property="og:description" content="@yield('meta_description', 'Tabstick creates creative, durable stickers for laptops, cars, phones and college students. Explore unique sticker designs and shop online in India.')">
+    <meta property="og:title" content="@yield('title', 'Tabstick – Anti-Tarnish 18K Gold Plated Fine Jewelry')">
+    <meta property="og:description" content="@yield('meta_description', 'Discover anti-tarnish, water-resistant, hypoallergenic 18K gold-plated fine jewelry by Tabstick. Shop rings, necklaces, bracelets, earrings & charms online in India.')">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="@yield('og_image', asset('images/hero-banner.webp'))">
     <meta property="og:locale" content="en_IN">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('title', 'Tabstick – Creative Laptop, Car & Custom Stickers')">
-    <meta name="twitter:description" content="@yield('meta_description', 'Tabstick creates creative, durable stickers for laptops, cars, phones and college students. Explore unique sticker designs and shop online in India.')">
+    <meta name="twitter:title" content="@yield('title', 'Tabstick – Anti-Tarnish 18K Gold Plated Fine Jewelry')">
+    <meta name="twitter:description" content="@yield('meta_description', 'Discover anti-tarnish, water-resistant, hypoallergenic 18K gold-plated fine jewelry by Tabstick. Shop rings, necklaces, bracelets, earrings & charms online in India.')">
     <meta name="twitter:image" content="@yield('og_image', asset('images/hero-banner.webp'))">
 
     <!-- Organization & Founder Schema (JSON-LD) -->
@@ -43,12 +43,12 @@
         '@context' => 'https://schema.org',
         '@type' => 'Organization',
         'name' => 'Tabstick',
-        'alternateName' => ['Tabstick Stickers', 'Tabstick India', 'Tabstick Store'],
+        'alternateName' => ['Tabstick Jewelry', 'Tabstick India', 'Tabstick Fine Jewelry'],
         'legalName' => 'Tabstick',
         'url' => 'https://tabstick.in',
         'logo' => asset('favicon-192x192.png'),
         'image' => asset('images/hero-banner.webp'),
-        'description' => 'Tabstick is an Indian sticker brand founded by Mayank Malhotra. We create creative and durable stickers for laptops, cars, phones and college students.',
+        'description' => 'Tabstick is an Indian fine jewelry brand founded by Mayank Malhotra. We create anti-tarnish, water-resistant and hypoallergenic 18K gold-plated jewelry for everyday luxury.',
         'founder' => [
             '@type' => 'Person',
             'name' => 'Mayank Malhotra',
@@ -73,7 +73,7 @@
         '@context' => 'https://schema.org',
         '@type' => 'WebSite',
         'name' => 'Tabstick',
-        'alternateName' => ['Tabstick Stickers', 'Tabstick India', 'Tabstick Store'],
+        'alternateName' => ['Tabstick Jewelry', 'Tabstick India', 'Tabstick Fine Jewelry'],
         'url' => 'https://tabstick.in',
         'potentialAction' => [
             '@type' => 'SearchAction',
@@ -121,7 +121,7 @@
                 <div class="peel-stamp-title">TAB<span>STICK</span></div>
             </div>
             <div class="peel-loading-chip">
-                <span id="peel-loader-text">✦ UNBOXING STICKER UNIVERSE ✦</span>
+                <span id="peel-loader-text">✦ UNBOXING FINE JEWELRY ✦</span>
             </div>
             <div class="peel-loading-progress">
                 <div class="peel-progress-bar"></div>
@@ -255,26 +255,26 @@
                 <span class="drawer-arrow">➔</span>
             </a>
             <a href="{{ route('category.index') }}" class="mobile-drawer-card card-yellow">
-                <span class="drawer-card-emoji">⚡</span>
+                <span class="drawer-card-emoji">💍</span>
                 <div>
-                    <strong>Sticker Collections</strong>
-                    <small>Anime, Cars, Laptop, Memes &amp; More</small>
+                    <strong>Jewelry Collections</strong>
+                    <small>Rings, Necklaces, Bracelets &amp; More</small>
                 </div>
                 <span class="drawer-arrow">➔</span>
             </a>
             <a href="{{ route('home') }}#shop" class="mobile-drawer-card card-blue">
                 <span class="drawer-card-emoji">🛍️</span>
                 <div>
-                    <strong>Shop The Drop</strong>
-                    <small>Explore 5000+ waterproof stickers</small>
+                    <strong>Shop The Collection</strong>
+                    <small>Explore 599+ 18K gold plated pieces</small>
                 </div>
                 <span class="drawer-arrow">➔</span>
             </a>
             <a href="{{ route('home') }}#why" class="mobile-drawer-card card-blue">
                 <span class="drawer-card-emoji">🛡️</span>
                 <div>
-                    <strong>Why We Stick</strong>
-                    <small>100% waterproof automotive vinyl</small>
+                    <strong>Why Jewels Galaxy</strong>
+                    <small>18K real gold plated &amp; anti-tarnish</small>
                 </div>
                 <span class="drawer-arrow">➔</span>
             </a>
@@ -290,15 +290,15 @@
                 <span class="drawer-card-emoji">⭐</span>
                 <div>
                     <strong>Reviews</strong>
-                    <small>What 25,000+ sticker heads say</small>
+                    <small>What 25,000+ jewelry lovers say</small>
                 </div>
                 <span class="drawer-arrow">➔</span>
             </a>
             <a href="{{ route('home') }}#gallery" class="mobile-drawer-card card-purple">
                 <span class="drawer-card-emoji">📸</span>
                 <div>
-                    <strong>Seen In The Wild</strong>
-                    <small>Streetwear on laptops &amp; bikes</small>
+                    <strong>Style Gallery</strong>
+                    <small>Everyday luxury styled by customers</small>
                 </div>
                 <span class="drawer-arrow">➔</span>
             </a>
@@ -339,30 +339,30 @@
     <footer class="site-footer">
         <div class="footer-marquee-strip">
             <div class="footer-marquee-track">
-                <span>✦ PEEL. STICK. STAND OUT. ✦ 100% WATERPROOF VINYL ✦ EASY PEEL BACKING ✦ UV SUNPROOF ✦ 5000+ DESIGNS ✦</span>
-                <span>✦ PEEL. STICK. STAND OUT. ✦ 100% WATERPROOF VINYL ✦ EASY PEEL BACKING ✦ UV SUNPROOF ✦ 5000+ DESIGNS ✦</span>
+                <span>✦ 18K REAL GOLD PLATED ✦ ANTI-TARNISH FINISH ✦ WATER &amp; SWEATPROOF ✦ HYPOALLERGENIC ✦ 599+ PIECES ✦</span>
+                <span>✦ 18K REAL GOLD PLATED ✦ ANTI-TARNISH FINISH ✦ WATER &amp; SWEATPROOF ✦ HYPOALLERGENIC ✦ 599+ PIECES ✦</span>
             </div>
         </div>
 
         <div class="container footer-inner-wrap">
             <div class="footer-hero-statement">
                 <div class="footer-floating-stickers-wrap" aria-hidden="true">
-                    <span class="footer-float-stk fstk-1">⭐</span>
-                    <span class="footer-float-stk fstk-2">🔥</span>
-                    <span class="footer-float-stk fstk-3">⚡</span>
-                    <span class="footer-float-stk fstk-4">💧</span>
+                    <span class="footer-float-stk fstk-1">💎</span>
+                    <span class="footer-float-stk fstk-2">✨</span>
+                    <span class="footer-float-stk fstk-3">⭐</span>
+                    <span class="footer-float-stk fstk-4">🌿</span>
                 </div>
-                <h2 class="footer-big-brand-title footer-bouncy-title">STICK AROUND.</h2>
-                <p class="footer-big-brand-sub">Tabstick is an Indian sticker brand founded by Mayank Malhotra. We create creative and durable stickers for laptops, cars, phones and college students.</p>
+                <h2 class="footer-big-brand-title footer-bouncy-title">TIMELESS LUXURY.</h2>
+                <p class="footer-big-brand-sub">Tabstick is an Indian fine jewelry brand founded by Mayank Malhotra. We create anti-tarnish, water-resistant and hypoallergenic 18K gold-plated jewelry for everyday luxury.</p>
 
-                <!-- Final Guarantee Sticker Seal -->
-                <div class="footer-seal-stamp" title="100% Authentic Vinyl Seal">
+                <!-- Final Guarantee Seal -->
+                <div class="footer-seal-stamp" title="100% Authentic 18K Gold Plated Seal">
                     <svg width="86" height="86" viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" r="46" fill="#FFE600" stroke="#18181B" stroke-width="3" stroke-dasharray="5 3"/>
-                        <circle cx="50" cy="50" r="36" fill="#FF334B" stroke="#18181B" stroke-width="2"/>
-                        <text x="50" y="44" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="900" fill="#FFFFFF">100%</text>
-                        <text x="50" y="56" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="900" fill="#FFE600">GENUINE</text>
-                        <text x="50" y="67" text-anchor="middle" font-family="sans-serif" font-size="7" font-weight="900" fill="#FFFFFF">VINYL SEAL ✦</text>
+                        <circle cx="50" cy="50" r="46" fill="#F7EFE3" stroke="#C5A059" stroke-width="3" stroke-dasharray="5 3"/>
+                        <circle cx="50" cy="50" r="36" fill="#18181B" stroke="#C5A059" stroke-width="2"/>
+                        <text x="50" y="44" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="900" fill="#FFFFFF">18K</text>
+                        <text x="50" y="56" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="900" fill="#C5A059">REAL GOLD</text>
+                        <text x="50" y="67" text-anchor="middle" font-family="sans-serif" font-size="7" font-weight="900" fill="#FFFFFF">PLATED SEAL ✦</text>
                     </svg>
                 </div>
             </div>
@@ -380,7 +380,7 @@
                         <span class="brand-main" style="color:#0f172a;">TAB<span class="brand-accent">STICK</span></span>
                     </div>
                     <p style="color:#475569;font-size:0.92rem;line-height:1.6;max-width:320px;">
-                        Tabstick creates creative, durable stickers for laptops, cars, phones and college students. Explore unique sticker designs and shop online in India.
+                        Tabstick is an Indian fine jewelry brand founded by Mayank Malhotra. We create anti-tarnish, water-resistant and hypoallergenic 18K gold-plated jewelry for everyday luxury.
                     </p>
                     <div class="footer-social-links">
                         <a href="[ADD_INSTAGRAM_URL]" target="_blank" rel="noopener" class="social-chip" aria-label="Instagram">
@@ -402,12 +402,12 @@
                     <h4>Collections</h4>
                     <ul>
                         <li><a href="{{ route('category.index') }}">All Collections Hub</a></li>
-                        <li><a href="{{ route('category.show', 'anime') }}">Anime &amp; Manga Decals</a></li>
-                        <li><a href="{{ route('category.show', 'cars-bikes') }}">Car &amp; Moto Stickers</a></li>
-                        <li><a href="{{ route('category.show', 'memes') }}">Desi Pop &amp; Meme Drops</a></li>
-                        <li><a href="{{ route('category.show', 'glitter-holo') }}">Holographic &amp; Glitter</a></li>
-                        <li><a href="{{ route('category.show', 'laptop-stickers') }}">Laptop &amp; MacBook Decals</a></li>
-                        <li><a href="{{ route('category.show', 'custom-stickers') }}">Custom Stickers in India</a></li>
+                        <li><a href="{{ url('/?category=rings#shop') }}">Rings Collection</a></li>
+                        <li><a href="{{ url('/?category=charms-pendants#shop') }}">Charms &amp; Pendants</a></li>
+                        <li><a href="{{ url('/?category=bracelets#shop') }}">Bracelets &amp; Bangles</a></li>
+                        <li><a href="{{ url('/?category=earrings#shop') }}">Earrings &amp; Studs</a></li>
+                        <li><a href="{{ url('/?category=necklaces#shop') }}">Necklaces &amp; Chains</a></li>
+                        <li><a href="{{ url('/?category=jewelry-sets#shop') }}">Fine Jewelry Sets</a></li>
                     </ul>
                 </div>
 
@@ -416,8 +416,8 @@
                     <ul>
                         <li><a href="mailto:hello@tabstick.in">hello@tabstick.in</a></li>
                         <li><a href="{{ route('home') }}#faq">Frequently Asked Questions</a></li>
-                        <li><a href="{{ route('home') }}#why">48-Hour Dispatch Guarantee</a></li>
-                        <li><a href="{{ route('home') }}#why">100% Waterproof Guarantee</a></li>
+                        <li><a href="{{ route('home') }}#why">6-Month Warranty Guarantee</a></li>
+                        <li><a href="{{ route('home') }}#why">100% Water &amp; Sweatproof</a></li>
                         <li><a href="{{ route('cart.index') }}">Review Your Cart</a></li>
                         <li><a href="{{ route('portfolio') }}">Founder &amp; Engineering (Maayank Malhotra)</a></li>
                         <li><a href="{{ route('admin.dashboard') }}">Staff Admin Portal</a></li>
@@ -428,17 +428,17 @@
                     <h4>The Tabstick Promise</h4>
                     <div class="footer-perks-list">
                         <div class="footer-perk-item">
-                            <span class="f-perk-icon">💧</span>
+                            <span class="f-perk-icon">✨</span>
                             <div>
-                                <strong>100% Waterproof</strong>
-                                <small>Rain, snow &amp; dishwasher proof</small>
+                                <strong>18K Real Gold Plated</strong>
+                                <small>Vacuum ion-plating over surgical steel</small>
                             </div>
                         </div>
                         <div class="footer-perk-item">
-                            <span class="f-perk-icon">✨</span>
+                            <span class="f-perk-icon">💧</span>
                             <div>
-                                <strong>Zero Residue</strong>
-                                <small>Clean peel whenever you change</small>
+                                <strong>Water &amp; Sweatproof</strong>
+                                <small>Shower, gym &amp; daily wear safe</small>
                             </div>
                         </div>
                         <div class="footer-perk-item">
@@ -453,7 +453,7 @@
             </div>
 
             <div class="footer-bottom">
-                <p>© {{ date('Y') }} TABSTICK. Founded by <a href="{{ route('portfolio') }}" style="color:inherit;font-weight:800;text-decoration:underline;">Maayank Malhotra</a>. Designed &amp; Crafted with ❤️ in India. All stickers 100% waterproof automotive-grade vinyl.</p>
+                <p>© {{ date('Y') }} TABSTICK. Founded by <a href="{{ route('portfolio') }}" style="color:inherit;font-weight:800;text-decoration:underline;">Maayank Malhotra</a>. Designed &amp; Crafted with ❤️ in India. All fine jewelry crafted with 18K vacuum gold plating.</p>
                 <div class="footer-payment-pills">
                     <span class="payment-pill">⚡ UPI / QR</span>
                     <span class="payment-pill">💳 Cards &amp; NetBanking</span>
@@ -497,8 +497,10 @@
     <script src="{{ asset('js/playful-pop.js') }}" defer></script>
     <!-- LANDING PAGE LEAD POPUP MODAL -->
     @include('partials.lead-modal')
-    <!-- STOREFRONT AI STICKER CHATBOT & STYLIST -->
-    @include('partials.sticker-ai-chat')
+    <!-- STOREFRONT AI STICKER CHATBOT & STYLIST (EXCLUDED FROM LANDING PAGE) -->
+    @if(!request()->routeIs('home') && request()->path() !== '/')
+        @include('partials.sticker-ai-chat')
+    @endif
     <!-- SLIDE-OUT CART DRAWER -->
     @include('partials.cart-drawer')
 

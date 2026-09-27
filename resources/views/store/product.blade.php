@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', $product->name . ' Sticker | Tabstick')
-@section('meta_description', Str::limit(strip_tags($product->description), 155) ?: ($product->name . ' – 18K gold plated fine jewelry by Jewels Galaxy. Anti-tarnish, water-resistant, hypoallergenic everyday luxury.'))
+@section('title', $product->name . ' | Tabstick Jewelry')
+@section('meta_description', Str::limit(strip_tags($product->description), 155) ?: ($product->name . ' – 18K gold plated fine jewelry by Tabstick. Anti-tarnish, water-resistant, hypoallergenic everyday luxury.'))
 @section('canonical', route('products.show', $product))
 
 @section('content')
@@ -33,7 +33,7 @@
     @endphp
 
     <div class="product-gallery-box" style="background:#FFFFFF;border:1px solid var(--jg-border);border-radius:var(--radius-card);padding:24px;box-shadow:var(--shadow-pop);display:flex;align-items:center;justify-content:center;aspect-ratio:1;">
-        <img src="{{ $imgSrc }}" alt="{{ $product->name }} Vinyl Sticker - Tabstick" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:12px;" onerror="this.onerror=null; this.src='https://cdn.shopify.com/s/files/1/0692/8800/1725/files/SMNJG-RNG-5565-M-1-2x.jpg';">
+        <img src="{{ $imgSrc }}" alt="{{ $product->name }} - Tabstick Fine Jewelry" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:12px;" onerror="this.onerror=null; this.src='https://cdn.shopify.com/s/files/1/0692/8800/1725/files/SMNJG-RNG-5565-M-1-2x.jpg';">
     </div>
 
     <div class="product-info-panel" style="background:#FFFFFF;border:1px solid var(--jg-border);border-radius:var(--radius-card);padding:32px;box-shadow:var(--shadow-pop);">
