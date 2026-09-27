@@ -149,7 +149,7 @@ class StoreTest extends TestCase
         $response->assertSee('SHOP BY CATEGORY');
         $response->assertSee('DISCOVER THE COLLECTION');
         $response->assertSee('ALL JEWELRY');
-        $response->assertSee('Jewels Galaxy');
+        $response->assertSee('Tabstick');
     }
 
     public function test_gaze_n_gifts_renders_landing_page(): void

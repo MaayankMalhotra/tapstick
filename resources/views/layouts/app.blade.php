@@ -141,7 +141,7 @@
     </script>
     @endif
 
-    <!-- TOP ANNOUNCEMENT BAR: JEWELS GALAXY LUXURY PROMISES -->
+    <!-- TOP ANNOUNCEMENT BAR: TABSTICK LUXURY PROMISES -->
     <div class="top-announcement-bar">
         <div class="top-announcement-inner">
             <span class="top-announcement-item">✨ <strong>18K REAL GOLD PLATED</strong></span>
@@ -160,16 +160,16 @@
         </div>
     </div>
 
-    <!-- 2. JEWELS GALAXY LUXURY HEADER -->
+    <!-- 2. TABSTICK LUXURY HEADER -->
     <header class="site-header">
         <div class="container header-inner">
             <div class="brand-wrap">
-                <a href="{{ route('home') }}" class="brand-link" aria-label="Jewels Galaxy Home">
+                <a href="{{ route('home') }}" class="brand-link" aria-label="Tabstick Fine Jewelry Home">
                     <div class="brand-logo-badge" style="background:#F7EFE3;border:1px solid #C5A059;">
                         <span style="font-size:1.4rem;">💎</span>
                     </div>
                     <div class="brand-text-lockup">
-                        <span class="brand-main">JEWELS <span class="brand-accent">GALAXY</span></span>
+                        <span class="brand-main">TAB<span class="brand-accent">STICK</span></span>
                         <span class="brand-sub">FINE JEWELRY ✦ 18K GOLD</span>
                     </div>
                 </a>
@@ -273,7 +273,7 @@
             <a href="{{ route('home') }}#why" class="mobile-drawer-card card-blue">
                 <span class="drawer-card-emoji">🛡️</span>
                 <div>
-                    <strong>Why Jewels Galaxy</strong>
+                    <strong>Why Tabstick</strong>
                     <small>18K real gold plated &amp; anti-tarnish</small>
                 </div>
                 <span class="drawer-arrow">➔</span>

@@ -24,7 +24,7 @@
 
         <a href="{{ route('products.show', $product) }}" class="jg-card-img-link" title="{{ $product->name }}">
             <img src="{{ $imgSrc }}" 
-                 alt="{{ $product->name }} – Jewels Galaxy Fine Jewelry" 
+                 alt="{{ $product->name }} – Tabstick Fine Jewelry" 
                  loading="lazy" 
                  class="jg-card-img"
                  onerror="this.onerror=null; this.src='https://cdn.shopify.com/s/files/1/0692/8800/1725/files/SMNJG-RNG-5565-M-1-2x.jpg';">

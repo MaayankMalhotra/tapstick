@@ -31,7 +31,7 @@
             </h1>
             
             <p class="jg-collection-subtitle">
-                Explore {{ number_format($totalProductsCount ?? 599) }}+ anti-tarnish, hypoallergenic fine jewelry pieces crafted with 18K vacuum gold plating for everyday luxury by Jewels Galaxy. Wear in the shower, at the gym, and everywhere life takes you.
+                Explore {{ number_format($totalProductsCount ?? 599) }}+ anti-tarnish, hypoallergenic fine jewelry pieces crafted with 18K vacuum gold plating for everyday luxury by Tabstick Fine Jewelry. Wear in the shower, at the gym, and everywhere life takes you.
             </p>
 
             <!-- Dual Luxury CTA Buttons -->
@@ -136,7 +136,7 @@
             @foreach($categoryData as $cat)
                 <a href="?category={{ $cat['slug'] }}#shop" class="jg-cat-circle-card" data-slug="{{ $cat['slug'] }}">
                     <div class="jg-cat-img-wrapper">
-                        <img src="{{ $cat['img'] }}" alt="{{ $cat['name'] }} – Jewels Galaxy" loading="lazy" class="jg-cat-circle-img">
+                        <img src="{{ $cat['img'] }}" alt="{{ $cat['name'] }} – Tabstick Fine Jewelry" loading="lazy" class="jg-cat-circle-img">
                         <span class="jg-cat-floating-badge">{{ $cat['badge'] }}</span>
                     </div>
                     <h3 class="jg-cat-circle-title">{{ $cat['name'] }}</h3>
@@ -178,7 +178,7 @@
 <section id="shop" class="jg-shop-section">
     <div class="container">
         <div class="jg-section-header text-center">
-            <span class="jg-subheading-badge">JEWELS GALAXY FINE JEWELRY</span>
+            <span class="jg-subheading-badge">TABSTICK FINE JEWELRY</span>
             <h2 class="jg-section-heading">DISCOVER THE COLLECTION</h2>
             <p class="jg-section-subtext">
                 Anti-tarnish, waterproof, hypoallergenic luxury jewelry engineered for daily wear and special moments.
@@ -261,10 +261,10 @@
 <section class="jg-why-section" id="craftsmanship">
     <div class="container">
         <div class="jg-section-header text-center">
-            <span class="jg-subheading-badge">✦ THE JEWELS GALAXY STANDARD ✦</span>
+            <span class="jg-subheading-badge">✦ THE TABSTICK STANDARD ✦</span>
             <h2 class="jg-section-heading">CRAFTED FOR ENDURING LUXURY</h2>
             <p class="jg-section-subtext">
-                Unlike ordinary fashion jewelry that turns your skin green or fades within weeks, Jewels Galaxy is engineered with fine jewelry durability.
+                Unlike ordinary fashion jewelry that turns your skin green or fades within weeks, Tabstick Fine Jewelry is engineered with lasting durability.
             </p>
         </div>
 
@@ -342,7 +342,7 @@
         <div class="jg-comparison-wrap">
             <div class="jg-comparison-header text-center">
                 <span class="jg-subheading-badge">WHY WE OUTPERFORM</span>
-                <h3 class="jg-comparison-title">Jewels Galaxy vs. Traditional Fashion Jewelry</h3>
+                <h3 class="jg-comparison-title">Tabstick vs. Traditional Fashion Jewelry</h3>
             </div>
 
             <div class="jg-comparison-table-wrap">
@@ -350,7 +350,7 @@
                     <thead>
                         <tr>
                             <th>Feature</th>
-                            <th class="col-highlight">✨ Jewels Galaxy Fine Jewelry</th>
+                            <th class="col-highlight">✨ Tabstick Fine Jewelry</th>
                             <th>Traditional Fashion Jewelry</th>
                         </tr>
                     </thead>
@@ -417,7 +417,7 @@
             <div class="jg-review-card">
                 <div class="jg-review-stars">★★★★★</div>
                 <p class="jg-review-quote">
-                    “I have sensitive skin that usually breaks out with imitation jewelry. Jewels Galaxy pieces are truly hypoallergenic and comfortable. The packaging felt like receiving a luxury boutique gift!”
+                    “I have sensitive skin that usually breaks out with imitation jewelry. Tabstick pieces are truly hypoallergenic and comfortable. The packaging felt like receiving a luxury boutique gift!”
                 </p>
                 <div class="jg-review-author">
                     <div class="jg-author-avatar">PN</div>
@@ -461,11 +461,11 @@
         <div class="jg-faq-accordion-wrap">
             <details class="jg-faq-item" open>
                 <summary class="jg-faq-question">
-                    <span>Will Jewels Galaxy jewelry tarnish or turn black?</span>
+                    <span>Will Tabstick fine jewelry tarnish or turn black?</span>
                     <span class="jg-faq-toggle-icon">+</span>
                 </summary>
                 <div class="jg-faq-answer">
-                    <p>No. All Jewels Galaxy pieces are crafted using 18K vacuum ion-plating over surgical stainless steel, making them 10x more resistant to corrosion and moisture than standard plated jewelry.</p>
+                    <p>No. All Tabstick pieces are crafted using 18K vacuum ion-plating over surgical stainless steel, making them 10x more resistant to corrosion and moisture than standard plated jewelry.</p>
                 </div>
             </details>
 
@@ -521,10 +521,10 @@
         'mainEntity' => [
             [
                 '@type' => 'Question',
-                'name' => 'Will Jewels Galaxy jewelry tarnish or turn black?',
+                'name' => 'Will Tabstick fine jewelry tarnish or turn black?',
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => 'No. All Jewels Galaxy pieces are crafted using 18K vacuum ion-plating over surgical stainless steel, making them 10x more resistant to corrosion and moisture than standard plated jewelry.',
+                    'text' => 'No. All Tabstick pieces are crafted using 18K vacuum ion-plating over surgical stainless steel, making them 10x more resistant to corrosion and moisture than standard plated jewelry.',
                 ],
             ],
             [

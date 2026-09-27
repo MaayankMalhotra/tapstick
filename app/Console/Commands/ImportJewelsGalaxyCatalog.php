@@ -82,8 +82,10 @@ class ImportJewelsGalaxyCatalog extends Command
                 foreach ($chunk as $item) {
                     $bar->advance();
 
-                    $title = trim($item['title'] ?? 'Jewelry Piece');
+                    $rawTitle = trim($item['title'] ?? 'Fine Jewelry Piece');
+                    $title = trim(preg_replace('/\bJewels\s+Galaxy\b/i', 'Tabstick', $rawTitle));
                     $handle = trim($item['handle'] ?? Str::slug($title));
+                    $handle = str_ireplace('jewels-galaxy', 'tabstick', $handle);
                     $id = $item['id'] ?? null;
 
                     $slug = $handle;
@@ -111,8 +113,9 @@ class ImportJewelsGalaxyCatalog extends Command
                     // Description
                     $rawDesc = $item['body_html'] ?? '';
                     $cleanDesc = trim(strip_tags($rawDesc));
+                    $cleanDesc = trim(preg_replace('/\bJewels\s+Galaxy\b/i', 'Tabstick', $cleanDesc));
                     if (empty($cleanDesc)) {
-                        $cleanDesc = "{$title}. Crafted with high-grade anti-tarnish stainless steel and premium plating for lasting shine and durability.";
+                        $cleanDesc = "{$title}. Crafted with high-grade anti-tarnish stainless steel and premium 18K real gold plating for lasting shine and durability.";
                     }
 
                     $sku = 'JG-' . ($id ?? rand(10000, 99999));
