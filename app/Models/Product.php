@@ -17,6 +17,20 @@ class Product extends Model
         return ['price' => 'decimal:2', 'is_active' => 'boolean', 'stock' => 'integer', 'low_stock_threshold' => 'integer'];
     }
 
+    public function getNameAttribute($value): string
+    {
+        return str_ireplace('Jewels Galaxy', 'Tabstick', (string)$value);
+    }
+
+    public function getDescriptionAttribute($value): ?string
+    {
+        if ($value === null) {
+            return null;
+        }
+
+        return str_ireplace('Jewels Galaxy', 'Tabstick', (string)$value);
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
