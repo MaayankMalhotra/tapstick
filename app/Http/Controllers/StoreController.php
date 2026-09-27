@@ -31,7 +31,26 @@ class StoreController extends Controller
         $prodQuery = Product::where('is_active', true)
             ->where('stock', '>', 0)
             ->where(function ($q) {
-                $q->whereNull('sku')->orWhere('sku', '!=', Product::TEST_STICKER_SKU);
+                $q->whereNull('sku')->orWhere(function ($sub) {
+                    $sub->where('sku', '!=', Product::TEST_STICKER_SKU)
+                        ->where('sku', 'not like', 'STK-%')
+                        ->where('sku', 'not like', 'STICK-%');
+                });
+            })
+            ->whereDoesntHave('category', function ($q) {
+                $q->whereIn('slug', [
+                    'stickers',
+                    'memes',
+                    'glitter-holo',
+                    'anime',
+                    'cars-bikes',
+                    'aesthetic',
+                    'tech-dev',
+                    'mystery-box',
+                    'clothing',
+                    'popular',
+                    'test-stickers',
+                ]);
             });
 
         $totalProductsCount = (clone $prodQuery)->count();
@@ -96,12 +115,32 @@ class StoreController extends Controller
             ->where('is_active', true)
             ->where('stock', '>', 0)
             ->where(function ($q) {
-                $q->whereNull('sku')->orWhere('sku', '!=', Product::TEST_STICKER_SKU);
+                $q->whereNull('sku')->orWhere(function ($sub) {
+                    $sub->where('sku', '!=', Product::TEST_STICKER_SKU)
+                        ->where('sku', 'not like', 'STK-%')
+                        ->where('sku', 'not like', 'STICK-%');
+                });
             });
 
         if ($categorySlug && $categorySlug !== 'all') {
             $query->whereHas('category', function ($q) use ($categorySlug) {
                 $q->where('slug', $categorySlug);
+            });
+        } elseif ($search === '') {
+            $query->whereDoesntHave('category', function ($q) {
+                $q->whereIn('slug', [
+                    'stickers',
+                    'memes',
+                    'glitter-holo',
+                    'anime',
+                    'cars-bikes',
+                    'aesthetic',
+                    'tech-dev',
+                    'mystery-box',
+                    'clothing',
+                    'popular',
+                    'test-stickers',
+                ]);
             });
         }
 
