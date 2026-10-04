@@ -1,20 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <defs>
-    <filter id="pop-shadow" x="-10%" y="-10%" width="130%" height="130%">
-      <feDropShadow dx="3" dy="3" stdDeviation="0" flood-color="#18181B" flood-opacity="1"/>
-    </filter>
+    <linearGradient id="favGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCEABB" />
+      <stop offset="35%" stop-color="#D4AF37" />
+      <stop offset="70%" stop-color="#C5A059" />
+      <stop offset="100%" stop-color="#8C6623" />
+    </linearGradient>
+    <linearGradient id="favGoldLight" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C5A059" />
+      <stop offset="50%" stop-color="#FFF5D6" />
+      <stop offset="100%" stop-color="#9C7728" />
+    </linearGradient>
+    <radialGradient id="favBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2D2214" />
+      <stop offset="100%" stop-color="#120F0C" />
+    </radialGradient>
   </defs>
-  <!-- Die-cut Vinyl Badge Background -->
-  <rect x="6" y="6" width="50" height="50" rx="14" fill="#FFE600" stroke="#18181B" stroke-width="4" filter="url(#pop-shadow)"/>
-  
-  <!-- Tactile Peel Corner (Top-Right) -->
-  <path d="M42 6 L56 20 L42 20 Z" fill="#FF334B" stroke="#18181B" stroke-width="3" stroke-linejoin="round"/>
-  
-  <!-- Bold Tabstick "T" Letterform with Playful Pop Ink -->
-  <path d="M18 20 H40" stroke="#18181B" stroke-width="6" stroke-linecap="round"/>
-  <path d="M29 20 V46" stroke="#18181B" stroke-width="6" stroke-linecap="round"/>
-  
-  <!-- Pop Star Sparkle (Bottom-Right) -->
-  <circle cx="44" cy="42" r="4.5" fill="#FF334B" stroke="#18181B" stroke-width="2"/>
-  <circle cx="43" cy="40.5" r="1.5" fill="#FFFFFF"/>
+
+  <!-- Faceted Octagonal Diamond Cut Outer Shield -->
+  <polygon points="20,4 44,4 58,18 58,46 44,60 20,60 6,46 6,18" fill="url(#favBg)" stroke="url(#favGold)" stroke-width="2.5"/>
+  <!-- Concentric Inner Geometry Facets -->
+  <polygon points="22,10 42,10 52,20 52,44 42,54 22,54 12,44 12,20" fill="none" stroke="rgba(212, 175, 55, 0.4)" stroke-width="1.2" stroke-dasharray="3 2"/>
+
+  <!-- Solitaire Diamond Peak at Top -->
+  <path d="M32,12 L36,18 L32,24 L28,18 Z" fill="url(#favGoldLight)"/>
+
+  <!-- Architectural Serif "T" Monogram with Micro Brackets -->
+  <path d="M18,24 H46 M32,24 V50" stroke="url(#favGoldLight)" stroke-width="4.5" stroke-linecap="square"/>
+  <path d="M18,21 V27 M46,21 V27 M26,50 H38" stroke="url(#favGoldLight)" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Brilliant Sparkle Dots on Facets -->
+  <circle cx="20" cy="4" r="1.8" fill="#FFF5D6"/>
+  <circle cx="44" cy="4" r="1.8" fill="#FFF5D6"/>
+  <circle cx="58" cy="32" r="1.8" fill="#FFF5D6"/>
+  <circle cx="6" cy="32" r="1.8" fill="#FFF5D6"/>
 </svg>

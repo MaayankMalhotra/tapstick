@@ -1063,27 +1063,461 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   10. SITE FOOTER
+   10. HAUTE LUXURY SITE FOOTER (JEWELS GALAXY / TABSTICK ATELIER)
    ========================================================================== */
-.site-footer {
-  background: var(--jg-espresso) !important;
-  color: #F5EFEB !important;
-  border-top: 1px solid rgba(197, 160, 89, 0.2) !important;
+.site-footer,
+.jg-luxury-footer {
+  background: radial-gradient(ellipse 90% 45% at 50% 0%, #221A12 0%, #110E0B 65%, #0A0807 100%) !important;
+  color: #E8DFD5 !important;
+  border-top: 1px solid rgba(197, 160, 89, 0.35) !important;
+  position: relative;
+  overflow: hidden;
 }
 
-.site-footer h3,
-.site-footer h4 {
+/* Header Luxury Logo Badge */
+.jg-header-logo-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 12px !important;
+  background: #181410 !important;
+  border: 1.5px solid var(--jg-gold) !important;
+  box-shadow: 0 4px 14px rgba(197, 160, 89, 0.25) !important;
+  padding: 4px !important;
+  transition: all 0.3s ease !important;
+  flex-shrink: 0;
+}
+
+.brand-link:hover .jg-header-logo-badge {
+  transform: rotate(5deg) scale(1.06) !important;
+  box-shadow: 0 6px 20px rgba(197, 160, 89, 0.45) !important;
+  border-color: #E8C882 !important;
+}
+
+/* Continuous Gold Marquee Ticker Strip */
+.jg-footer-marquee {
+  background: linear-gradient(90deg, #18130F 0%, #261D15 50%, #18130F 100%);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.25);
+  padding: 12px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.jg-footer-marquee-track {
+  display: inline-flex;
+  gap: 36px;
+  font-family: var(--font-heading);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--jg-gold);
+  text-transform: uppercase;
+  animation: jgMarqueeScroll 28s linear infinite;
+}
+
+@keyframes jgMarqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Atelier Heritage Statement Header */
+.jg-footer-container {
+  padding: 0 24px !important;
+}
+
+.jg-footer-prestige-wrap {
+  padding: 56px 0 40px;
+  border-bottom: 1px solid rgba(197, 160, 89, 0.18);
+}
+
+.jg-footer-prestige-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  flex-wrap: wrap;
+}
+
+.jg-prestige-left {
+  max-width: 680px;
+}
+
+.jg-prestige-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(197, 160, 89, 0.12);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  color: #E8C882;
+  padding: 5px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.jg-prestige-title {
+  font-family: 'Playfair Display', var(--font-heading), Georgia, serif !important;
+  font-size: clamp(2rem, 3.8vw, 3rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.15 !important;
+  color: #FFFDF9 !important;
+  margin-bottom: 14px !important;
+}
+
+.jg-prestige-desc {
+  font-size: 0.98rem !important;
+  color: #D6CBC1 !important;
+  line-height: 1.7 !important;
+  max-width: 620px;
+  margin: 0;
+}
+
+/* Luxury 18K Real Gold Plated Seal */
+.jg-prestige-seal-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(28, 22, 17, 0.75);
+  border: 1.5px solid rgba(197, 160, 89, 0.4);
+  border-radius: 20px;
+  padding: 16px 24px;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.jg-prestige-seal-box:hover {
+  transform: translateY(-2px);
+  border-color: var(--jg-gold);
+}
+
+.jg-seal-svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.jg-seal-text-wrap strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: #FFFFFF;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+
+.jg-seal-text-wrap small {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--jg-gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-top: 3px;
+}
+
+/* 4-Column Grid */
+.jg-footer-main-grid {
+  display: grid !important;
+  grid-template-columns: 1.45fr 1fr 1fr 1.25fr !important;
+  gap: 48px !important;
+  padding: 56px 0 44px !important;
+}
+
+@media (max-width: 1024px) {
+  .jg-footer-main-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 36px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .jg-footer-main-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+}
+
+/* Col 1 Brand */
+.jg-footer-brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+
+.jg-footer-brand-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.jg-footer-brand-title .brand-main-text {
+  font-family: 'Playfair Display', var(--font-heading), Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  color: #FFFFFF;
+  line-height: 1;
+}
+
+.jg-footer-brand-title .brand-accent-text {
+  color: #E8C882;
+}
+
+.jg-footer-brand-title .brand-tagline {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: var(--jg-gold);
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+.jg-footer-brand-desc {
+  font-size: 0.92rem;
+  color: #D6CBC1;
+  line-height: 1.7;
+  max-width: 340px;
+  margin-bottom: 22px;
+}
+
+/* Social Icon Buttons (Frosted Obsidian Wireframe) */
+.jg-luxury-social-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.jg-lux-social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  color: #E8C882 !important;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.jg-lux-social-btn:hover {
+  background: linear-gradient(135deg, #D4AF37 0%, #C5A059 100%);
+  border-color: #E8C882;
+  color: #120F0C !important;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(197, 160, 89, 0.4);
+}
+
+.jg-founder-badge-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(197, 160, 89, 0.1);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  padding: 7px 16px;
+  border-radius: var(--radius-pill);
+  color: #F0E2D0 !important;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.jg-founder-badge-link:hover {
+  background: rgba(197, 160, 89, 0.22);
+  border-color: var(--jg-gold);
   color: #FFFFFF !important;
-  font-family: var(--font-heading) !important;
+  transform: translateY(-1px);
 }
 
-.site-footer a {
-  color: #DECFC6 !important;
-  transition: color 0.2s ease !important;
+.jg-desk-dot-live {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
 }
 
-.site-footer a:hover {
-  color: var(--jg-gold) !important;
+/* Footer Column Headings */
+.jg-footer-col h4 {
+  font-family: 'Playfair Display', var(--font-heading), Georgia, serif !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  color: #FFFDF9 !important;
+  text-transform: uppercase !important;
+  margin-bottom: 20px !important;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+.jg-footer-col h4::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background: var(--jg-gold);
+}
+
+/* Footer Navigation Links */
+.jg-footer-links-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.jg-footer-links-list li {
+  margin-bottom: 12px !important;
+}
+
+.jg-footer-links-list a {
+  color: #D6CBC1 !important;
+  font-size: 0.92rem !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease !important;
+}
+
+.jg-footer-links-list a:hover {
+  color: #FCEABB !important;
+  transform: translateX(4px);
+}
+
+.jg-link-zip-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(197, 160, 89, 0.12);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  color: #E8C882 !important;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-weight: 700 !important;
+  font-size: 0.82rem !important;
+}
+
+.jg-link-zip-pill:hover {
+  background: var(--jg-gold) !important;
+  color: #120F0C !important;
+}
+
+/* Column 4: Hallmarks Stack */
+.jg-hallmarks-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.jg-hallmark-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: rgba(28, 22, 17, 0.6);
+  border: 1px solid rgba(197, 160, 89, 0.22);
+  border-radius: 12px;
+  padding: 12px 14px;
+  transition: all 0.25s ease;
+}
+
+.jg-hallmark-card:hover {
+  border-color: rgba(197, 160, 89, 0.5);
+  background: rgba(36, 28, 22, 0.85);
+  transform: translateY(-2px);
+}
+
+.jg-hallmark-glyph {
+  font-size: 1.25rem;
+  line-height: 1;
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+
+.jg-hallmark-text strong {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #FFFDF9;
+  letter-spacing: 0.02em;
+}
+
+.jg-hallmark-text small {
+  display: block;
+  font-size: 0.76rem;
+  color: #B5A596;
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+/* Bottom Copyright Bar */
+.jg-footer-bottom-bar {
+  border-top: 1px solid rgba(197, 160, 89, 0.22);
+  padding: 28px 0 34px;
+}
+
+.jg-bottom-bar-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.jg-legal-copy p {
+  font-size: 0.84rem;
+  color: #D6CBC1;
+  margin: 0 0 4px;
+}
+
+.jg-legal-copy small {
+  font-size: 0.74rem;
+  color: #9E8E7E;
+}
+
+.jg-legal-copy a {
+  color: #E8C882 !important;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+/* Payment Badges (Luxury Obsidian Glass) */
+.jg-pay-pills-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.jg-pay-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(28, 22, 17, 0.85);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  border-radius: var(--radius-pill);
+  padding: 5px 12px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #E8DFD5;
+  letter-spacing: 0.02em;
 }
 
 /* ==========================================================================
