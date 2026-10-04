@@ -408,7 +408,7 @@
                         <li><a href="{{ url('/?category=earrings#shop') }}">Earrings &amp; Studs</a></li>
                         <li><a href="{{ url('/?category=necklaces#shop') }}">Necklaces &amp; Chains</a></li>
                         <li><a href="{{ url('/?category=jewelry-sets#shop') }}">Fine Jewelry Sets</a></li>
-                        <li><a href="{{ route('catalog.download') }}">📦 Download Catalog (ZIP)</a></li>
+                        <li><a href="{{ url('/catalog/download') }}">📦 Download Catalog (ZIP)</a></li>
                     </ul>
                 </div>
 
