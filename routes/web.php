@@ -63,6 +63,9 @@ Route::get('/category/{slug}', [StoreController::class, 'category'])->name('cate
 Route::get('/collection/{slug}', fn($slug) => redirect()->route('category.show', $slug, 301));
 Route::get('/feed/google-shopping.xml', [\App\Http\Controllers\FeedController::class, 'googleShopping'])->name('feed.google-shopping');
 Route::get('/feed/google-merchant.xml', [\App\Http\Controllers\FeedController::class, 'googleShopping']);
+Route::get('/catalog/download', [StoreController::class, 'downloadCatalog'])->name('catalog.download');
+Route::get('/catalog-bundle.zip', [StoreController::class, 'downloadCatalog']);
+Route::get('/catalog.zip', [StoreController::class, 'downloadCatalog']);
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
 Route::get('/maayank', [StoreController::class, 'portfolio'])->name('portfolio');
 Route::get('/maayank/resume', [StoreController::class, 'downloadResume'])->name('portfolio.resume');

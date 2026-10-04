@@ -7,6 +7,7 @@ use App\Models\PortfolioInquiry;
 use App\Models\Product;
 use App\Mail\PortfolioUserConfirmationMail;
 use App\Mail\PortfolioAdminNotificationMail;
+use App\Services\CatalogBundleService;
 use App\Services\GeminiService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -752,5 +753,27 @@ class StoreController extends Controller
     public function premMedicalCenter(): View
     {
         return view('store.prem-medical-center');
+    }
+
+    /**
+     * Download the complete product catalog bundle (ZIP archive).
+     */
+    public function downloadCatalog(CatalogBundleService $service)
+    {
+        $zipPath = storage_path('app/exports/' . CatalogBundleService::EXPORT_ZIP_NAME);
+
+        if (!file_exists($zipPath)) {
+            $bundle = $service->generateBundle();
+            $zipPath = $bundle['zip_path'];
+        }
+
+        return response()->download(
+            $zipPath,
+            'tabstick-fine-jewelry-catalog.zip',
+            [
+                'Content-Type' => 'application/zip',
+                'Cache-Control' => 'no-cache, must-revalidate',
+            ]
+        );
     }
 }

@@ -215,6 +215,12 @@
                 </div>
                 <div class="jg-live-counter products-live-counter">
                     <span id="products-count-label">Showing <strong id="current-shown-count">{{ $products->count() }}</strong> of <strong id="total-matching-count">{{ number_format($totalProductsCount ?? 599) }}</strong> luxury designs</span>
+                    <a href="{{ route('catalog.download') }}" class="jg-download-catalog-chip" title="Download Complete 599+ Fine Jewelry Catalog (CSV, JSON & Specs ZIP)">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:middle;margin-right:3px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
+                        <span>Download Catalog (ZIP)</span>
+                    </a>
                 </div>
             </div>
         </div>

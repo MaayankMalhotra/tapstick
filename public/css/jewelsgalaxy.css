@@ -579,6 +579,35 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--jg-text-muted);
   font-weight: 600;
   text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.jg-download-catalog-chip {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(197, 160, 89, 0.12);
+  color: var(--jg-bronze, #8c6d37);
+  border: 1px solid rgba(197, 160, 89, 0.45);
+  padding: 3px 12px;
+  border-radius: 9999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+  line-height: 1.5;
+}
+
+.jg-download-catalog-chip:hover {
+  background: var(--jg-gold, #C5A059);
+  color: #FFFFFF;
+  border-color: var(--jg-gold, #C5A059);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(197, 160, 89, 0.25);
 }
 
 /* 4-COLUMN LUXURY PRODUCT GRID */
