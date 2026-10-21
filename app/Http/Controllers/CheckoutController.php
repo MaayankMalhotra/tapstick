@@ -8,10 +8,12 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\StockMovement;
 use App\Services\FulfillmentService;
+use App\Services\MetaPixel;
 use App\Services\RazorpayGateway;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -36,7 +38,13 @@ class CheckoutController extends Controller
             return redirect()->route('cart.index')->with('warning', 'Minimum order amount is ₹'.self::MIN_ORDER_AMOUNT.'. Please add ₹'.number_format($diff, 2).' more to proceed to checkout.');
         }
 
-        return view('store.checkout', $summary);
+        $metaCheckout = MetaPixel::contents($summary['items']->map(fn ($item) => [
+            'id' => (string) $item['product']->id,
+            'quantity' => (int) $item['quantity'],
+            'item_price' => (float) $item['product']->price,
+        ])->all(), (float) $summary['total']);
+
+        return view('store.checkout', $summary + compact('metaCheckout'));
     }
 
     public function store(Request $request): View|RedirectResponse
@@ -189,6 +197,9 @@ class CheckoutController extends Controller
             'razorpay_signature' => $data['razorpay_signature'],
             'payment_status' => 'paid',
         ]);
+        // Only the browser that completed signature verification may emit this purchase.
+        // The already-paid callback above deliberately does not re-arm tracking.
+        $request->session()->put('meta_verified_orders.'.$order->id, true);
         $request->session()->forget('cart');
         $this->sendOrderEmails($order);
         app(FulfillmentService::class)->createForOrder($order);
@@ -196,7 +207,28 @@ class CheckoutController extends Controller
         return response()->json(['success' => true, 'redirect_url' => route('orders.success', $order)]);
     }
 
-    public function success(Order $order): View { return view('store.success', compact('order')); }
+    public function success(Request $request, Order $order): View
+    {
+        $tracking = [];
+        if (MetaPixel::enabled($request)
+            && $order->payment_status === 'paid'
+            && ! in_array($order->status, ['cancelled', 'canceled', 'failed', 'refunded'], true)
+            && $request->session()->get('meta_verified_orders.'.$order->id) === true) {
+            $eventId = 'purchase-'.$order->order_number;
+            // Atomic shared-cache claim also protects simultaneous confirmation loads.
+            // Never let an analytics cache failure break order confirmation.
+            try {
+                if (Cache::add('meta-pixel:'.$eventId, true, now()->addYears(5))) {
+                    $tracking = ['metaPurchase' => MetaPixel::purchase($order), 'metaPurchaseId' => $eventId];
+                    $request->session()->forget('meta_verified_orders.'.$order->id);
+                }
+            } catch (Throwable $exception) {
+                report($exception);
+            }
+        }
+
+        return view('store.success', compact('order') + $tracking);
+    }
 
     private function summary(Request $request): array
     {

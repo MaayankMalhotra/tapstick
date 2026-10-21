@@ -9,6 +9,7 @@ use App\Mail\PortfolioUserConfirmationMail;
 use App\Mail\PortfolioAdminNotificationMail;
 use App\Services\CatalogBundleService;
 use App\Services\GeminiService;
+use App\Services\MetaPixel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -172,7 +173,7 @@ class StoreController extends Controller
     public function show(Product $product): View
     {
         abort_unless($product->is_active, 404);
-        return view('store.product', compact('product'));
+        return view('store.product', ['product' => $product, 'metaViewContent' => MetaPixel::product($product)]);
     }
 
     public function cart(Request $request): View
@@ -189,11 +190,19 @@ class StoreController extends Controller
         ]);
         $quantity = (int) ($validated['quantity'] ?? 1);
         $cart = $request->session()->get('cart', []);
+        $previousQuantity = $cart[$product->id] ?? 0;
         $cart[$product->id] = min(($cart[$product->id] ?? 0) + $quantity, $product->stock, 20);
         $request->session()->put('cart', $cart);
 
+        $addedQuantity = $cart[$product->id] - $previousQuantity;
+        $metaAddToCart = $addedQuantity > 0 ? MetaPixel::product($product, $addedQuantity) : null;
+
         if ($request->expectsJson() || $request->ajax()) {
-            return response()->json($this->formatCartDrawerPayload($request, $product->name.' added to your cart!'));
+            return response()->json($this->formatCartDrawerPayload($request, $product->name.' added to your cart!') + ['meta_add_to_cart' => $metaAddToCart]);
+        }
+
+        if ($metaAddToCart) {
+            $request->session()->flash('meta_add_to_cart', $metaAddToCart);
         }
 
         if ($request->input('redirect') === 'checkout') {

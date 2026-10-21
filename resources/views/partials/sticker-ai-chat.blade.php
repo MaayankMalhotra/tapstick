@@ -912,6 +912,12 @@
                 body: formData
             });
 
+            if (!res.ok) throw new Error('Add to cart failed');
+            const cartData = await res.json();
+            if (cartData.success && cartData.meta_add_to_cart && window.tabstickMeta) {
+                window.tabstickMeta.track('AddToCart', cartData.meta_add_to_cart);
+            }
+
             btn.classList.add('added');
             btn.innerHTML = '✓ Added';
 

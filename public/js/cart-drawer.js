@@ -295,6 +295,9 @@
                     }
 
                     if (data && data.success) {
+                        if (data.meta_add_to_cart && window.tabstickMeta) {
+                            window.tabstickMeta.track('AddToCart', data.meta_add_to_cart);
+                        }
                         window.updateCartDrawerUI(data);
                         window.openCartDrawer();
                     }
