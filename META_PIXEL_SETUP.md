@@ -9,20 +9,22 @@ implementation was found in the application.
 
 ## Configuration
 
-Set these on the production server before enabling tracking:
+The values are set directly in `config/services.php`; no Meta `.env` entries are required:
 
-```dotenv
-META_PIXEL_ID=1631769315356742
-META_PIXEL_REQUIRE_CONSENT=false
+```php
+'meta' => [
+    'pixel_id' => '1631769315356742',
+    'require_consent' => false,
+],
 ```
 
-An empty Pixel ID disables the integration. The ID is public, not a credential.
+An empty `services.meta.pixel_id` disables the integration. The ID is public, not a credential.
 No ad-account ID, access token, customer identifiers or advertising budget is used.
-The values are included in `.env.example`; production `.env` stays untracked.
+Production `.env` stays untracked; existing Meta environment values are not used.
 
 No consent UI was added, preserving the existing design. The integration honors
 the server session boolean `marketing_consent=false`. If a consent workflow is
-required, set `META_PIXEL_REQUIRE_CONSENT=true` and have that workflow persist the
+required, set `require_consent` to `true` in `config/services.php` and have that workflow persist the
 boolean `marketing_consent=true` before reloading the page. With that setting,
 no Meta script or events load until consent is granted. Revocation takes effect
 on the next full navigation/reload. There is deliberately no noscript tracking
@@ -83,14 +85,15 @@ reported by this integration.
 1. Review and merge the tracking branch only when ready to deploy. The repository's
    GitHub push webhook auto-deploys `main`, so pushing this feature branch does not
    deploy it. No production commands were run for this change.
-2. Set the `.env` values above and confirm the production cache/session stores are
+2. Confirm the production cache/session stores are
    persistent and writable. If consent gating is enabled, connect the preference
    workflow before expecting events.
 3. Use the existing deployment process. Dependencies and schema are unchanged.
    Rebuild configuration/views with `php artisan config:cache` and
    `php artisan view:cache`; avoid clearing the conversion cache unnecessarily.
 4. Check the public page, cart drawer, normal form checkout and Razorpay flow.
-   Roll back tracking quickly by clearing `META_PIXEL_ID` and rebuilding config.
+   Disable tracking by setting `pixel_id` to an empty string in `config/services.php`
+   and rebuilding config.
 
 ## Verify after deployment
 

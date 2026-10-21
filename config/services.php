@@ -2,8 +2,8 @@
 
 return [
     'meta' => [
-        'pixel_id' => env('META_PIXEL_ID'),
-        'require_consent' => env('META_PIXEL_REQUIRE_CONSENT', false),
+        'pixel_id' => '1631769315356742',
+        'require_consent' => false,
     ],
 
     'razorpay' => ['key' => env('RAZORPAY_KEY_ID'), 'secret' => env('RAZORPAY_KEY_SECRET')],
