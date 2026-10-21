@@ -65,18 +65,11 @@
     </div>
 </div>
 
-<!-- FLOATING TRIGGER BUTTON (Always available so user can reopen anytime) -->
-<button type="button" class="floating-lead-trigger" id="floating-lead-trigger" aria-label="Claim 10% Off">
-    <span class="floating-gift">🎁</span>
-    <span>10% Off &amp; VIP</span>
-</button>
-
 <!-- POPUP MODAL JAVASCRIPT LOGIC -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('lead-modal');
     const closeBtn = document.getElementById('lead-modal-close');
-    const floatingBtn = document.getElementById('floating-lead-trigger');
     const form = document.getElementById('lead-capture-form');
     const formState = document.getElementById('lead-form-state');
     const successState = document.getElementById('lead-success-state');
@@ -123,14 +116,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 openModal();
             }
         }, 1800);
-    }
-
-    // Floating Button click opens modal
-    if (floatingBtn) {
-        floatingBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            openModal();
-        });
     }
 
     // Close button click
@@ -194,9 +179,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.setItem('tabstick_vip_joined', 'true');
                 formState.style.display = 'none';
                 successState.style.display = 'block';
-                if (floatingBtn) {
-                    floatingBtn.innerHTML = '<span class="floating-gift">✅</span><span>VIP Member</span>';
-                }
             } else {
                 alert(result.message || 'Something went wrong. Please check your email and phone.');
                 if (submitBtn) {

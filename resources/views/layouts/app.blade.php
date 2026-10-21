@@ -341,7 +341,7 @@
             </a>
         </div>
         <div class="mobile-drawer-footer">
-            <button type="button" class="btn-pop-primary" style="width: 100%;" onclick="document.getElementById('floating-lead-trigger')?.click();">
+            <button type="button" class="btn-pop-primary" style="width: 100%;" onclick="window.openLeadModal?.();">
                 <span>Claim 10% Off 🎁</span>
             </button>
         </div>
@@ -610,10 +610,6 @@
     <script src="{{ asset('js/playful-pop.js') }}" defer></script>
     <!-- LANDING PAGE LEAD POPUP MODAL -->
     @include('partials.lead-modal')
-    <!-- STOREFRONT AI STICKER CHATBOT & STYLIST (EXCLUDED FROM LANDING PAGE) -->
-    @if(!request()->routeIs('home') && request()->path() !== '/')
-        @include('partials.sticker-ai-chat')
-    @endif
     <!-- SLIDE-OUT CART DRAWER -->
     @include('partials.cart-drawer')
 

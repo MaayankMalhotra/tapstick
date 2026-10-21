@@ -16,7 +16,7 @@ class LeadCaptureTest extends TestCase
         return User::factory()->create(['is_admin' => true, 'password' => 'example-admin-password']);
     }
 
-    public function test_landing_page_renders_lead_modal_and_trigger(): void
+    public function test_landing_page_renders_lead_modal_without_floating_trigger(): void
     {
         $response = $this->get('/');
         $response->assertOk();
@@ -26,7 +26,7 @@ class LeadCaptureTest extends TestCase
         $response->assertSee('Email Address');
         $response->assertDontSee('Continue with Google');
         $response->assertSee('lead-modal');
-        $response->assertSee('floating-lead-trigger');
+        $response->assertDontSee('id="floating-lead-trigger"', false);
     }
 
     public function test_guest_can_submit_lead_form(): void

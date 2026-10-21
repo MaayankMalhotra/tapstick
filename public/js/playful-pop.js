@@ -531,8 +531,6 @@
                 modal.classList.add('active');
                 modal.setAttribute('aria-hidden', 'false');
                 document.body.style.overflow = 'hidden';
-            } else {
-                document.getElementById('floating-lead-trigger')?.click();
             }
         });
     }
